@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Execute the statement
     if (mysqli_stmt_execute($stmt)) {
         echo "Registration successful!";
+        $successMessage = "Registration successful!";
     } else {
         // Handle registration failure (e.g., duplicate username)
         $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
@@ -39,6 +40,9 @@ include ("../layouts/secondary.inc"); // An open div with layout class
 
 if (!empty($errorMessage)) {
     echo "<p style='color: red;'>$errorMessage</p>";
+} else {
+    echo "<p style='color: green;'>$successMessage</p>";
+
 }
 
 include ("../layouts/tail.inc"); // closing tags for layout div, body, and html
