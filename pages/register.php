@@ -3,7 +3,7 @@
 $page_title = "Register";
 $page_css = "/assets/css/style.css";
 
-// include_once ("../../db_connect.php"); // $msqli connect
+include_once ("../../db_connect.php"); // $msqli connect
 
 // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -31,7 +31,7 @@ $page_css = "/assets/css/style.css";
 //         $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
 //     }
 // }
-// mysqli_close($mysqli);
+mysqli_close($mysqli);
 
 include ("../components/head.inc"); // Top section up to and including body tag
 include ("../layouts/secondary.inc"); // An open div with layout class
