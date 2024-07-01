@@ -1,16 +1,16 @@
 <?php
 
 $page_title = "Keep Sur Wild";
-$page_css = "../assets/css/style.css";
+$page_css = "./assets/css/style.css";
 
-include ("../components/head.php"); // Top section up to and including body tag
-include ("../layouts/main.php"); // An open div with layout class
+include ("./components/head.php"); // Top section up to and including body tag
+include ("./layouts/main.php"); // An open div with layout class
 
-include ("../components/nav.php"); // standalone div
-include ("../components/welcome-header.php"); // standalone div
-include ("../components/topo-map.php"); // standalone div + script
+include ("./components/nav.php"); // standalone div
+include ("./components/welcome-header.php"); // standalone div
+include ("./components/topo-map.php"); // standalone div + script
 
-include ("../components/tail.php"); // closing tags for layout div, body, and html
+include ("./components/tail.php"); // closing tags for layout div, body, and html
 
 include_once ("../db_connect.php"); // $msqli connect
 // $query = "SELECT * FROM users";
