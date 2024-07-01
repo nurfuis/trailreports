@@ -1,9 +1,9 @@
 <?php
 
 $page_title = "Register";
-$page_css = "../assets/css/style.css";
+$page_css = "/assets/css/style.css";
 
-include_once ("../../db_connect.php"); // $msqli connect
+include_once ("../db_connect.php"); // $msqli connect
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
