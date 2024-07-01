@@ -9,7 +9,7 @@ include ("./layouts/main.inc"); // An open div with layout class
 include ("./components/nav.inc"); // standalone div
 include ("./components/welcome-header.inc"); // standalone div
 include ("./components/topo-map.inc"); // standalone div + script
-include ("../components/registration-form.inc");
+include ("./components/registration-form.inc");
 
 include ("./layouts/tail.inc"); // closing tags for layout div, body, and html
 
