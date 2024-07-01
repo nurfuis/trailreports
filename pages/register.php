@@ -5,21 +5,35 @@ $page_css = "../assets/css/style.css";
 
 include ("../layouts/head.inc"); // Top section up to and including body tag
 include ("../layouts/secondary.inc"); // An open div with layout class
-
+include ("../components/registration-form.inc");
 
 include ("../layouts/tail.inc"); // closing tags for layout div, body, and html
 
 include_once ("../../db_connect.php"); // $msqli connect
-// $query = "SELECT * FROM users";
-// $result = mysqli_query($mysqli, $query);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-// if ($result) {
-//   $users = mysqli_fetch_all($result);
+    // Sanitize user input to prevent SQL injection
+    $username = mysqli_real_escape_string($mysqli, trim($_POST['username']));
+    $password = mysqli_real_escape_string($mysqli, trim($_POST['password']));
 
-//   foreach ($users as $user) {
-//     echo '<h6>Username: </h6>', $user[1], ' <h6>Registration date: </h6>', $user[3];
-//   }
+    // Hash the password before storing it in the database (recommended)
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-//   mysqli_free_result($result);
-// }
+    // Prepare SQL statement (prevents SQL injection)
+    $sql = "INSERT INTO users (username, password_hash) VALUES (?, ?)";
+
+    // Prepare the statement
+    $stmt = mysqli_prepare($mysqli, $sql);
+
+    // Bind parameters to the statement
+    mysqli_stmt_bind_param($stmt, "ss", $username, $passwordHash);
+
+    // Execute the statement
+    if (mysqli_stmt_execute($stmt)) {
+        echo "Registration successful!";
+    } else {
+        // Handle registration failure (e.g., duplicate username)
+        $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
+    }
+}
 mysqli_close($mysqli);
