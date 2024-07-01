@@ -1,7 +1,7 @@
 <?php
 
 $page_title = "Keep Sur Wild";
-$page_css = "./assets/css/style.css";
+$page_css = "../assets/css/style.css";
 
 include ("./components/head.php"); // Top section up to and including body tag
 include ("./layouts/main.php"); // An open div with layout class

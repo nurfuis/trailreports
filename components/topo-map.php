@@ -4,7 +4,7 @@
   <div class="map-image__wrapper">
     <img
       class="topo-map__link--image"
-      src="./assets/images/map-static-300x200.png"
+      src="../assets/images/map-static-300x200.png"
       onclick="openTopoMap()"
     />
   </div>
