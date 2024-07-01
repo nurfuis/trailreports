@@ -9,7 +9,7 @@ directories=(assets components layouts pages)
 # Check if the html directory exists
 if [ -d "$html_dir" ]; then
   echo "WARNING: The directory '$html_dir' already exists and contains files."
-  echo "This script will DELETE ALL FILES in this directory. Are you sure? (y/N)"
+  echo "This script will DELETE ALL FILES AND SUBDIRECTORIES in this directory. Are you sure? (y/N)"
   read -r confirm
 
   if [[ ! $confirm =~ ^([Yy]$) ]]; then
@@ -17,8 +17,10 @@ if [ -d "$html_dir" ]; then
     exit 0
   fi
 
-  # Clear the directory (use with caution!)
-  rm -rf "$html_dir/*"
+  # Clear the directory (use with EXTREME CAUTION!)
+  rm -rf "$html_dir"
+  # Recreate the empty directory
+  mkdir "$html_dir"
 fi
 
 # Copy files and directories
