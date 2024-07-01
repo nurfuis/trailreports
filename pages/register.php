@@ -31,18 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
     }
 }
-$query = "SELECT * FROM users";
-$result = mysqli_query($mysqli, $query);
 
-if ($result) {
-    $users = mysqli_fetch_all($result);
-
-    foreach ($users as $user) {
-        echo '<h6>Username: </h6>', $user[1], ' <h6>Registration date: </h6>', $user[3];
-    }
-
-    mysqli_free_result($result);
-}
 mysqli_close($mysqli);
 
 include ("../components/head.inc"); // Top section up to and including body tag
