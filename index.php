@@ -3,14 +3,14 @@
 $page_title = "Keep Sur Wild";
 $page_css = "./assets/css/style.css";
 
-include ("./components/head.inc"); // Top section up to and including body tag
+include ("./layouts/head.inc"); // Top section up to and including body tag
 include ("./layouts/main.inc"); // An open div with layout class
 
 include ("./components/nav.inc"); // standalone div
 include ("./components/welcome-header.inc"); // standalone div
 include ("./components/topo-map.inc"); // standalone div + script
 
-include ("./components/tail.inc"); // closing tags for layout div, body, and html
+include ("./layouts/tail.inc"); // closing tags for layout div, body, and html
 
 include_once ("../db_connect.php"); // $msqli connect
 // $query = "SELECT * FROM users";
