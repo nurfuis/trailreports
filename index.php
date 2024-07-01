@@ -1,9 +1,9 @@
 <?php
 
 $page_title = "Keep Sur Wild";
-$page_css = "./assets/css/style.css";
+$page_css = "/assets/css/style.css";
 
-include ("./layouts/head.inc"); // Top section up to and including body tag
+include ("./components/head.inc"); // Top section up to and including body tag
 include ("./layouts/main.inc"); // An open div with layout class
 
 include ("./components/nav.inc"); // standalone div

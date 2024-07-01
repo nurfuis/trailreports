@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 mysqli_close($mysqli);
 
-include ("../layouts/head.inc"); // Top section up to and including body tag
+include ("../components/head.inc"); // Top section up to and including body tag
 include ("../layouts/secondary.inc"); // An open div with layout class
 
 if (!empty($errorMessage)) {
