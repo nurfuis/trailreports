@@ -3,6 +3,9 @@
 $page_title = "Register";
 $page_css = "/assets/css/style.css";
 
+include ("../components/head.inc"); // Top section up to and including body tag
+include ("../layouts/secondary.inc"); // An open div with layout class
+
 include_once ("../../db_connect.php"); // $msqli connect
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -21,6 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($row['COUNT(*)'] > 0) {
         $errorMessage = "Username already exists. Please choose another.";
+        include ("./components/registration-form.inc");
+
     } else {
         // Username is available, proceed with registration... (existing code)
     }
@@ -51,8 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 mysqli_close($mysqli);
 
-include ("../components/head.inc"); // Top section up to and including body tag
-include ("../layouts/secondary.inc"); // An open div with layout class
+
 
 if (!empty($errorMessage)) {
     echo "<p style='color: red;'>$errorMessage</p>";
