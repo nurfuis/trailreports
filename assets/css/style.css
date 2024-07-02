@@ -22,7 +22,7 @@ body {
 }
 
 .map-image__wrapper {
-  text-align: center;
+  text-align: left;
 }
 
 .map__wrapper {
@@ -36,7 +36,8 @@ body {
 
 .main__wrapper {
   margin: 0 auto 0 auto;
-  max-width: 360px;
+  min-width: 320px;
+  max-width: 960px;
   display: grid;
   grid-template-areas:
     "nav-wrapper"
