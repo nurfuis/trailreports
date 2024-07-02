@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($row['COUNT(*)'] > 0) {
         $errorMessage = "Username already exists. Please choose another.";
-        include ("./components/registration-form.inc");
+        include ("../components/registration-form.inc");
 
     } else {
         // Username is available, proceed with registration... (existing code)
