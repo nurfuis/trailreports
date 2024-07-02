@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Sanitize user input to prevent SQL injection
     $username = mysqli_real_escape_string($mysqli, trim($_POST['username']));
     $password = mysqli_real_escape_string($mysqli, trim($_POST['password']));
-    
+
     // Check username availability
     $sql = "SELECT COUNT(*) FROM users WHERE username = ?";
     $stmt = mysqli_prepare($mysqli, $sql);
@@ -42,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Execute the statement
         if (mysqli_stmt_execute($stmt)) {
             $successMessage = "Registration successful!";
+            include ("/pages/add-email-recovery-form.inc");
         } else {
             // Handle registration failure (e.g., duplicate username)
             $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
