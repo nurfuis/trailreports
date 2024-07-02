@@ -1,0 +1,29 @@
+<?php
+
+$page_title = "Display Users";
+$page_css = "/assets/css/style.css";
+
+include ("../components/head.inc"); // Top section up to and including body tag
+include ("../layouts/secondary.inc"); // An open div with layout class
+
+include_once ("../../db_connect.php"); // $msqli connect
+
+// Write your query here
+$sql = "SELECT username FROM users ORDER BY registration_date ASC";
+
+$result = mysqli_query($mysqli, $sql);
+
+// Check for errors
+if (!$result) {
+  echo "Error: " . mysqli_error($mysqli);
+  exit;
+}
+
+// Process results
+while ($row = mysqli_fetch_assoc($result)) {
+  echo "<p>" .  $row["username"] . "</p>";
+}
+
+mysqli_close($mysqli);
+
+include ("../layouts/tail.inc"); // closing tags for layout div, body, and html
