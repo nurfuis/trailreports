@@ -1,3 +1,4 @@
+<!-- START head.inc -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,8 +16,11 @@
       rel="stylesheet"
     />
   </head>
-
   <body>
+<!-- END head.inc -->
+
+
+<!-- START nav.inc -->
     <div class="main__wrapper">
       <div class="nav__wrapper">
         <a href="/index.php">HOME</a> |
@@ -25,6 +29,10 @@
         <a href="#">ABOUT</a> |
         <a href="#">GIVE</a>
       </div>
+<!-- END nav.inc -->
+
+
+<!-- START welcome-header.inc -->
       <div class="welcome-header__wrapper">
         <h1>TrailDex</h1>
         <h2>Big Sur, California</h2>
@@ -33,9 +41,12 @@
           map.
         </p>
       </div>
+<!-- END welcome-header.inc -->
+
+
+<!-- START topo-map.inc -->
       <div class="map__wrapper">
         <h3>Topographic Map</h3>
-
         <div class="map-image__wrapper">
           <img
             class="topo-map__link--image"
@@ -44,12 +55,16 @@
           />
         </div>
       </div>
-
       <script>
         function openTopoMap() {
           window.location.href = "./topo-map.html";
         }
       </script>
+<!-- END topo-map.inc -->
+
+
+<!-- START tail.inc -->
     </div>
   </body>
 </html>
+<!-- END tail.inc -->

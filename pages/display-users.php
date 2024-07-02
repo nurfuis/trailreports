@@ -3,8 +3,8 @@
 $page_title = "Display Users";
 $page_css = "/assets/css/style.css";
 
-include ("../components/head.inc"); // Top section up to and including body tag
-include ("../layouts/secondary.inc"); // An open div with layout class
+include ("/components/head.inc"); // Top section up to and including body tag
+include ("/layouts/secondary.inc"); // An open div with layout class
 
 include_once ("../../db_connect.php"); // $msqli connect
 
@@ -29,4 +29,4 @@ echo "</table>";
 
 mysqli_close($mysqli);
 
-include ("../layouts/tail.inc"); // closing tags for layout div, body, and html
+include ("/layouts/tail.inc"); // closing tags for layout div, body, and html
