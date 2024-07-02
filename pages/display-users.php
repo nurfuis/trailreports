@@ -20,10 +20,10 @@ if (!$result) {
 }
 
 // Process results
-echo "<table><tr><th>Users</th></tr>";
+echo "<table><tr><th>Users</th><th>Registered</th></tr>";
 
 while ($row = mysqli_fetch_assoc($result)) {
-  echo "<tr><td>" . $row["username"] . "</td></tr>";
+  echo "<tr><td>" . $row["username"] . "</td><td>" . $row["registration_date"] . "</td></tr>";
 }
 echo "</table>";
 
