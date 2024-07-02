@@ -25,10 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($row['COUNT(*)'] > 0) {
         $errorMessage = "Username already exists. Please choose another.";
         include ("../components/registration-form.inc");
+        echo "<p style='color: red;'>$errorMessage</p>";
 
 
     } else {
-        // Username is available, proceed with registration... (existing code)
+        // Username is available, proceed with registration...
         // Hash the password before storing it in the database (recommended)
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
@@ -43,11 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     }
 
-    mysqli_free_result($result); // Free the result from the username check
-    mysqli_stmt_close($stmt); // Close the statement used for username check
-
-
-
     // Execute the statement
     if (mysqli_stmt_execute($stmt)) {
         $successMessage = "Registration successful!";
@@ -55,17 +51,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Handle registration failure (e.g., duplicate username)
         $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
     }
+
+    mysqli_stmt_close($stmt); // Close the statement used for username check
+    mysqli_free_result($result); // Free the result from the username check
 }
 
 mysqli_close($mysqli);
 
 
-
-if (!empty($errorMessage)) {
-    echo "<p style='color: red;'>$errorMessage</p>";
-} else {
+if (!empty($successMessage)) {
     echo "<p style='color: blue;'>$successMessage</p>";
-
 }
 
 include ("../layouts/tail.inc"); // closing tags for layout div, body, and html
