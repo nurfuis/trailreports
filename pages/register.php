@@ -13,10 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Sanitize user input to prevent SQL injection
     $username = mysqli_real_escape_string($mysqli, trim($_POST['username']));
     $password = mysqli_real_escape_string($mysqli, trim($_POST['password']));
-
-    
-    
-    
     
     // Check username availability
     $sql = "SELECT COUNT(*) FROM users WHERE username = ?";
@@ -54,13 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     mysqli_free_result($result); // Free the result from the username check
     mysqli_stmt_close($stmt); // Close the statement used for username check
-
-
 }
 
 mysqli_close($mysqli);
-
-
 
 if (!empty($errorMessage)) {
     echo "<p style='color: red;'>$errorMessage</p>";
