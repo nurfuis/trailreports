@@ -9,7 +9,7 @@ include ("../layouts/secondary.inc"); // An open div with layout class
 include_once ("../../db_connect.php"); // $msqli connect
 
 // Write your query here
-$sql = "SELECT username FROM users ORDER BY registration_date ASC";
+$sql = "SELECT username, registration_date FROM users ORDER BY registration_date ASC";
 
 $result = mysqli_query($mysqli, $sql);
 
