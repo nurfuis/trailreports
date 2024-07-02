@@ -1,8 +1,8 @@
 <h2>Join Our Trail Reporting Community</h2>
 <p>To ensure the quality and credibility of trail reports on our platform, we highly recommend verifying your email address.  This email will also be used for password recovery if needed.  We take your privacy seriously and will never sell or share your information with third parties.</p>
-<form action="register.php" method="post">
+<form action="../index.php" method="post"> <!-- TODO -->
   <label for="email">Email Address:</label>
-  <input type="email" name="email" id="email" placeholder="Enter your email">  <br>
+  <input type="email" name="email" id="email" placeholder="Enter your email"><br>
   <button type="submit">Submit</button>
   <button type="button" onclick="skipVerification()">Skip</button>
   <p class="info">A verification email will be sent to the address you provide.</p>
@@ -28,6 +28,6 @@ function closeSkipAlert(focusEmail = false) {
 
 function continueWithoutEmail() {
   // Redirect to next page (replace with your actual URL)
-  window.location.href = "next-page.php";
+  window.location.href = "../index.php";
 }
 </script>
