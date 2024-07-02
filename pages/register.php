@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Execute the statement
         if (mysqli_stmt_execute($stmt)) {
             $successMessage = "Registration successful!";
-            include ("../components/add-email-recovery-form.inc");
+            include ("../components/register-email-form.inc");
 
         } else {
             // Handle registration failure (e.g., duplicate username)
