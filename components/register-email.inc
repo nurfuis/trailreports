@@ -10,7 +10,7 @@
 
 <div id="skip-verification-alert" style="display: none;">
   <p>By skipping verification, your account setup will not be complete. This may limit your access to certain features on the platform. Are you sure you want to continue?</p>
-  <button onclick="closeSkipAlert()">Fill Out Email</button>
+  <button onclick="closeSkipAlert(true)">Fill Out Email</button>
   <button onclick="continueWithoutEmail()">Continue (Limited Access)</button>
 </div>
 
@@ -19,8 +19,11 @@ function skipVerification() {
   document.getElementById("skip-verification-alert").style.display = "block";
 }
 
-function closeSkipAlert() {
+function closeSkipAlert(focusEmail = false) {
   document.getElementById("skip-verification-alert").style.display = "none";
+  if (focusEmail) {
+    document.getElementById("email").focus();
+  }
 }
 
 function continueWithoutEmail() {
