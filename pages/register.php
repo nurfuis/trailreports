@@ -42,7 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Execute the statement
         if (mysqli_stmt_execute($stmt)) {
             $successMessage = "Registration successful!";
-            include ("/components/add-email-recovery-form.inc");
         } else {
             // Handle registration failure (e.g., duplicate username)
             $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
@@ -59,6 +58,8 @@ if (!empty($errorMessage)) {
     echo "<p style='color: red;'>$errorMessage</p>";
 } else {
     echo "<p style='color: blue;'>$successMessage</p>";
+    include ("/components/add-email-recovery-form.inc");
+
 
 }
 
