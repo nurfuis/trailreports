@@ -26,24 +26,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errorMessage = "Username already exists. Please choose another.";
         include ("../components/registration-form.inc");
 
+
     } else {
         // Username is available, proceed with registration... (existing code)
+        // Hash the password before storing it in the database (recommended)
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+        // Prepare SQL statement (prevents SQL injection)
+        $sql = "INSERT INTO users (username, password_hash) VALUES (?, ?)";
+
+        // Prepare the statement
+        $stmt = mysqli_prepare($mysqli, $sql);
+
+        // Bind parameters to the statement
+        mysqli_stmt_bind_param($stmt, "ss", $username, $passwordHash);
+
     }
 
     mysqli_free_result($result); // Free the result from the username check
     mysqli_stmt_close($stmt); // Close the statement used for username check
 
-    // Hash the password before storing it in the database (recommended)
-    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-    // Prepare SQL statement (prevents SQL injection)
-    $sql = "INSERT INTO users (username, password_hash) VALUES (?, ?)";
-
-    // Prepare the statement
-    $stmt = mysqli_prepare($mysqli, $sql);
-
-    // Bind parameters to the statement
-    mysqli_stmt_bind_param($stmt, "ss", $username, $passwordHash);
 
     // Execute the statement
     if (mysqli_stmt_execute($stmt)) {
