@@ -13,13 +13,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Sanitize user input to prevent SQL injection
   $username = mysqli_real_escape_string($mysqli, trim($_POST['username']));
   $password = mysqli_real_escape_string($mysqli, trim($_POST['password']));
+
   // Prepare SQL statement to check user credentials
   $sql = "SELECT user_id, username, password_hash FROM users WHERE username = ?";
   $stmt = mysqli_prepare($mysqli, $sql);
   mysqli_stmt_bind_param($stmt, "s", $username);
   mysqli_stmt_execute($stmt);
-  if (mysqli_stmt_error($stmt)) {
-    echo "MySQL error: " . mysqli_stmt_error($stmt);
+  if (mysqli_stmt_execute($stmt)) {
+    // Statement executed successfully
+    echo "stmt good";
+  } else {
+    echo "Error executing prepared statement: " . mysqli_stmt_error($stmt);
   }
   $result = mysqli_stmt_get_result($stmt);
 
