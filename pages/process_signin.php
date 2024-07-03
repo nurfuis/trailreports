@@ -34,11 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $successMessage = "Welcome back, " . $_SESSION['username'] . "!";
     } else {
       $errorMessage = "Invalid username or password.";
-      include ("../components/signing_form.inc");
+      include ("../components/signin_form.inc");
     }
   } else {
     $errorMessage = "Invalid username or password.";
-    include ("../components/signing_form.inc");
+    include ("../components/signin_form.inc");
   }
 
   mysqli_free_result($result);
