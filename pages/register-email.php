@@ -56,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (mysqli_stmt_execute($stmt)) {
       $successMessage = "Email was registered successfully. Once verified (check your inbox) you will be able to post and edit trail reports.";
+      include ("../components/home-button.inc");
     } else {
       $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
     }
