@@ -21,9 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   echo "SQL query: " . $sql . "<br>";  // Added line
 
   mysqli_stmt_execute($stmt);
+
   $result = mysqli_stmt_get_result($stmt);
-  echo "result". $result->num_rows ."<br>";
-  $num_rows = mysqli_stmt_num_rows($stmt);  // Store the number of rows
+
+  $num_rows = $result->num_rows;  // Store the number of rows
 
   if ($num_rows > 0) {
     // Username exists (handle multiple rows if necessary)
