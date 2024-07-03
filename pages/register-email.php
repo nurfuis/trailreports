@@ -19,11 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Basic email validation (check for @ and .)
   if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
     $errorMessage = "Please enter a valid email address.";
+    echo $errorMessage;
     include ("../components/register-email-form.inc"); // Include email form with error message
-    // exit; // Exit script after including form
+    exit; // Exit script after including form
   }
 
   // Check email availability
+  echo "Check email availability";
   $sql = "SELECT COUNT(*) FROM users WHERE email = ?";
   $stmt = mysqli_prepare($mysqli, $sql);
   mysqli_stmt_bind_param($stmt, "s", $email);
@@ -33,7 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if ($row['COUNT(*)'] > 0) {
     $errorMessage = "Email already exists. Please use a different email.";
-    include ("../components/register-email-form.inc"); // Include email form with error message
+    echo $errorMessage;
+    include ("../components/register-email-form.inc");
   } else {
     // Prepare SQL statement to insert user with email
     $sql = "INSERT INTO users (email) VALUES (?)";
@@ -42,8 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (mysqli_stmt_execute($stmt)) {
       $successMessage = "Registration successful! You can now log in.";
+      echo $successMessage;
     } else {
       $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
+      echo $errorMessage;
     }
 
     mysqli_stmt_close($stmt);
