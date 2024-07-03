@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Sanitize user input to prevent SQL injection
   $username = mysqli_real_escape_string($mysqli, trim($_POST['username']));
   $password = mysqli_real_escape_string($mysqli, trim($_POST['password']));
-
+  echo $username;
   // Prepare SQL statement to check user credentials
   $sql = "SELECT user_id, username, password_hash FROM users WHERE username = ?";
   $stmt = mysqli_prepare($mysqli, $sql);
