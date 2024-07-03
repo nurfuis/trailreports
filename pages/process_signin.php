@@ -19,32 +19,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $stmt = mysqli_prepare($mysqli, $sql);
   mysqli_stmt_bind_param($stmt, "s", $username);
   mysqli_stmt_execute($stmt);
-  if (mysqli_stmt_execute($stmt)) {
-    // Statement executed successfully
-    echo "stmt good";
-  } else {
-    echo "Error executing prepared statement: " . mysqli_stmt_error($stmt);
-  }
   $result = mysqli_stmt_get_result($stmt);
 
-  if (mysqli_stmt_num_rows($stmt) == 1) {
+  $num_rows = mysqli_stmt_num_rows($stmt);  // Store the number of rows
+
+  if ($num_rows > 0) {
+    // Username exists (handle multiple rows if necessary)
     $row = mysqli_fetch_assoc($result);
 
     // Verify password using password_verify function
     if (password_verify($password, $row['password_hash'])) {
-      // signin successful - Start session and store user data
+      // Login successful - Start session and store user data
       session_start();
       $_SESSION['username'] = $row['username'];
       $_SESSION['user_id'] = $row['user_id'];
 
       $successMessage = "Welcome back, " . $_SESSION['username'] . "!";
     } else {
-      $errorMessage = "Invalid username or password. a";
-      include ("../components/signin_form.inc");
+      $errorMessage = "Invalid username or password.";
     }
   } else {
-    $errorMessage = "Invalid username or password. b";
-    include ("../components/signin_form.inc");
+    $errorMessage = "Invalid username or password.";  // Username not found
   }
 
   mysqli_free_result($result);
@@ -62,3 +57,4 @@ if (!empty($errorMessage)) {
 }
 
 include ("../layouts/tail.inc"); // closing tags for layout div, body, and html 
+?>
