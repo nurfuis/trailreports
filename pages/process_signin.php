@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
   } else {
     $errorMessage = "Invalid username or password.";
+    include ("../components/signing_form.inc");
   }
 
   mysqli_free_result($result);
