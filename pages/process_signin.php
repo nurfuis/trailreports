@@ -54,8 +54,7 @@ if (!empty($errorMessage)) {
 } else if (!empty($successMessage)) {
   echo "<p style='color: blue;'>$successMessage</p>";
   // Redirect to homepage or profile page after successful signin (optional)
-  // header("Location: homepage.php");
+  header("Location: /index.php");
 }
 
 include ("../layouts/tail.inc"); // closing tags for layout div, body, and html 
-?>
