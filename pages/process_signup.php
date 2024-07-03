@@ -73,7 +73,7 @@ if (!empty($errorMessage)) {
 } else if (!empty($successMessage)) {
     echo "<p style='color: blue;'>$successMessage</p>";
     // Redirect to homepage or profile page after successful registration (optional)
-    header("Location: /pages/account.php");
+    header("Location: /pages/email.php");
 }
 
 
