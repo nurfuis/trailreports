@@ -12,7 +12,7 @@ include ("./components/nav.inc"); // standalone div
 include ("./components/welcome_header.inc"); // standalone div
 include ("./components/topo_map.inc"); // standalone div + script
 
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['user_id'])) {
     $username = $_SESSION['username'];
     include ("./components/is_logged_in.inc");
 } else {
