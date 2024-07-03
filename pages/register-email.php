@@ -12,9 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // Sanitize user input to prevent SQL injection
   $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
-  echo "<pre>";
-  var_dump($email);
-  echo "</pre>";
 
   // Basic email validation (check for @ and .)
   if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
@@ -27,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Check email availability
   echo "Check email availability";
 
-  $sql = "SELECT COUNT(*) FROM users WHERE email =?";
+  $sql = "SELECT COUNT(*) FROM users WHERE email = ?";
 
   $stmt = mysqli_prepare($mysqli, $sql);
   echo $stmt;
