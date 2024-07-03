@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Sanitize user input to prevent SQL injection
   $username = mysqli_real_escape_string($mysqli, trim($_POST['username']));
   $password = mysqli_real_escape_string($mysqli, trim($_POST['password']));
-  $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
   // Prepare SQL statement to check user credentials
   $sql = "SELECT user_id, username, password_hash FROM users WHERE username = ?";
@@ -26,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $row = mysqli_fetch_assoc($result);
 
     // Verify password using password_verify function
-    if (password_verify($passwordHash, $row['password_hash'])) {
+    if (password_verify($password, $row['password_hash'])) {
       // signin successful - Start session and store user data
       session_start();
       $_SESSION['username'] = $row['username'];

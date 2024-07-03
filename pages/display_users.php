@@ -20,10 +20,10 @@ if (!$result) {
 }
 
 // Process results
-echo "<table><tr><th>ID</th><th>Users</th><th>email</th><th>verified</th><th>Registered</th></tr>";
+echo "<table><tr><th>ID</th><th>Users</th><th>email</th><th>verified</th><th>Registered</th><th>hash</th></tr>";
 
 while ($row = mysqli_fetch_assoc($result)) {
-  echo "<tr><td>" . $row["user_id"] . "</td><td>" . $row["username"] . "</td><td>" . $row["email"] . "</td><td>" . $row["verified"] . "</td><td>" . $row["registration_date"] . "</td></tr>";
+  echo "<tr><td>" . $row["user_id"] . "</td><td>" . $row["username"] . "</td><td>" . $row["email"] . "</td><td>" . $row["verified"] . "</td><td>" . $row["password_hash"] . "</td><td>" . $row["registration_date"] . "</td></tr>";
 }
 echo "</table>";
 
