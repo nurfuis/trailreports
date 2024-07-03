@@ -42,13 +42,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Execute the statement
         if (mysqli_stmt_execute($stmt)) {
             // The user should be logged in upon succesful registration
+            // Get the user ID of the newly registered user
+            $sql = "SELECT user_id FROM users WHERE username = ?";
+            $stmt = mysqli_prepare($mysqli, $sql);
+            mysqli_stmt_bind_param($stmt, "s", $username);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $row = mysqli_fetch_assoc($result);
+
+            $userId = $row['user_id'];
             // Start the session
             session_start();
 
             // Add username as a session variable
             $_SESSION['username'] = $username;
+            $_SESSION['user_id'] = $userId;
 
-            $successMessage = "Registration successful! Welcome " . $_SESSION['username'] . ".";
+            $successMessage = "Registration successful! Welcome " . $_SESSION['username'] . $_SESSION['user_id'] . ".";
 
             include ("../components/register-email-form.inc");
 
