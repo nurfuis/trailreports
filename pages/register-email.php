@@ -43,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include ("../components/register-email-form.inc");
   } else {
     echo "<p>0</p>";
+    session_start();
 
     echo $_SESSION['username'];
     // Prepare SQL statement to insert user with email
