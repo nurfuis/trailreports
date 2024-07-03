@@ -29,7 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   mysqli_stmt_bind_param($stmt, "s", $email);
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);
-  echo $result;
+  if ($result) {
+    echo "1";
+  } else {
+    echo "0";
+  }
   $row = mysqli_fetch_assoc($result);
 
   if ($row['COUNT(*)'] > 0) {
