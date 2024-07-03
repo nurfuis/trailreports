@@ -3,10 +3,14 @@
 $page_title = "Email";
 $page_css = "/assets/css/style.css";
 
-include ("../components/head.inc"); 
-include ("../layouts/secondary.inc"); 
-?>
+include ("../components/head.inc");
+include ("../layouts/secondary.inc");
 
+session_start();
+if (!isset($_SESSION['user_id'])) {
+  header("Location: /index.php");
+}
+?>
 <h2>Join Our Trail Reporting Community</h2>
 <p>
   To ensure the quality and credibility of trail reports on our platform, we
