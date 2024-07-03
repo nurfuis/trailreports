@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   var_dump($email);
   echo "</pre>";
   // Basic email validation (check for @ and .)
+
   if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
     $errorMessage = "Please enter a valid email address.";
     include ("../components/register-email-form.inc"); // Include email form with error message
@@ -23,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   // Check email availability
-  $sql = "SELECT COUNT(*) FROM users WHERE email = ?";
+  $sql = "SELECT COUNT(*) FROM users WHERE email = $email";
   $stmt = mysqli_prepare($mysqli, $sql);
   mysqli_stmt_bind_param($stmt, "s", $email);
   mysqli_stmt_execute($stmt);
@@ -35,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include ("../components/register-email-form.inc"); // Include email form with error message
   } else {
     // Prepare SQL statement to insert user with email
-    $sql = "INSERT INTO users (email) VALUES (?)";
+    $sql = "INSERT INTO users (email) VALUES ($email)";
     $stmt = mysqli_prepare($mysqli, $sql);
     mysqli_stmt_bind_param($stmt, "s", $email);
 
