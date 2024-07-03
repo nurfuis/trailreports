@@ -1,5 +1,5 @@
 <div>
-  <h1>User Registration</h1>
+  <h2>User Registration</h2>
   <form action="/pages/process_signup.php" method="post">
     <label for="username">Username:</label>
     <input type="text" name="username" id="username" required /><br />
