@@ -37,12 +37,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $row = mysqli_fetch_assoc($result);
 
   if ($row['COUNT(*)'] > 0) {
+
+
     $errorMessage = "Email already exists. Please use a different email.";
     include ("../components/register-email-form.inc");
   } else {
+    $username = mysqli_real_escape_string($mysqli, trim($_POST['username']));
+
+    echo $username;
     // Prepare SQL statement to insert user with email
-    echo "poopsnach" . $username;
+
     // $sql = "INSERT INTO users (email) VALUES (?)";
+
     // $stmt = mysqli_prepare($mysqli, $sql);
     // mysqli_stmt_bind_param($stmt, "s", $email);
 
@@ -52,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //   $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
     // }
 
-    mysqli_stmt_close($stmt);
+    // mysqli_stmt_close($stmt);
   }
 
   mysqli_free_result($result); // Free the result from the email check
