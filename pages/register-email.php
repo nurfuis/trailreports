@@ -22,37 +22,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   // Check email availability
-  echo "<p>Check email availability</p>";
-
   $sql = "SELECT COUNT(*) FROM users WHERE email = ?";
   $stmt = mysqli_prepare($mysqli, $sql);
   mysqli_stmt_bind_param($stmt, "s", $email);
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);
-  if ($result) {
-    echo "<p>1</p>";
-  } else {
-    echo "<p>0</p>";
-  }
+
   $row = mysqli_fetch_assoc($result);
 
   if ($row['COUNT(*)'] > 0) {
-    echo "<p>1</p>";
-
     $errorMessage = "Email already exists. Please use a different email.";
     include ("../components/register-email-form.inc");
   } else {
-    echo "<p>0</p>";
     session_start();
 
-    $username = $_SESSION['username'];
-    $email = $_POST['email'];
+    // Use user_id from session variable
+    $user_id = $_SESSION['user_id'];
 
-    // Prepare SQL statement to update user with email
-    $sql = "UPDATE users SET email = ? WHERE username = ?";
+    // Prepare SQL statement to update user email
+    $sql = "UPDATE users SET email = ? WHERE user_id = ?";
 
     $stmt = mysqli_prepare($mysqli, $sql);
-    mysqli_stmt_bind_param($stmt, "ss", $email, $username);
+    mysqli_stmt_bind_param($stmt, "si", $email, $user_id);
 
     if (mysqli_stmt_execute($stmt)) {
       $successMessage = "Email was registered successfully. Once verified (check your inbox) you will be able to post and edit trail reports.";
