@@ -6,12 +6,12 @@ $page_css = "/assets/css/style.css";
 include ("./components/head.inc"); // Top section up to and including body tag
 include ("./layouts/main.inc"); // An open div with layout class
 
-session_start();
 
 include ("./components/nav.inc"); // standalone div
 include ("./components/welcome_header.inc"); // standalone div
 include ("./components/topo_map.inc"); // standalone div + script
 
+session_start();
 if (isset($_SESSION['user_id'])) {
     $username = $_SESSION['username'];
     include ("./components/is_logged_in.inc");
