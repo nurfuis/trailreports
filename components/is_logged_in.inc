@@ -4,4 +4,4 @@
   <button type="submit">Logout </button>
 </form>
 
-<p><a href="account.php">Manage Account</a></p>
+<p><a href="/pages/account.php">Manage Account</a></p>
