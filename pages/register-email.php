@@ -35,23 +35,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "<p>0</p>";
   }
   $row = mysqli_fetch_assoc($result);
-  if ($row) {
-    echo "row";
-  }
+
   if ($row['COUNT(*)'] > 0) {
     $errorMessage = "Email already exists. Please use a different email.";
     include ("../components/register-email-form.inc");
   } else {
     // Prepare SQL statement to insert user with email
-    $sql = "INSERT INTO users (email) VALUES (?)";
-    $stmt = mysqli_prepare($mysqli, $sql);
-    mysqli_stmt_bind_param($stmt, "s", $email);
+    echo "poopsnach";
+    // $sql = "INSERT INTO users (email) VALUES (?)";
+    // $stmt = mysqli_prepare($mysqli, $sql);
+    // mysqli_stmt_bind_param($stmt, "s", $email);
 
-    if (mysqli_stmt_execute($stmt)) {
-      $successMessage = "Registration successful! You can now log in.";
-    } else {
-      $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
-    }
+    // if (mysqli_stmt_execute($stmt)) {
+    //   $successMessage = "Registration successful! You can now log in.";
+    // } else {
+    //   $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
+    // }
 
     mysqli_stmt_close($stmt);
   }
