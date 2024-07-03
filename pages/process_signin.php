@@ -18,15 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $sql = "SELECT user_id, username, password_hash FROM users WHERE username = ?";
   $stmt = mysqli_prepare($mysqli, $sql);
   mysqli_stmt_bind_param($stmt, "s", $username);
-  echo "SQL query: " . $sql . "<br>";  // Added line
-
   mysqli_stmt_execute($stmt);
 
   $result = mysqli_stmt_get_result($stmt);
 
   $num_rows = $result->num_rows;  // Store the number of rows
 
-  if ($num_rows > 0) {
+  if ($num_rows === 1) {
     // Username exists (handle multiple rows if necessary)
     $row = mysqli_fetch_assoc($result);
 
