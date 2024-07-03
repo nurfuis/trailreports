@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Basic email validation (check for @ and .)
   if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
     $errorMessage = "Please enter a valid email address.";
-    echo $errorMessage;
+    echo '<p class="alert">' . $errorMessage . '</p>';
     include ("../components/register-email-form.inc"); // Include email form with error message
     exit; // Exit script after including form
   }
@@ -38,31 +38,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if ($row['COUNT(*)'] > 0) {
     echo "<p>1</p>";
-  
+
     $errorMessage = "Email already exists. Please use a different email.";
     include ("../components/register-email-form.inc");
   } else {
     echo "<p>0</p>";
     session_start();
-  
+
     $username = $_SESSION['username'];
     $email = $_POST['email'];
-  
+
     // Prepare SQL statement to update user with email
     $sql = "UPDATE users SET email = ? WHERE username = ?";
-  
+
     $stmt = mysqli_prepare($mysqli, $sql);
     mysqli_stmt_bind_param($stmt, "ss", $email, $username);
-  
+
     if (mysqli_stmt_execute($stmt)) {
       $successMessage = "Email was registered successfully.";
     } else {
       $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
     }
-  
+
     mysqli_stmt_close($stmt);
   }
-  
+
 
   mysqli_free_result($result); // Free the result from the email check
 }
