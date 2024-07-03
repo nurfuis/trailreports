@@ -55,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Add username and user_id as session variables
             $_SESSION['username'] = $username;
             $_SESSION['user_id'] = $userId;
-            echo $_SESSION['user_id'];
             $successMessage = "Registration successful! Welcome " . $_SESSION['username'] . ".";
         } else {
             // Handle registration failure (e.g., duplicate username)
