@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $successMessage = "Welcome back, " . $_SESSION['username'] . "!";
     } else {
       $errorMessage = "Invalid username or password.";
+      include ("../components/signing_form.inc");
     }
   } else {
     $errorMessage = "Invalid username or password.";
