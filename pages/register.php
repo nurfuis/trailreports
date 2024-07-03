@@ -24,8 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($row['COUNT(*)'] > 0) {
         $errorMessage = "Username already exists. Please choose another.";
-        include ("../components/registration_form.inc");
-
     } else {
         // Hash the password before storing it in the database (recommended)
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
@@ -60,8 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo $_SESSION['user_id'];
             $successMessage = "Registration successful! Welcome " . $_SESSION['username'] . ".";
 
-            include ("../components/register_email_form.inc");
-
         } else {
             // Handle registration failure (e.g., duplicate username)
             $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
@@ -77,9 +73,12 @@ mysqli_close($mysqli);
 if (!empty($errorMessage)) {
     echo "<p style='color: red;'>$errorMessage</p>";
 } else {
-    echo "<p style='color: blue;'>$successMessage</p>";
-
-
+    // Only include the registration form if the form hasn't been submitted
+    if (empty($_POST)) {
+        include ("../components/registration_form.inc");
+    } else {
+        echo "<p style='color: blue;'>$successMessage</p>";
+    }
 }
 
 include ("../layouts/tail.inc"); // closing tags for layout div, body, and html
