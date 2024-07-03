@@ -26,12 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // Check email availability
   echo "Check email availability";
+
   $sql = "SELECT COUNT(*) FROM users WHERE email = ?";
   $stmt = mysqli_prepare($mysqli, $sql);
   mysqli_stmt_bind_param($stmt, "s", $email);
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);
   $row = mysqli_fetch_assoc($result);
+  echo "result:" . $result;
 
   if ($row['COUNT(*)'] > 0) {
     $errorMessage = "Email already exists. Please use a different email.";
