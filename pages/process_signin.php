@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);
-
+  echo "result". $result->num_rows ."<br>";
   $num_rows = mysqli_stmt_num_rows($stmt);  // Store the number of rows
 
   if ($num_rows > 0) {
