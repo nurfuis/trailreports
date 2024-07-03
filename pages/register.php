@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($row['COUNT(*)'] > 0) {
         $errorMessage = "Username already exists. Please choose another.";
-        include ("../components/registration-form.inc");
+        include ("../components/registration_form.inc");
 
     } else {
         // Hash the password before storing it in the database (recommended)
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo $_SESSION['user_id'];
             $successMessage = "Registration successful! Welcome " . $_SESSION['username'] . ".";
 
-            include ("../components/register-email-form.inc");
+            include ("../components/register_email_form.inc");
 
         } else {
             // Handle registration failure (e.g., duplicate username)

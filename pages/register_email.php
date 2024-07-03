@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
     $errorMessage = "Please enter a valid email address.";
     echo '<p class="alert">' . $errorMessage . '</p>';
-    include ("../components/register-email-form.inc"); // Include email form with error message
+    include ("../components/register_email_form.inc"); // Include email form with error message
     exit; // Exit script after including form
   }
 
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if ($row['COUNT(*)'] > 0) {
     $errorMessage = "Email already exists. Please use a different email.";
-    include ("../components/register-email-form.inc");
+    include ("../components/register_email_form.inc");
   } else {
     session_start();
 
@@ -64,7 +64,7 @@ if (!empty($errorMessage)) {
   echo "<p style='color: red;'>$errorMessage</p>";
 } else {
   echo "<p style='color: blue;'>$successMessage</p>";
-  include ("../components/home-button.inc");
+  include ("../components/home_button.inc");
 
 }
 

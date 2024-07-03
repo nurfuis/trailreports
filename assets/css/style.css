@@ -120,7 +120,7 @@ p {
   grid-area: nav-wrapper;
 }
 
-.topo-map__link--image {
+.topo_map__link--image {
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
@@ -138,8 +138,8 @@ p {
   display: block;
 }
 
-.welcome-header__wrapper {
-  grid-area: welcome-header;
+.welcome_header__wrapper {
+  grid-area: welcome_header;
 }
 
 .main__wrapper {
@@ -149,6 +149,6 @@ p {
   display: grid;
   grid-template-areas:
     "nav-wrapper"
-    "welcome-header"
+    "welcome_header"
     "map-wrapper";
 }

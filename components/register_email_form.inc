@@ -5,7 +5,7 @@
   for password recovery if needed. We take your privacy seriously and will never
   sell or share your information with third parties.
 </p>
-<form action="../pages/register-email.php" method="post">
+<form action="../pages/register_email.php" method="post">
   <label for="email">Email Address:</label>
   <input
     type="email"

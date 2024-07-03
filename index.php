@@ -9,14 +9,14 @@ include ("./layouts/main.inc"); // An open div with layout class
 session_start();
 
 include ("./components/nav.inc"); // standalone div
-include ("./components/welcome-header.inc"); // standalone div
-include ("./components/topo-map.inc"); // standalone div + script
+include ("./components/welcome_header.inc"); // standalone div
+include ("./components/topo_map.inc"); // standalone div + script
 
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
-    include ("./components/is-logged-in.inc");
+    include ("./components/is_logged_in.inc");
 } else {
-    include ("./components/registration-form.inc");
+    include ("./components/registration_form.inc");
 }
 
 include ("./layouts/tail.inc"); // closing tags for layout div, body, and html
