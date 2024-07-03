@@ -14,7 +14,7 @@ include ("./components/topo-map.inc"); // standalone div + script
 
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
-    include ("./components/is-logged-in.inc")    
+    include ("./components/is-logged-in.inc");
 } else {
     include ("./components/registration-form.inc");
 }
