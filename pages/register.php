@@ -41,7 +41,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Execute the statement
         if (mysqli_stmt_execute($stmt)) {
-            $successMessage = "Registration successful!";
+            // The user should be logged in upon succesful registration
+            // Start the session
+            session_start();
+
+            // Add username as a session variable
+            $_SESSION['username'] = $username;
+
+            $successMessage = "Registration successful! Welcome " . $_SESSION['username'] . ".";
+
             include ("../components/register-email-form.inc");
 
         } else {

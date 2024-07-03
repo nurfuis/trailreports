@@ -42,7 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errorMessage = "Email already exists. Please use a different email.";
     include ("../components/register-email-form.inc");
   } else {
-    $username = mysqli_real_escape_string($mysqli, trim($_POST['username']));
 
     echo $username;
     // Prepare SQL statement to insert user with email
