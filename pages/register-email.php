@@ -37,11 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $row = mysqli_fetch_assoc($result);
 
   if ($row['COUNT(*)'] > 0) {
-
+    echo "<p>1</p>";
 
     $errorMessage = "Email already exists. Please use a different email.";
     include ("../components/register-email-form.inc");
   } else {
+    echo "<p>0</p>";
 
     echo $_SESSION['username'];
     // Prepare SQL statement to insert user with email
