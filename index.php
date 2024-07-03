@@ -8,17 +8,17 @@ include ("./layouts/main.inc"); // An open div with layout class
 
 session_start();
 
-if (isset($_SESSION['username'])) {
-  $username = $_SESSION['username'];
-  echo "<p>Welcome, $username! You are currently logged in.</p>";
-} else {
-  echo "<p>You are not currently logged in.</p>";
-}
-
 include ("./components/nav.inc"); // standalone div
 include ("./components/welcome-header.inc"); // standalone div
 include ("./components/topo-map.inc"); // standalone div + script
 include ("./components/registration-form.inc");
+
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+    echo "<p>Welcome, $username! You are currently logged in.</p>";
+} else {
+    echo "<p>You are not currently logged in.</p>";
+}
 
 include ("./layouts/tail.inc"); // closing tags for layout div, body, and html
 
