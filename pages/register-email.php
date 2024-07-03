@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Check email availability
   echo "Check email availability";
 
-  $sql = "SELECT COUNT(*) FROM users WHERE email = ?";
+  $sql = "SELECT COUNT(*) FROM users WHERE email =?";
   echo $sql;
 
   $stmt = mysqli_prepare($mysqli, $sql);
