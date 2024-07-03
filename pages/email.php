@@ -1,3 +1,12 @@
+<?php
+
+$page_title = "Email";
+$page_css = "/assets/css/style.css";
+
+include ("../components/head.inc"); 
+include ("../layouts/secondary.inc"); 
+?>
+
 <h2>Join Our Trail Reporting Community</h2>
 <p>
   To ensure the quality and credibility of trail reports on our platform, we
@@ -5,19 +14,12 @@
   for password recovery if needed. We take your privacy seriously and will never
   sell or share your information with third parties.
 </p>
-<form action="../pages/register_email.php" method="post">
-  <label for="email">Email Address:</label>
-  <input
-    type="email"
-    name="email"
-    id="email"
-    placeholder="Enter your email"
-  /><br />
-  <button type="submit">Submit</button>
+
+<?php
+include ("../components/change_email_form.inc");
+?>
+<form>
   <button type="button" onclick="skipVerification()">Skip</button>
-  <p class="info">
-    A verification email will be sent to the address you provide.
-  </p>
 </form>
 
 <div id="skip-verification-alert" style="display: none">
@@ -47,3 +49,6 @@
     window.location.href = "../index.php";
   }
 </script>
+<?php
+include ("../layouts/tail.inc");
+?>
