@@ -57,8 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Add username as a session variable
             $_SESSION['username'] = $username;
             $_SESSION['user_id'] = $userId;
-
-            $successMessage = "Registration successful! Welcome " . $_SESSION['username'] . $_SESSION['user_id'] . ".";
+            echo $_SESSION['user_id'];
+            $successMessage = "Registration successful! Welcome " . $_SESSION['username'] . ".";
 
             include ("../components/register-email-form.inc");
 
