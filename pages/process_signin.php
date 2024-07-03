@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $errorMessage = "Invalid username or password.";
     }
   } else {
-    $errorMessage = "Invalid username or password.";  // Username not found
+    $errorMessage = "Invalid username or password...";  // Username not found
   }
 
   mysqli_free_result($result);
