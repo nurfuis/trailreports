@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   // Check email availability
-  echo "Check email availability";
+  echo "<p>Check email availability</p>";
 
   $sql = "SELECT COUNT(*) FROM users WHERE email = ?";
   $stmt = mysqli_prepare($mysqli, $sql);
@@ -30,9 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);
   if ($result) {
-    echo "1";
+    echo "<p>1</p>";
   } else {
-    echo "0";
+    echo "<p>0</p>";
   }
   $row = mysqli_fetch_assoc($result);
 
@@ -48,10 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (mysqli_stmt_execute($stmt)) {
       $successMessage = "Registration successful! You can now log in.";
-      echo $successMessage;
     } else {
       $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
-      echo $errorMessage;
     }
 
     mysqli_stmt_close($stmt);
