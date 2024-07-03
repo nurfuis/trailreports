@@ -49,9 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $row = mysqli_fetch_assoc($result);
 
             $userId = $row['user_id'];
+
             // Start the session
             session_start();
-
             // Add username and user_id as session variables
             $_SESSION['username'] = $username;
             $_SESSION['user_id'] = $userId;
@@ -73,9 +73,8 @@ if (!empty($errorMessage)) {
 } else if (!empty($successMessage)) {
     echo "<p style='color: blue;'>$successMessage</p>";
     // Redirect to homepage or profile page after successful registration (optional)
-    // header("Location: homepage.php");
+    header("Location: /pages/.php");
 }
 
-include "../components/register_form.inc";
 
 include ("../layouts/tail.inc"); // closing tags for layout div, body, and html ?>

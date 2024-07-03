@@ -16,3 +16,6 @@ session_destroy();
   <p>You have successfully logged out. Now you can close your browser to completely end your session.</p>
   <a href="/index.php">Return to the Trailhead</a>
 
+<?php 
+include ("../layouts/tail.inc");
+?>
