@@ -9,7 +9,7 @@ include ("../layouts/secondary.inc"); // An open div with layout class
 include_once ("../../db_connect.php"); // $msqli connect
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
   // Sanitize user input to prevent SQL injection
   $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
   echo "<pre>";
@@ -28,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   echo "Check email availability";
 
   $sql = "SELECT COUNT(*) FROM users WHERE email =?";
-  echo $sql;
 
   $stmt = mysqli_prepare($mysqli, $sql);
   echo $stmt;
