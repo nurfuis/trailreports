@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Verify password using password_verify function
     if (password_verify($password, $row['password_hash'])) {
-      // Login successful - Start session and store user data
+      // signin successful - Start session and store user data
       session_start();
       $_SESSION['username'] = $row['username'];
       $_SESSION['user_id'] = $row['user_id'];
@@ -49,12 +49,8 @@ if (!empty($errorMessage)) {
   echo "<p style='color: red;'>$errorMessage</p>";
 } else if (!empty($successMessage)) {
   echo "<p style='color: blue;'>$successMessage</p>";
-  // Redirect to homepage or profile page after successful login (optional)
+  // Redirect to homepage or profile page after successful signin (optional)
   // header("Location: homepage.php");
 }
 
-?>
-
-
-
-<?php include ("../layouts/tail.inc"); // closing tags for layout div, body, and html ?>
+include ("../layouts/tail.inc"); // closing tags for layout div, body, and html 
