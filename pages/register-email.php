@@ -1,6 +1,6 @@
 <?php
 
-$page_title = "Register";
+$page_title = "Register Email";
 $page_css = "/assets/css/style.css";
 
 include ("../components/head.inc"); // Top section up to and including body tag
@@ -12,7 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // Sanitize user input to prevent SQL injection
   $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
-
+  echo "<pre>";
+  var_dump($email);
+  echo "</pre>";
   // Basic email validation (check for @ and .)
   if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
     $errorMessage = "Please enter a valid email address.";

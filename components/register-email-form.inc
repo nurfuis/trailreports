@@ -6,7 +6,6 @@
   sell or share your information with third parties.
 </p>
 <form action="../pages/register-email.php" method="post">
-  <!-- TODO -->
   <label for="email">Email Address:</label>
   <input
     type="email"
