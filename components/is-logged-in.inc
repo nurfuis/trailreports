@@ -1,6 +1,6 @@
 <p>Welcome, <?php echo $username; ?>! You are currently logged in.</p>
 
-<form action="logout.php" method="post">
+<form action="../index.php" method="post">
   <button type="submit">Logout </button>
 </form>
 <br>
