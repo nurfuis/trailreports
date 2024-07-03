@@ -38,29 +38,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if ($row['COUNT(*)'] > 0) {
     echo "<p>1</p>";
-
+  
     $errorMessage = "Email already exists. Please use a different email.";
     include ("../components/register-email-form.inc");
   } else {
     echo "<p>0</p>";
     session_start();
-
-    echo $_SESSION['username'];
-    // Prepare SQL statement to insert user with email
-
-    // $sql = "INSERT INTO users (email) VALUES (?)";
-
-    // $stmt = mysqli_prepare($mysqli, $sql);
-    // mysqli_stmt_bind_param($stmt, "s", $email);
-
-    // if (mysqli_stmt_execute($stmt)) {
-    //   $successMessage = "Registration successful! You can now log in.";
-    // } else {
-    //   $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
-    // }
-
-    // mysqli_stmt_close($stmt);
+  
+    $username = $_SESSION['username'];
+    $email = $_POST['email'];
+  
+    // Prepare SQL statement to update user with email
+    $sql = "UPDATE users SET email = ? WHERE username = ?";
+  
+    $stmt = mysqli_prepare($mysqli, $sql);
+    mysqli_stmt_bind_param($stmt, "ss", $email, $username);
+  
+    if (mysqli_stmt_execute($stmt)) {
+      $successMessage = "Email was registered successfully.";
+    } else {
+      $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
+    }
+  
+    mysqli_stmt_close($stmt);
   }
+  
 
   mysqli_free_result($result); // Free the result from the email check
 }
