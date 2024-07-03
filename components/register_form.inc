@@ -1,23 +1,27 @@
 <div>
-  <h2>User Registration</h2>
-<form method="post" action="/pages/register_email.php">
-  <label for="username">Username:</label>
-  <input type="text" id="username" name="username" required><br><br>
-  <label for="password">Password:</label>
-  <input type="password" id="password" name="password" required><br><br>
-  <input type="submit" value="Register">
-</form>
+  <h1>User Registration</h1>
+  <form action="/pages/register_email.php" method="post">
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username" required /><br />
+
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" required /><br />
+
+    <input type="checkbox" id="showPassword" />
+    <label for="showPassword">Show Password</label><br />
+    <button type="submit">Register</button>
+  </form>
 </div>
 
 <script>
-  const passwordInput = document.getElementById('password');
-  const showPasswordCheckbox = document.getElementById('showPassword');
+  const passwordInput = document.getElementById("password");
+  const showPasswordCheckbox = document.getElementById("showPassword");
 
-  showPasswordCheckbox.addEventListener('change', function() {
+  showPasswordCheckbox.addEventListener("change", function () {
     if (this.checked) {
-      passwordInput.type = 'text';
+      passwordInput.type = "text";
     } else {
-      passwordInput.type = 'password';
+      passwordInput.type = "password";
     }
   });
 </script>
