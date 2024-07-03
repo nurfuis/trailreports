@@ -43,7 +43,7 @@
   }
 
   function continueWithoutEmail() {
-    // Redirect to next page (replace with your actual URL)
+    // Redirect to next page
     window.location.href = "../index.php";
   }
 </script>

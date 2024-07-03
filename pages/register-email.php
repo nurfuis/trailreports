@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mysqli_stmt_bind_param($stmt, "ss", $email, $username);
 
     if (mysqli_stmt_execute($stmt)) {
-      $successMessage = "Email was registered successfully.";
+      $successMessage = "Email was registered successfully. Once verified (check your inbox) you will be able to post and edit trail reports.";
     } else {
       $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
     }
