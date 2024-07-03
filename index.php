@@ -16,7 +16,7 @@ if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
     include ("./components/is_logged_in.inc");
 } else {
-    include ("./components/registration_form.inc");
+    include ("./components/register_form.inc");
 }
 
 include ("./layouts/tail.inc"); // closing tags for layout div, body, and html
