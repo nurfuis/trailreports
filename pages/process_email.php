@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if ($row['COUNT(*)'] > 0) {
     $errorMessage = "Email already exists. Please use a different email.";
-    include ("../components/register_email_form.inc");
+    include ("../components/change_email_form.inc");
   } else {
     session_start();
 
