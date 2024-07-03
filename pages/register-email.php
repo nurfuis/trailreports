@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include ("../components/register-email-form.inc");
   } else {
     // Prepare SQL statement to insert user with email
-    echo "poopsnach";
+    echo "poopsnach" . $username;
     // $sql = "INSERT INTO users (email) VALUES (?)";
     // $stmt = mysqli_prepare($mysqli, $sql);
     // mysqli_stmt_bind_param($stmt, "s", $email);
