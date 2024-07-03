@@ -33,11 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       $successMessage = "Welcome back, " . $_SESSION['username'] . "!";
     } else {
-      $errorMessage = "Invalid username or password.";
+      $errorMessage = "Invalid username or password. a";
       include ("../components/signin_form.inc");
     }
   } else {
-    $errorMessage = "Invalid username or password.";
+    $errorMessage = "Invalid username or password. b";
     include ("../components/signin_form.inc");
   }
 
