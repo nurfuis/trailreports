@@ -10,6 +10,7 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 $fetched_email = mysqli_fetch_assoc($result);
+$email = $fetched_email['email'];
 ?>
 
 <div>
@@ -21,7 +22,7 @@ $fetched_email = mysqli_fetch_assoc($result);
     <?php echo $_SESSION['username']; ?>!
   </p>
   <ul>
-    <li><?php echo $fetched_email ?></li>
+    <li><?php echo $email ?></li>
   </ul>
 
   <ul class="account-management-list">
