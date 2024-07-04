@@ -64,8 +64,6 @@ if (!empty($errorMessage)) {
   echo "<p style='color: red;'>$errorMessage</p>";
 } else {
   echo "<p style='color: blue;'>$successMessage</p>";
-  include ("../components/home_button.inc");
-
 }
 
 include ("../components/tail.inc"); // closing tags for layout div, body, and html
