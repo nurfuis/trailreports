@@ -1,7 +1,7 @@
 <div>
   <h2>Update User Email</h2>
   <form action="../pages/process_email.php" method="post">
-    <label for="email">Email Address:</label>
+    <label for="email">New Email Address:</label>
     <input
       type="email"
       name="email"
