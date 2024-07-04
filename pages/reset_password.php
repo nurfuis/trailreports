@@ -24,8 +24,10 @@ if (isset($_GET['token'])) {
   $result = mysqli_stmt_get_result($stmt);
 
   $num_rows = $result->num_rows;  // Store the number of rows
+  $row = mysqli_fetch_assoc($result);
 
-  if ($num_rows === 1) {
+  if ($num_rows === 1 && $row['reset_token_expiry'] > date("Y-m-d H:i:s")) {
+
     $user_id = $row['user_id'];
     echo '<p>Please enter your new password:</p>';
 
