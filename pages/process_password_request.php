@@ -1,11 +1,15 @@
 <?php
+$page_title = "Change Password";
+$page_css = "/assets/css/style.css";
+
+include ("../components/head.inc");
+include ("../layouts/secondary.inc");
 
 require_once ("../../db_connect.php"); // Include database connection
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
-    echo $email;
     // Check if email exists in the database
     $sql = "SELECT user_id, email FROM users WHERE email = ?";
     $stmt = mysqli_prepare($mysqli, $sql);
@@ -34,12 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $subject = "Password Reset Request for " . $_SERVER['HTTP_HOST'];
         $message = "You requested to change your password for your account on " . $_SERVER['HTTP_HOST'] . ".\n\n";
         $message .= "Click the following link to reset your password within 1 hour:\n";
-        $reset_link = "192.168.0.78/pages/reset_password.php?token=" . $token;  // Replace with your website URL
+        $reset_link = "192.168.0.78/pages/reset_password.php?token=" . $token;
         $message .= $reset_link . "\n\n";
         $message .= "If you did not request a password reset, please ignore this email.\n\n";
 
-        // Send email using your preferred method (e.g., PHPMailer, built-in mail function)
-        $success = mail($to, $subject, $message); // Replace with your email sending logic
+        $success = mail($to, $subject, $message);
 
         if ($success) {
             $successMessage = "A password reset link has been sent to your registered email address.";
@@ -55,18 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mysqli_close($mysqli);
 }
 
-$page_title = "Change Password";
-$page_css = "/assets/css/style.css";
-
-include ("../components/head.inc");
-include ("../layouts/secondary.inc");
-
-
 if (!empty($errorMessage)) {
     echo "<p style='color: red;'>$errorMessage</p>";
 } else if (!empty($successMessage)) {
     echo "<p style='color: blue;'>$successMessage</p>";
 }
-
 
 include ("../layouts/tail.inc");

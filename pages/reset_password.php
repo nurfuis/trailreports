@@ -1,6 +1,6 @@
 <?php
 
-$page_title = "Reset Password";
+$page_title = "Password Reset";
 $page_css = "/assets/css/style.css";
 
 include ("../components/head.inc");
@@ -27,7 +27,6 @@ if (isset($_GET['token'])) {
   $row = mysqli_fetch_assoc($result);
 
   if ($num_rows === 1 && $row['reset_token_expiry'] > date("Y-m-d H:i:s")) {
-
     $user_id = $row['user_id'];
     echo '<p>Please enter your new password:</p>';
 

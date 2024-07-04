@@ -1,5 +1,5 @@
 <div>
-  <h2>Update Email</h2>
+  <h2>Update User Email</h2>
   <form action="../pages/process_email.php" method="post">
     <label for="email">Email Address:</label>
     <input
