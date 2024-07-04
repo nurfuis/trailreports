@@ -20,7 +20,7 @@ if (!isset($_SESSION['user_id'])) {
 </p>
 
 <?php
-include ("../components/change_email_form.inc");
+include ("../components/update_email_form.inc");
 ?>
 <form>
   <button type="button" onclick="skipVerification()">Skip</button>

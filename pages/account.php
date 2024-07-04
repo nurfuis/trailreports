@@ -21,9 +21,9 @@ include ("../layouts/secondary.inc");
 
 <ul>
   <li><a href="#">Update Email Address</a>
-    <?php include ("../components/change_email_form.inc"); ?> </li>
+    <?php include ("../components/update_email_form.inc"); ?> </li>
   <li><a href="#">Update Password</a>
-    <?php include ("update_password.inc"); ?> </li>
+    <?php include ("../components/update_password_form.inc"); ?> </li>
 </ul>
 
 <?php include ("../layouts/tail.inc");  ?>
