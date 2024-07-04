@@ -1,4 +1,9 @@
 <div>
+  <a href="/">
+    <i class="fas fa-home"></i> Home
+  </a>
+</div>
+<div>
   <h2>Account Management</h2>
 
   <p>
