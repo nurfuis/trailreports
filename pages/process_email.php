@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
     $errorMessage = "Please enter a valid email address.";
     echo '<p class="alert">' . $errorMessage . '</p>';
-    include ("../components/register_email_form.inc"); // Include email form with error message
+    include ("../components/update_email_form.inc"); // Include email form with error message
     exit; // Exit script after including form
   }
 
