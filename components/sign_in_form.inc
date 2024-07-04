@@ -10,7 +10,7 @@
 
   <input type="submit" value="Login"><br><br>
 </form>
-<form method="post" action="/pages/process_sign_in.php">
+<form method="post" action="/pages/process_.php">
   <p><b>OR</b> Sign in with your email address:</p>
   <label for="email">Email Address:</label>
   <input type="email" autocomplete="email" id="email" name="email" placeholder="Enter email" required><br><br>
