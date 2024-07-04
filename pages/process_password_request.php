@@ -5,7 +5,7 @@ require_once ("../../db_connect.php"); // Include database connection
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
-
+  echo $email;
   // Check if email exists in the database
   $sql = "SELECT user_id, email FROM users WHERE email = ?";
   $stmt = mysqli_prepare($mysqli, $sql);
