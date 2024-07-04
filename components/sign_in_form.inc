@@ -1,4 +1,4 @@
-<h2>User Sign In</h2>
+<h3>User Sign In</h3>
 
 <form method="post" action="/pages/process_sign_in.php">
   <label for="username">Username:</label>

@@ -1,4 +1,4 @@
-<h2>Update User Password</h2>
+<h3>Update User Password</h3>
 
 <form action="../pages/process_password_request.php" method="post">
   <label for="email">Registered Email Address:</label>
