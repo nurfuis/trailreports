@@ -1,7 +1,7 @@
 <?php
 
-$page_title = "Signup";
-$page_css = "/assets/css/style.css";
+$page_title = "Sign up";
+$page_css = "../assets/css/style.css";
 
 include ("../components/head.inc");
 include ("../layouts/secondary.inc");

@@ -1,6 +1,6 @@
 <?php
 
-$page_title = "Signin";
+$page_title = "Sign in";
 $page_css = "../assets/css/style.css";
 
 include ("../components/head.inc");
