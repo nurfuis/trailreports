@@ -6,6 +6,9 @@ $page_css = "/assets/css/style.css";
 include ("../components/head.inc");
 include ("../layouts/single.inc");
 
+session_start();
+session_destroy();
+
 require_once ("../../db_connect.php"); // Include database connection
 
 ?>
@@ -15,8 +18,7 @@ require_once ("../../db_connect.php"); // Include database connection
 
 if (isset($_GET['token'])) {
 
-  session_destroy();
-  
+
   $token = $_GET['token'];
 
   $sql = "SELECT user_id, reset_token_expiry FROM users WHERE reset_token = ?";
