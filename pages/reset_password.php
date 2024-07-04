@@ -25,7 +25,7 @@ if (isset($_GET['token'])) {
 
   $num_rows = $result->num_rows;  // Store the number of rows
 
-  if ($num_rows === 1 && $row['reset_token_expiry'] > date("Y-m-d H:i:s")) {
+  if ($num_rows === 1) {
     $user_id = $row['user_id'];
     echo '<p>Please enter your new password:</p>';
 
