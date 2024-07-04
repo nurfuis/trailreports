@@ -78,4 +78,4 @@ if (!empty($errorMessage)) {
 }
 
 
-include ("../components/tail.inc"); // closing tags for layout div, body, and html ?>
+include ("../components/tail.inc");
