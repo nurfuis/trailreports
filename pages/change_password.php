@@ -1,6 +1,6 @@
 <?php
 
-$page_title = "Password Reset";
+$page_title = "Change Password";
 $page_css = "/assets/css/style.css";
 
 include ("../components/head.inc");
@@ -9,7 +9,7 @@ include ("../layouts/single.inc");
 require_once ("../../db_connect.php"); // Include database connection
 
 ?>
-<h2>Reset Password</h2>
+<h2>Change Password</h2>
 
 <?php
 

@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $subject = "Password Reset Request for " . $_SERVER['HTTP_HOST'];
         $message = "You requested to change your password for your account on " . $_SERVER['HTTP_HOST'] . ".\n\n";
         $message .= "Click the following link to reset your password within 1 hour:\n";
-        $reset_link = $_SERVER['HTTP_HOST'] . "/pages/change_password.php?token=" . $token;
+        $reset_link = "192.168.0.78/pages/change_password.php?token=" . $token;
         $message .= $reset_link . "\n\n";
 
         $success = mail($to, $subject, $message);
