@@ -15,6 +15,5 @@ session_destroy();
 <p>You have successfully logged out. Now you can close your browser to completely end your session.</p>
 
 <?php
-include ("../components/home_button.inc");
 include ("../components/tail.inc");
 ?>
