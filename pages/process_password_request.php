@@ -18,24 +18,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the logged-in user ID from the session variable
     $user_id = $_SESSION['user_id'];
 
-    // Validate the submitted email
-    $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
-    if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-        $errorMessage = "Please enter a valid email address.";
-    }
-    // Check if the entered email matches the logged-in user's email
-    $sql = "SELECT email FROM users WHERE user_id = ?"; // Corrected query
+    // Query to get the user's email address
+    $sql = "SELECT email FROM users WHERE user_id = ?";
     $stmt = mysqli_prepare($mysqli, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $user_id); // Bind only the user ID
+    mysqli_stmt_bind_param($stmt, "i", $user_id); // Bind the user ID
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
     $fetched_email = mysqli_fetch_assoc($result);
 
-    if ($fetched_email && $fetched_email['email'] === $email) {
-        // Email matches logged-in user, proceed with generating token, etc.
-
-        $row = mysqli_fetch_assoc($result);
+    if ($fetched_email) {
+        $email = $fetched_email['email'];
 
         // Generate a unique random password reset token
         $token = bin2hex(random_bytes(16));
@@ -46,10 +39,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Update user record with token and expiry
         $sql = "UPDATE users SET reset_token = ?, reset_token_expiry = ? WHERE user_id = ?";
         $stmt = mysqli_prepare($mysqli, $sql);
-        mysqli_stmt_bind_param($stmt, "sss", $token, $expiry, $row['user_id']);
+        mysqli_stmt_bind_param($stmt, "sss", $token, $expiry, $user_id);
         mysqli_stmt_execute($stmt);
 
-        // Prepare email content (similar to previous code)
+        // Prepare email content
+        $to = $email;
+        $subject = "Password Reset Request for " . $_SERVER['HTTP_HOST'];
+        $message = "You requested to change your password for your account on " . $_SERVER['HTTP_HOST'] . ".\n\n";
+        $message .= "Click the following link to reset your password within 1 hour:\n";
+        $reset_link = $_SERVER['HTTP_HOST'] . "/pages/change_password.php?token=" . $token;
+        $message .= $reset_link . "\n\n";
 
         $success = mail($to, $subject, $message);
 
@@ -60,8 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
     } else {
-        $errorMessage = "The email address you entered is not associated with your account.";
-        include ("../components/update_password_form.inc");
+        $errorMessage = "There is not an email associated with this account.";
     }
 
     mysqli_free_result($result);
