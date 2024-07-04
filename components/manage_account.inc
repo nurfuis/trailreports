@@ -13,7 +13,7 @@ $fetched = mysqli_fetch_assoc($result);
 
 $email = $fetched['email'];
 $verified = $fetched['verified'];
-$registeration = $fetched['registration_date'];
+$registration = $fetched['registration_date'];
 ?>
 
 <div>
