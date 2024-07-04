@@ -1,10 +1,14 @@
 <?php
+
+$user_id = $_SESSION['user_id'];
+
 include_once ("../../db_connect.php");
 $sql = "SELECT email FROM users WHERE user_id = ?";
 $stmt = mysqli_prepare($mysqli, $sql);
 mysqli_stmt_bind_param($stmt, "i", $user_id); // Bind the user ID
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
+
 $fetched_email = mysqli_fetch_assoc($result);
 ?>
 
