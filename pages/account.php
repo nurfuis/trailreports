@@ -20,12 +20,9 @@ include ("../layouts/secondary.inc");
 <p>Welcome, <?php echo $_SESSION['username']; ?>!</p>
 
 <ul>
-  <li><a href="#">Update Email Address</a>
-    <?php include ("../components/update_email_form.inc"); ?> </li>
-  <li><a href="#">Update Password</a>
-    <?php include ("../components/update_password_form.inc"); ?> </li>
-    <li><a href="#">Deactivate Account</a>
-    <?php include ("../components/update_account_status.inc"); ?> </li>    
+  <li><?php include ("../components/update_email_form.inc"); ?> </li>
+  <li><?php include ("../components/update_password_form.inc"); ?> </li>
+    <li><?php include ("../components/update_account_status.inc"); ?> </li>    
 </ul>
 
 <?php include ("../layouts/tail.inc");  ?>
