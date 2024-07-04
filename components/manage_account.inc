@@ -3,14 +3,17 @@
 $user_id = $_SESSION['user_id'];
 
 include_once ("../../db_connect.php");
-$sql = "SELECT email FROM users WHERE user_id = ?";
+$sql = "SELECT email, verified, registration_date FROM users WHERE user_id = ?";
 $stmt = mysqli_prepare($mysqli, $sql);
 mysqli_stmt_bind_param($stmt, "i", $user_id); // Bind the user ID
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
-$fetched_email = mysqli_fetch_assoc($result);
-$email = $fetched_email['email'];
+$fetched = mysqli_fetch_assoc($result);
+
+$email = $fetched['email'];
+$verified = $fetched['verified'];
+$registeration = $fetched['registration_date'];
 ?>
 
 <div>
@@ -22,7 +25,10 @@ $email = $fetched_email['email'];
     <?php echo $_SESSION['username']; ?>!
   </p>
   <ul>
-    <li><?php echo $email ?></li>
+    <li>Email: <?php echo $email ?></li>
+    <li>Verified status: <?php echo $verified ?></li>
+    <li>Registration date: <?php echo $registration ?></li>
+
   </ul>
 
   <ul class="account-management-list">
