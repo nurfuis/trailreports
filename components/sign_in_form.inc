@@ -13,7 +13,7 @@
   <p><b>OR</b> Sign in with your email address:</p>
   <label for="email">Email Address:</label>
   <input type="email" autocomplete="email" id="email" name="email" placeholder="Enter email"><br><br>
-  <input type="submit" value="Send Login Link">
+  <input type="submit" value="Send Login Link"><br><br>
 </form>
 <script>
   const passwordInput = document.getElementById("password");
