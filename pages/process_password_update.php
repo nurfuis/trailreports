@@ -1,7 +1,9 @@
 <?php
+$page_title = "New Password";
+$page_css = "/assets/css/style.css";
 
-session_start();
-
+include ("../components/head.inc"); // Top section up to and including body tag
+include ("../layouts/single.inc"); // An open div with layout class
 include_once ("../../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -32,3 +34,4 @@ if (isset($errorMessage)) {
 } else if (isset($successMessage)) {
     echo '<p style="color: blue;">' . $successMessage . '</p>';
 }
+include ("../components/tail.inc");
