@@ -18,9 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql = "UPDATE users SET password = ? WHERE user_id = ?";
 
     $stmt = mysqli_prepare($mysqli, $sql);
+    echo $stmt;
+
     mysqli_stmt_bind_param($stmt, "si", $hashed_password, $user_id);
 
-    echo "poopsnach";
     if (mysqli_stmt_execute($stmt)) {
         $successMessage = "Password updated successfully.";
         header("Location: /pages/account.php");
