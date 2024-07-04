@@ -25,9 +25,15 @@ $registration = $fetched['registration_date'];
     <?php echo $_SESSION['username']; ?>!
   </p>
   <ul class="account-management-list">
-    <li>Email: <?php echo $email ?></li>
-    <li>Verified status: <?php echo $verified ?></li>
-    <li>Registration date: <?php echo $registration ?></li>
+    <li>
+      <p>Email: <?php echo $email ?></p>
+    </li>
+    <li>
+      <p>Verified status: <?php echo $verified ?></p>
+    </li>
+    <li>
+      <p>Registration date: <?php echo $registration ?></p>
+    </li>
 
   </ul>
 
