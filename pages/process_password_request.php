@@ -61,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     } else {
         $errorMessage = "The email address you entered is not associated with your account.";
+        include ("../components/update_password_form.inc");
     }
 
     mysqli_free_result($result);
