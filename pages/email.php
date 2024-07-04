@@ -1,6 +1,6 @@
 <?php
 
-$page_title = "Email";
+$page_title = "Verify email";
 $page_css = "/assets/css/style.css";
 
 include ("../components/head.inc");
