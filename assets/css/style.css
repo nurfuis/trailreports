@@ -10,7 +10,11 @@ p {
   font-weight: 200;
   font-style: normal;
 }
-
+.account-management-list--compact {
+  list-style-type: none;
+  margin: 0;
+  padding: 1em 0;
+}
 .account-management-list {
   list-style-type: none;
   margin: 0;
