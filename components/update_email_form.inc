@@ -6,7 +6,7 @@
       type="email"
       name="email"
       id="email"
-      placeholder="Enter your email"
+      placeholder="Enter email"
     /><br><br>
     <button type="submit">Submit</button>
   </form>

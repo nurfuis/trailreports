@@ -2,6 +2,12 @@
 
 <form action="../pages/process_password_request.php" method="post">
   <label for="email">Registered Email Address:</label>
-  <input type="email" name="email" id="email" required><br><br>
+  <input
+    type="email"
+    name="email"
+    id="email"
+    placeholder="Enter email"
+    required
+  /><br /><br />
   <button type="submit">Send Password Reset Link</button>
 </form>
