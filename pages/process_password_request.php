@@ -8,9 +8,6 @@ include ("../layouts/single.inc");
 
 require_once ("../../db_connect.php"); // Include database connection
 
-<?php
-
-// Start a session if not already started
 session_start();
 
 // Include the database connection file
