@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql = "UPDATE users SET password = ? WHERE user_id = ?";
 
     $stmt = mysqli_prepare($mysqli, $sql);
-    echo $stmt;
+    echo "pee";
 
     mysqli_stmt_bind_param($stmt, "si", $hashed_password, $user_id);
 
