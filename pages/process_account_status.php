@@ -4,7 +4,7 @@ $page_title = "Deactivate Account";
 $page_css = "/assets/css/style.css";
 
 include ("../components/head.inc"); // Top section up to and including body tag
-include ("../layouts/secondary.inc"); // An open div with layout class
+include ("../layouts/single.inc"); // An open div with layout class
 
 // Check if user is logged in (optional, based on your implementation)
 if (!isset($_SESSION['user_id'])) {

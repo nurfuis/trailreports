@@ -4,7 +4,7 @@ $page_title = "Change Password";
 $page_css = "/assets/css/style.css";
 
 include ("../components/head.inc");
-include ("../layouts/secondary.inc");
+include ("../layouts/single.inc");
 
 require_once ("../../db_connect.php"); // Include database connection
 

@@ -4,7 +4,7 @@ $page_title = "Register";
 $page_css = "/assets/css/style.css";
 
 include ("../components/head.inc"); // Top section up to and including body tag
-include ("../layouts/secondary.inc"); // An open div with layout class
+include ("../layouts/single.inc"); // An open div with layout class
 
 include_once ("../../db_connect.php"); // $msqli connect
 

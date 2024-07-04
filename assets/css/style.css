@@ -39,7 +39,6 @@ p {
   grid-area: nav;
 }
 
-
 .main__wrapper {
   margin: 0 auto 0 auto;
   min-width: 320px;
@@ -51,3 +50,8 @@ p {
     "map";
 }
 
+.single__wrapper {
+  margin: 0 auto 0 auto;
+  min-width: 320px;
+  max-width: 600px;
+}

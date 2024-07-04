@@ -4,7 +4,7 @@ $page_title = "Sign up";
 $page_css = "../assets/css/style.css";
 
 include ("../components/head.inc");
-include ("../layouts/secondary.inc");
+include ("../layouts/single.inc");
 
 session_start();
 if (isset($_SESSION['user_id'])) {

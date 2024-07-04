@@ -11,7 +11,7 @@ $page_title = "Account Management";
 $page_css = "/assets/css/style.css";
 
 include ("../components/head.inc"); 
-include ("../layouts/secondary.inc"); 
+include ("../layouts/single.inc"); 
 
 ?>
 
