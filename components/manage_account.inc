@@ -23,16 +23,16 @@ $registration = $fetched['registration_date'];
 
   <ul class="account-management-list--compact">
     <li>
-      Username: <span class="k2d-regular"><?php echo $_SESSION['username']; ?></span>
+      Username: <span><?php echo $_SESSION['username']; ?></span>
     </li>
     <li>
-      Email: <span class="k2d-regular"><?php echo $email ?></span>
+      Email: <span><?php echo $email ?></span>
     </li>
     <li>
-      Verified status: <span class="k2d-regular"><?php echo $verified ?></span>
+      Verified status: <span><?php echo $verified ?></span>
     </li>
     <li>
-      Registration date: <span class="k2d-regular"><?php echo $registration ?></span>
+      Registration date: <span><?php echo $registration ?></span>
     </li>
 
   </ul>
