@@ -8,7 +8,12 @@
   <input type="checkbox" id="showPassword">
   <label for="showPassword">Show Password</label><br><br>
 
-  <input type="submit" value="Login">
+  <input type="submit" value="Login"><br><br>
+
+  <p><b>OR</b> Sign in with your email address:</p>
+  <label for="email">Email Address:</label>
+  <input type="email" autocomplete="email" id="email" name="email" placeholder="Enter email"><br><br>
+  <input type="submit" value="Send Login Link">
 </form>
 <script>
   const passwordInput = document.getElementById("password");
