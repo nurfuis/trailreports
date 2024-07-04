@@ -7,6 +7,7 @@
     <title><?php echo $page_title ?></title>
 
     <link rel="stylesheet" href="<?php echo $page_css ?>" />
+    <link rel="stylesheet" href="../assets/css/fonts.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,4 +16,5 @@
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body></body>
+</html>
