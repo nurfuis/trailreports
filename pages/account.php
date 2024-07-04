@@ -10,19 +10,9 @@ if (!isset($_SESSION['user_id'])) {
 $page_title = "Account Management";
 $page_css = "/assets/css/style.css";
 
-include ("../components/head.inc"); 
-include ("../layouts/single.inc"); 
+include ("../components/head.inc");
+include ("../layouts/single.inc");
 
-?>
+include ("../components/manage_account.inc");
 
-<h2>Account Management</h2>
-
-<p>Welcome, <?php echo $_SESSION['username']; ?>!</p>
-
-<ul>
-  <li><?php include ("../components/update_email_form.inc"); ?> </li>
-  <li><?php include ("../components/update_password_form.inc"); ?> </li>
-    <li><?php include ("../components/update_account_status.inc"); ?> </li>    
-</ul>
-
-<?php include ("../components/tail.inc");  ?>
+include ("../components/tail.inc");
