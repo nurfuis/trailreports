@@ -1,1 +1,1 @@
-$base_url = 'http://192.168.0.78';
+define('BASE_URL', 'http://192.168.0.78');
