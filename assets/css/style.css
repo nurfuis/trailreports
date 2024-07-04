@@ -1,5 +1,5 @@
 body {
-  margin: 0.25em 0.25em 4em 0.25em;
+  margin: 0.5em 0.5em 4em 0.5em;
   font-family: "Julius Sans One", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -10,37 +10,35 @@ p {
   font-weight: 200;
   font-style: normal;
 }
+
 .alert {
   color: red;
   display: block;
   margin: 2em auto 2em auto;
 }
 
-.nav__wrapper {
-  grid-area: nav-wrapper;
-}
-
 .topo_map__link--image {
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
-
-.map__wrapper a {
-  display: block;
-}
-
 .map-image__wrapper {
   text-align: left;
 }
-
-.map__wrapper {
-  grid-area: map-wrapper;
+.map__wrapper a {
   display: block;
 }
-
-.welcome_header__wrapper {
-  grid-area: welcome_header;
+.map__wrapper {
+  grid-area: map;
 }
+
+.header__wrapper {
+  grid-area: header;
+}
+
+.nav__wrapper {
+  grid-area: nav;
+}
+
 
 .main__wrapper {
   margin: 0 auto 0 auto;
@@ -48,10 +46,11 @@ p {
   max-width: 960px;
   display: grid;
   grid-template-areas:
-    "nav-wrapper"
-    "welcome_header"
-    "map-wrapper";
+    "nav"
+    "header"
+    "map";
 }
+
 .k2d-thin {
   font-family: "K2D", sans-serif;
   font-weight: 100;

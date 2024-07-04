@@ -54,5 +54,5 @@ include ("../components/update_email_form.inc");
   }
 </script>
 <?php
-include ("../layouts/tail.inc");
+include ("../components/tail.inc");
 ?>

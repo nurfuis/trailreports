@@ -3,7 +3,7 @@ session_start();
 
 // Ensure user is logged in
 if (!isset($_SESSION['user_id'])) {
-  header("Location: signin.php");
+  header("Location: sign_in.php");
   exit;
 }
 
@@ -25,4 +25,4 @@ include ("../layouts/secondary.inc");
     <li><?php include ("../components/update_account_status.inc"); ?> </li>    
 </ul>
 
-<?php include ("../layouts/tail.inc");  ?>
+<?php include ("../components/tail.inc");  ?>

@@ -1,5 +1,4 @@
-<!-- START welcome_header.inc -->
-      <div class="welcome_header__wrapper">
+      <div class="header__wrapper">
         <h1>TrailDex</h1>
         <h2>Big Sur, California</h2>
         <p>
@@ -7,4 +6,3 @@
           map.
         </p>
       </div>
-<!-- END welcome_header.inc -->

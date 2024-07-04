@@ -1,6 +1,6 @@
 <h2>User Sign In</h2>
 
-<form method="post" action="/pages/process_signin.php">
+<form method="post" action="/pages/process_sign_in.php">
   <label for="username">Username:</label>
   <input type="text" autocomplete="username" id="username" name="username" required><br><br>
   <label for="password">Password:</label>
@@ -23,4 +23,4 @@
   });
 </script>
 
-<p>Don't have an account? <a href="/pages/signup.php">Register Here</a></p>
+<p>Don't have an account? <a href="/pages/sign_up.php">Register Here</a></p>

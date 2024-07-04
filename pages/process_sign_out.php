@@ -11,11 +11,10 @@ session_start();
 session_destroy();
 
 ?>
+<h1>Packing Up and Hitting the Trail</h1>
+<p>You have successfully logged out. Now you can close your browser to completely end your session.</p>
 
-  <h1>Packing Up and Hitting the Trail</h1>
-  <p>You have successfully logged out. Now you can close your browser to completely end your session.</p>
-  <a href="/index.php">Return to the Trailhead</a>
-
-<?php 
-include ("../layouts/tail.inc");
+<?php
+include ("../components/home_button.inc");
+include ("../components/tail.inc");
 ?>

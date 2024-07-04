@@ -1,6 +1,6 @@
 <div>
-  <h2>User Sign Up</h2>
-  <form action="/pages/process_signup.php" method="post">
+  <h2>New User</h2>
+  <form action="/pages/process_sign_up.php" method="post">
     <label for="username">Username:</label>
     <input type="text" autocomplete="username" name="username" id="username" required /><br><br>
 

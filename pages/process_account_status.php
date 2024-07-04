@@ -44,4 +44,4 @@ if (!empty($errorMessage)) {
   echo "<p style='color: blue;'>$successMessage</p>";
 }
 
-include ("../layouts/tail.inc");
+include ("../components/tail.inc");

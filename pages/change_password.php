@@ -42,5 +42,5 @@ if (isset($_GET['token'])) {
 
 mysqli_close($mysqli);
 
-include ("../layouts/tail.inc");
+include ("../components/tail.inc");
 ?>

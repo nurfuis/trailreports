@@ -1,1 +1,1 @@
-<a href="/index.php">Return to the Trailhead</a>
+<a href="/index.php">Return Home</a>

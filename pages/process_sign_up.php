@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($row['COUNT(*)'] > 0) {
         $errorMessage = "Username already exists. Please choose another.";
-        include ("../components/signup_form.inc");
+        include ("../components/sign_up_form.inc");
     } else {
         // Hash the password before storing it in the database (recommended)
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
@@ -78,4 +78,4 @@ if (!empty($errorMessage)) {
 }
 
 
-include ("../layouts/tail.inc"); // closing tags for layout div, body, and html ?>
+include ("../components/tail.inc"); // closing tags for layout div, body, and html ?>

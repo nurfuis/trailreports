@@ -4,11 +4,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Big Sur TrailDex</title>
-
-    <link rel="stylesheet" href="./assets/css/style.css" />
-
+    <title><?php echo $page_title ?></title>
+    <link rel="stylesheet" href="<?php echo $page_css ?>" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,23 +14,19 @@
     />
   </head>
   <body>
-<!-- END head.inc -->
-
-
-<!-- START nav.inc -->
+    <!-- END head.inc -->
+    <!-- START nav.inc-->
     <div class="main__wrapper">
       <div class="nav__wrapper">
         <a href="/index.php">HOME</a> |
         <a href="/pages/trail-conditions.html">TRAILS</a> |
-        <a href="#">CAMPS</a> | <a href="/pages/topo_map.html">MAP</a> |
-        <a href="#">ABOUT</a> |
-        <a href="#">GIVE</a>
+        <a href="/pages/topo_map.html">MAP</a> | <a href="#">ABOUT</a> |
+        <a href="#">GIVE</a> |
+        <a href="/pages/sign_in.php">SIGN IN</a>
       </div>
-<!-- END nav.inc -->
-
-
-<!-- START welcome_header.inc -->
-      <div class="welcome_header__wrapper">
+      <!-- END nav.inc-->
+      <!-- START header.inc -->
+      <div class="header__wrapper">
         <h1>TrailDex</h1>
         <h2>Big Sur, California</h2>
         <p>
@@ -41,30 +34,33 @@
           map.
         </p>
       </div>
-<!-- END welcome_header.inc -->
-
-
-<!-- START topo_map.inc -->
+      <!-- END header.inc -->
+      <!-- START topo_map.inc-->
       <div class="map__wrapper">
-        <h3>Topographic Map</h3>
+        <h2>Topographic Map</h2>
+
         <div class="map-image__wrapper">
           <img
             class="topo_map__link--image"
-            src="./assets/images/map-static-300x200.png"
+            src="../assets/images/map-static-300x200.png"
             onclick="openTopoMap()"
           />
         </div>
       </div>
+
       <script>
         function openTopoMap() {
-          window.location.href = "./topo_map.html";
+          window.location.href = "./pages/topo_map.html";
         }
       </script>
-<!-- END topo_map.inc -->
+      <!-- END topo_map.inc-->
+      <p>Welcome, mmm! You are currently logged in.</p>
 
+      <form action="../pages/process_sign_out.php" method="post">
+        <button type="submit">Logout</button>
+      </form>
 
-<!-- START tail.inc -->
+      <p><a href="/pages/account.php">Manage Account</a></p>
     </div>
   </body>
 </html>
-<!-- END tail.inc -->
