@@ -9,7 +9,7 @@ include ("/layouts/single.inc"); // An open div with layout class
 include_once ("../../db_connect.php"); // $msqli connect
 
 // Write your query here
-$sql = "SELECT user_id, username, registration_date, email, verified, password_hash FROM users ORDER BY registration_date ASC";
+$sql = "SELECT registration_date, email, verified FROM users";
 
 $result = mysqli_query($mysqli, $sql);
 

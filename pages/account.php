@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 // Ensure user is logged in
