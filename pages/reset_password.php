@@ -27,6 +27,9 @@ if (isset($_GET['token'])) {
 
   if ($num_rows === 1) {
     echo "1";
+  } else {
+    echo "<p style='color: red;'>Invalid password reset link.</p>";
+    exit;
   }
 
 } else {
