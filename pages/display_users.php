@@ -9,7 +9,7 @@ include ("/layouts/secondary.inc"); // An open div with layout class
 include_once ("../../db_connect.php"); // $msqli connect
 
 // Write your query here
-$sql = "SELECT user_id, username, registration_date, email, verified, password_hash FROM users ORDER BY registration_date ASC";
+$sql = "SELECT user_id, username, registration_date, email, verified FROM users ORDER BY registration_date ASC";
 
 $result = mysqli_query($mysqli, $sql);
 
@@ -20,10 +20,10 @@ if (!$result) {
 }
 
 // Process results
-echo "<table><tr><th>ID</th><th>users</th><th>email</th><th>verified</th><th>registered</th><th>hash</th></tr>";
+echo "<table><tr><th>ID</th><th>users</th><th>email</th><th>verified</th><th>registered</th></tr>";
 
 while ($row = mysqli_fetch_assoc($result)) {
-  echo "<tr><td>" . $row["user_id"] . "</td><td>" . $row["username"] . "</td><td>" . $row["email"] . "</td><td>" . $row["verified"] . "</td><td>" . $row["registration_date"] . "</td><td>" . $row["password_hash"] . "</td></tr>";
+  echo "<tr><td>" . $row["user_id"] . "</td><td>" . $row["username"] . "</td><td>" . $row["email"] . "</td><td>" . $row["verified"] . "</td><td>" . $row["registration_date"] . "</td></tr>";
 }
 echo "</table>";
 
