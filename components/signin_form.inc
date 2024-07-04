@@ -23,4 +23,4 @@
   });
 </script>
 
-<p>Don't have an account? <a href="signup.php">Register Here</a></p>
+<p>Don't have an account? <a href="/pages/signup.php">Register Here</a></p>

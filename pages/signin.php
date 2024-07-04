@@ -2,6 +2,7 @@
 
 $page_title = "Sign in";
 $page_css = "../assets/css/style.css";
+$host = "192.168.0.78";
 
 include ("../components/head.inc");
 include ("../layouts/secondary.inc");

@@ -1,7 +1,9 @@
 <?php
+// Your main script
+require_once ('config.php');
 
 $page_title = "Keep Sur Wild";
-$page_css = "/assets/css/style.css";
+$page_css = $base_url . "/assets/css/style.css";
 
 include ("./components/head.inc");
 include ("./layouts/main.inc");
