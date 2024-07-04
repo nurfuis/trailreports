@@ -20,11 +20,11 @@ $registration = $fetched['registration_date'];
 
   <h2>Account Management</h2>
 
-  <p>
-    Welcome,
-    <?php echo $_SESSION['username']; ?>!
-  </p>
+
   <ul class="account-management-list--compact">
+    <li>
+      Username: <p><?php echo $_SESSION['username']; ?></p>
+    </li>
     <li>
       Email: <p><?php echo $email ?></p>
     </li>
