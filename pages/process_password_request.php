@@ -23,16 +23,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
         $errorMessage = "Please enter a valid email address.";
     }
-    echo $user_id . ", " . $email;
     // Check if the entered email matches the logged-in user's email
-    $sql = "SELECT COUNT(*) FROM users WHERE email = ? AND user_id = ?";
+    $sql = "SELECT email FROM users WHERE user_id = ?"; // Corrected query
     $stmt = mysqli_prepare($mysqli, $sql);
-    mysqli_stmt_bind_param($stmt, "si", $email, $user_id);
+    mysqli_stmt_bind_param($stmt, "i", $user_id); // Bind only the user ID
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
-    $num_rows = $result->num_rows;
 
-    if ($num_rows === 1) {
+    $fetched_email = mysqli_fetch_assoc($result);
+
+    if ($fetched_email && $fetched_email['email'] === $email) {
         // Email matches logged-in user, proceed with generating token, etc.
 
         $row = mysqli_fetch_assoc($result);
