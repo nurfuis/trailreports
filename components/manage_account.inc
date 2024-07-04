@@ -6,10 +6,6 @@ mysqli_stmt_bind_param($stmt, "i", $user_id); // Bind the user ID
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $fetched_email = mysqli_fetch_assoc($result);
-
-mysqli_free_result($result);
-mysqli_stmt_close($stmt);
-mysqli_close($mysqli);
 ?>
 
 <div>
@@ -30,3 +26,8 @@ mysqli_close($mysqli);
     <li><?php include ("../components/update_account_status.inc"); ?></li>
   </ul>
 </div>
+<?php
+mysqli_free_result($result);
+mysqli_stmt_close($stmt);
+mysqli_close($mysqli);
+?>
