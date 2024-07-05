@@ -3,7 +3,7 @@ body {
   font-family: "Julius Sans One", sans-serif;
   font-weight: 400;
   font-style: normal;
-  color: #212916;
+  background-color: #212916;
 }
 
 p {
@@ -61,7 +61,7 @@ p {
 }
 
 .main__wrapper {
-  color: #f2f3f4;
+  background-color: #f2f3f4;
   margin: 0 auto 0 auto;
   min-width: 320px;
   max-width: 600px;
