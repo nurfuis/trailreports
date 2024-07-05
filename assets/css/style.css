@@ -63,6 +63,7 @@ p {
 .main__wrapper {
   background-color: #f2f3f4;
   padding: 1em;
+  border-radius: 2em;
   margin: 0 auto 0 auto;
   min-width: 320px;
   max-width: 640px;
@@ -74,6 +75,9 @@ p {
 }
 
 .single__wrapper {
+  background-color: #f2f3f4;
+  padding: 1em;
+  border-radius: 2em;
   margin: 0 auto 0 auto;
   min-width: 320px;
   max-width: 600px;
