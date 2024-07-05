@@ -30,7 +30,7 @@ if (!isset($_SESSION['user_id'])) {
     <button type="button" onclick="skipVerification()">Skip</button>
 
 
-    <div id="skip-verification-alert" style="display: none">
+    <div id="skip-verification-alert" class="hidden">
       <p>
         By skipping verification, your account setup will not be complete. This may
         limit your access to certain features on the platform. Are you sure you want
