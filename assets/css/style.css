@@ -70,6 +70,7 @@ p {
   padding: 1em;
   border-radius: 1em;
   border: var(--darker-background);
+  color: var(--light-background);
   grid-area: header;
 }
 .nav__wrapper a {
