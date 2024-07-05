@@ -33,17 +33,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ($row['COUNT(*)'] > 0) {
     $errorMessage = "Email already exists. Please use a different email.";
     include ("../components/update_email_form.inc");
-  
+
   } else {
     session_start();
 
     // Use user_id from session variable
-    $user_id = $_SESSION['user_id'];   
+    $user_id = $_SESSION['user_id'];
     // Generate a unique random email verification token
     $token = bin2hex(random_bytes(16));
     // Set token expiry time (e.g., 24 hours from now)
     $expiry = date("Y-m-d H:i:s", strtotime("+24 hours"));
-   
+
     // Prepare SQL statement to update user email and verification data
     $sql = "UPDATE users SET pending_email = ?, verification_token = ?, verification_token_expiry = ? WHERE user_id = ?";
     $stmt = mysqli_prepare($mysqli, $sql);
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       if ($success) {
         // Optional: Redirect to a success page or display a success message here
         // header("Location: /pages/account.php"); // Assuming a success page
-        $successMessage = "A verification email has been sent."
+        $successMessage = "A verification email has been sent.";
       } else {
         $errorMessage = "Email was collected but the verification email could not be sent. Please try again later.";
       }
