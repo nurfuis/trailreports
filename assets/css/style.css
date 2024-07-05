@@ -27,6 +27,7 @@ p {
 }
 form {
   border-bottom: 1px dashed var(--accent);
+  padding-bottom: 1em;
 }
 .account-management-list--compact span {
   font-family: "K2D", sans-serif;
