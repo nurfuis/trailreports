@@ -2,6 +2,7 @@
   --text: #000080ff;
   --light-background: #f2f3f4ff;
   --dark-background: #5a2328;
+  --darker-background: #2A3439;
   --highlight: #fb4d3d;
   --accent: #57a773;
 }
@@ -65,6 +66,7 @@ p {
 }
 
 .header__wrapper {
+  background-color: var(--darker-background);
   grid-area: header;
 }
 .nav__wrapper a {
