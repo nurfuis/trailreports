@@ -14,7 +14,8 @@ if (isset($_GET['token'])) {
 
     $token = $_GET['token'];
 
-    $sql = "SELECT user_id FROM users WHERE verification_token = ? AND verification_token_expiry > NOW()";
+    // Prepared statement to prevent SQL injection
+    $sql = "SELECT user_id, pending_email FROM users WHERE verification_token = ? AND verification_token_expiry > NOW()";
 
     $stmt = mysqli_prepare($mysqli, $sql);
     mysqli_stmt_bind_param($stmt, "s", $token);
@@ -26,11 +27,12 @@ if (isset($_GET['token'])) {
     if ($num_rows === 1) {
         $row = mysqli_fetch_assoc($result);
         $user_id = $row['user_id'];
+        $pending_email = $row['pending_email'];
 
-        // Update user record to verified, clear token and expiry
-        $sql = "UPDATE users SET verified = 1, verification_token = NULL, verification_token_expiry = NULL WHERE user_id = ?";
+        // Update user record (verified, clear token and expiry, set email)
+        $sql = "UPDATE users SET verified = 1, verification_token = NULL, verification_token_expiry = NULL, email = ? WHERE user_id = ?";
         $stmt = mysqli_prepare($mysqli, $sql);
-        mysqli_stmt_bind_param($stmt, "i", $user_id);
+        mysqli_stmt_bind_param($stmt, "si", $pending_email, $user_id);
 
         if (mysqli_stmt_execute($stmt)) {
             $successMessage = "Your email address has been verified successfully. You can now log in using your email address.";
@@ -57,4 +59,5 @@ if (!empty($errorMessage)) {
 }
 
 include ("../components/tail.inc");
+
 

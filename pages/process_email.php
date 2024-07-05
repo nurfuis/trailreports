@@ -30,47 +30,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $row = mysqli_fetch_assoc($result);
 
-  if ($row['COUNT(*)'] > 0) {
-    $errorMessage = "Email already exists. Please use a different email.";
-    include ("../components/update_email_form.inc");
+if ($num_rows === 1) {
 
+  $row = mysqli_fetch_assoc($result);
+  $user_id = $row['user_id'];
+
+  // Generate a unique login token and expiry time
+  $token = bin2hex(random_bytes(16));
+  $expiry = date('Y-m-d H:i:s', strtotime('+1 hour'));
+
+  // Update user record with login token and expiry
+  $sql = "UPDATE users SET login_token = ?, login_token_expiry = ? WHERE user_id = ?";
+  $stmt = mysqli_prepare($mysqli, $sql);
+  mysqli_stmt_bind_param($stmt, "sss", $token, $expiry, $user_id);
+  mysqli_stmt_execute($stmt);
+
+  if (mysqli_stmt_affected_rows($stmt) === 1) {
+
+    // Prepare email content (similar to verification email)
+    $to = $email;
+    $subject = "Login Link for " . $_SERVER['HTTP_HOST'];
+    $message = "Click the link below to log in securely:\n";
+    $login_link = "https://www.yourwebsite.com/pages/login.php?token=" . $token; // Replace with your actual URL
+    $message .= $login_link . "\n\n";
+    $message .= "This link will expire in 1 hour. \n\n";
+    $message .= "If you did not request a login link, please ignore this email. \n\n";
+
+    // Use a library like PHPMailer or your server's mail function to send the email
+    if (mail($to, $subject, $message)) {
+      $successMessage = "A login link has been sent to your email address.";
+    } else {
+      $errorMessage = "Failed to send login link. Please try again.";
+      // Log the error for troubleshooting
+    }
   } else {
-    session_start();
-
-    // Use user_id from session variable
-    $user_id = $_SESSION['user_id'];
-    // Generate a unique random email verification token
-    $token = bin2hex(random_bytes(16));
-    // Set token expiry time (e.g., 24 hours from now)
-    $expiry = date("Y-m-d H:i:s", strtotime("+24 hours"));
-
-    // Prepare SQL statement to update user email and verification data
-    $sql = "UPDATE users SET pending_email = ?, verification_token = ?, verification_token_expiry = ? WHERE user_id = ?";
-    $stmt = mysqli_prepare($mysqli, $sql);
-    mysqli_stmt_bind_param($stmt, "ssss", $email, $token, $expiry, $user_id);
-
-    if (mysqli_stmt_execute($stmt)) {
-      $successMessage = "Email registration is pending. Please verify your email address by clicking the link in the confirmation email we sent you. Once verified, you will be able to post and edit trail reports.";
-
-      // Prepare email content
-      $to = $email;
-      $subject = "Email Verification for Trail Reports Website";
-      $message = "Thank you for registering on Trail Reports! \n\n";
-      $message .= "Please click the following link to verify your email address and activate your account: \n";
-      $verification_link = "192.168.0.78/pages/verify_email.php?token=" . $token; // Replace with your actual URL
-      $message .= $verification_link . "\n\n";
-      $message .= "This link will expire in 24 hours. \n\n";
-      $message .= "If you did not register on Trail Reports, please ignore this email. \n\n";
-
-      $success = mail($to, $subject, $message);
-
-      if ($success) {
-        // Optional: Redirect to a success page or display a success message here
-        // header("Location: /pages/account.php"); // Assuming a success page
-        $successMessage = "A verification email has been sent.";
-      } else {
-        $errorMessage = "Email was collected but the verification email could not be sent. Please try again later.";
-      }
+    $errorMessage = "Failed to generate login token.";
+  }
     } else {
       $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
     }
