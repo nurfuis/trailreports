@@ -43,11 +43,11 @@ if (!isset($_SESSION['user_id'])) {
 </div>
 <script>
   function skipVerification() {
-    document.getElementById("skip-verification-alert").style.display = "block";
+    document.getElementById("skip-verification-alert").classList.toggle("show");
   }
 
   function closeSkipAlert(focusEmail = false) {
-    document.getElementById("skip-verification-alert").style.display = "none";
+    document.getElementById("skip-verification-alert").classList.toggle("show");
     if (focusEmail) {
       document.getElementById("email").focus();
     }

@@ -29,6 +29,9 @@ form {
   border-bottom: 1px dashed var(--accent);
   padding-bottom: 1em;
 }
+.show {
+  display: block;
+}
 .account-management-list--compact span {
   font-family: "K2D", sans-serif;
   font-weight: 200;
