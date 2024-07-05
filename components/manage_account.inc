@@ -29,7 +29,14 @@ $pending_email = $fetched['pending_email'];
       Username: <span><?php echo $_SESSION['username']; ?></span>
     </li>
     <li>
-      Email: <span><?php echo $email ?></span>
+      Email: <span> <?php
+      if (is_null($email)) {
+        echo $pending_email;
+      } else {
+        echo $email;
+      }
+      ?>
+      </span>
     </li>
     <li>
       Verified: <span>
