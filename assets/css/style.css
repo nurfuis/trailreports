@@ -5,7 +5,7 @@
   --highlight: #fb4d3d;
   --accent: #57a773;
 }
-a hover {
+a:hover {
   color: var(--highlight);
 }
 body {
