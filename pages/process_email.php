@@ -39,22 +39,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Use user_id from session variable
     $user_id = $_SESSION['user_id'];
 
-    // Prepare SQL statement to update user email
-    $sql = "UPDATE users SET email = ? WHERE user_id = ?";
+    // Generate a unique random email verification token
+    $token = bin2hex(random_bytes(16));
+
+    // Set token expiry time (e.g., 24 hours from now)
+    $expiry = date("Y-m-d H:i:s", strtotime("+24 hours"));
+
+    // Prepare SQL statement to update user email and verification data
+    $sql = "UPDATE users SET email = ?, verification_token = ?, verification_token_expiry = ? WHERE user_id = ?";
 
     $stmt = mysqli_prepare($mysqli, $sql);
-    mysqli_stmt_bind_param($stmt, "si", $email, $user_id);
+    mysqli_stmt_bind_param($stmt, "ssss", $email, $token, $expiry, $user_id);
 
     if (mysqli_stmt_execute($stmt)) {
-      $successMessage = "Email was registered successfully. Once verified (check your inbox) you will be able to post and edit trail reports.";
-      header("Location: /pages/account.php");
+      $successMessage = "Email was registered successfully. Please verify your email address by clicking the link in the confirmation email we sent you. Once verified, you will be able to post and edit trail reports.";
 
+      // Prepare email content
+      $to = $email;
+      $subject = "Email Verification for Trail Reports Website";
+      $message = "Thank you for registering on Trail Reports! \n\n";
+      $message .= "Please click the following link to verify your email address and activate your account: \n";
+      $verification_link = "192.168.0.78/pages/verify_email.php?token=" . $token; // Replace with your actual URL
+      $message .= $verification_link . "\n\n";
+      $message .= "This link will expire in 24 hours. \n\n";
+      $message .= "If you did not register on Trail Reports, please ignore this email. \n\n";
+
+      $success = mail($to, $subject, $message);
+
+      if ($success) {
+        // Optional: Redirect to a success page or display a success message here
+        header("Location: /pages/account.php"); // Assuming a success page
+      } else {
+        $errorMessage = "Email was registered successfully, but verification email could not be sent. Please try again later.";
+      }
     } else {
       $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
     }
 
     mysqli_stmt_close($stmt);
   }
+
 
 
   mysqli_free_result($result); // Free the result from the email check
