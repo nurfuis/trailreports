@@ -50,5 +50,11 @@ if (isset($_GET['token'])) {
 
 mysqli_close($mysqli);
 
+if (!empty($errorMessage)) {
+    echo "<p style='color: red;'>$errorMessage</p>";
+} else {
+    echo "<p style='color: blue;'>$successMessage</p>";
+}
+
 include ("../components/tail.inc");
 
