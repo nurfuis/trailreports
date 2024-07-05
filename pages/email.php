@@ -29,17 +29,17 @@ if (!isset($_SESSION['user_id'])) {
   <form>
     <button type="button" onclick="skipVerification()">Skip</button>
 
-
-    <div id="skip-verification-alert" style="display: none">
-      <p>
-        By skipping verification, your account setup will not be complete. This may
-        limit your access to certain features on the platform. Are you sure you want
-        to continue?
-      </p>
-      <button onclick="closeSkipAlert(true)">Fill Out Email</button>
-      <button onclick="continueWithoutEmail()">Continue (Limited Access)</button>
-    </div>
   </form>
+
+  <div id="skip-verification-alert" style="display: none">
+    <p>
+      By skipping verification, your account setup will not be complete. This may
+      limit your access to certain features on the platform. Are you sure you want
+      to continue?
+    </p>
+    <button onclick="closeSkipAlert(true)">Fill Out Email</button>
+    <button onclick="continueWithoutEmail()">Continue (Limited Access)</button>
+  </div>
 </div>
 <script>
   function skipVerification() {
