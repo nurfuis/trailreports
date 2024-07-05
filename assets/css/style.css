@@ -35,6 +35,9 @@ form {
 .hidden {
   display: none;
 }
+.account-management-list--compact button {
+  margin-top: 0.5em;
+}
 .account-management-list--compact span {
   font-family: "K2D", sans-serif;
   font-weight: 200;
