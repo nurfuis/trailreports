@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $user_id = $_SESSION['user_id'];
 
 include_once ("../../db_connect.php");
