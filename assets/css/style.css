@@ -64,7 +64,10 @@ p {
 .map__wrapper {
   grid-area: map;
 }
-
+.header__wrapper p {
+  background-color: var(--accent);
+  padding: 1em;
+}
 .header__wrapper {
   background-color: var(--dark-background);
   padding: 1em;
