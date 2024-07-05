@@ -29,6 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (mysqli_stmt_execute($stmt)) {
         $successMessage = "Password updated successfully.";
+        header("Location: /pages/account.php");
+
     } else {
         $errorMessage = "Failed to update password: " . mysqli_stmt_error($stmt);
     }
@@ -38,7 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 mysqli_close($mysqli); // Close database connection
 
-// Display error or success message if any
 if (isset($errorMessage)) {
     echo '<p class="alert">' . $errorMessage . '</p>';
 } else if (isset($successMessage)) {
