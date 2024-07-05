@@ -40,12 +40,10 @@ if (isset($_GET['token'])) {
 
   } else {
     $errorMessage = "Invalid password reset link.";
-    exit;
   }
 
 } else {
   $errorMessage = "Invalid password reset link.";
-  exit;
 }
 
 mysqli_close($mysqli);

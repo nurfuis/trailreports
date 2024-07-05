@@ -43,5 +43,3 @@ if (isset($errorMessage)) {
     echo '<p style="color: blue;">' . $successMessage . '</p>';
 }
 include ("../components/tail.inc");
-
-?>
