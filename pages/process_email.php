@@ -66,7 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       if ($success) {
         // Optional: Redirect to a success page or display a success message here
-        header("Location: /pages/account.php"); // Assuming a success page
+        // header("Location: /pages/account.php"); // Assuming a success page
+        $successMessage = "A verification email has been sent."
       } else {
         $errorMessage = "Email was collected but the verification email could not be sent. Please try again later.";
       }
