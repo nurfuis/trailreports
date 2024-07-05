@@ -32,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if ($row['COUNT(*)'] > 0) {
     $errorMessage = "Email already exists. Please use a different email.";
-    include ("../components/update_email_form.inc");
 
   } else {
     session_start();
@@ -87,6 +86,8 @@ mysqli_close($mysqli);
 
 if (!empty($errorMessage)) {
   echo "<p style='color: red;'>$errorMessage</p>";
+  include ("../components/update_email_form.inc");
+
 } else {
   echo "<p style='color: blue;'>$successMessage</p>";
 }

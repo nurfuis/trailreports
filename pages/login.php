@@ -3,16 +3,15 @@
 $page_title = "Login";
 $page_css = "/assets/css/style.css";
 
-include ("../components/head.inc"); // Top section up to and including body tag
-include ("../layouts/single.inc"); // An open div with layout class
+include ("../components/head.inc");
+include ("../layouts/single.inc");
 
-include_once ("../../db_connect.php"); // $msqli connect
+include_once ("../../db_connect.php");
 
 if (isset($_GET['token'])) {
 
   $token = $_GET['token'];
 
-  // Check if token is valid (exists, not expired)
   $sql = "SELECT user_id, username, account_status FROM users WHERE login_token = ? AND login_token_expiry > NOW()";
   $stmt = mysqli_prepare($mysqli, $sql);
   mysqli_stmt_bind_param($stmt, "s", $token);
@@ -27,7 +26,6 @@ if (isset($_GET['token'])) {
     $user_id = $row['user_id'];
     $username = $row['username'];
 
-    // Check account status and reactivate if necessary
     if ($row['account_status'] === 'inactive') {
       $sql = "UPDATE users SET account_status = 'active' WHERE user_id = ?";
       $stmt = mysqli_prepare($mysqli, $sql);
@@ -40,7 +38,6 @@ if (isset($_GET['token'])) {
     $_SESSION['user_id'] = $user_id;
     $_SESSION['username'] = $username;
 
-    // Optional: Delete the used login token for security
     $sql = "UPDATE users SET login_token = NULL, login_token_expiry = NULL WHERE user_id = ?";
     $stmt = mysqli_prepare($mysqli, $sql);
     mysqli_stmt_bind_param($stmt, "i", $user_id);
@@ -65,9 +62,7 @@ if (!empty($errorMessage)) {
   echo "<p style='color: red;'>$errorMessage</p>";
 } else if (!empty($successMessage)) {
   echo "<p style='color: blue;'>$successMessage</p>";
-  // Optional: Redirect to a specific page after successful login
-  // header("Location: /index.php");
 }
 
-include ("../components/tail.inc"); // closing tags for layout div, body, and html 
+include ("../components/tail.inc");
 
