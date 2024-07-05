@@ -70,7 +70,6 @@ p {
 }
 .header__wrapper {
   background-color: var(--dark-background);
-  padding: 1em;
   border-radius: 1em;
   border: var(--darker-background);
   color: var(--light-background);
