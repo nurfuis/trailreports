@@ -30,7 +30,7 @@ if (!isset($_SESSION['user_id'])) {
     <button type="button" onclick="skipVerification()">Skip</button>
 
 
-    <div id="skip-verification-alert" class="hidden">
+    <div id="skip-verification-alert" style="display: none">
       <p>
         By skipping verification, your account setup will not be complete. This may
         limit your access to certain features on the platform. Are you sure you want
@@ -43,11 +43,11 @@ if (!isset($_SESSION['user_id'])) {
 </div>
 <script>
   function skipVerification() {
-    document.getElementById("skip-verification-alert").classList.toggle("show");
+    document.getElementById("skip-verification-alert").style.display = "block";
   }
 
   function closeSkipAlert(focusEmail = false) {
-    document.getElementById("skip-verification-alert").classList.toggle("show");
+    document.getElementById("skip-verification-alert").style.display = "none";
     if (focusEmail) {
       document.getElementById("email").focus();
     }
