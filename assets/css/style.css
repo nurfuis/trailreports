@@ -68,7 +68,7 @@ p {
   grid-area: header;
 }
 .nav__wrapper a {
-  line-height: 1.5;
+  line-height: 2;
 }
 .nav__wrapper {
   grid-area: nav;
