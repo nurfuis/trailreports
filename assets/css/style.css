@@ -1,10 +1,18 @@
+:root {
+  --text: #000080ff;
+  --light-background: #f2f3f4ff;
+  --dark-background: #931621ff;
+  --highlight: #5da271ff;
+  --accent: #1c7c54ff;
+}
+
 body {
   margin: 0.5em 0.5em 4em 0.5em;
   font-family: "Julius Sans One", sans-serif;
   font-weight: 400;
   font-style: normal;
-  background-color: #212916;
-  color: #000080;
+  background-color: var(--dark-background);
+  color: var(--text) ;
 }
 
 p {
@@ -22,7 +30,7 @@ p {
   list-style-type: none;
   margin: 0;
   padding: 1em 0;
-  border-bottom: 1px solid #212916;
+  border-bottom: 1px solid var(--accent);
 }
 .account-management-list {
   list-style-type: none;
@@ -63,7 +71,7 @@ p {
 }
 
 .main__wrapper {
-  background-color: #f2f3f4;
+  background-color: var(--light-background);
   padding: 1em;
   border-radius: 2em;
   margin: 0 auto 0 auto;
@@ -77,7 +85,7 @@ p {
 }
 
 .single__wrapper {
-  background-color: #f2f3f4;
+  background-color: var(--light-background);
   padding: 1em;
   border-radius: 2em;
   margin: 0 auto 0 auto;
