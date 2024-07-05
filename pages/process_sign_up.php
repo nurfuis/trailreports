@@ -24,24 +24,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($row['COUNT(*)'] > 0) {
         $errorMessage = "Username already exists. Please choose another.";
-        include ("../components/sign_up_form.inc");
     } else {
-        // Hash the password before storing it in the database (recommended)
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-        // Prepare SQL statement (prevents SQL injection)
         $sql = "INSERT INTO users (username, password_hash) VALUES (?, ?)";
 
-        // Prepare the statement
         $stmt = mysqli_prepare($mysqli, $sql);
 
-        // Bind parameters to the statement
         mysqli_stmt_bind_param($stmt, "ss", $username, $passwordHash);
 
-        // Execute the statement
         if (mysqli_stmt_execute($stmt)) {
-            // The user should be logged in upon successful registration
-            // Get the user ID of the newly registered user
             $sql = "SELECT user_id FROM users WHERE username = ?";
             $stmt = mysqli_prepare($mysqli, $sql);
             mysqli_stmt_bind_param($stmt, "s", $username);
@@ -51,29 +43,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $userId = $row['user_id'];
 
-            // Start the session
             session_start();
-            // Add username and user_id as session variables
             $_SESSION['username'] = $username;
             $_SESSION['user_id'] = $userId;
             $successMessage = "Registration successful! Welcome " . $_SESSION['username'] . ".";
         } else {
-            // Handle registration failure (e.g., duplicate username)
             $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
         }
     }
 
-    mysqli_free_result($result); // Free the result from the username check
-    mysqli_stmt_close($stmt); // Close the statement used for username check
+    mysqli_free_result($result);
+    mysqli_stmt_close($stmt);
 }
 
 mysqli_close($mysqli);
 
 if (!empty($errorMessage)) {
     echo "<p style='color: red;'>$errorMessage</p>";
+    include ("../components/sign_up_form.inc");
+
 } else if (!empty($successMessage)) {
     echo "<p style='color: blue;'>$successMessage</p>";
-    // Redirect to homepage or profile page after successful registration (optional)
     header("Location: /pages/email.php");
 }
 
