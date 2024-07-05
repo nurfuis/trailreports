@@ -55,7 +55,7 @@ if (!isset($_SESSION['user_id'])) {
 
   function continueWithoutEmail() {
     // Redirect to next page
-    window.location.href = "../index.php";
+    window.location.href = "/";
   }
 </script>
 <?php
