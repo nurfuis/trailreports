@@ -10,7 +10,7 @@ a:hover {
   color: var(--accent);
 }
 body {
-  margin: 0.5em 0.5em 4em 0.5em;
+  margin: 0px;
   font-family: "Julius Sans One", sans-serif;
   font-weight: 400;
   font-style: normal;
