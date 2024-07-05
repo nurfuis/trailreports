@@ -49,9 +49,9 @@ if (isset($_GET['token'])) {
 mysqli_close($mysqli);
 
 if (!empty($errorMessage)) {
-  echo '<p class="alert">$errorMessage</p>';
+  echo '<p class="alert">' . $errorMessage . '</p>';
 } else if (!empty($successMessage)) {
-  echo "<p style='color: blue;'>$successMessage</p>";
+  echo '<p style="color: blue;">' . $successMessage . '</p>';
 }
 
 include ("../components/tail.inc");
