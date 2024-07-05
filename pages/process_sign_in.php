@@ -48,11 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
     } else {
       $errorMessage = "Invalid username or password.";
-      include ("../components/sign_in_form.inc");
     }
   } else {
     $errorMessage = "Invalid username or password.";
-    include ("../components/sign_in_form.inc");
   }
 
   mysqli_free_result($result);
@@ -63,10 +61,10 @@ mysqli_close($mysqli);
 
 if (!empty($errorMessage)) {
   echo "<p style='color: red;'>$errorMessage</p>";
+  include ("../components/sign_in_form.inc");
+
 } else if (!empty($successMessage)) {
   echo "<p style='color: blue;'>$successMessage</p>";
-  // Redirect to homepage or profile page after successful sign_in (optional)
-  // header("Location: /index.php");
 }
 
 include ("../components/tail.inc"); // closing tags for layout div, body, and html 
