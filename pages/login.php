@@ -27,6 +27,14 @@ if (isset($_GET['token'])) {
     $user_id = $row['user_id'];
     $username = $row['username'];
 
+    // Check account status and reactivate if necessary
+    if ($row['account_status'] === 'inactive') {
+      $sql = "UPDATE users SET account_status = 'active' WHERE user_id = ?";
+      $stmt = mysqli_prepare($mysqli, $sql);
+      mysqli_stmt_bind_param($stmt, "i", $user_id);
+      mysqli_stmt_execute($stmt);
+    }
+
     // **Log in the user:**
     session_start();
     $_SESSION['user_id'] = $user_id;
@@ -38,7 +46,10 @@ if (isset($_GET['token'])) {
     mysqli_stmt_bind_param($stmt, "i", $user_id);
     mysqli_stmt_execute($stmt);
 
-    $successMessage = "Login successful!";
+    $successMessage = "Welcome back, " . $_SESSION['username'] . "!";
+    if ($row['account_status'] === 'inactive') {
+      $successMessage .= " Your account has been activated.";
+    }
 
   } else {
     $errorMessage = "Invalid or expired login link.";
