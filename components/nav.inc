@@ -1,4 +1,4 @@
-<div class="nav__wrapper">
+<div class="nav__wrapper regular-padding">
   <a href="/index.php">Home</a> |
   <a href="/pages/trail-conditions.html">View Trail Reports</a> |
   <a href="/pages/topo-map.html">Topo Map</a> | <a href="#">About</a> |

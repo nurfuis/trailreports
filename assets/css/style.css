@@ -82,6 +82,9 @@ h2 {
 .nav__wrapper a {
   line-height: 2;
 }
+.regular-padding {
+  padding: 0.5em;
+}
 .nav__wrapper {
   grid-area: nav;
 }
