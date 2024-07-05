@@ -6,6 +6,8 @@ $page_css = "/assets/css/style.css";
 include ("../components/head.inc"); // Top section up to and including body tag
 include ("../layouts/single.inc"); // An open div with layout class
 
+session_start();
+
 // Check if user is logged in (optional, based on your implementation)
 if (!isset($_SESSION['user_id'])) {
   header("Location: /pages/login.php"); // Redirect to login page if not logged in
