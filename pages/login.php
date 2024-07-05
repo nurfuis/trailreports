@@ -13,7 +13,7 @@ if (isset($_GET['token'])) {
   $token = $_GET['token'];
 
   // Check if token is valid (exists, not expired)
-  $sql = "SELECT user_id, username FROM users WHERE login_token = ? AND login_token_expiry > NOW()";
+  $sql = "SELECT user_id, username, account_status FROM users WHERE login_token = ? AND login_token_expiry > NOW()";
   $stmt = mysqli_prepare($mysqli, $sql);
   mysqli_stmt_bind_param($stmt, "s", $token);
   mysqli_stmt_execute($stmt);
