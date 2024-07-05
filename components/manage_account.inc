@@ -37,7 +37,7 @@ $pending_email = $fetched['pending_email'];
         ?>
         <?php if ($verified === 0 && !empty($pending_email)): ?>
           <form method="post" action="process_resend_verification.php">
-            <button type="submit" name="resend_verification">Resend Verification Email</button>
+            <br><br><button type="submit" name="resend_verification">Resend Verification Email</button><br><br>
           </form>
         <?php endif; ?>
       </span>
