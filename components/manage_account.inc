@@ -45,7 +45,8 @@ $pending_email = $fetched['pending_email'];
         echo $verifiedText;
         ?>
         <?php if ($verified === 0 && !empty($pending_email)): ?>
-          <form method="post" action="process_resend_verification.php">
+          <form method="post" action=".../pages/process_email.php">
+            <input type="hidden" name="email" value="<?= $pending_email ?>">
             <br><button type="submit" name="resend_verification">Resend Verification Email</button><br><br>
           </form>
         <?php endif; ?>
@@ -54,7 +55,6 @@ $pending_email = $fetched['pending_email'];
     <li>
       Registration date: <span><?php echo $registration ?></span>
     </li>
-
   </ul>
 
   <ul class="account-management-list">
