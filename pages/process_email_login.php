@@ -71,6 +71,8 @@ mysqli_close($mysqli);
 
 if (!empty($errorMessage)) {
     echo "<p style='color: red;'>$errorMessage</p>";
+    include ("./components/sign_in_form.inc");
+
 } else if (!empty($successMessage)) {
     echo "<p style='color: blue;'>$successMessage</p>";
 }
