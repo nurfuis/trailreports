@@ -29,13 +29,20 @@ $pending_email = $fetched['pending_email'];
       Username: <span><?php echo $_SESSION['username']; ?></span>
     </li>
     <li>
-      Email: <span> <?php
-      if (is_null($email)) {
-        echo $pending_email;
-      } else {
-        echo $email;
-      }
-      ?>
+      Email: <span>
+        <?php
+        // Display "Incomplete" if both email and pending_email are null
+        if (is_null($email) && is_null($pending_email)) {
+          echo "Incomplete";
+        } else {
+          // Display pending_email if email is null, otherwise display email
+          if (is_null($email)) {
+            echo $pending_email;
+          } else {
+            echo $email;
+          }
+        }
+        ?>
       </span>
     </li>
     <li>
