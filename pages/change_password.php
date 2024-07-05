@@ -9,7 +9,10 @@ include ("../layouts/single.inc");
 session_start();
 session_destroy();
 
-require_once ("../../db_connect.php"); // Include database connection
+require_once ("../../db_connect.php");
+
+$errorMessage = "";
+$successMessage = "";
 
 ?>
 <h2>Change Password</h2>
@@ -28,7 +31,7 @@ if (isset($_GET['token'])) {
 
   $result = mysqli_stmt_get_result($stmt);
 
-  $num_rows = $result->num_rows;  // Store the number of rows
+  $num_rows = $result->num_rows;
   $row = mysqli_fetch_assoc($result);
 
   if ($num_rows === 1 && $row['reset_token_expiry'] > date("Y-m-d H:i:s")) {
@@ -36,16 +39,22 @@ if (isset($_GET['token'])) {
     include ('../components/new_password_form.inc');
 
   } else {
-    echo "<p style='color: red;'>Invalid password reset link.</p>";
+    $errorMessage = "Invalid password reset link.";
     exit;
   }
 
 } else {
-  echo "<p style='color: red;'>Invalid password reset link.</p>";
+  $errorMessage = "Invalid password reset link.";
   exit;
 }
 
 mysqli_close($mysqli);
+
+if (!empty($errorMessage)) {
+  echo '<p class="alert">$errorMessage</p>';
+} else if (!empty($successMessage)) {
+  echo "<p style='color: blue;'>$successMessage</p>";
+}
 
 include ("../components/tail.inc");
 ?>
