@@ -8,16 +8,27 @@ include ("../layouts/single.inc"); // An open div with layout class
 
 include_once ("../../db_connect.php"); // $msqli connect
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_ METHOD'] === 'POST') {
 
   // Sanitize user input to prevent SQL injection
   $username = mysqli_real_escape_string($mysqli, trim($_POST['username']));
   $password = mysqli_real_escape_string($mysqli, trim($_POST['password']));
 
-  // Prepare SQL statement to check user credentials
-  $sql = "SELECT user_id, username, password_hash, account_status FROM users WHERE username = ?";
-  $stmt = mysqli_prepare($mysqli, $sql);
-  mysqli_stmt_bind_param($stmt, "s", $username);
+  // Check if username is an email
+  $isEmail = filter_var($username, FILTER_VALIDATE_EMAIL);
+
+  if ($isEmail) {
+    // Username is an email, search by email address
+    $sql = "SELECT user_id, username, password_hash, account_status FROM users WHERE email = ?";
+    $stmt = mysqli_prepare($mysqli, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $username);
+  } else {
+    // Username is not an email, search by username
+    $sql = "SELECT user_id, username, password_hash, account_status FROM users WHERE username = ?";
+    $stmt = mysqli_prepare($mysqli, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $username);
+  }
+
   mysqli_stmt_execute($stmt);
 
   $result = mysqli_stmt_get_result($stmt);
@@ -25,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $num_rows = $result->num_rows; // Store the number of rows
 
   if ($num_rows === 1) {
-    // Username exists (handle multiple rows if necessary)
+    // Username/Email exists (handle multiple rows if necessary)
     $row = mysqli_fetch_assoc($result);
 
     // Verify password using password_verify function
