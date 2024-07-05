@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (mysqli_stmt_execute($stmt)) {
         $successMessage = "Password updated successfully.";
-
+        echo $successMessage;
     } else {
         $errorMessage = "Failed to update password: " . mysqli_stmt_error($stmt);
     }
