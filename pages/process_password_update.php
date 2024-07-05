@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
-    $sql = "UPDATE users SET password_hash = ?, reset_token = NULL, reset_token_expiry = NULL WHERE user_id = ?";
+    $sql = "UPDATE users SET password_hash = ? WHERE user_id = ?";
 
     $stmt = mysqli_prepare($mysqli, $sql);
 
@@ -23,8 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (mysqli_stmt_execute($stmt)) {
         $successMessage = "Password updated successfully.";
-
-
+        $sql = "UPDATE users SET reset_token = NULL, reset_token_expiry = NULL WHERE user_id = ?";
         header("Location: /pages/account.php");
     } else {
         $errorMessage = "Failed to update password: " . mysqli_stmt_error($stmt);
