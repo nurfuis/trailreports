@@ -1,18 +1,20 @@
 :root {
   --text: #000080ff;
   --light-background: #f2f3f4ff;
-  --dark-background: #6B6054;
+  --dark-background: #6b6054;
   --highlight: #fb4d3d;
-  --accent: #57A773;
+  --accent: #57a773;
 }
-
+a :hover {
+  color: var(--highlight);
+}
 body {
   margin: 0.5em 0.5em 4em 0.5em;
   font-family: "Julius Sans One", sans-serif;
   font-weight: 400;
   font-style: normal;
   background-color: var(--dark-background);
-  color: var(--text) ;
+  color: var(--text);
 }
 
 p {
@@ -43,7 +45,7 @@ p {
 }
 
 .alert {
-  color: red;
+  color: var(--highlight);
   display: block;
   margin: 2em auto 2em auto;
 }
