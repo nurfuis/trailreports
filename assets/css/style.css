@@ -5,8 +5,8 @@
   --highlight: #fb4d3d;
   --accent: #57a773;
 }
-a:hover {
-  color: var(--highlight);
+ahover {
+  color: var(--accent);
 }
 body {
   margin: 0.5em 0.5em 4em 0.5em;
