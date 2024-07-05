@@ -29,9 +29,9 @@ $registration = $fetched['registration_date'];
       Email: <span><?php echo $email ?></span>
     </li>
     <li>
-      Verified status: <span>
+      Verified: <span>
         <?php
-        $verifiedText = ($verified === 1) ? 'Verified' : 'Pending';
+        $verifiedText = ($verified === 1) ? 'Complete' : 'Pending';
         echo $verifiedText;
         ?>
       </span>
