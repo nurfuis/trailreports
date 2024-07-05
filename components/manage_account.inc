@@ -66,7 +66,15 @@ $pending_email = $fetched['pending_email'];
 
   <ul class="account-management-list">
     <li><?php include ("../components/update_email_form.inc"); ?></li>
-    <li><?php include ("../components/update_password_form.inc"); ?></li>
+    <li>
+      <?php
+      if ($verified === 1) {
+        include ("../components/update_password_form.inc");
+      } else {
+        echo '<h3>Change Password</h3><p>Email verification required to change password.</p>';
+      }
+      ?>
+    </li>
     <li><?php include ("../components/update_account_status.inc"); ?></li>
   </ul>
 </div>
