@@ -11,19 +11,23 @@ if (!isset($_SESSION['user_id'])) {
   header("Location: /index.php");
 }
 ?>
-<h2>Join Our Trail Reporting Community</h2>
-<p>
-  To ensure the quality and credibility of trail reports on our platform, we
-  highly recommend verifying your email address. This email will also be used
-  for password recovery if needed. We take your privacy seriously and will never
-  sell or share your information with third parties.
-</p>
 
-<?php
-include ("../components/update_email_form.inc");
-?>
 <div class="regular-padding">
-  <button type="button" onclick="skipVerification()">Skip</button>
+  <h2>Join Our Trail Reporting Community</h2>
+  <p>
+    To ensure the quality and credibility of trail reports on our platform, we
+    highly recommend verifying your email address. This email will also be used
+    for password recovery if needed. We take your privacy seriously and will never
+    sell or share your information with third parties.
+  </p>
+
+  <?php
+  include ("../components/update_email_form.inc");
+  ?>
+</div>
+<div class="regular-padding">
+  <form>
+    <button type="button" onclick="skipVerification()">Skip</button>
   </form>
 
   <div id="skip-verification-alert" style="display: none">

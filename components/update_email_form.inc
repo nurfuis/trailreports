@@ -8,6 +8,4 @@
     <input type="email" name="email" id="email" placeholder="Enter email" /><br><br>
     <button type="submit">Submit</button>
   </form>
-
-
 </div>
