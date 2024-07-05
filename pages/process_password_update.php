@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
-    $sql = "UPDATE users SET password_hash = ?, reset_token = NULL, reset_token_expiry = NULL WHERE user_id = ?";
+    $sql = "UPDATE users SET password_hash = ? WHERE user_id = ?";
 
     $stmt = mysqli_prepare($mysqli, $sql);
 
