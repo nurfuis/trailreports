@@ -1,6 +1,6 @@
 <div class="padding-regular">
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-        <h2>Add Trail Report</h2>
+        <h2>Add Trail</h2>
         <label for="trail_name">Trail Name:</label>
         <input type="text" id="trail_name" name="trail_name" required><br>
         <label for="location">Location:</label>
