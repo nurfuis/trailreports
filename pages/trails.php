@@ -50,7 +50,7 @@ if (!$result) {
 }
 
 // Start the HTML table
-echo '<table class="padding-regular>';
+echo '<table class="regular-padding>';
 
 // Create table headers
 echo "<tr>";
