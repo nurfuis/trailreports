@@ -1,6 +1,6 @@
 <?php
 
-$page_title = "Trail Reports";
+$page_title = "Trails";
 $page_css = "../assets/css/style.css";
 
 session_start();
@@ -32,13 +32,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Check for errors and provide feedback
     if ($result) {
-        echo "Trail report added successfully!";
+        echo "Trail added successfully!";
     } else {
         echo "Error adding report. Please try again.";
     }
 }
 
-// Write the query to select all trail reports
+// Write the query to select all trails
 $sql = "SELECT * FROM trails";
 
 $result = mysqli_query($mysqli, $sql);
