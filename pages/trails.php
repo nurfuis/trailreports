@@ -6,7 +6,7 @@ $page_css = "../assets/css/style.css";
 session_start();
 
 include ("../components/head.inc");
-include ("../layouts/trail-reports__wrapper.inc");
+include ("../layouts/details.inc");
 
 include_once ("../../db_connect.php");
 
