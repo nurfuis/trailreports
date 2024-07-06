@@ -125,7 +125,7 @@ h2 {
   min-width: 320px;
   max-width: 640px;
 }
-.report__wrapper {
+.trail-reports__wrapper {
   background-color: var(--light-background);
   border-radius: 0em;
   margin: 0 auto 0 auto;
