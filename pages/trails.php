@@ -25,18 +25,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Optional: Image handling (if applicable)
     // ... (code to handle image upload and store path)
+    // Check for duplicate trail name
+    $sql_check = "SELECT COUNT(*) FROM trails WHERE trail_name = '$trail_name'";
+    $result_check = mysqli_query($mysqli, $sql_check);
 
-    // Build the INSERT query
-    $sql = "INSERT INTO trails (trail_name, location, distance, elevation_gain, elevation_loss, description, image) 
+    if (mysqli_fetch_row($result_check)[0] > 0) {
+        echo "Error: Trail name already exists. Please choose a unique name.";
+    } else {
+        // Build the INSERT query
+        $sql = "INSERT INTO trails (trail_name, location, distance, elevation_gain, elevation_loss, description, image) 
             VALUES ('$trail_name', '$location', '$distance', '$elevation_gain', '$elevation_loss', '$description', '$image_path')"; // replace '$image_path' with actual path if applicable
 
-    $result = mysqli_query($mysqli, $sql);
+        $result = mysqli_query($mysqli, $sql);
 
-    // Check for errors and provide feedback
-    if ($result) {
-        echo "Trail added successfully!";
-    } else {
-        echo "Error adding report. Please try again.";
+        // Check for errors and provide feedback
+        if ($result) {
+            echo "Trail added successfully!";
+        } else {
+            echo "Error adding report. Please try again.";
+        }
     }
 }
 
