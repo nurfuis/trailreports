@@ -125,3 +125,15 @@ h2 {
   min-width: 320px;
   max-width: 640px;
 }
+.report__wrapper {
+  background-color: var(--light-background);
+  border-radius: 0em;
+  margin: 0 auto 0 auto;
+  min-width: 320px;
+  max-width: 640px;
+  display: grid;
+  grid-template-areas:
+    "-"
+    "-"
+    "-";
+}
