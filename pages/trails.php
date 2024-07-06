@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ... (code to handle image upload and store path)
 
     // Build the INSERT query
-    $sql = "INSERT INTO trail_reports (trail_name, location, distance, elevation_gain, elevation_loss, description, image) 
+    $sql = "INSERT INTO trails (trail_name, location, distance, elevation_gain, elevation_loss, description, image) 
             VALUES ('$trail_name', '$location', '$distance', '$elevation_gain', '$elevation_loss', '$description', '$image_path')"; // replace '$image_path' with actual path if applicable
 
     $result = mysqli_query($mysqli, $sql);
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Write the query to select all trail reports
-$sql = "SELECT * FROM trail_reports";
+$sql = "SELECT * FROM trails";
 
 $result = mysqli_query($mysqli, $sql);
 
