@@ -1,12 +1,12 @@
 <?php
 
 $page_title = "Trail Reports";
-$page_css = "/assets/css/style.css";
+$page_css = "../assets/css/style.css";
 
 session_start();
 
-include ("/components/head.inc");
-include ("/layouts/trail-reports__wrapper.inc");
+include ("../components/head.inc");
+include ("../layouts/trail-reports__wrapper.inc");
 
 include_once ("../../db_connect.php");
 
@@ -81,6 +81,6 @@ while ($row = mysqli_fetch_assoc($result)) {
 echo "</table>";
 
 mysqli_close($mysqli);
-include ("/components/add_trail_form.inc");
+include ("../components/add_trail_form.inc");
 
-include ("/components/tail.inc");
+include ("../components/tail.inc");
