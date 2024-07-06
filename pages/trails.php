@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Optional: Image handling (if applicable)
     // ... (code to handle image upload and store path)
+
     // Check for duplicate trail name
     $sql_check = "SELECT COUNT(*) FROM trails WHERE trail_name = '$trail_name'";
     $result_check = mysqli_query($mysqli, $sql_check);
@@ -41,10 +42,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Check for errors and provide feedback
         if ($result) {
             echo "Trail added successfully!";
+            header("Location: " . $_SERVER['PHP_SELF']); // Redirect to current page
+            exit;
         } else {
             echo "Error adding report. Please try again.";
         }
     }
+    mysqli_free_result($result_check);
+
 }
 
 // Write the query to select all trails
