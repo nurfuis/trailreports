@@ -10,7 +10,7 @@ include ("../layouts/details.inc");
 
 include_once ("../../db_connect.php");
 
-echo "<h2>Trails</h2>"
+echo "<h2>Trails</h2>";
 
 // Check if form is submitted (using POST method)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
