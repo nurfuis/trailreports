@@ -5,6 +5,7 @@
 db_connect.php
 html
 docs
+data
 # User-specific files
 *.rsuser
 *.suo
