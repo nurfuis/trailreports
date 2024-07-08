@@ -18,12 +18,12 @@ foreach ($data->features as $feature) {
   $geometry_type = $feature->geometry->type;
   $coordinates = json_encode($feature->geometry->coordinates);
 
-  // Prepare and execute the INSERT query with collection_id set to 4
-  $sql = "INSERT INTO features (collection_id, name, geometry_type, geometry, properties) 
+  // Prepare and execute the INSERT query with collections_id set to 4
+  $sql = "INSERT INTO features (collections_id, name, geometry_type, geometry, properties) 
           VALUES (?, ?, ?, ?, ?)";
   $stmt = $mysqli->prepare($sql);
-  $collection_id = 4; // Set collection_id to 4
-  $stmt->bind_param("sssss", $collection_id, $name, $geometry_type, $coordinates, $properties);
+  $collections_id = 4; // Set collections_id to 4
+  $stmt->bind_param("sssss", $collections_id, $name, $geometry_type, $coordinates, $properties);
 
   if ($stmt->execute()) {
     echo "Feature '" . $name . "' added successfully! \n";
