@@ -11,7 +11,7 @@ $data = json_decode(file_get_contents("../data/CAMPGROUNDS.geojson"));
 foreach ($data->features as $feature) {
   
   // Extract feature properties
-  $feature_name = $feature->properties->Name;
+  $name = $feature->properties->Name;
   $properties = json_encode($feature->properties);
   $geometry_type = $feature->geometry->type;
   $coordinates = json_encode($feature->geometry->coordinates);
@@ -20,14 +20,14 @@ foreach ($data->features as $feature) {
   $sql = "INSERT INTO features (feature_name, geometry_type, geometry, properties) 
           VALUES (?, ?, ?, ?)";
   $stmt = $mysqli->prepare($sql);
-  $stmt->bind_param("ssss", $feature_name, $geometry_type, $coordinates, $properties);
+  $stmt->bind_param("ssss", $name, $geometry_type, $coordinates, $properties);
 
   if ($stmt->execute()) {
-    echo "Feature '" . $feature_name . "' added successfully! \n";
+    echo "Feature '" . $name . "' added successfully! \n";
   } else {
     // Handle potential duplicate key error (assuming UNIQUE constraint on feature_name)
     if ($mysqli->errno === 1062) { // Duplicate key error code
-      echo "Feature '" . $feature_name . "' already exists. Skipping insertion. \n";
+      echo "Feature '" . $name . "' already exists. Skipping insertion. \n";
     } else {
       echo "Error adding feature: " . $mysqli->error . "\n";
     }
