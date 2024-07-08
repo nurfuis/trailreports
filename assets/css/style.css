@@ -116,7 +116,12 @@ h2 {
     "header"
     "map";
 }
-
+.wide__wrapper {
+  background-color: var(--light-background);
+  padding: 1em;
+  border-radius: 2em;
+  margin: 0 auto 0 auto;
+}
 .single__wrapper {
   background-color: var(--light-background);
   padding: 1em;
