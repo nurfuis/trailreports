@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 echo "past post";
 // Write the query to select all features
-$sql = "SELECT id, feature_name, geometry_type, geometry, properties, management_area_id, collections_id FROM features";
+$sql = "SELECT id, feature_name, geometry_type, properties, management_area_id, collections_id FROM features";
 
 $result = mysqli_query($mysqli, $sql);
 
