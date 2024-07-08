@@ -1,6 +1,6 @@
 <?php
 
-$page_title = "Features";
+$page_title = "Trails";
 $page_css = "../assets/css/style.css";
 
 session_start();
@@ -10,39 +10,39 @@ include ("../layouts/details.inc");
 
 include_once ("../../db_connect.php");
 
-echo "<h2>Features</h2>";
+echo "<h2>Trails</h2>";
 
 // Check if form is submitted (using POST method)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Sanitize user input
-    $name = htmlspecialchars($_POST['name']);
-    $geometry_type = htmlspecialchars($_POST['geometry_type']);
-    $geometry = floatval($_POST['geometry']); // convert to float for geometry
-    $properties = intval($_POST['properties']); // convert to integer
-    $management_area_id = intval($_POST['management_area_id']); // convert to integer
-    $collections_id = htmlspecialchars($_POST['collections_id']);
+    $trail_name = htmlspecialchars($_POST['trail_name']);
+    $location = htmlspecialchars($_POST['location']);
+    $distance = floatval($_POST['distance']); // convert to float for distance
+    $elevation_gain = intval($_POST['elevation_gain']); // convert to integer
+    $elevation_loss = intval($_POST['elevation_loss']); // convert to integer
+    $description = htmlspecialchars($_POST['description']);
 
     // Optional: Image handling (if applicable)
     // ... (code to handle image upload and store path)
 
     // Check for duplicate trail name
-    $sql_check = "SELECT COUNT(*) FROM features WHERE name = '$name'";
+    $sql_check = "SELECT COUNT(*) FROM trails WHERE trail_name = '$trail_name'";
     $result_check = mysqli_query($mysqli, $sql_check);
 
     if (mysqli_fetch_row($result_check)[0] > 0) {
         echo "Error: Trail name already exists. Please choose a unique name.";
     } else {
         // Build the INSERT query
-        $sql = "INSERT INTO features (name, geometry_type, geometry, properties, management_area_id, collections_id, image) 
-            VALUES ('$name', '$geometry_type', '$geometry', '$properties', '$management_area_id', '$collections_id', '$image_path')"; // replace '$image_path' with actual path if applicable
+        $sql = "INSERT INTO trails (trail_name, location, distance, elevation_gain, elevation_loss, description, image) 
+            VALUES ('$trail_name', '$location', '$distance', '$elevation_gain', '$elevation_loss', '$description', '$image_path')"; // replace '$image_path' with actual path if applicable
 
         $result = mysqli_query($mysqli, $sql);
 
         // Check for errors and provide feedback
         if ($result) {
             echo "Trail added successfully!";
-            header("Type: " . $_SERVER['PHP_SELF']); // Redirect to current page
+            header("Location: " . $_SERVER['PHP_SELF']); // Redirect to current page
             exit;
         } else {
             echo "Error adding report. Please try again.";
@@ -52,8 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }
 
-// Write the query to select all features
-$sql = "SELECT * FROM features";
+// Write the query to select all trails
+$sql = "SELECT * FROM trails";
 
 $result = mysqli_query($mysqli, $sql);
 
@@ -69,11 +69,11 @@ echo "<table>";
 // Create table headers
 echo "<tr>";
 echo "<th>Trail Name</th>";
-echo "<th>Type</th>";
-echo "<th>Coords (miles)</th>";
-echo "<th>Properties</th>";
-echo "<th>Management Agency</th>";
-echo "<th>Collection</th>";
+echo "<th>Location</th>";
+echo "<th>Distance (miles)</th>";
+echo "<th>Elevation Gain (ft)</th>";
+echo "<th>Elevation Loss (ft)</th>";
+echo "<th>Description</th>";
 // Add a header for image if you want to display it
 // echo "<th>Image</th>";
 echo "</tr>";
@@ -81,20 +81,20 @@ echo "</tr>";
 // Process results and display data in table rows
 while ($row = mysqli_fetch_assoc($result)) {
     echo "<tr>";
-    echo "<td>" . $row['name'] . "</td>";
-    echo "<td>" . $row['geometry_type'] . "</td>";
-    echo "<td>" . $row['geometry'] . "</td>";
-    echo "<td>" . $row['properties'] . "</td>";
-    echo "<td>" . $row['management_area_id'] . "</td>";
-    echo "<td>" . $row['collections_id'] . "</td>";
+    echo "<td>" . $row['trail_name'] . "</td>";
+    echo "<td>" . $row['location'] . "</td>";
+    echo "<td>" . $row['distance'] . "</td>";
+    echo "<td>" . $row['elevation_gain'] . "</td>";
+    echo "<td>" . $row['elevation_loss'] . "</td>";
+    echo "<td>" . $row['description'] . "</td>";
     // Add code to display image if needed (replace 'image_path' with actual path)
-    // echo "<td><img src='" . 'image_path' . $row['image'] . "' alt='" . $row['name'] . " image'></td>";
+    // echo "<td><img src='" . 'image_path' . $row['image'] . "' alt='" . $row['trail_name'] . " image'></td>";
     echo "</tr>";
 }
 
 echo "</table>";
 
 mysqli_close($mysqli);
-include ("../components/add_feature_form.inc");
+include ("../components/add_trail_form.inc");
 
 include ("../components/tail.inc");
