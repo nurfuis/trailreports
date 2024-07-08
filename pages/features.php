@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Error: Feature name already exists. Please choose a unique name.";
     } else {
         // Build the INSERT query
-        $sql = "INSERT INTO features (feature_name, geometry_type, geometry, properties, management_area_id, collections_id) 
+        $sql = "INSERT INTO features (feature_name, geometry_type, properties, management_area_id, collections_id) 
               VALUES ('$feature_name', '$geometry_type', '$geometry', '$properties', $management_area_id, $collections_id)";
 
         $result = mysqli_query($mysqli, $sql);
