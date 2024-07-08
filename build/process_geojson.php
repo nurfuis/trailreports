@@ -17,7 +17,7 @@ foreach ($data->features as $feature) {
   $coordinates = json_encode($feature->geometry->coordinates);
 
   // Prepare and execute the INSERT query
-  $sql = "INSERT INTO features (feature_name, geometry_type, geometry, properties) 
+  $sql = "INSERT INTO features (name, geometry_type, geometry, properties) 
           VALUES (?, ?, ?, ?)";
   $stmt = $mysqli->prepare($sql);
   $stmt->bind_param("ssss", $name, $geometry_type, $coordinates, $properties);
