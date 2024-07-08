@@ -10,6 +10,9 @@ include ("../layouts/details.inc");
 
 include_once ("../../db_connect.php");
 
+
+
+
 echo "<h2>Features</h2>";
 
 // Check if form is submitted (using POST method)
