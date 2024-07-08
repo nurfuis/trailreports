@@ -6,12 +6,11 @@ $page_css = "../assets/css/style.css";
 session_start();
 
 include ("../components/head.inc");
-include ("../layouts/details.inc");
-
 include_once ("../../db_connect.php");
 
 
 
+echo "<div>";
 
 echo "<h2>Features</h2>";
 
