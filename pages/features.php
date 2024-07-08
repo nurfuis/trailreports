@@ -70,7 +70,7 @@ echo "<table>";
 echo "<tr>";
 echo "<th>Trail Name</th>";
 echo "<th>Type</th>";
-echo "<th>Coords (miles)</th>";
+echo "<th>Coords (lat long)</th>";
 echo "<th>Properties</th>";
 echo "<th>Management Agency</th>";
 echo "<th>Collection</th>";
