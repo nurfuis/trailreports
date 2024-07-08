@@ -7,7 +7,7 @@ if ($mysqli->connect_error) {
   die("Connection failed: " . $mysqli->connect_error);
 }
 
-$data = json_decode(file_get_contents("../data/CAMPS.geojson"));
+$data = json_decode(file_get_contents("/media/usb/CAMPS.geojson"));
 
 // Loop through each feature in the dataset
 foreach ($data->features as $feature) {
