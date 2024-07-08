@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mysqli_free_result($result_check);
 
 }
-
+echo "past post";
 // Write the query to select all features
 $sql = "SELECT id, feature_name, geometry_type, geometry, properties, management_area_id, collections_id FROM features";
 
@@ -93,4 +93,3 @@ include ("../components/add_feature_form.inc");  // Change filename to reflect n
 
 include ("../components/tail.inc");
 
-?>
