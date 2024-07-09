@@ -23,8 +23,8 @@ $result = mysqli_query($mysqli, $sql);
 
 // Check for errors
 if (!$result) {
-  echo "Error: " . mysqli_error($mysqli);
-  exit;
+    echo "Error: " . mysqli_error($mysqli);
+    exit;
 }
 
 // Start the HTML table
@@ -43,28 +43,28 @@ echo "</tr>";
 // Process results and display data in table rows
 while ($row = mysqli_fetch_assoc($result)) {
 
-  // Convert name to sentence case and replace underscores with spaces
-  $name = ucfirst(strtolower(str_replace('_', ' ', $row['name'])));
+    // Convert name to sentence case and replace underscores with spaces
+    $name = ucfirst(strtolower(str_replace('_', ' ', $row['name'])));
 
-  // Convert collection name to sentence case and replace underscores with spaces (if applicable)
-  $collection_name = ucfirst(strtolower(str_replace('_', ' ', $row['collection_name'])));
+    // Convert collection name to sentence case and replace underscores with spaces (if applicable)
+    $collection_name = ucfirst(strtolower(str_replace('_', ' ', $row['collection_name'])));
 
-  // Check if point_geometry exists (use a default value if not)
-  $geometry_string = $row['point_geometry'] ? $row['point_geometry'] : "0,0";
+    // Check if point_geometry exists (use a default value if not)
+    $geometry_string = $row['point_geometry'][0] ? $row['point_geometry'][1] : "0,0";
 
-  $geometry_type = $row['geometry_type'];
+    $geometry_type = $row['geometry_type'];
 
-  // Get the first 20 characters (or less)
-  if (strlen($geometry_string) > 30) {
-    $geometry_string = substr($geometry_string, 0, 20) . "...";
-  }
+    // Get the first 20 characters (or less)
+    if (strlen($geometry_string) > 30) {
+        $geometry_string = substr($geometry_string, 0, 20) . "...";
+    }
 
-  echo "<tr>";
-  echo "<td>" . $name . "</td>";
-  echo "<td>" . $geometry_string . "</td>";
-  echo "<td>" . $geometry_type . "</td>";
-  echo "<td>" . $collection_name . "</td>";
-  echo "</tr>";
+    echo "<tr>";
+    echo "<td>" . $name . "</td>";
+    echo "<td>" . $geometry_string . "</td>";
+    echo "<td>" . $geometry_type . "</td>";
+    echo "<td>" . $collection_name . "</td>";
+    echo "</tr>";
 }
 
 echo "</table>";
