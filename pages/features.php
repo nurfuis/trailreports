@@ -91,7 +91,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     $geometry_string = $row['geometry'];
 
     // Get the first 20 characters (or less)
-    if (strlen($geometry_string) > 20) {
+    if (strlen($geometry_string) > 30) {
         $geometry_string = substr($geometry_string, 0, 20) . "...";
     }
 
