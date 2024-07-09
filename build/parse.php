@@ -128,7 +128,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
 
                                 $sql = "INSERT IGNORE INTO points (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
-                                $stmt->bind_param("ssss", $feature_id, $geometry);
+                                $stmt->bind_param("ss", $feature_id, $geometry);
                                 $stmt->execute();
 
                                 if ($stmt->affected_rows === 1) {
@@ -143,7 +143,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                                 echo $geometry[0][0] . "," . $geometry[0][1] . "\n";
                                 $sql = "INSERT IGNORE INTO polylines (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
-                                $stmt->bind_param("ssss", $feature_id, $geometry);
+                                $stmt->bind_param("ss", $feature_id, $geometry);
                                 $stmt->execute();
 
                                 if ($stmt->affected_rows === 1) {
@@ -158,7 +158,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                                 echo $geometry[0][0] . "," . $geometry[0][1] . "\n";
                                 $sql = "INSERT IGNORE INTO polygons (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
-                                $stmt->bind_param("ssss", $feature_id, $geometry);
+                                $stmt->bind_param("ss", $feature_id, $geometry);
                                 $stmt->execute();
 
                                 if ($stmt->affected_rows === 1) {
