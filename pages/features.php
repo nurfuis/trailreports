@@ -84,9 +84,8 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<tr>";
     echo "<td>" . $row['name'] . "</td>";
     echo "<td>" . $row['geometry'] . "</td>";
-    echo "<td>" . $row['c.name'] . "</td>";
-    // Add code to display image if needed (replace 'image_path' with actual path)
-    // echo "<td><img src='" . 'image_path' . $row['image'] . "' alt='" . $row['name'] . " image'></td>";
+    // Use the correct alias 'collection_name' to access the collection name
+    echo "<td>" . $row['collection_name'] . "</td>";
     echo "</tr>";
 }
 
