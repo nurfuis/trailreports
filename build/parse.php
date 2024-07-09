@@ -150,7 +150,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                                 $stmt_get_id->execute();
                                 $result = $stmt_get_id->get_result();
                                 $row = $result->fetch_assoc();
-
+                                echo $row;
                                 // Check if feature exists and has an ID
                                 if ($row) {
                                     $existing_id = $row['id'];
