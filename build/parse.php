@@ -126,9 +126,9 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                             case 'Point':
                                 echo $geometry_type . "\n";
                                 echo $geometry[0] . "," . $geometry[1] . "\n";
-                                $sql = "INSERT IGNORE INTO points (name, feature_id, geometry) VALUES (?, ?, ?)";
+                                $sql = "INSERT IGNORE INTO points (feature_id, geometry) VALUES (?, ?, ?)";
                                 $stmt = $mysqli->prepare($sql);
-                                $stmt->bind_param("ssss", $name, $geometry);
+                                $stmt->bind_param("ssss", $feature_id, $geometry);
                                 $stmt->execute();
 
                                 if ($stmt->affected_rows === 1) {
@@ -142,9 +142,9 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                             case 'LineString':
                                 echo $geometry_type . "\n";
                                 echo $geometry[0][0] . "," . $geometry[0][1] . "\n";
-                                $sql = "INSERT IGNORE INTO polylines (name, geometry) VALUES (?, ?)";
+                                $sql = "INSERT IGNORE INTO polylines (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
-                                $stmt->bind_param("ssss", $name, $geometry);
+                                $stmt->bind_param("ssss", $feature_id, $geometry);
                                 $stmt->execute();
 
                                 if ($stmt->affected_rows === 1) {
@@ -158,9 +158,9 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                             case 'Polygon':
                                 echo $geometry_type . "\n";
                                 echo $geometry[0][0] . "," . $geometry[0][1] . "\n";
-                                $sql = "INSERT IGNORE INTO polygons (name, geometry) VALUES (?, ?)";
+                                $sql = "INSERT IGNORE INTO polygons (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
-                                $stmt->bind_param("ssss", $name, $geometry);
+                                $stmt->bind_param("ssss", $feature_id, $geometry);
                                 $stmt->execute();
 
                                 if ($stmt->affected_rows === 1) {
