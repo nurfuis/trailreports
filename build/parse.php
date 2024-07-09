@@ -143,11 +143,28 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                             case 'Point':
                                 // Process point data (geometry, etc.)
                                 $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
-                                $sql_point = "INSERT INTO points (feature_id, geometry) VALUES ((SELECT id FROM features WHERE id=$feature_id), PointFromText(?))";
-                                $stmt_point = $mysqli->prepare($sql_point);
-                                $stmt_point->bind_param("is", $feature_id, $wktString);
-                                $stmt_point->execute();
-                                $stmt->close();
+                                // Retrieve feature ID (assuming it exists)
+                                $sql_get_id = "SELECT id FROM features WHERE id=?";
+                                $stmt_get_id = $mysqli->prepare($sql_get_id);
+                                $stmt_get_id->bind_param("i", $feature_id);
+                                $stmt_get_id->execute();
+                                $result = $stmt_get_id->get_result();
+                                $row = $result->fetch_assoc();
+
+                                // Check if feature exists and has an ID
+                                if ($row) {
+                                    $existing_id = $row['id'];
+
+                                    // Insert point using the retrieved ID
+                                    $sql_point = "INSERT INTO points (feature_id, geometry) VALUES (?, PointFromText(?))";
+                                    $stmt_point = $mysqli->prepare($sql_point);
+                                    $stmt_point->bind_param("ii", $existing_id, $wktString);  // Use "ii" for two integers
+                                    $stmt_point->execute();
+                                } else {
+                                    // Handle case where feature doesn't exist (optional: create feature or report error)
+                                }
+
+                                $stmt_get_id->close();
 
                                 break;
                             case 'LineString':
