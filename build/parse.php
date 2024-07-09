@@ -138,5 +138,3 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
         }
     }
 }
-
-?>
