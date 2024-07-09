@@ -8,7 +8,7 @@ if ($mysqli->connect_error) {
 }
 
 // Define the base directory containing GeoJSON subdirectories
-$base_dir = "/media/usb/lospadres/";
+$base_dir = "/media/usb/";
 
 // Open the base directory for reading
 if (is_dir($base_dir) && is_readable($base_dir)) {
