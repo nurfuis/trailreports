@@ -91,12 +91,18 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     echo "<td>" . $name . "</td>";
 
-    if (is_array($row['geometry']) && count($row['geometry']) > 0) {
+    if (is_array($row['geometry'])) {
         $first_coord = $row['geometry'][0];
-      } else {
-        $first_coord = $row['geometry']; // Display as it is if not an array or empty array
-      }
-      echo "<td>" . $first_coord . "</td>";
+    } else {
+        // Check if geometry is a string and contains a comma (potential delimiter)
+        if (is_string($row['geometry']) && strpos($row['geometry'], ',') !== false) {
+            $coords_array = explode(',', $row['geometry']); // Explode by comma
+            $first_coord = trim($coords_array[0]); // Access and trim first element
+        } else {
+            $first_coord = $row['geometry']; // Display as it is (not array or invalid format)
+        }
+    }
+    echo "<td>" . $first_coord . "</td>";
     echo "<td>" . $collection_name . "</td>";
     echo "</tr>";
 }
