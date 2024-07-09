@@ -82,8 +82,8 @@ echo "</tr>";
 // Process results and display data in table rows
 while ($row = mysqli_fetch_assoc($result)) {
     echo "<tr>";
-    echo "<td>" . $row['f.name'] . "</td>";
-    echo "<td>" . $row['f.geometry'] . "</td>";
+    echo "<td>" . $row['name'] . "</td>";
+    echo "<td>" . $row['geometry'] . "</td>";
     echo "<td>" . $row['collections_id'] . "</td>";
     // Add code to display image if needed (replace 'image_path' with actual path)
     // echo "<td><img src='" . 'image_path' . $row['image'] . "' alt='" . $row['name'] . " image'></td>";
