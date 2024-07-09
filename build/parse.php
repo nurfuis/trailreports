@@ -143,7 +143,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                         $stmt_get_id->execute();
                         $result = $stmt_get_id->get_result();
                         $row = $result->fetch_assoc();
-                        echo "ROW: " . $row[0];
+                        echo "ROW: " . $row['id'];
                         $feature_id = mysqli_insert_id($mysqli);
 
 
