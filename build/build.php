@@ -60,7 +60,6 @@ function get_collections_id($mysqli, $dir_name)
         return false; // No matching collections entry found
     }
 
-    $stmt->close();
 }
 
 // Function to process GeoJSON files in a subdirectory (simplified for now)
