@@ -89,13 +89,15 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                         // Extract feature properties
                         $name = $feature->properties->Name;
                         echo $name . "\n";
+
                         $properties = json_encode($feature->properties); // Assuming properties hold additional data
+
                         $geometry_type = $feature->geometry->type; // Assuming a single geometry type per feature
                         echo $geometry_type . "\n";
-                        // Process feature (insert or update)
-                        
 
+                        $geometry = (string) $feature->geometry;
 
+                        // Process feature (insert or update)                        
                         $sql = "INSERT IGNORE INTO features (name, properties, collections_id, geometry_type) VALUES (?, ?, ?, ?)";
                         $stmt = $mysqli->prepare($sql);
                         $stmt->bind_param("ssss", $name, $properties, $collections_id, $geometry_type);
@@ -104,27 +106,30 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                         if ($stmt->affected_rows === 1) {
                             $feature_id = $mysqli->insert_id;
                             echo "Feature inserted: $name (ID: $feature_id) \n";
-
-                            // Handle geometry based on type (call functions from feature_processor.php)
-                            // switch ($geometry_type) {
-                            //     case 'Point':
-                            //         process_point($mysqli, $feature_id, "..."); // Pass feature data to point processor
-                            //         break;
-                            //     case 'LineString':
-                            //         process_polyline($mysqli, $feature_id, "..."); // Pass feature data to polyline processor
-                            //         break;
-                            //     case 'Polygon':
-                            //         process_polygon($mysqli, $feature_id, "..."); // Pass feature data to polygon processor
-                            //         break;
-                            //     default:
-                            //         echo "Unsupported geometry type: $geometry_type \n";
-                            // }
                         } else {
                             echo "Error inserting feature: $name \n";
                         }
-
                         $stmt->close();
 
+                        // Handle geometry based on type (call functions from feature_processor.php)
+                        switch ($geometry_type) {
+                            case 'Point':
+                                echo $geometry;
+                                // process_point($mysqli, $feature_id, "..."); // Pass feature data to point processor
+                                break;
+                            case 'LineString':
+                                echo $geometry;
+
+                                // process_polyline($mysqli, $feature_id, "..."); // Pass feature data to polyline processor
+                                break;
+                            case 'Polygon':
+                                echo $geometry;
+
+                                // process_polygon($mysqli, $feature_id, "..."); // Pass feature data to polygon processor
+                                break;
+                            default:
+                                echo "Unsupported geometry type: $geometry_type \n";
+                        }
                     }
                 }
             }
