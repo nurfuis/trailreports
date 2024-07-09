@@ -121,7 +121,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                         echo $name . "\n";
                         $geometry_type = $feature->geometry->type; // Assuming a single geometry type per feature
                         echo $geometry_type . "\n";
-                        echo $geometry = $feature->geometry->coordinates;
+                        $geometry = $feature->geometry->coordinates;
                         switch ($geometry_type) {
                             case 'Point':
                                 echo $geometry_type . "\n";
