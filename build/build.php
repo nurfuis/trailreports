@@ -89,13 +89,14 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                         // Extract feature properties
                         $name = $feature->properties->Name;
                         echo $name . "\n";
-                        $properties = json_encode($feature->properties); // Assuming properties hold additional data
-                        $geometry_type = $feature->geometry->type; // Assuming a single geometry type per feature
+                        $properties = json_encode($feature->properties);
+                        $geometry_type = $feature->geometry->type;
                         echo $geometry_type . "\n";
                         // Process feature (insert or update)
 
-
-                        $sql = "INSERT INTO features (name, properties, collections_id, geometry_type) VALUES (?, ?, ?, ?)";
+                        $sql = "INSERT INTO features (name, properties, collections_id, geometry_type) 
+                            VALUES (?, ?, ?, ?) 
+                            ON DUPLICATE KEY UPDATE";
                         $stmt = $mysqli->prepare($sql);
                         $stmt->bind_param("ssss", $name, $properties, $collections_id, $geometry_type);
                         $stmt->execute();
