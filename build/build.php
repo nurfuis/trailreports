@@ -78,12 +78,26 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
 
                 // Check if it's a GeoJSON file
                 if (pathinfo($file, PATHINFO_EXTENSION) === 'geojson') {
-                    $filepath = realpath($sub_dir . $file);
-                    echo "\n Found GeoJSON file -->  \n";
-                    echo "Collection ID: " . $collections_id . "\n";
-                    echo $sub_dir . "/" . $file . "\n";
-                    // Implement logic to process features and add them to database using collections_id (for future)
-                    // ... (will be implemented later)
+                    $filepath = $sub_dir . $file; // Manually construct the filepath
+                    echo "Found GeoJSON file: $filepath \n";
+
+                    // Read the GeoJSON file content
+                    $data = json_decode(file_get_contents($filepath));
+
+                    // Process each feature in the GeoJSON file
+                    foreach ($data->features as $feature) {
+                        // Extract feature properties
+                        $name = $feature->properties->Name;
+                        echo $name;
+                        $properties = json_encode($feature->properties); // Assuming properties hold additional data
+                        $geometry_type = $feature->geometry->type; // Assuming a single geometry type per feature
+
+                        // Process feature (insert or update) - call function from separate file
+                        // $feature_id = process_feature($mysqli, $name, $properties, $collections_id);
+
+                        // Implement logic to handle geometry types (for future)
+                        // ... (will be implemented based on your feature_processor.php)
+                    }
                 }
             }
             closedir($sub_dh);
