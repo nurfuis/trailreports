@@ -41,12 +41,23 @@ if (is_dir($dir) && is_readable($dir)) {
 
                     // Prepare and execute the INSERT query
                     $sql = "INSERT INTO features (collections_id, name, geometry_type, geometry, properties) 
-                  VALUES (?, ?, ?, ?, ?)";
+                    VALUES (?, ?, ?, ?, ?) 
+                    ON DUPLICATE KEY UPDATE collections_id = VALUES(collections_id), 
+                                           geometry_type = VALUES(geometry_type), 
+                                           geometry = VALUES(geometry), 
+                                           properties = VALUES(properties)";
                     $stmt = $mysqli->prepare($sql);
                     $stmt->bind_param("sssss", $collections_id, $name, $geometry_type, $coordinates, $properties);
 
                     if ($stmt->execute()) {
-                        echo "Feature '" . $name . "' (from " . $file . ") added successfully! \n";
+                        $rows_affected = $stmt->affected_rows;
+                        if ($rows_affected === 1) {
+                            echo "Feature '" . $name . "' added successfully! \n";
+                        } else if ($rows_affected > 1) {
+                            echo "Unexpected behavior: Multiple rows affected. \n";
+                        } else { // rows_affected === 0 (update case)
+                            echo "Feature '" . $name . "' already exists and has been updated. \n";
+                        }
                     } else {
                         echo "Error adding feature: " . $mysqli->error . "\n";
                     }
