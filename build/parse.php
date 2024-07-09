@@ -155,7 +155,6 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                                 $stmt_point = $mysqli->prepare($sql_point);
                                 $stmt_point->bind_param("is", $feature_id, $wktString);
                                 $stmt_point->execute();
-                                $stmt->close();
 
                                 break;
                             case 'LineString':
