@@ -90,17 +90,40 @@ while ($row = mysqli_fetch_assoc($result)) {
     $collection_name = ucfirst(strtolower(str_replace('_', ' ', $row['collection_name'])));
 
     echo "<td>" . $name . "</td>";
+    function get_first_coord($geometry_string)
+    {
+        if (empty($geometry_string)) {
+            return null; // Handle empty string
+        }
 
+        // Split by colon (assuming it separates name and coordinates)
+        $parts = explode(':', $geometry_string, 2);
+        if (count($parts) < 2) {
+            return null; // Invalid format if no colon separator
+        }
+
+        // Extract the part potentially containing coordinates (after the colon)
+        $coords_part = trim($parts[1]);
+
+        // Check if coordinates are enclosed in square brackets
+        if (strpos($coords_part, '[') === 0 && strrpos($coords_part, ']') === strlen($coords_part) - 1) {
+            // Extract coordinates within brackets
+            $coords_part = trim(substr($coords_part, 1, -1));
+
+            // Assuming comma as delimiter within coordinates (adjust if different)
+            $coords_array = explode(',', $coords_part);
+            if (count($coords_array) > 0) {
+                return trim($coords_array[0]); // Return first coordinate
+            }
+        }
+
+        // Default return if parsing fails
+        return null;
+    }
     if (is_array($row['geometry'])) {
         $first_coord = $row['geometry'][0];
     } else {
-        // Check if geometry is a string and contains a comma (potential delimiter)
-        if (is_string($row['geometry']) && strpos($row['geometry'], ',') !== false) {
-            $coords_array = explode(',', $row['geometry']); // Explode by comma
-            $first_coord = trim($coords_array[0]); // Access and trim first element
-        } else {
-            $first_coord = $row['geometry']; // Display as it is (not array or invalid format)
-        }
+        $first_coord = get_first_coord($row['geometry']);
     }
     echo "<td>" . $first_coord . "</td>";
     echo "<td>" . $collection_name . "</td>";
