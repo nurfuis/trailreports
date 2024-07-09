@@ -114,16 +114,16 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                         // Handle geometry based on type (call functions from feature_processor.php)
                         switch ($geometry_type) {
                             case 'Point':
-                                echo $geometry;
+                                echo 'Point;';
                                 // process_point($mysqli, $feature_id, "..."); // Pass feature data to point processor
                                 break;
                             case 'LineString':
-                                echo $geometry;
+                                echo 'Line';
 
                                 // process_polyline($mysqli, $feature_id, "..."); // Pass feature data to polyline processor
                                 break;
                             case 'Polygon':
-                                echo $geometry;
+                                echo 'Shape';
 
                                 // process_polygon($mysqli, $feature_id, "..."); // Pass feature data to polygon processor
                                 break;
