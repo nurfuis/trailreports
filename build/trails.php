@@ -52,13 +52,13 @@ if (is_dir($dir) && is_readable($dir)) {
                     if ($stmt->execute()) {
                         $rows_affected = $stmt->affected_rows;
                         if ($rows_affected === 1) {
-                            echo "Feature '" . $name . "' added successfully! \n";
+                          echo "Feature '" . $name . "' added successfully! \n";
                         } else if ($rows_affected > 1) {
-                            echo "Unexpected behavior: Multiple rows affected. \n";
+                          echo "Unexpected behavior: Multiple rows affected. \n";
                         } else { // rows_affected === 0 (update case)
-                            echo "Feature '" . $name . "' already exists and has been updated. \n";
+                          echo "Feature '" . $name . "' already exists and has been updated. \n";
                         }
-                    } else {
+                      } else {
                         echo "Error adding feature: " . $mysqli->error . "\n";
                     }
 
