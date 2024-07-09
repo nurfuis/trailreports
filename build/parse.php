@@ -197,8 +197,6 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                                 echo "Unsupported geometry type: $geometry_type \n";
                         }
                     }
-
-
                 }
             }
             closedir($sub_dh);
