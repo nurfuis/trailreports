@@ -82,7 +82,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                     echo "Found GeoJSON file:";
                     echo $collections_id . "\n";
                     echo $file . "\n";
-                    echo $filepath;
+                    echo $sub_dir . $file;
                     // Implement logic to process features and add them to database using collections_id (for future)
                     // ... (will be implemented later)
                 }
