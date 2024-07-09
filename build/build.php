@@ -80,7 +80,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                 if (pathinfo($file, PATHINFO_EXTENSION) === 'geojson') {
                     $filepath = realpath($sub_dir . $file);
                     echo "Found GeoJSON file: $filepath \n";
-
+                    echo $collections_id;
                     // Implement logic to process features and add them to database using collections_id (for future)
                     // ... (will be implemented later)
                 }
