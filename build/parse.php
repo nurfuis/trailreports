@@ -94,20 +94,24 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
 
                         $geometry_type = $feature->geometry->type; // Assuming a single geometry type per feature
                         echo $geometry_type . "\n";
-
+                        $geometry = $feature->geometry->coordinates;
+                        
                         // Handle geometry based on type (call functions from feature_processor.php)
                         switch ($geometry_type) {
                             case 'Point':
                                 echo $geometry_type . "\n";
+                                echo $geometry . "\n";
                                 // process_point($mysqli, $feature_id, "..."); // Pass feature data to point processor
                                 break;
                             case 'LineString':
                                 echo $geometry_type . "\n";
+                                echo $geometry . "\n";
 
                                 // process_polyline($mysqli, $feature_id, "..."); // Pass feature data to polyline processor
                                 break;
                             case 'Polygon':
                                 echo $geometry_type . "\n";
+                                echo $geometry . "\n";
 
                                 // process_polygon($mysqli, $feature_id, "..."); // Pass feature data to polygon processor
                                 break;
