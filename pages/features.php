@@ -72,10 +72,7 @@ echo "<table>";
 // Create table headers
 echo "<tr>";
 echo "<th>Trail Name</th>";
-echo "<th>Type</th>";
 echo "<th>Coords</th>";
-echo "<th>Properties</th>";
-echo "<th>Management Agency</th>";
 echo "<th>Collection</th>";
 // Add a header for image if you want to display it
 // echo "<th>Image</th>";
@@ -85,10 +82,7 @@ echo "</tr>";
 while ($row = mysqli_fetch_assoc($result)) {
     echo "<tr>";
     echo "<td>" . $row['name'] . "</td>";
-    echo "<td>" . $row['geometry_type'] . "</td>";
     echo "<td>" . $row['geometry'] . "</td>";
-    echo "<td>" . $row['properties'] . "</td>";
-    echo "<td>" . $row['management_area_id'] . "</td>";
     echo "<td>" . $row['collections_id'] . "</td>";
     // Add code to display image if needed (replace 'image_path' with actual path)
     // echo "<td><img src='" . 'image_path' . $row['image'] . "' alt='" . $row['name'] . " image'></td>";
