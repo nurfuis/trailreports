@@ -124,7 +124,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                         // Process feature (insert or update)                        
                         $sql = "INSERT INTO features (name, properties, collections_id, geometry_type) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE name=VALUES(name), properties=VALUES(properties), collections_id=VALUES(collections_id), geometry_type=VALUES(geometry_type)";
                         $stmt = $mysqli->prepare($sql);
-                        $stmt->bind_param("ssss", $name, $properties, $collections_id, $geometry_type);
+                        $stmt->bind_param("ssis", $name, $properties, $collections_id, $geometry_type);
                         $stmt->execute();
 
 
@@ -147,7 +147,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
 
                                 $sql = "INSERT INTO points (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
-                                $stmt->bind_param("ss", $feature_id, $wktString);
+                                $stmt->bind_param("is", $feature_id, $wktString);
                                 $stmt->execute();
                                 $stmt->close();
                                 break;
@@ -158,7 +158,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
 
                                 $sql = "INSERT INTO polylines (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
-                                $stmt->bind_param("ss", $feature_id, $wktString);
+                                $stmt->bind_param("is", $feature_id, $wktString);
                                 $stmt->execute();
                                 $stmt->close();
                                 break;
@@ -169,7 +169,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
 
                                 $sql = "INSERT INTO polygons (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
-                                $stmt->bind_param("ss", $feature_id, $wktString);
+                                $stmt->bind_param("is", $feature_id, $wktString);
                                 $stmt->execute();
                                 $stmt->close();
                                 break;
