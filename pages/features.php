@@ -12,10 +12,10 @@ include_once ("../../db_connect.php");
 
 echo "<h2>Features</h2>";
 
-// Write the query with conditional joins for different geometries
+// Write the query with conditional joins and foreign key check
 $sql = "SELECT f.*, c.name AS collection_name, ";
 $sql .= "(CASE WHEN f.geometry_type = 'Point' THEN ";
-$sql .= "  (SELECT AsText(geometry) FROM points WHERE feature_id = f.id) ";
+$sql .= "  (SELECT AsText(geometry) FROM points WHERE feature_id = f.id AND points.feature_id IS NOT NULL) "; // Add foreign key check
 $sql .= "WHEN f.geometry_type = 'LineString' THEN ";
 $sql .= "  (SELECT AsText(geometry) FROM polylines WHERE feature_id = f.id) ";
 $sql .= "WHEN f.geometry_type = 'Polygon' THEN ";
@@ -54,7 +54,7 @@ while ($row = mysqli_fetch_assoc($result)) {
   // Convert collection name to sentence case and replace underscores with spaces (if applicable)
   $collection_name = ucfirst(strtolower(str_replace('_', ' ', $row['collection_name'])));
 
-  $geometry_string = $row['geometry']; // Use the retrieved coords from the conditional join
+  $geometry_string = $row['coords']; // Use the retrieved coords from the conditional join
 
   // Get the first 20 characters (or less)
   if (strlen($geometry_string) > 30) {
