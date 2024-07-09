@@ -150,6 +150,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                         switch ($geometry_type) {
                             case 'Point':
                                 $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
+                                echo $wktString;
                                 $sql = "INSERT IGNORE INTO points (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
                                 $stmt->bind_param("ss", $feature_id, $wktString);
@@ -165,6 +166,8 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                                 break;
                             case 'LineString':
                                 $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
+                                echo $wktString;
+
                                 $sql = "INSERT IGNORE INTO polylines (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
                                 $stmt->bind_param("ss", $feature_id, $wktString);
@@ -180,6 +183,8 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                                 break;
                             case 'Polygon':
                                 $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
+                                echo $wktString;
+
                                 $sql = "INSERT IGNORE INTO polygons (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
                                 $stmt->bind_param("ss", $feature_id, $wktString);
