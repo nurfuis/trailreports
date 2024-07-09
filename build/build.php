@@ -94,9 +94,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                         echo $geometry_type . "\n";
                         // Process feature (insert or update)
 
-                        $sql = "INSERT INTO features (name, properties, collections_id, geometry_type) 
-                            VALUES (?, ?, ?, ?) 
-                            ON DUPLICATE KEY UPDATE";
+                        $sql = "INSERT INTO features (name, properties, collections_id, geometry_type) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE";
                         $stmt = $mysqli->prepare($sql);
                         $stmt->bind_param("ssss", $name, $properties, $collections_id, $geometry_type);
                         $stmt->execute();
@@ -134,5 +132,3 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
         }
     }
 }
-
-?>
