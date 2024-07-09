@@ -122,7 +122,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
 
 
                         // Process feature (insert or update)                        
-                        $sql = "INSERT IGNORE INTO features (name, properties, collections_id, geometry_type) VALUES (?, ?, ?, ?)";
+                        $sql = "INSERT INTO features (name, properties, collections_id, geometry_type) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE name=VALUES(name), properties=VALUES(properties), collections_id=VALUES(collections_id), geometry_type=VALUES(geometry_type)";
                         $stmt = $mysqli->prepare($sql);
                         $stmt->bind_param("ssss", $name, $properties, $collections_id, $geometry_type);
                         $stmt->execute();
@@ -137,33 +137,33 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
 
                         $coordinates = $feature->geometry->coordinates;
 
+                        $feature_id = mysqli_insert_id($mysqli);
+                        $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
+
                         switch ($geometry_type) {
                             case 'Point':
-                                $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
                                 echo $wktString;
                                 $sql = "INSERT INTO points (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
-                                $stmt->bind_param("ss", $name, $wktString);
+                                $stmt->bind_param("ss", $feature_id, $wktString);
                                 $stmt->execute();
                                 $stmt->close();
                                 break;
                             case 'LineString':
-                                $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
                                 echo $wktString;
 
                                 $sql = "INSERT INTO polylines (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
-                                $stmt->bind_param("ss", $name, $wktString);
+                                $stmt->bind_param("ss", $feature_id, $wktString);
                                 $stmt->execute();
                                 $stmt->close();
                                 break;
                             case 'Polygon':
-                                $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
                                 echo $wktString;
 
                                 $sql = "INSERT INTO polygons (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
-                                $stmt->bind_param("ss", $name, $wktString);
+                                $stmt->bind_param("ss", $feature_id, $wktString);
                                 $stmt->execute();
                                 $stmt->close();
                                 break;
