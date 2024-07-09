@@ -10,7 +10,7 @@ if ($mysqli->connect_error) {
 $collections_id = 1; // Set collections_id
 
 // Define the directory containing GeoJSON files
-$dir = "/media/usb/lospadres/trails"; // Adjust the path to your directory
+$dir = "/media/usb/lospadres/trails/"; // Adjust the path to your directory
 
 // Open the directory for reading
 if (is_dir($dir) && is_readable($dir)) {
