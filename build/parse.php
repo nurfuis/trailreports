@@ -116,8 +116,10 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                         // Extract feature properties
                         $name = $feature->properties->Name;
                         echo $name . "\n";
+
                         $properties = json_encode($feature->properties); // Assuming properties hold additional data
                         $geometry_type = $feature->geometry->type; // Assuming a single geometry type per feature
+
 
                         // Process feature (insert or update)                        
                         $sql = "INSERT IGNORE INTO features (name, properties, collections_id, geometry_type) VALUES (?, ?, ?, ?)";
@@ -125,25 +127,13 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                         $stmt->bind_param("ssss", $name, $properties, $collections_id, $geometry_type);
                         $stmt->execute();
 
+
                         if ($stmt->affected_rows === 1) {
-                            $feature_id = $mysqli->insert_id;
-                            echo "Feature inserted: $name (ID: $feature_id) \n";
+                            echo "Added feature...." . $name . "\n";
                         } else {
-                            echo "Ignore duplicate: $name \n";
+                            echo "Ignore duplicate..." . $name . "\n";
                         }
                         $stmt->close();
-
-                        // Handle geometry based on type (call functions from feature_processor.php)
-
-
-                    }
-
-                    foreach ($data->features as $feature) {
-                        $name = $feature->properties->Name;
-                        echo $name . "\n";
-
-                        $geometry_type = $feature->geometry->type; // Assuming a single geometry type per feature
-                        echo $geometry_type . "\n";
 
                         $coordinates = $feature->geometry->coordinates;
 
@@ -153,7 +143,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                                 echo $wktString;
                                 $sql = "INSERT INTO points (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
-                                $stmt->bind_param("ss", $feature_id, $wktString);
+                                $stmt->bind_param("ss", $name, $wktString);
                                 $stmt->execute();
                                 $stmt->close();
                                 break;
@@ -163,7 +153,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
 
                                 $sql = "INSERT INTO polylines (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
-                                $stmt->bind_param("ss", $feature_id, $wktString);
+                                $stmt->bind_param("ss", $name, $wktString);
                                 $stmt->execute();
                                 $stmt->close();
                                 break;
@@ -173,13 +163,16 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
 
                                 $sql = "INSERT INTO polygons (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
-                                $stmt->bind_param("ss", $feature_id, $wktString);
+                                $stmt->bind_param("ss", $name, $wktString);
                                 $stmt->execute();
                                 $stmt->close();
                                 break;
                             default:
                                 echo "Unsupported geometry type: $geometry_type \n";
                         }
+                        // Handle geometry based on type (call functions from feature_processor.php)
+
+
                     }
                 }
             }
