@@ -141,15 +141,14 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
 
                         switch ($geometry_type) {
                             case 'Point':
+                                // Process point data (geometry, etc.)
                                 $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
-
-                                echo $wktString;
-
-                                $sql = "INSERT INTO points (feature_id, geometry) VALUES (?, PointFromText(?))";
-                                $stmt = $mysqli->prepare($sql);
-                                $stmt->bind_param("is", $feature_id, $wktString);
-                                $stmt->execute();
+                                $sql_point = "INSERT INTO points (feature_id, geometry) VALUES (?, PointFromText(?))";
+                                $stmt_point = $mysqli->prepare($sql_point);
+                                $stmt_point->bind_param("is", $feature_id, $wktString);
+                                $stmt_point->execute();
                                 $stmt->close();
+
                                 break;
                             case 'LineString':
                                 $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
