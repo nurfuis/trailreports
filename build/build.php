@@ -78,7 +78,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
 
                 // Check if it's a GeoJSON file
                 if (pathinfo($file, PATHINFO_EXTENSION) === 'geojson') {
-                    $filepath = $sub_dir . $file; // Manually construct the filepath
+                    $filepath = $sub_dir. "/" . $file; // Manually construct the filepath
                     echo "Found GeoJSON file: $filepath \n";
 
                     // Read the GeoJSON file content
