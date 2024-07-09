@@ -74,6 +74,7 @@ echo "<table>";
 echo "<tr>";
 echo "<th>Trail Name</th>";
 echo "<th>Coords</th>";
+echo "<th>Shape</th>";
 echo "<th>Collection</th>";
 // Add a header for image if you want to display it
 // echo "<th>Image</th>";
@@ -98,6 +99,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<tr>";
     echo "<td>" . $name . "</td>";
     echo "<td>" . $geometry_string . "</td>";
+    echo "<td>" . $geometry_type . "</td>";
     echo "<td>" . $collection_name . "</td>";
     echo "</tr>";
 }
