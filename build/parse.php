@@ -122,7 +122,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                         switch ($geometry_type) {
                             case 'Point':
                                 echo $geometry[0] . "," . $geometry[1] . "\n";
-                                $sql = "INSERT IGNORE INTO points (feature_id, geometry) VALUES (?, ?, ?)";
+                                $sql = "INSERT IGNORE INTO points (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
                                 $stmt->bind_param("ssss", $feature_id, $geometry);
                                 $stmt->execute();
