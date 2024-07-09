@@ -96,9 +96,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
 
 
 
-                        $sql = "INSERT INTO features (name, properties, collections_id, geometry_type) 
-        VALUES (?, ?, ?, ?) 
-        ON DUPLICATE KEY UPDATE";
+                        $sql = "INSERT INTO features (name, properties, collections_id, geometry_type) VALUES (?, ?, ?, ?);
                         $stmt = $mysqli->prepare($sql);
                         $stmt->bind_param("ssss", $name, $properties, $collections_id, $geometry_type);
                         $stmt->execute();
