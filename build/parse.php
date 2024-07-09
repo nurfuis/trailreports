@@ -137,7 +137,15 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
 
                         $coordinates = $feature->geometry->coordinates;
 
+                        $sql_get_id = "SELECT id FROM features WHERE name=?";
+                        $stmt_get_id = $mysqli->prepare($sql_get_id);
+                        $stmt_get_id->bind_param("s", $name);
+                        $stmt_get_id->execute();
+                        $result = $stmt_get_id->get_result();
+                        $row = $result->fetch_assoc();
+                        echo "ROW: " . $row;
                         $feature_id = mysqli_insert_id($mysqli);
+
 
                         switch ($geometry_type) {
                             case 'Point':
