@@ -1,6 +1,6 @@
 <?php
 
-include_once ("./db_connect.php");
+include_once ("../db_connect.php");
 
 // Check connection
 if ($mysqli->connect_error) {
@@ -34,5 +34,6 @@ foreach ($data->features as $feature) {
   $stmt->close();
 }
 
+$mysqli->close();
 
 ?>
