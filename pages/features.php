@@ -91,13 +91,12 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     echo "<td>" . $name . "</td>";
 
-    if (is_array($row['geometry'])) {
+    if (is_array($row['geometry']) && count($row['geometry']) > 0) {
         $first_coord = $row['geometry'][0];
-    } else {
-        $first_coord = $row['geometry']; // Display as it is if not an array
-    }
-
-    echo "<td>" . $first_coord . "</td>";
+      } else {
+        $first_coord = $row['geometry']; // Display as it is if not an array or empty array
+      }
+      echo "<td>" . $first_coord . "</td>";
     echo "<td>" . $collection_name . "</td>";
     echo "</tr>";
 }
