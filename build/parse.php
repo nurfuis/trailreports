@@ -144,6 +144,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                                 $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
 
                                 echo $wktString;
+
                                 $sql = "INSERT INTO points (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
                                 $stmt->bind_param("ss", $feature_id, $wktString);
@@ -176,8 +177,6 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                                 echo "Unsupported geometry type: $geometry_type \n";
                         }
                         // Handle geometry based on type (call functions from feature_processor.php)
-
-
                     }
                 }
             }
