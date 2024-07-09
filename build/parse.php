@@ -96,6 +96,8 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                         echo $geometry_type . "\n";
 
                         $geometry = $feature->geometry->coordinates;
+                        echo $geometry;
+
                         // Process feature (insert or update)                        
                         $sql = "INSERT IGNORE INTO features (name, properties, collections_id, geometry_type) VALUES (?, ?, ?, ?)";
                         $stmt = $mysqli->prepare($sql);
