@@ -10,26 +10,23 @@ include ("../layouts/wide.inc");
 
 include_once ("../../db_connect.php");
 
+
+
+
 echo "<h2>Features</h2>";
 
-// Write the query with conditional joins and foreign key check
-$sql = "SELECT f.*, c.name AS collection_name, ";
-$sql .= "(CASE WHEN f.geometry_type = 'Point' THEN ";
-$sql .= "  (SELECT AsText(geometry) FROM points WHERE feature_id = f.id AND points.feature_id IS NOT NULL) "; // Add foreign key check
-$sql .= "WHEN f.geometry_type = 'LineString' THEN ";
-$sql .= "  (SELECT AsText(geometry) FROM polylines WHERE feature_id = f.id) ";
-$sql .= "WHEN f.geometry_type = 'Polygon' THEN ";
-$sql .= "  (SELECT AsText(geometry) FROM polygons WHERE feature_id = f.id) ";
-$sql .= "ELSE NULL END) AS coords "; // Add a default value for other geometries
-$sql .= "FROM features f ";
-$sql .= "INNER JOIN collections c ON f.collections_id = c.id;";
 
+
+// Write the query to select all features
+$sql = "SELECT f.*, c.name AS collection_name
+FROM features f
+INNER JOIN collections c ON f.collections_id = c.id;";
 $result = mysqli_query($mysqli, $sql);
 
 // Check for errors
 if (!$result) {
-  echo "Error: " . mysqli_error($mysqli);
-  exit;
+    echo "Error: " . mysqli_error($mysqli);
+    exit;
 }
 
 // Start the HTML table
@@ -37,7 +34,7 @@ echo "<table>";
 
 // Create table headers
 echo "<tr>";
-echo "<th>Feature Name</th>";
+echo "<th>Trail Name</th>";
 echo "<th>Coords</th>";
 echo "<th>Shape</th>";
 echo "<th>Collection</th>";
@@ -48,25 +45,25 @@ echo "</tr>";
 // Process results and display data in table rows
 while ($row = mysqli_fetch_assoc($result)) {
 
-  // Convert name to sentence case and replace underscores with spaces
-  $name = ucfirst(strtolower(str_replace('_', ' ', $row['name'])));
+    // Convert name to sentence case and replace underscores with spaces
+    $name = ucfirst(strtolower(str_replace('_', ' ', $row['name'])));
 
-  // Convert collection name to sentence case and replace underscores with spaces (if applicable)
-  $collection_name = ucfirst(strtolower(str_replace('_', ' ', $row['collection_name'])));
+    // Convert collection name to sentence case and replace underscores with spaces (if applicable)
+    $collection_name = ucfirst(strtolower(str_replace('_', ' ', $row['collection_name'])));
 
-  $geometry_string = $row['coords']; // Use the retrieved coords from the conditional join
+    $geometry_string = $row['geometry'];
 
-  // Get the first 20 characters (or less)
-  if (strlen($geometry_string) > 30) {
-    $geometry_string = substr($geometry_string, 0, 30) . "...";
-  }
+    // Get the first 20 characters (or less)
+    if (strlen($geometry_string) > 30) {
+        $geometry_string = substr($geometry_string, 0, 20) . "...";
+    }
 
-  echo "<tr>";
-  echo "<td>" . $name . "</td>";
-  echo "<td>" . $geometry_string . "</td>";
-  echo "<td>" . $row['geometry_type'] . "</td>";
-  echo "<td>" . $collection_name . "</td>";
-  echo "</tr>";
+    echo "<tr>";
+    echo "<td>" . $name . "</td>";
+    echo "<td>" . $geometry_string . "</td>";
+    echo "<td>" . $geometry_type . "</td>";
+    echo "<td>" . $collection_name . "</td>";
+    echo "</tr>";
 }
 
 echo "</table>";
