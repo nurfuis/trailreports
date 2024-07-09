@@ -105,13 +105,13 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                                 break;
                             case 'LineString':
                                 echo $geometry_type . "\n";
-                                echo $geometry[0] . "\n";
+                                echo $geometry[0][0] . "\n";
 
                                 // process_polyline($mysqli, $feature_id, "..."); // Pass feature data to polyline processor
                                 break;
                             case 'Polygon':
                                 echo $geometry_type . "\n";
-                                echo $geometry[0] . "\n";
+                                echo $geometry[0][0] . "\n";
 
                                 // process_polygon($mysqli, $feature_id, "..."); // Pass feature data to polygon processor
                                 break;
