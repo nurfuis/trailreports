@@ -34,6 +34,5 @@ foreach ($data->features as $feature) {
   $stmt->close();
 }
 
-$mysqli->close();
 
 ?>
