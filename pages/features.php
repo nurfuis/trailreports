@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Write the query to select all features
-$sql = "SELECT f.*, c.name AS collection_name
+$sql = "SELECT f.*, c.id AS collections_id
 FROM features f
 INNER JOIN collections c ON f.collections_id = c.id;";
 $result = mysqli_query($mysqli, $sql);
