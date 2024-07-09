@@ -151,51 +151,30 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                             case 'Point':
                                 $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
                                 echo $wktString;
-                                $sql = "INSERT IGNORE INTO points (feature_id, geometry) VALUES (?, ?)";
+                                $sql = "INSERT INTO points (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
                                 $stmt->bind_param("ss", $feature_id, $wktString);
                                 $stmt->execute();
-
-                                if ($stmt->affected_rows === 1) {
-                                    $feature_id = $mysqli->insert_id;
-                                    echo "Feature inserted: $name (ID: $feature_id) \n";
-                                } else {
-                                    echo "Error inserting feature: $name \n";
-                                }
                                 $stmt->close();
                                 break;
                             case 'LineString':
                                 $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
                                 echo $wktString;
 
-                                $sql = "INSERT IGNORE INTO polylines (feature_id, geometry) VALUES (?, ?)";
+                                $sql = "INSERT INTO polylines (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
                                 $stmt->bind_param("ss", $feature_id, $wktString);
                                 $stmt->execute();
-
-                                if ($stmt->affected_rows === 1) {
-                                    $feature_id = $mysqli->insert_id;
-                                    echo "Feature inserted: $name (ID: $feature_id) \n";
-                                } else {
-                                    echo "Error inserting feature: $name \n";
-                                }
                                 $stmt->close();
                                 break;
                             case 'Polygon':
                                 $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
                                 echo $wktString;
 
-                                $sql = "INSERT IGNORE INTO polygons (feature_id, geometry) VALUES (?, ?)";
+                                $sql = "INSERT INTO polygons (feature_id, geometry) VALUES (?, ?)";
                                 $stmt = $mysqli->prepare($sql);
                                 $stmt->bind_param("ss", $feature_id, $wktString);
                                 $stmt->execute();
-
-                                if ($stmt->affected_rows === 1) {
-                                    $feature_id = $mysqli->insert_id;
-                                    echo "Feature inserted: $name (ID: $feature_id) \n";
-                                } else {
-                                    echo "Error inserting feature: $name \n";
-                                }
                                 $stmt->close();
                                 break;
                             default:
