@@ -145,7 +145,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
 
                                 echo $wktString;
 
-                                $sql = "INSERT INTO points (feature_id, geometry) VALUES (?, (PointFromText(?))";
+                                $sql = "INSERT INTO points (feature_id, geometry) VALUES (?, PointFromText(?))";
                                 $stmt = $mysqli->prepare($sql);
                                 $stmt->bind_param("is", $feature_id, $wktString);
                                 $stmt->execute();
