@@ -82,7 +82,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 $geometry_string = "Segments: " . $coords;
 
                 foreach ($polylines_result as $polyline) {
-                    echo "LINE" . $polyline["geometry"]
+                    echo "LINE" . $polyline["geometry"];
                 }
             }
             break;
