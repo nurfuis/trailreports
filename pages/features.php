@@ -55,11 +55,11 @@ while ($row = mysqli_fetch_assoc($result)) {
           FROM points 
           WHERE feature_id=$feature_id;";
     $points_result = mysqli_query($mysqli, $sql);
+    
     if ($points_result) {
         $coords = mysqli_fetch_assoc($points_result);
         $latitude = $coords['latitude'];
         $longitude = $coords['longitude'];
-
     }
     $geometry_string = $latitude . "," . $longitude;
     $geometry_type = $row['geometry_type'];

@@ -121,8 +121,10 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                         $geometry_type = $feature->geometry->type; // Assuming a single geometry type per feature
 
 
-                        // Process feature (insert or update)                        
-                        $sql = "INSERT INTO features (name, properties, collections_id, geometry_type) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE name=VALUES(name), properties=VALUES(properties), collections_id=VALUES(collections_id), geometry_type=VALUES(geometry_type)";
+                        // Process feature (insert or update)
+                        $sql = "INSERT INTO features (name, collections_id, geometry_type) VALUES (?, ?, ?, ?)";
+
+                        // $sql = "INSERT INTO features (name, collections_id, geometry_type) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE name=VALUES(name), properties=VALUES(properties), collections_id=VALUES(collections_id), geometry_type=VALUES(geometry_type)";
                         $stmt = $mysqli->prepare($sql);
                         $stmt->bind_param("ssis", $name, $properties, $collections_id, $geometry_type);
                         $stmt->execute();
