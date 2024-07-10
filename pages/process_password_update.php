@@ -4,6 +4,7 @@ $page_css = "/assets/css/style.css";
 
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/single.inc");
+
 require_once realpath("../../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

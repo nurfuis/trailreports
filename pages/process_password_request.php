@@ -1,5 +1,4 @@
 <?php
-// TODO change host at reset_link
 $page_title = "Change Password";
 $page_css = "/assets/css/style.css";
 
@@ -8,6 +7,7 @@ include_once realpath("../layouts/single.inc");
 
 session_start();
 
+require_once realpath("../config.php");
 require_once realpath("../../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $subject = "Password Reset Request for " . $_SERVER['HTTP_HOST'];
         $message = "You requested to change your password for your account on " . $_SERVER['HTTP_HOST'] . ".\n\n";
         $message .= "Click the following link to reset your password within 1 hour:\n";
-        $reset_link = "192.168.0.78/pages/change_password.php?token=" . $token;
+        $reset_link = HOST_ADDRESS . "/pages/change_password.php?token=" . $token;
         $message .= $reset_link . "\n\n";
 
         $success = mail($to, $subject, $message);

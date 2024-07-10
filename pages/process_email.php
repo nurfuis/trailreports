@@ -1,5 +1,4 @@
 <?php
-// TODO Change host below $verification_link when going live
 
 $page_title = "Register Email";
 $page_css = "/assets/css/style.css";
@@ -7,6 +6,7 @@ $page_css = "/assets/css/style.css";
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/single.inc");
 
+require_once realpath("../../config.php");
 require_once realpath("../../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $subject = "Email Verification for Trail Reports Website";
       $message = "Thank you for registering on Trail Reports! \n\n";
       $message .= "Please click the following link to verify your email address and activate your account: \n";
-      $verification_link = "192.168.0.78/pages/verify_email.php?token=" . $token; // Replace with your actual URL
+      $verification_link = HOST_ADDRESS . "/pages/verify_email.php?token=" . $token; // Replace with your actual URL
       $message .= $verification_link . "\n\n";
       $message .= "This link will expire in 24 hours. \n\n";
       $message .= "If you did not register on Trail Reports, please ignore this email. \n\n";
