@@ -3,18 +3,17 @@
 $page_title = "Email Verification";
 $page_css = "/assets/css/style.css";
 
-include ("../components/head.inc");
-include ("../layouts/single.inc");
+include_once realpath("../components/head.inc");
+include_once realpath("../layouts/single.inc");
 
 session_start();
 
-require_once ("../../db_connect.php"); // Include database connection
+require_once realpath("../../db_connect.php");
 
 if (isset($_GET['token'])) {
 
     $token = $_GET['token'];
 
-    // Prepared statement to prevent SQL injection
     $sql = "SELECT user_id, pending_email FROM users WHERE verification_token = ? AND verification_token_expiry > NOW()";
 
     $stmt = mysqli_prepare($mysqli, $sql);
@@ -58,6 +57,6 @@ if (!empty($errorMessage)) {
     echo "<p style='color: blue;'>$successMessage</p>";
 }
 
-include ("../components/tail.inc");
+include_once realpath("../components/tail.inc");
 
 
