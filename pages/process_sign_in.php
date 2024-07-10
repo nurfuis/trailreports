@@ -3,10 +3,10 @@
 $page_title = "Login";
 $page_css = "/assets/css/style.css";
 
-include ("../components/head.inc"); // Top section up to and including body tag
-include ("../layouts/single.inc"); // An open div with layout class
+include realpath("../components/head.inc"); // Top section up to and including body tag
+include realpath("../layouts/single.inc"); // An open div with layout class
 
-include_once ("../../db_connect.php"); // $msqli connect
+require_once realpath("../../db_connect.php"); // $msqli connect
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       session_start();
       $_SESSION['username'] = $row['username'];
       $_SESSION['user_id'] = $row['user_id'];
+      $_SESSION['authenticated'] = true;
 
       if ($row['account_status'] === 'inactive') {
         // Update account status to active
@@ -61,10 +62,10 @@ mysqli_close($mysqli);
 
 if (!empty($errorMessage)) {
   echo "<p style='color: red;'>$errorMessage</p>";
-  include ("../components/sign_in_form.inc");
+  include realpath("../components/sign_in_form.inc");
 
 } else if (!empty($successMessage)) {
   echo "<p style='color: blue;'>$successMessage</p>";
 }
 
-include ("../components/tail.inc"); // closing tags for layout div, body, and html 
+include realpath("../components/tail.inc"); // closing tags for layout div, body, and html 
