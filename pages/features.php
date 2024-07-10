@@ -79,8 +79,11 @@ while ($row = mysqli_fetch_assoc($result)) {
                 $coords = mysqli_num_rows($polylines_result);
                 // $latitude = $coords['latitude'];
                 // $longitude = $coords['longitude'];
-
                 $geometry_string = "Segments: " . $coords;
+
+                foreach ($polylines_result as $polyline) {
+                    echo "LINE" . $polyline["geometry"]
+                }
             }
             break;
 
