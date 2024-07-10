@@ -11,9 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 $page_title = "Account Management";
 $page_css = "/assets/css/style.css";
 
-include ("../components/head.inc");
-include ("../layouts/single.inc");
-
-include ("../components/manage_account.inc");
-
-include ("../components/tail.inc");
+include realpath("../components/head.inc");
+include realpath("../layouts/single.inc");
+include realpath("../components/manage_account.inc");
+include realpath("../components/tail.inc");
