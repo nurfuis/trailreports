@@ -27,9 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $attempts = $row['email_login_attempts'];
         $lastAttempt = strtotime($row['last_email_login_attempt']);
         $currentTime = time();
-        $lockoutTime = 20000;
-        $threshold = 5;
-        echo $currentTime - $lastAttempt;
+        $threshold = LOGIN_ATTEMPTS;
+        $lockoutTime = LOCKOUT_TIME;
 
         if ($attempts >= $threshold && ($currentTime - $lastAttempt) < $lockoutTime) {
             // account is locked

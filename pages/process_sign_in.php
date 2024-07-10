@@ -6,6 +6,7 @@ $page_css = "/assets/css/style.css";
 include realpath("../components/head.inc");
 include realpath("../layouts/single.inc");
 
+require_once realpath("../../config.php");
 require_once realpath("../../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -27,9 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $attempts = $row['login_attempts'];
     $lastAttempt = strtotime($row['last_login_attempt']);
     $currentTime = time();
-    $threshold = 5;
-    $lockoutTime = 20000;
-    echo $currentTime - $lastAttempt;
+    $threshold = LOGIN_ATTEMPTS;
+    $lockoutTime = LOCKOUT_TIME;
+    
     if ($attempts >= $threshold && ($currentTime - $lastAttempt) < $lockoutTime) {
       // account is locked
       $errorMessage = "Your account has been temporarily locked due to multiple failed login attempts. Please try again later.";
