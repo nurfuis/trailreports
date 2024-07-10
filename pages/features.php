@@ -50,7 +50,8 @@ while ($row = mysqli_fetch_assoc($result)) {
     $collection_name = ucfirst(strtolower(str_replace('_', ' ', $row['collection_name'])));
 
     $feature_id = $row['id'];
-
+    
+    $sql = "SELECT geometry FROM points WHERE feature_id=$feature_id";
     
 
     $geometry_string = "0,0";
