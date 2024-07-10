@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $threshold = 5;
     $lockoutTime = 3600;
 
-    if ($attempts >= $threshold && ($currentTime - $lastAttempt) < $lockoutTime) {
+    if ($attempts >= $threshold && ($currentTime - $lastAttempt) >= $lockoutTime) {
       // account is locked
       $errorMessage = "Your account has been temporarily locked due to multiple failed login attempts. Please try again later.";
 
