@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $subject = "Email Verification for Trail Reports Website";
       $message = "Thank you for registering on Trail Reports! \n\n";
       $message .= "Please click the following link to verify your email address and activate your account: \n";
-      $verification_link = HOST_ADDRESS . "/pages/verify_email.php?token=" . $token; // Replace with your actual URL
+      $verification_link = HOST_ADDRESS . "/pages/verify_email.php?token=" . $token;
       $message .= $verification_link . "\n\n";
       $message .= "This link will expire in 24 hours. \n\n";
       $message .= "If you did not register on Trail Reports, please ignore this email. \n\n";
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     mysqli_stmt_close($stmt);
   }
-  mysqli_free_result($result); // Free the result from the email check
+  mysqli_free_result($result);
 }
 
 mysqli_close($mysqli);
@@ -80,4 +80,4 @@ if (!empty($errorMessage)) {
   echo "<p style='color: blue;'>$successMessage</p>";
 }
 
-include_once realpath("../components/tail.inc"); // closing tags for layout div, body, and html
+include_once realpath("../components/tail.inc");
