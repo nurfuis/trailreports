@@ -157,17 +157,14 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                                 $stmt_point->execute();
 
                                 break;
-                            // case 'LineString':
-                            //     $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
-
-                            //     echo $wktString;
-
-                            //     $sql = "INSERT INTO polylines (feature_id, geometry) VALUES (?, ?)";
-                            //     $stmt = $mysqli->prepare($sql);
-                            //     $stmt->bind_param("is", $feature_id, $wktString);
-                            //     $stmt->execute();
-                            //     $stmt->close();
-                            //     break;
+                            case 'LineString':
+                                $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
+                                $sql_line = "INSERT INTO polylines (feature_id, geometry) VALUES (?, ST_GeomFromText(?))";
+                                $stmt_line = $mysqli->prepare($sql_line);
+                                $stmt_line->bind_param("is", $feature_id, $wktString);
+                                $stmt_line->execute();
+                                $stmt_line->close();
+                                break;
                             // case 'Polygon':
                             //     $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
 
