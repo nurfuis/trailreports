@@ -8,6 +8,6 @@
 
 <script>
   function openTopoMap() {
-    window.location.href = "./pages/topo_map.html";
+    window.location.href = "/pages/topo_map.html";
   }
 </script>

@@ -1,16 +1,13 @@
 <?php
 
-include_once ("./db_connect.php");
+require_once realpath("./db_connect.php");
 
-// Check connection
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
 
-// Define the base directory containing GeoJSON subdirectories
 $base_dir = "/media/usb/";
 
-// Open the base directory for reading
 if (is_dir($base_dir) && is_readable($base_dir)) {
     $dh = opendir($base_dir);
 
@@ -69,7 +66,6 @@ function convertCoordinatesToWKT($geometry_type, $coordinates)
     }
 }
 
-// Function to get collections_id based on directory name
 function get_collections_id($mysqli, $dir_name)
 {
     $sql = "SELECT id FROM collections WHERE name = ?";
@@ -87,7 +83,6 @@ function get_collections_id($mysqli, $dir_name)
 
 }
 
-// Function to process GeoJSON files in a subdirectory (simplified for now)
 function process_geojson_files($mysqli, $collections_id, $sub_dir)
 {
     // Open the subdirectory for reading
