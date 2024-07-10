@@ -48,7 +48,7 @@ $pending_email = $fetched['pending_email'];
     <li>
       Verified: <span>
         <?php
-        $verifiedText = ($verified === 1) ? 'Complete' : 'Pending';
+        $verifiedText = ($verified === 1) ? 'Yes' : 'No';
         echo $verifiedText;
         ?>
         <?php if ($verified === 0 && !empty($pending_email)): ?>
