@@ -49,7 +49,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $successMessage = "Welcome back, " . $_SESSION['username'] . "!";
       }
     } else {
-      $errorMessage = "Invalid username or password.";
+      // Login failed - Update login attempts
+      $sql = "UPDATE users SET login_attempts = login_attempts + 1, last_login_attempt = NOW() 
+              WHERE user_id = ?";
+      $stmt = mysqli_prepare($mysqli, $sql);
+      mysqli_stmt_bind_param($stmt, "i", $row['user_id']);
+      mysqli_stmt_execute($stmt);
+      mysqli_stmt_close($stmt);
+
+      // Check login attempt limit
+      $sql = "SELECT login_attempts, last_login_attempt FROM users WHERE user_id = ?";
+      $stmt = mysqli_prepare($mysqli, $sql);
+      mysqli_stmt_bind_param($stmt, "i", $row['user_id']);
+      mysqli_stmt_execute($stmt);
+      $result = mysqli_stmt_get_result($stmt);
+      $row = mysqli_fetch_assoc($result);
+
+      $attempts = $row['login_attempts'];
+      $lastAttempt = strtotime($row['last_login_attempt']);
+      $currentTime = time();
+      $threshold = 5; // Maximum allowed attempts
+      $lockoutTime = 3600; // Lockout duration in seconds (1 hour)
+
+      if ($attempts >= $threshold && ($currentTime - $lastAttempt) < $lockoutTime) {
+        $errorMessage = "Your account has been temporarily locked due to multiple failed login attempts. Please try again later.";
+      }
     }
   } else {
     $errorMessage = "Invalid username or password.";
