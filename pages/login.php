@@ -40,7 +40,7 @@ if (isset($_GET['token'])) {
     $_SESSION['authenticated'] = true;
 
 
-    $sql = "UPDATE users SET login_token = NULL, login_token_expiry = NULL, email_login_attempts = NULL WHERE user_id = ?";
+    $sql = "UPDATE users SET login_token = NULL, login_token_expiry = NULL, email_login_attempts = 0 WHERE user_id = ?";
     $stmt = mysqli_prepare($mysqli, $sql);
     mysqli_stmt_bind_param($stmt, "i", $user_id);
     mysqli_stmt_execute($stmt);
