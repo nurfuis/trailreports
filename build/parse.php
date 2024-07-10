@@ -123,7 +123,6 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                         // Process feature (insert or update)
                         $sql = "INSERT INTO features (name, collections_id, geometry_type) VALUES (?, ?, ?)";
 
-                        // $sql = "INSERT INTO features (name, collections_id, geometry_type) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE name=VALUES(name), properties=VALUES(properties), collections_id=VALUES(collections_id), geometry_type=VALUES(geometry_type)";
                         $stmt = $mysqli->prepare($sql);
                         $stmt->bind_param("sis", $name, $collections_id, $geometry_type);
                         $stmt->execute();
@@ -158,28 +157,28 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                                 $stmt_point->execute();
 
                                 break;
-                            case 'LineString':
-                                $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
+                            // case 'LineString':
+                            //     $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
 
-                                echo $wktString;
+                            //     echo $wktString;
 
-                                $sql = "INSERT INTO polylines (feature_id, geometry) VALUES (?, ?)";
-                                $stmt = $mysqli->prepare($sql);
-                                $stmt->bind_param("is", $feature_id, $wktString);
-                                $stmt->execute();
-                                $stmt->close();
-                                break;
-                            case 'Polygon':
-                                $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
+                            //     $sql = "INSERT INTO polylines (feature_id, geometry) VALUES (?, ?)";
+                            //     $stmt = $mysqli->prepare($sql);
+                            //     $stmt->bind_param("is", $feature_id, $wktString);
+                            //     $stmt->execute();
+                            //     $stmt->close();
+                            //     break;
+                            // case 'Polygon':
+                            //     $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
 
-                                echo $wktString;
+                            //     echo $wktString;
 
-                                $sql = "INSERT INTO polygons (feature_id, geometry) VALUES (?, ?)";
-                                $stmt = $mysqli->prepare($sql);
-                                $stmt->bind_param("is", $feature_id, $wktString);
-                                $stmt->execute();
-                                $stmt->close();
-                                break;
+                            //     $sql = "INSERT INTO polygons (feature_id, geometry) VALUES (?, ?)";
+                            //     $stmt = $mysqli->prepare($sql);
+                            //     $stmt->bind_param("is", $feature_id, $wktString);
+                            //     $stmt->execute();
+                            //     $stmt->close();
+                            //     break;
                             default:
                                 echo "Unsupported geometry type: $geometry_type \n";
                         }
