@@ -51,10 +51,12 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     $feature_id = $row['id'];
 
-    $sql = "SELECT geometry FROM points WHERE feature_id=$feature_id";
+    $sql = "SELECT ST_X(geometry) AS latitude, ST_Y(geometry) AS longitude FROM points WHERE feature_id=$feature_id";
+
     $result = mysqli_query($mysqli, $sql);
     $coords = mysqli_fetch_assoc($result);
-
+    $latitude = $coords['latitude'];
+    $longitude = $coords['longitude'];
 
     $geometry_string = $coords[0];
     $geometry_type = $row['geometry_type'];
