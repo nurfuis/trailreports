@@ -50,23 +50,40 @@ while ($row = mysqli_fetch_assoc($result)) {
     $collection_name = ucfirst(strtolower(str_replace('_', ' ', $row['collection_name'])));
 
     $feature_id = $row['id'];
+    $geometry_type = $row['geometry_type'];
+    $geometry_type = "";
 
-    $sql = "SELECT ST_X(geometry) AS latitude, ST_Y(geometry) AS longitude
+    switch ($geometry_type) {
+        case 'Point':
+            $sql = "SELECT ST_X(geometry) AS latitude, ST_Y(geometry) AS longitude
           FROM points 
           WHERE feature_id=$feature_id;";
-    $points_result = mysqli_query($mysqli, $sql);
-    
-    if ($points_result) {
-        $coords = mysqli_fetch_assoc($points_result);
-        $latitude = $coords['latitude'];
-        $longitude = $coords['longitude'];
+            $points_result = mysqli_query($mysqli, $sql);
+
+            if ($points_result) {
+                $coords = mysqli_fetch_assoc($points_result);
+                $latitude = $coords['latitude'];
+                $longitude = $coords['longitude'];
+
+                $geometry_string = $latitude . "," . $longitude;
+            }
+            break;
+
+        case 'LineString':
+            $geometry_string = "poopsnach";
+            break;
+
+        default:
+            $geometry_string = "NA";
+            break;
     }
-    $geometry_string = $latitude . "," . $longitude;
-    $geometry_type = $row['geometry_type'];
-    // Get the first 20 characters (or less)
-    if (strlen($geometry_string) > 30) {
-        $geometry_string = substr($geometry_string, 0, 20) . "...";
-    }
+
+
+
+
+
+
+
 
     echo "<tr>";
     echo "<td>" . $feature_id . "</td>";
