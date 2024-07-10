@@ -23,16 +23,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $num_rows = $result->num_rows;
 
   if ($num_rows === 1) {
-    // Username exists (handle multiple rows if necessary)
+    // Username exists
     $row = mysqli_fetch_assoc($result);
 
+    // record the last_login_attempt time
     $sql_login = "UPDATE users SET last_login_attempt = NOW() WHERE user_id = ?";
     $stmt_login = mysqli_prepare($mysqli, $sql_login);
     mysqli_stmt_bind_param($stmt_login, "i", $row['user_id']);
     mysqli_stmt_execute($stmt_login);
     mysqli_stmt_close($stmt_login);
 
-    // Verify password using password_verify function
     if (password_verify($password, $row['password_hash'])) {
       // Login successful - Start session and store user data
       session_start();

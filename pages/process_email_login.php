@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $expiry = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
         // Update user record with login token and expiry
-        $sql = "UPDATE users SET login_token = ?, login_token_expiry = ? WHERE user_id = ?";
+        $sql = "UPDATE users SET last_login_attempt = NOW(), login_token = ?, login_token_expiry = ? WHERE user_id = ?";
         $stmt = mysqli_prepare($mysqli, $sql);
         mysqli_stmt_bind_param($stmt, "sss", $token, $expiry, $user_id);
         mysqli_stmt_execute($stmt);
