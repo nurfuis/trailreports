@@ -54,9 +54,13 @@ while ($row = mysqli_fetch_assoc($result)) {
     $sql = "SELECT ST_X(geometry) AS latitude, ST_Y(geometry) AS longitude
           FROM points 
           WHERE feature_id=$feature_id;";
-    $coords = mysqli_query($mysqli, $sql);
+    $points_result = mysqli_query($mysqli, $sql);
+    if ($points_result) {
+        $coords = mysqli_fetch_assoc($points_result);
+        $latitude = $coords['latitude'];
+        $longitude = $coords['longitude'];
 
-
+    }
     $geometry_string = "0,0";
     $geometry_type = $row['geometry_type'];
     // Get the first 20 characters (or less)
