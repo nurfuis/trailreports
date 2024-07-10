@@ -3,8 +3,8 @@
 $page_title = "Deactivate Account";
 $page_css = "/assets/css/style.css";
 
-include ("../components/head.inc"); // Top section up to and including body tag
-include ("../layouts/single.inc"); // An open div with layout class
+include_once realpath("../components/head.inc"); // Top section up to and including body tag
+include_once realpath("../layouts/single.inc"); // An open div with layout class
 
 session_start();
 
@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_id'])) {
   exit;
 }
 
-include_once ("../../db_connect.php"); // $msqli connect
+require_once realpath("../../db_connect.php"); // $msqli connect
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $user_id = $_SESSION['user_id']; // Get user ID from session
@@ -46,4 +46,4 @@ if (!empty($errorMessage)) {
   echo "<p style='color: blue;'>$successMessage</p>";
 }
 
-include ("../components/tail.inc");
+include_once realpath("../components/tail.inc");

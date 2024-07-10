@@ -3,18 +3,16 @@
 $page_title = "Register";
 $page_css = "/assets/css/style.css";
 
-include ("../components/head.inc"); // Top section up to and including body tag
-include ("../layouts/single.inc"); // An open div with layout class
+include_once realpath("../components/head.inc");
+include_once realpath("../layouts/single.inc");
 
-include_once ("../../db_connect.php"); // $msqli connect
+require_once realpath("../../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Sanitize user input to prevent SQL injection
     $username = mysqli_real_escape_string($mysqli, trim($_POST['username']));
     $password = mysqli_real_escape_string($mysqli, trim($_POST['password']));
 
-    // Check username availability
     $sql = "SELECT COUNT(*) FROM users WHERE username = ?";
     $stmt = mysqli_prepare($mysqli, $sql);
     mysqli_stmt_bind_param($stmt, "s", $username);
@@ -46,6 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_start();
             $_SESSION['username'] = $username;
             $_SESSION['user_id'] = $userId;
+            $_SESSION['authenticated'] = true;
+
             $successMessage = "Registration successful! Welcome " . $_SESSION['username'] . ".";
         } else {
             $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
@@ -60,7 +60,7 @@ mysqli_close($mysqli);
 
 if (!empty($errorMessage)) {
     echo "<p style='color: red;'>$errorMessage</p>";
-    include ("../components/sign_up_form.inc");
+    include_once realpath("../components/sign_up_form.inc");
 
 } else if (!empty($successMessage)) {
     echo "<p style='color: blue;'>$successMessage</p>";
@@ -68,4 +68,4 @@ if (!empty($errorMessage)) {
 }
 
 
-include ("../components/tail.inc");
+include_once realpath("../components/tail.inc");

@@ -2,7 +2,6 @@
 
 session_start();
 
-// Ensure user is logged in
 if (!isset($_SESSION['user_id'])) {
   header("Location: sign_in.php");
   exit;
@@ -11,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 $page_title = "Account Management";
 $page_css = "/assets/css/style.css";
 
-include realpath("../components/head.inc");
-include realpath("../layouts/single.inc");
-include realpath("../components/manage_account.inc");
-include realpath("../components/tail.inc");
+include_once realpath("../components/head.inc");
+include_once realpath("../layouts/single.inc");
+include_once realpath("../components/manage_account.inc");
+include_once realpath("../components/tail.inc");

@@ -1,19 +1,18 @@
 <?php
+// TODO Dont forget to change the host address $login_link below when transfering to live
 
 $page_title = "Login by email";
 $page_css = "/assets/css/style.css";
 
-include ("../components/head.inc"); // Top section up to and including body tag
-include ("../layouts/single.inc"); // An open div with layout class
+include_once realpath("../components/head.inc");
+include_once realpath("../layouts/single.inc");
 
-include_once ("../../db_connect.php"); // $msqli connect
+require_once realpath("../../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Sanitize user input to prevent SQL injection
     $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
 
-    // Check if email exists
     $sql = "SELECT user_id, email FROM users WHERE email = ? AND verified = 1";
     $stmt = mysqli_prepare($mysqli, $sql);
     mysqli_stmt_bind_param($stmt, "s", $email);
@@ -27,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $row = mysqli_fetch_assoc($result);
         $user_id = $row['user_id'];
 
-        // Generate a unique login token and expiry time
         $token = bin2hex(random_bytes(16));
         $expiry = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
@@ -39,7 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (mysqli_stmt_affected_rows($stmt) === 1) {
 
-            // Prepare email content (similar to verification email)
             $to = $email;
             $subject = "Login Link for " . $_SERVER['HTTP_HOST'];
             $message = "Click the link below to log in securely:\n";
@@ -48,12 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $message .= "This link will expire in 1 hour. \n\n";
             $message .= "If you did not request a login link, please ignore this email. \n\n";
 
-            // Use a library like PHPMailer or your server's mail function to send the email
             if (mail($to, $subject, $message)) {
                 $successMessage = "A login link has been sent to your email address.";
             } else {
                 $errorMessage = "Failed to send login link. Please try again.";
-                // Log the error for troubleshooting
             }
         } else {
             $errorMessage = "Failed to generate login token.";
@@ -71,10 +66,10 @@ mysqli_close($mysqli);
 
 if (!empty($errorMessage)) {
     echo "<p style='color: red;'>$errorMessage</p>";
-    include ("../components/sign_in_form.inc");
+    include_once realpath("../components/sign_in_form.inc");
 
 } else if (!empty($successMessage)) {
     echo "<p style='color: blue;'>$successMessage</p>";
 }
 
-include ("../components/tail.inc"); // closing tags for layout div, body, and html 
+include_once realpath("../components/tail.inc"); // closing tags for layout div, body, and html 

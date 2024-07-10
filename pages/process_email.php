@@ -1,12 +1,13 @@
 <?php
+// TODO Change host below $verification_link when going live
 
 $page_title = "Register Email";
 $page_css = "/assets/css/style.css";
 
-include ("../components/head.inc");
-include ("../layouts/single.inc");
+include_once realpath("../components/head.inc");
+include_once realpath("../layouts/single.inc");
 
-include_once ("../../db_connect.php");
+require_once realpath("../../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -15,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
     $errorMessage = "Please enter a valid email address.";
     echo '<p class="alert">' . $errorMessage . '</p>';
-    include ("../components/update_email_form.inc");
+    include_once realpath("../components/update_email_form.inc");
     exit; 
   }
 
@@ -73,10 +74,10 @@ mysqli_close($mysqli);
 
 if (!empty($errorMessage)) {
   echo "<p style='color: red;'>$errorMessage</p>";
-  include ("../components/update_email_form.inc");
+  include_once realpath("../components/update_email_form.inc");
 
 } else {
   echo "<p style='color: blue;'>$successMessage</p>";
 }
 
-include ("../components/tail.inc"); // closing tags for layout div, body, and html
+include_once realpath("../components/tail.inc"); // closing tags for layout div, body, and html

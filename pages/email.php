@@ -3,10 +3,11 @@
 $page_title = "Verify email";
 $page_css = "/assets/css/style.css";
 
-include ("../components/head.inc");
-include ("../layouts/single.inc");
+include_once realpath("../components/head.inc");
+include_once realpath("../layouts/single.inc");
 
 session_start();
+
 if (!isset($_SESSION['user_id'])) {
   header("Location: /index.php");
 }
@@ -22,7 +23,7 @@ if (!isset($_SESSION['user_id'])) {
   </p>
 
   <?php
-  include ("../components/update_email_form.inc");
+  include_once realpath("../components/update_email_form.inc");
   ?>
 </div>
 <div class="regular-padding">
@@ -59,5 +60,5 @@ if (!isset($_SESSION['user_id'])) {
   }
 </script>
 <?php
-include ("../components/tail.inc");
+include_once realpath("../components/tail.inc");
 ?>

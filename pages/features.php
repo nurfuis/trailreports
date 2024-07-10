@@ -5,10 +5,10 @@ $page_css = "../assets/css/style.css";
 
 session_start();
 
-include ("../components/head.inc");
-include ("../layouts/wide.inc");
+include_once realpath("../components/head.inc");
+include_once realpath("../layouts/wide.inc");
 
-include_once ("../../db_connect.php");
+require_once realpath("../../db_connect.php");
 
 echo "<h2>Features</h2>";
 
@@ -136,7 +136,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 echo "</table>";
 
 mysqli_close($mysqli);
-include ("../components/add_feature_form.inc");
+include_once realpath("../components/add_feature_form.inc");
 
-include ("../components/tail.inc");
+include_once realpath("../components/tail.inc");
 

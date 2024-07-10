@@ -1,14 +1,14 @@
 <?php
-
+// TODO change host at reset_link
 $page_title = "Change Password";
 $page_css = "/assets/css/style.css";
 
-include ("../components/head.inc");
-include ("../layouts/single.inc");
+include_once realpath("../components/head.inc");
+include_once realpath("../layouts/single.inc");
 
 session_start();
 
-include_once ("../../db_connect.php");
+require_once realpath("../../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -63,4 +63,4 @@ if (isset($errorMessage)) {
     echo '<p style="color: blue;">' . $successMessage . '</p>';
 }
 
-include ("../components/tail.inc");
+include_once realpath("../components/tail.inc");

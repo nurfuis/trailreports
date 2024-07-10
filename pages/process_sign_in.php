@@ -3,18 +3,16 @@
 $page_title = "Login";
 $page_css = "/assets/css/style.css";
 
-include realpath("../components/head.inc"); // Top section up to and including body tag
-include realpath("../layouts/single.inc"); // An open div with layout class
+include realpath("../components/head.inc");
+include realpath("../layouts/single.inc");
 
-require_once realpath("../../db_connect.php"); // $msqli connect
+require_once realpath("../../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-  // Sanitize user input to prevent SQL injection
   $username = mysqli_real_escape_string($mysqli, trim($_POST['username']));
   $password = mysqli_real_escape_string($mysqli, trim($_POST['password']));
 
-  // Prepare SQL statement to check user credentials
   $sql = "SELECT user_id, username, password_hash, account_status FROM users WHERE username = ?";
   $stmt = mysqli_prepare($mysqli, $sql);
   mysqli_stmt_bind_param($stmt, "s", $username);
@@ -22,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $result = mysqli_stmt_get_result($stmt);
 
-  $num_rows = $result->num_rows; // Store the number of rows
+  $num_rows = $result->num_rows;
 
   if ($num_rows === 1) {
     // Username exists (handle multiple rows if necessary)

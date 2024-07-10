@@ -3,13 +3,13 @@
 $page_title = "Change Password";
 $page_css = "/assets/css/style.css";
 
-include ("../components/head.inc");
-include ("../layouts/single.inc");
+include_once realpath("../components/head.inc");
+include_once realpath("../layouts/single.inc");
 
 session_start();
 session_destroy();
 
-require_once ("../../db_connect.php");
+require_once realpath("../../db_connect.php");
 
 $errorMessage = "";
 $successMessage = "";
@@ -20,7 +20,6 @@ $successMessage = "";
 <?php
 
 if (isset($_GET['token'])) {
-
 
   $token = $_GET['token'];
 
@@ -36,7 +35,7 @@ if (isset($_GET['token'])) {
 
   if ($num_rows === 1 && $row['reset_token_expiry'] > date("Y-m-d H:i:s")) {
     $user_id = $row['user_id'];
-    include ('../components/new_password_form.inc');
+    include_once ('../components/new_password_form.inc');
 
   } else {
     $errorMessage = "Invalid password reset link.";
@@ -54,5 +53,5 @@ if (!empty($errorMessage)) {
   echo '<p style="color: blue;">' . $successMessage . '</p>';
 }
 
-include ("../components/tail.inc");
+include_once realpath("../components/tail.inc");
 ?>

@@ -3,10 +3,10 @@
 $page_title = "Login";
 $page_css = "/assets/css/style.css";
 
-include ("../components/head.inc");
-include ("../layouts/single.inc");
+include_once realpath("../components/head.inc");
+include_once realpath("../layouts/single.inc");
 
-include_once ("../../db_connect.php");
+require_once realpath("../../db_connect.php");
 
 if (isset($_GET['token'])) {
 
@@ -37,6 +37,8 @@ if (isset($_GET['token'])) {
     session_start();
     $_SESSION['user_id'] = $user_id;
     $_SESSION['username'] = $username;
+    $_SESSION['authenticated'] = true;
+
 
     $sql = "UPDATE users SET login_token = NULL, login_token_expiry = NULL WHERE user_id = ?";
     $stmt = mysqli_prepare($mysqli, $sql);
@@ -64,5 +66,5 @@ if (!empty($errorMessage)) {
   echo "<p style='color: blue;'>$successMessage</p>";
 }
 
-include ("../components/tail.inc");
+include_once realpath("../components/tail.inc");
 
