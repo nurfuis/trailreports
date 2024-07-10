@@ -82,9 +82,6 @@ while ($row = mysqli_fetch_assoc($result)) {
 
                 $geometry_string = "Segments: " . $coords;
             }
-
-
-            $geometry_string = "poopsnach";
             break;
 
         default:
