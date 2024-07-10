@@ -2,12 +2,12 @@
 
 // Define page details
 $page_title = "Display Users";
-$page_css = "/assets/css/style.css";
+$page_css = "../assets/css/style.css";
 
 // Include components
-include_once ("../components/head.inc"); // Top section up to and including body tag
-include_once ("../layouts/secondary.inc"); // An open div with layout class
-include_once ("../../db_connect.php"); // $msqli connection
+include_once realpath("../components/head.inc"); // Top section up to and including body tag
+include_once realpath("../layouts/secondary.inc"); // An open div with layout class
+include_once realpath("../../db_connect.php"); // $msqli connection
 
 // Build the user data query
 $sql = "SELECT user_id, username, email, verified, account_status, last_login_attempt, registration_date 
