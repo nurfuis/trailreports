@@ -87,7 +87,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 $first_longitude = $first_point[0];
                 $first_latitude = $first_point[1];
 
-                $geometry_string = "First Coordinate: ($first_longitude, $first_latitude)";
+                $geometry_string = "$first_longitude, $first_latitude";
 
                 // Initialize an empty array to store segments
                 $segments = [];
