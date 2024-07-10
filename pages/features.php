@@ -59,7 +59,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     }
 
     echo "<tr>";
-    echo "<td>" . $id . "</td>";
+    echo "<td>" . $feature_id . "</td>";
 
     echo "<td>" . $name . "</td>";
     echo "<td>" . $geometry_string . "</td>";
