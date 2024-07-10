@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Segment Details</title>
+  </head>
+  <body>
+    <h2>Segment Details</h2>
+    <table id="segments_table"></table>
+    <script>
+      // Access URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const geometryId = urlParams.get("id");
+      const encodedSegments = urlParams.get("segments");
+
+      // Check for missing parameters
+      if (!geometryId || !encodedSegments) {
+        document.getElementById("segments_table").innerHTML =
+          "Error: Missing data in URL";
+        return;
+      }
+
+      // Decode segments from JSON
+      const segments = JSON.parse(encodedSegments);
+
+      // Create table headers dynamically
+      const table = document.getElementById("segments_table");
+      const headerRow = table.insertRow();
+      const headerCell1 = headerRow.insertCell();
+      headerCell1.textContent = "Longitude";
+      const headerCell2 = headerRow.insertCell();
+      headerCell2.textContent = "Latitude";
+
+      // Populate table body with segments
+      for (const segment of segments) {
+        const row = table.insertRow();
+        const cell1 = row.insertCell();
+        cell1.textContent = segment[0]; // Access longitude from the array
+        const cell2 = row.insertCell();
+        cell2.textContent = segment[1]; // Access latitude from the array
+      }
+    </script>
+  </body>
+</html>
