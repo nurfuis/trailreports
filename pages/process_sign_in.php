@@ -56,13 +56,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $successMessage = "Welcome back, " . $_SESSION['username'] . "!";
         }
       } else {
-        // failed login
-        // record the last_login_attempt time
-        $sql_login = "UPDATE users SET last_login_attempt = NOW() WHERE user_id = ?";
-        $stmt_login = mysqli_prepare($mysqli, $sql_login);
-        mysqli_stmt_bind_param($stmt_login, "i", $row['user_id']);
-        mysqli_stmt_execute($stmt_login);
-        mysqli_stmt_close($stmt_login);
+        // Login failed - Update login attempts
+        $sql_update_attempts = "UPDATE users SET login_attempts = login_attempts + 1, last_login_attempt = NOW() WHERE username = ?";
+        $stmt_update_attempts = mysqli_prepare($mysqli, $sql_update_attempts);
+        mysqli_stmt_bind_param($stmt_update_attempts, "s", $username);
+        mysqli_stmt_execute($stmt_update_attempts);
+        mysqli_stmt_close($stmt_update_attempts);
 
         $errorMessage = "Invalid username or password.";
       }
