@@ -139,7 +139,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<td>" . $feature_id . "</td>";
 
     echo "<td>" . $name . "</td>";
-    echo "<td>" . $geometry_string . "<a href='javascript:void(0)' onclick='openSegmentDetails($first_longitude, $first_latitude)'>Click for Segment Details</a>" . </td>";
+    echo "<td>" . $geometry_string . "<a href='javascript:void(0)' onclick='openSegmentDetails($first_longitude, $first_latitude)'>Click for Segment Details</a>" . "</td>";
     echo "<td>" . $geometry_type . "</td>";
 
     echo "<td>" . $collection_name . "</td>";
