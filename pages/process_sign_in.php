@@ -52,10 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $successMessage = "Welcome back, " . $_SESSION['username'] . "!";
       }
     } else {
-      $errorMessage = "Invalid username or password.";
+      $errorMessage = "Invalid username or password." . "CODE: 0";
     }
   } else {
-    $errorMessage = "Invalid username or password.";
+    $errorMessage = "Invalid username or password." . "CODE: 1";
   }
 
   mysqli_free_result($result);
