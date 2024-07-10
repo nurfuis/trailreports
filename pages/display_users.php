@@ -31,9 +31,7 @@ while ($row = mysqli_fetch_assoc($result)) {
   echo "<tr>";
   echo "<td>" . $row["user_id"] . "</td>";
   echo "<td>" . $row["username"] . "</td>";
-  $email = $row["email"];
-  $displayed_email = (empty($email)) ? 'N/A' : (strlen($email) > 5) ? substr($email, 0, 5) . str_repeat('*', strlen($email) - 5) : $email;
-  echo "<td>" . $displayed_email . "</td>";
+  echo "<td>" . $row["email"] . "</td>";
   echo "<td>" . ($row["verified"] ? "Yes" : "No") . "</td>"; // Convert verified to Yes/No
   echo "<td>" . $row["registration_date"] . "</td>";
   echo "<td>" . $row["last_login_attempt"] . "</td>";
