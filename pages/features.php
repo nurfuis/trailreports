@@ -61,7 +61,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         $longitude = $coords['longitude'];
 
     }
-    $geometry_string = "0,0";
+    $geometry_string = $latitude . "," . $longitude;
     $geometry_type = $row['geometry_type'];
     // Get the first 20 characters (or less)
     if (strlen($geometry_string) > 30) {
