@@ -60,9 +60,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       mysqli_stmt_execute($checkLoginAttemptsStmt);
       $result = mysqli_stmt_get_result($checkLoginAttemptsStmt);
       $row = mysqli_fetch_assoc($result);
-    
+
       if ($row) {
         $errorMessage = "Invalid username or password." . "\n CODE: 2";
+        $attempts = $row['login_attempts'];
+        $lastAttempt = strtotime($row['last_login_attempt']);
+        $currentTime = time();
+        $threshold = 0;
+        $lockoutTime = 3600;
+
+        if ($attempts >= $threshold && ($currentTime - $lastAttempt) < $lockoutTime) {
+          $errorMessage = "Your account has been temporarily locked due to multiple failed login attempts. Please try again later.";
+        }
 
       }
 
