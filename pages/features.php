@@ -70,22 +70,30 @@ while ($row = mysqli_fetch_assoc($result)) {
             break;
 
         case 'LineString':
-            $sql = "SELECT ST_X(geometry) AS latitude, ST_Y(geometry) AS longitude
-          FROM polylines 
-          WHERE feature_id=$feature_id;";
+            $sql = "SELECT ST_AsText(geometry) AS wkt_string
+                         FROM polylines 
+                         WHERE feature_id=$feature_id;";
             $polylines_result = mysqli_query($mysqli, $sql);
 
             if ($polylines_result) {
-                $coords = mysqli_num_rows($polylines_result);
-                // $latitude = $coords['latitude'];
-                // $longitude = $coords['longitude'];
-                $geometry_string = "Segments: " . $coords;
+                $coords = mysqli_num_rows($polylines_result); // This will always be 1 for a single LineString
+                $row = mysqli_fetch_assoc($polylines_result);
+                $wkt_string = $row["wkt_string"];
 
-                foreach ($polylines_result as $polyline) {
-                    echo "LINE" . $polyline["geometry"];
+                // Extract individual coordinates from the WKT string 
+                $points = explode(",", substr($wkt_string, strpos($wkt_string, "(") + 1, -1));
+                $geometry_string = "Segments: " . count($points); // Number of points in the LineString
+
+                echo "LineString: \n";
+                foreach ($points as $point) {
+                    $point_data = explode(" ", trim($point));
+                    $longitude = $point_data[0];
+                    $latitude = $point_data[1];
+                    echo "  - ($longitude, $latitude) \n";
                 }
             }
             break;
+
 
         default:
             $geometry_string = "NA";
