@@ -28,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $currentTime = time();
     $threshold = 5;
     $lockoutTime = 3600;
-    echo $attempts . '($currentTime - $lastAttempt) < $lockoutTime';
 
     if ($attempts >= $threshold && ($currentTime - $lastAttempt) < $lockoutTime) {
       // account is locked
@@ -68,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
     }
   } else {
-    $errorMessage = "Invalid username or password.";
+    // $errorMessage = "Invalid username or password.";
   }
   mysqli_free_result($result);
   mysqli_stmt_close($stmt);
