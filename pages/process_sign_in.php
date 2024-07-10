@@ -19,10 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);
   $num_rows = $result->num_rows;
-  $row = mysqli_fetch_assoc($result);
 
   if ($num_rows === 1) {
     // username exists
+    $row = mysqli_fetch_assoc($result);
+
     $attempts = $row['login_attempts'];
     $lastAttempt = strtotime($row['last_login_attempt']);
     $currentTime = time();
