@@ -7,7 +7,7 @@ include_once realpath("../components/head.inc"); // Top section up to and includ
 include_once realpath("../layouts/wide.inc"); // An open div with layout class
 require_once realpath("../../db_connect.php"); // $msqli connection
 
-$sql = "SELECT user_id, username, email, verified, account_status, login_attempts, last_login_attempt, registration_date 
+$sql = "SELECT user_id, username, email, verified, account_status, login_attempts, last_login_attempt, email_login_attempts, last_email_login_attempt, registration_date 
         FROM users 
         ORDER BY registration_date ASC";
 
