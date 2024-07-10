@@ -12,13 +12,11 @@ include_once ("../../db_connect.php");
 
 echo "<h2>Features</h2>";
 
-// Write the query with a LEFT JOIN to points
-$sql = "SELECT f.*, c.name AS collection_name, ";
-$sql .= "p.geometry AS point_geometry ";  // Add point_geometry field
-$sql .= "FROM features f ";
-$sql .= "INNER JOIN collections c ON f.collections_id = c.id ";
-$sql .= "LEFT JOIN points p ON f.id = p.feature_id ";  // LEFT JOIN points
 
+// Write the query to select all features
+$sql = "SELECT f.*, c.name AS collection_name
+FROM features f
+INNER JOIN collections c ON f.collections_id = c.id;";
 $result = mysqli_query($mysqli, $sql);
 
 // Check for errors
@@ -32,7 +30,9 @@ echo "<table>";
 
 // Create table headers
 echo "<tr>";
-echo "<th>Feature Name</th>";
+echo "<th>ID</th>";
+
+echo "<th>Trail Name</th>";
 echo "<th>Coords</th>";
 echo "<th>Shape</th>";
 echo "<th>Collection</th>";
@@ -49,20 +49,22 @@ while ($row = mysqli_fetch_assoc($result)) {
     // Convert collection name to sentence case and replace underscores with spaces (if applicable)
     $collection_name = ucfirst(strtolower(str_replace('_', ' ', $row['collection_name'])));
 
-    // Check if point_geometry exists (use a default value if not)
-    $geometry_string = $row['point_geometry'] ? $row['point_geometry'] : "0,0";
+    $feature_id = $row['id'];
 
+    $geometry_string = "0,0";
     $geometry_type = $row['geometry_type'];
-
     // Get the first 20 characters (or less)
     if (strlen($geometry_string) > 30) {
         $geometry_string = substr($geometry_string, 0, 20) . "...";
     }
 
     echo "<tr>";
+    echo "<td>" . $id . "</td>";
+
     echo "<td>" . $name . "</td>";
-    echo "<td>" . $geometry_string[0] . "</td>";
+    echo "<td>" . $geometry_string . "</td>";
     echo "<td>" . $geometry_type . "</td>";
+
     echo "<td>" . $collection_name . "</td>";
     echo "</tr>";
 }
