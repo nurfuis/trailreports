@@ -6,7 +6,7 @@ $page_css = "/assets/css/style.css";
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/single.inc");
 
-require_once realpath("../config.php");
+require_once realpath("../../config.php");
 require_once realpath("../../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $to = $email;
             $subject = "Login Link for " . $_SERVER['HTTP_HOST'];
             $message = "Click the link below to log in securely:\n";
-            $login_link = HOST_ADDRESS . "/pages/login.php?token=" . $token;
+            $login_link = $HOST_ADDRESS . "/pages/login.php?token=" . $token;
             $message .= $login_link . "\n\n";
             $message .= "This link will expire in 1 hour. \n\n";
             $message .= "If you did not request a login link, please ignore this email. \n\n";
