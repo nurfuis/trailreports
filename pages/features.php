@@ -51,7 +51,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     $feature_id = $row['id'];
     $geometry_type = $row['geometry_type'];
-    $geometry_type = "";
+    $geometry_string = "";
 
     switch ($geometry_type) {
         case 'Point':
