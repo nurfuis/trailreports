@@ -101,7 +101,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                     $segment = [$longitude, $latitude];
                     $segments[] = $segment; // Add the segment to the array
                 }
-                $geometry_string = "$first_longitude, $first_latitude" . $segments;
+                $geometry_string = "$first_longitude, $first_latitude" . $segments[0];
 
                 // Now you can access the segments array for further processing
                 // Example: print_r($segments); // Prints all segments
