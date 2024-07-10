@@ -51,7 +51,12 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     $feature_id = $row['id'];
 
-    $geometry_string = "0,0";
+    $sql = "SELECT geometry FROM points WHERE feature_id=$feature_id";
+    $result = mysqli_query($mysqli, $sql);
+    $coords = mysqli_fetch_assoc($result);
+
+
+    $geometry_string = $coords[0];
     $geometry_type = $row['geometry_type'];
     // Get the first 20 characters (or less)
     if (strlen($geometry_string) > 30) {
