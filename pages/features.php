@@ -70,6 +70,20 @@ while ($row = mysqli_fetch_assoc($result)) {
             break;
 
         case 'LineString':
+            $sql = "SELECT ST_X(geometry) AS latitude, ST_Y(geometry) AS longitude
+          FROM polylines 
+          WHERE feature_id=$feature_id;";
+            $polylines_result = mysqli_query($mysqli, $sql);
+
+            if ($polylines_result) {
+                $coords = mysqli_num_rows($polylines_result);
+                // $latitude = $coords['latitude'];
+                // $longitude = $coords['longitude'];
+
+                $geometry_string = "Segments: " . $coords;
+            }
+
+
             $geometry_string = "poopsnach";
             break;
 
