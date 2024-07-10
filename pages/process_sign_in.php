@@ -52,10 +52,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $successMessage = "Welcome back, " . $_SESSION['username'] . "!";
       }
     } else {
-      $errorMessage = "Invalid username or password." . "CODE: 0";
+      $errorMessage = "Invalid username or password." . "\n CODE: 0";
+
+      $checkLoginAttemptsSql = "SELECT login_attempts, last_login_attempt FROM users WHERE username = ?";
+      $checkLoginAttemptsStmt = mysqli_prepare($mysqli, $checkLoginAttemptsSql);
+      mysqli_stmt_bind_param($checkLoginAttemptsStmt, "s", $username);
+      mysqli_stmt_execute($checkLoginAttemptsStmt);
+      $result = mysqli_stmt_get_result($checkLoginAttemptsStmt);
+      $row = mysqli_fetch_assoc($result);
+    
+      if ($row) {
+        $errorMessage = "Invalid username or password." . "\n CODE: 2";
+
+      }
+
+
     }
   } else {
-    $errorMessage = "Invalid username or password." . "CODE: 1";
+    $errorMessage = "Invalid username or password." . "\n CODE: 1";
   }
 
   mysqli_free_result($result);
