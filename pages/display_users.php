@@ -18,7 +18,7 @@ if (!$result) {
 }
 
 echo "<table>";
-echo "<tr><th>ID</th><th>Username</th><th>Email</th><th>Verified</th><th>Registered</th><th>Attempts</th><th>Last Login Attempt</th></tr>";
+echo "<tr><th>ID</th><th>Username</th><th>Email</th><th>Verified</th><th>Registered</th><th>Login Attempts</th><th>Last Login Attempt</th><th>Email Attempts</th><th>Last Email Attempt</th></tr>";
 
 while ($row = mysqli_fetch_assoc($result)) {
   echo "<tr>";
@@ -29,6 +29,8 @@ while ($row = mysqli_fetch_assoc($result)) {
   echo "<td>" . $row["registration_date"] . "</td>";
   echo "<td>" . $row["login_attempts"] . "</td>";
   echo "<td>" . $row["last_login_attempt"] . "</td>";
+  echo "<td>" . $row["email_login_attempts"] . "</td>"; // Display new values from added columns
+  echo "<td>" . $row["last_email_login_attempt"] . "</td>"; // Display new values from added columns
   echo "</tr>";
 }
 
