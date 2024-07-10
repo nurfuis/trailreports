@@ -76,23 +76,37 @@ while ($row = mysqli_fetch_assoc($result)) {
             $polylines_result = mysqli_query($mysqli, $sql);
 
             if ($polylines_result) {
-                $coords = mysqli_num_rows($polylines_result); // This will always be 1 for a single LineString
                 $row = mysqli_fetch_assoc($polylines_result);
                 $wkt_string = $row["wkt_string"];
 
                 // Extract individual coordinates from the WKT string 
                 $points = explode(",", substr($wkt_string, strpos($wkt_string, "(") + 1, -1));
-                $geometry_string = "Segments: " . count($points); // Number of points in the LineString
 
-                echo "LineString: \n";
+                // Get the first coordinate pair
+                $first_point = explode(" ", trim($points[0]));
+                $first_longitude = $first_point[0];
+                $first_latitude = $first_point[1];
+
+                $geometry_string = "First Coordinate: ($first_longitude, $first_latitude)";
+
+                // Initialize an empty array to store segments
+                $segments = [];
+
                 foreach ($points as $point) {
                     $point_data = explode(" ", trim($point));
                     $longitude = $point_data[0];
                     $latitude = $point_data[1];
-                    echo "  - ($longitude, $latitude) \n";
+
+                    // Create an array for each segment (longitude, latitude)
+                    $segment = [$longitude, $latitude];
+                    $segments[] = $segment; // Add the segment to the array
                 }
+
+                // Now you can access the segments array for further processing
+                // Example: print_r($segments); // Prints all segments
             }
             break;
+
 
 
         default:
