@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $attempts = $row['email_login_attempts'];
         $lastAttempt = strtotime($row['last_email_login_attempt']);
         $currentTime = time();
-        $lockoutTime = 36000;
+        $lockoutTime = 20000;
         $threshold = 5;
         echo $currentTime - $lastAttempt;
 
