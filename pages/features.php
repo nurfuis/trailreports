@@ -87,18 +87,6 @@ while ($row = mysqli_fetch_assoc($result)) {
                 $first_longitude = $first_point[0];
                 $first_latitude = $first_point[1];
 
-                // Generate a unique ID
-                $geometry_id = uniqid();
-
-                // Encode segments as JSON
-                $encoded_segments = json_encode($segments);
-
-                // JavaScript function to open pop-up window (inline)
-                $popup_function = <<<JS
-        function openSegmentDetails(longitude, latitude) {
-            window.open('segment_details.html?id=$geometry_id&segments=$encoded_segments', '_blank', 'width=400,height=300');
-        }
-    JS;
                 $geometry_string = "$first_longitude, $first_latitude";
 
                 // Initialize an empty array to store segments
@@ -113,8 +101,8 @@ while ($row = mysqli_fetch_assoc($result)) {
                     $segment = [$longitude, $latitude];
                     $segments[] = $segment; // Add the segment to the array
                 }
-                echo "<br>";
-                echo "<a href='javascript:void(0)' onclick='openSegmentDetails($first_longitude, $first_latitude)'>Click for Segment Details</a>";
+                $geometry_string = "$first_longitude, $first_latitude" . $segments;
+
                 // Now you can access the segments array for further processing
                 // Example: print_r($segments); // Prints all segments
             }
