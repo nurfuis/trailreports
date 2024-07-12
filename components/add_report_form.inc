@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $selectedCollections = isset($_POST["collections"]) ? $_POST["collections"] : []; // Handle checkbox selection
 }
 
-$sqlFeatures = "SELECT id, name FROM features WHERE collection_id = (2, 5, 6, 10, 1, 12)";
+$sqlFeatures = "SELECT id, name FROM features WHERE collections_id = (2, 5, 6, 10, 1, 12)";
 $sqlCollections = "SELECT id, name FROM collections";
 
 $resultFeatures = $mysqli->query($sqlFeatures);
