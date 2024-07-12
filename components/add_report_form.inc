@@ -23,10 +23,21 @@ $resultCollections = $mysqli->query($sqlCollections);
 if (!$resultCollections) {
     die("Error retrieving collections: " . $mysqli->error);
 }
+
+$collectionName = "";
+if ($selectedFeature) {
+  $sqlCollectionName = "SELECT c.name 
+                         FROM collections c
+                         INNER JOIN features f ON c.id = f.collections_id
+                         WHERE f.id = $selectedFeature";
+  $resultCollectionName = $mysqli->query($sqlCollectionName);
+  if ($resultCollectionName->num_rows > 0) {
+    $row = $resultCollectionName->fetch_assoc();
+    $collectionName = $row["name"];
+  }
 ?>
 
-<h1>Trail Report Form</h1>
-
+<h1><?php echo $collectionName ? "Trail Report Form - " . $collectionName : "Trail Report Form"; ?></h1>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
     <label for="feature">Select Feature:</label>
