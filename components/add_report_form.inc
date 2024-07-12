@@ -23,7 +23,7 @@ if (!$resultFeatures) {
 
 $collectionName = "";
 if ($selectedFeature) {
-    $row = $resultFeatures->fetch_assoc();1
+    $row = $resultFeatures->fetch_assoc();
     $collectionName = $row["collection_name"];
 }
 
@@ -60,7 +60,7 @@ if ($selectedFeature) {
 
         <br><br>
 
-        <button type="submit">Enter a Report</button>
+        <button type="submit">Enter Report</button>
 
     </form>
 
