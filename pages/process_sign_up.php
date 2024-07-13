@@ -11,7 +11,25 @@ require_once realpath("../../db_connect.php");
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $username = mysqli_real_escape_string($mysqli, trim($_POST['username']));
+
+    if (preg_match('/^[a-zA-Z0-9]{5,}$/', $username)) {
+        // username is good
+
+    } else {
+        $errorMessage = "Username must be English characters, numerals, and over 5 characters long.";
+        goto after_validation;
+    }
+
     $password = mysqli_real_escape_string($mysqli, trim($_POST['password']));
+
+    if (strlen($password) < 8) {
+        $errorMessage = "Password must be at least 8 characters long.";
+        goto after_validation;
+    }
+    if (!preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\da-zA-Z])(?!.*\s).{8,}$/', $password)) {
+        $errorMessage = "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character.";
+        goto after_validation;
+    }
 
     $sql = "SELECT COUNT(*) FROM users WHERE username = ?";
     $stmt = mysqli_prepare($mysqli, $sql);
@@ -51,10 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);
         }
     }
-
     mysqli_free_result($result);
     mysqli_stmt_close($stmt);
 }
+after_validation:
 
 mysqli_close($mysqli);
 
