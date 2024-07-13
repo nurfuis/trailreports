@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Prepare and execute insert query
         $sql = "INSERT INTO trail_reports (feature_id, user_id, rating, summary) VALUES (?, ?, ?, ?)";
         $stmt = mysqli_prepare($mysqli, $sql);
-        mysqli_stmt_bind_param($stmt, "iiii", $featureId, $userId, $rating, $summary);
+        mysqli_stmt_bind_param($stmt, "iiis", $featureId, $userId, $rating, $summary);
 
         if (mysqli_stmt_execute($stmt)) {
             $successMessage = "Trail report submitted successfully!";
