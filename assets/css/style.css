@@ -130,7 +130,6 @@ h2 {
 }
 .single__wrapper {
   background-color: var(--light-background);
-  border-radius: 2em;
   margin: 0 auto 0 auto;
   min-width: 320px;
   max-width: 640px;
@@ -157,5 +156,6 @@ h2 {
   width: 100%;
   box-sizing: border-box;
   min-height: 150px;
+  height: 35vh;
   resize: vertical;
 }

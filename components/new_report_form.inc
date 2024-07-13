@@ -13,10 +13,11 @@ if (!$resultFeatures) {
 <h1>New Trail Report</h1>
 
 <form action="process_new_report.php" method="post">
+    <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 
     <label for="feature">Select Trail:</label><br><br>
     <select name="feature" id="feature">
-        <option value=""><-- Select Trail --></option>
+        <option value="">-- Select Trail --</option>
         <?php while ($row = $resultFeatures->fetch_assoc()): ?>
             <option value="<?php echo $row["id"]; ?>">
                 <?php echo $row["name"]; ?>
@@ -59,6 +60,7 @@ if (!$resultFeatures) {
         toggleLink.addEventListener("click", function (event) {
             event.preventDefault();
             guidanceList.style.display = guidanceList.style.display === "none" ? "block" : "none";
+            toggleLink.textContent = guidanceList.style.display === "none" ? "(more)" : "(less)";
         });
     </script>
     <br>
