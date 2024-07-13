@@ -26,7 +26,6 @@ p {
   font-style: normal;
 }
 form {
-  border-bottom: 1px dashed var(--accent);
   padding-bottom: 1em;
 }
 .show {

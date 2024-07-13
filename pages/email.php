@@ -28,7 +28,7 @@ if (!isset($_SESSION['user_id'])) {
 </div>
 <div class="regular-padding">
   <form>
-    <button type="button" onclick="skipVerification()">Skip</button>
+    <button type="button" onclick="skipVerification()">Skip Verification</button>
 
   </form>
 
@@ -38,20 +38,12 @@ if (!isset($_SESSION['user_id'])) {
       limit your access to certain features on the platform. Are you sure you want
       to continue?
     </p>
-    <button onclick="closeSkipAlert(true)">Fill Out Email</button>
     <button onclick="continueWithoutEmail()">Continue (Limited Access)</button>
   </div>
 </div>
 <script>
   function skipVerification() {
     document.getElementById("skip-verification-alert").style.display = "block";
-  }
-
-  function closeSkipAlert(focusEmail = false) {
-    document.getElementById("skip-verification-alert").style.display = "none";
-    if (focusEmail) {
-      document.getElementById("email").focus();
-    }
   }
 
   function continueWithoutEmail() {
