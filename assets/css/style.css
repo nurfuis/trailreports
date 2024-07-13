@@ -35,6 +35,9 @@ form {
 .hidden {
   display: none;
 }
+.guidance-list li {
+  padding: 0.5em 0 0.5em 0;
+}
 .account-management-list--compact button {
   margin-top: 0.5em;
 }
@@ -144,4 +147,8 @@ h2 {
     "-"
     "-"
     "-";
+}
+.toggle-guidance {
+  text-decoration: none;
+  color: blue;
 }
