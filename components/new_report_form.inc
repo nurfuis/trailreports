@@ -62,7 +62,7 @@ if (!$resultFeatures) {
         });
     </script>
     <br>
-    <textarea name="summary" id="summary" rows="9" cols="50"
+    <textarea name="summary" id="summary" class="summary-input"
         placeholder="Provide a detailed description of your experience on the trail."></textarea>
     <br><br>
 

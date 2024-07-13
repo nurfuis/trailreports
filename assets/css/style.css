@@ -130,11 +130,12 @@ h2 {
 }
 .single__wrapper {
   background-color: var(--light-background);
-  padding: 1em;
   border-radius: 2em;
   margin: 0 auto 0 auto;
   min-width: 320px;
   max-width: 640px;
+  box-sizing: border-box;
+  padding: 0.25em;
 }
 .view-details__wrapper {
   background-color: var(--light-background);
@@ -151,4 +152,10 @@ h2 {
 .toggle-guidance {
   text-decoration: none;
   color: blue;
+}
+.summary-input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 150px;
+  resize: vertical;
 }
