@@ -112,9 +112,12 @@ h2 {
   padding: 0.5em 1.25em 0.5em 1.25em;
   text-decoration: none;
   border-right: 1px solid var(--accent);
-  border-top: 2px solid var(--highlight);
+  border-top: 1px solid var(--highlight);
   border-bottom: 3px solid var(--darker-background);
   box-sizing: border-box;
+  border-radius: 4px;
+  margin: 0em;
+  display: inline-block;
 }
 .nav__wrapper {
   margin: 2px 0 3px 0;
@@ -135,6 +138,40 @@ h2 {
   padding: 1em;
   border-radius: 2em;
   margin: 0 auto 0 auto;
+}
+.recent-report {
+  margin: 1em;
+  line-height: 1.5;
+}
+.recent-reports h3 {
+  border-bottom: 1px solid var(--accent);
+}
+.recent-reports {
+  background-color: var(--light-background);
+  margin: 0;
+  min-width: 320px;
+  max-width: 900x;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2em;
+}
+.indented-top {
+  padding-top: 2em;
+}
+.indented {
+  padding-left: 2em;
+}
+.single-report__wrapper h3 {
+  border-bottom: 1px solid var(--accent);
+}
+.single-report__wrapper {
+  background-color: var(--light-background);
+  margin: 0;
+  min-width: 320px;
+  max-width: 450px;
+  width: 50%;
+  box-sizing: border-box;
+  padding: 2em;
 }
 .single__wrapper {
   background-color: var(--light-background);

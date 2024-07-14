@@ -14,12 +14,13 @@ require_once realpath("../config.php");
 
 require_once realpath("../db_connect.php");
 
-$sql = "SELECT tr.*, f.name AS feature_name,
-        COALESCE(tr.title, 'Untitled') AS report_title
-        FROM trail_reports tr
-        INNER JOIN features f ON tr.feature_id = f.id
-        ORDER BY tr.created_at DESC
-        LIMIT 1;";
+$sql = "SELECT tr.*, f.name AS feature_name, 
+       COALESCE(tr.title, 'Untitled') AS report_title, u.username
+  FROM trail_reports tr
+  INNER JOIN features f ON tr.feature_id = f.id
+  INNER JOIN users u ON tr.user_id = u.user_id
+  ORDER BY tr.created_at DESC
+  LIMIT 6;";
 
 
 if ($mysqli->connect_error) {
@@ -33,22 +34,55 @@ if (!$result) {
     exit;
 }
 
-if ($result->num_rows === 1) {
+if ($result->num_rows >= 1) {
     $report = $result->fetch_assoc();
+    $ratings = array_flip(OVERALL_RATINGS);
+
     ?>
 
-    <div class="single">
-        <h3>Latest Report: <?php echo $report['report_title']; ?></h3>
-        <p><strong>Trail Feature:</strong> <?php echo $report['feature_name']; ?></p>
-        <p><strong>Rating:</strong> <?php echo $report['rating']; ?></p>
-        <p><?php echo nl2br($report['summary']); ?></p>
-        <p><i>Submitted on: <?php echo $report['created_at']; ?></i></p>
+    <div class="single-report__wrapper">
+        <h3>Latest Report</h3>
+        <p><strong>Trail Survey:</strong> <?php echo $report['feature_name']; ?></p>
+
+        <p><strong>Title:</strong> <?php echo $report['report_title']; ?></p>
+        <p><strong>Submitted by:</strong> <?php echo $report['username']; ?></p>
+        <p><strong>Rating:</strong> <?php echo $ratings[$report['rating']]; ?></p>
+        <p><strong>Report:</strong></p>
+
+        <p class="indented"><?php echo nl2br($report['summary']); ?></p>
+        <p class="indented-top"><i>Submitted on: <?php echo $report['created_at']; ?></i></p>
     </div>
 
     <?php
 } else {
     echo "<p>No recent reports found.</p>";
 }
+?>
+
+<div class="recent-reports">
+    <h3>Recent Reports</h3>
+
+    <?php
+    if ($result->num_rows > 1) { // Check if there are more than 1 report
+        $result->data_seek(1); // Move the pointer to the second row (skipping the first)
+    
+        while ($recent_report = $result->fetch_assoc()) {
+            ?>
+
+            <div class="recent-report">
+                <a href="#"><?php echo $recent_report['report_title']; ?></a> -
+                <?php echo $recent_report['feature_name']; ?>
+            </div>
+
+            <?php
+        }
+    } else {
+        echo "<p>No recent reports found.</p>";
+    }
+    ?>
+</div>
+<?php
+
 
 $mysqli->close();
 

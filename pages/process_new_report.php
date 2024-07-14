@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userId = (int) mysqli_real_escape_string($mysqli, trim($_POST['user_id'])); // Get user ID
     $featureId = (int) mysqli_real_escape_string($mysqli, trim($_POST['feature']));
     $rating = (int) mysqli_real_escape_string($mysqli, trim($_POST['rating']));
-    $summary = mysqli_real_escape_string($mysqli, trim($_POST['summary']));
+    $summary = trim($_POST['summary']);
     $title = mysqli_real_escape_string($mysqli, trim($_POST['title'])); // Get the title
 
     // Basic validation (You can improve this)
@@ -44,9 +44,10 @@ mysqli_close($mysqli);
         <p style="color: red;"><?= $errorMessage ?></p>
     <?php elseif (!empty($successMessage)): ?>
         <p style="color: green;"><?= $successMessage ?></p>
+        <h2>Thank you for submitting your trail report!</h2>
+
     <?php endif; ?>
 
-    <h2>Thank you for submitting your trail report!</h2>
 </main>
 
 </body>
