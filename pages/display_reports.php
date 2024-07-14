@@ -1,3 +1,4 @@
+
 <?php
 
 $page_title = "Trail Reports";
@@ -12,7 +13,7 @@ require_once realpath("../../db_connect.php");
 
 echo "<h2>Trail Reports</h2>";
 
-// Write the query to select all reports with user information
+// Write the query to select all reports with user information and add report ID
 $sql = "SELECT tr.*, f.name AS feature_name, u.username
 FROM trail_reports tr
 INNER JOIN features f ON tr.feature_id = f.id
@@ -22,47 +23,50 @@ $result = mysqli_query($mysqli, $sql);
 
 // Check for errors
 if (!$result) {
-    echo "Error: " . mysqli_error($mysqli);
-    exit;
+  echo "Error: " . mysqli_error($mysqli);
+  exit;
 }
 
 // Check if there are any reports
 if (mysqli_num_rows($result) === 0) {
-    echo "<p>There are currently no trail reports.</p>";
+  echo "<p>There are currently no trail reports.</p>";
 } else {
 
-    // Start the HTML table
-    echo "<table>";
+  // Start the HTML table
+  echo "<table>";
 
-    // Create table headers
+  // Create table headers with report ID
+  echo "<tr>";
+  echo "<th>Report ID</th>";  // Added header for report ID
+  echo "<th>Submitted By</th>";
+  echo "<th>Trail Name</th>";
+  echo "<th>Rating</th>";
+  echo "<th>Summary</th>";
+  // Add a header for date submitted if needed
+  echo "<th>Date Submitted</th>";
+  echo "</tr>";
+
+  // Process results and display data in table rows with report ID
+  while ($row = mysqli_fetch_assoc($result)) {
+
+    $report_id = $row['id'];  // Get report ID
+    $username = $row['username'];
+    $feature_name = $row['feature_name'];
+    $rating = $row['rating'];
+    $summary = $row['summary'];
+
     echo "<tr>";
-    echo "<th>Submitted By</th>";
-    echo "<th>Trail Name</th>";
-    echo "<th>Rating</th>";
-    echo "<th>Summary</th>";
-    // Add a header for date submitted if needed
-    echo "<th>Date Submitted</th>";
+    echo "<td>" . $report_id . "</td>";  // Display report ID
+    echo "<td>" . $username . "</td>";
+    echo "<td>" . $feature_name . "</td>";
+    echo "<td>" . $rating . "</td>";
+    echo "<td>" . $summary . "</td>";
+    // Add a table cell for date submitted if included
+    echo "<td>" . date("Y-m-d", strtotime($row['created_at'])) . "</td>";
     echo "</tr>";
+  }
 
-    // Process results and display data in table rows
-    while ($row = mysqli_fetch_assoc($result)) {
-
-        $username = $row['username'];
-        $feature_name = $row['feature_name'];
-        $rating = $row['rating'];
-        $summary = $row['summary'];
-
-        echo "<tr>";
-        echo "<td>" . $username . "</td>";
-        echo "<td>" . $feature_name . "</td>";
-        echo "<td>" . $rating . "</td>";
-        echo "<td>" . $summary . "</td>";
-        // Add a table cell for date submitted if included
-        echo "<td>" . date("Y-m-d", strtotime($row['created_at'])) . "</td>";
-        echo "</tr>";
-    }
-
-    echo "</table>";
+  echo "</table>";
 }
 
 mysqli_close($mysqli);

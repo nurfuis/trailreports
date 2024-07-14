@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 mysqli_close($mysqli);
 
 if (!empty($errorMessage)) {
-  echo "<p style='color: red;'>$errorMessage</p>";
+  echo "<p class='alert'>$errorMessage</p>";
   include realpath("../components/sign_in_form.inc");
 
 } else if (!empty($successMessage)) {

@@ -15,6 +15,11 @@ if (!$resultFeatures) {
 <form action="process_new_report.php" method="post">
     <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 
+    <label for="title">Report Title:</label><br><br>
+    <input type="text" name="title" id="title" placeholder="Enter a descriptive title for your report"><br><br>
+
+
+
     <label for="feature">Select Trail:</label><br><br>
     <select name="feature" id="feature">
         <option value="">-- Select Trail --</option>

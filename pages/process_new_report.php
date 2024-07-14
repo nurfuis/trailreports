@@ -13,16 +13,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $featureId = (int) mysqli_real_escape_string($mysqli, trim($_POST['feature']));
     $rating = (int) mysqli_real_escape_string($mysqli, trim($_POST['rating']));
     $summary = mysqli_real_escape_string($mysqli, trim($_POST['summary']));
+    $title = mysqli_real_escape_string($mysqli, trim($_POST['title'])); // Get the title
 
     // Basic validation (You can improve this)
-    if (empty($featureId) || empty($rating) || empty($summary)) {
+    if (empty($featureId) || empty($rating) || empty($summary) || empty($title)) {
         $errorMessage = "Please fill out all required fields.";
     } else {
 
         // Prepare and execute insert query
-        $sql = "INSERT INTO trail_reports (feature_id, user_id, rating, summary) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO trail_reports (feature_id, user_id, rating, summary, title) VALUES (?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($mysqli, $sql);
-        mysqli_stmt_bind_param($stmt, "iiis", $featureId, $userId, $rating, $summary);
+        mysqli_stmt_bind_param($stmt, "iiiss", $featureId, $userId, $rating, $summary, $title); // Bind title parameter
 
         if (mysqli_stmt_execute($stmt)) {
             $successMessage = "Trail report submitted successfully!";

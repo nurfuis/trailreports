@@ -28,7 +28,7 @@ if (!isset($_SESSION['user_id'])) {
 </div>
 <div class="regular-padding">
   <form>
-    <button type="button" onclick="skipVerification()">Skip Verification</button>
+    <button type="button" id="skip-button" onclick="skipVerification()">Skip Verification</button>
 
   </form>
 
@@ -39,11 +39,14 @@ if (!isset($_SESSION['user_id'])) {
       to continue?
     </p>
     <button onclick="continueWithoutEmail()">Continue (Limited Access)</button>
+    <br><br>
   </div>
 </div>
 <script>
   function skipVerification() {
     document.getElementById("skip-verification-alert").style.display = "block";
+    document.getElementById("skip-button").style.display = "none";
+
   }
 
   function continueWithoutEmail() {

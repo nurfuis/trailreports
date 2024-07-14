@@ -65,7 +65,7 @@ form {
 .alert {
   color: var(--highlight);
   display: block;
-  margin: 2em auto 2em auto;
+  margin: 1em auto 0em auto;
 }
 
 .topo_map__link--image {
@@ -86,37 +86,46 @@ h2 {
   margin: 0.5em;
 }
 .header__wrapper p {
-  background-color: var(--accent);
-  padding: 1em;
+  background-color: var(--darker-background);
+  text-align: justify;
+  text-indent: 2em;
+  padding: 1em 6em 2em 2em;
+  font-weight: 400;
+  line-height: 2;
 }
 .header__wrapper {
-  background-color: var(--dark-background);
+  background-color: var(--darker-background);
   border-radius: 0em;
   border: var(--darker-background);
   color: var(--light-background);
-  grid-area: header;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  background-image: url("../images/photo-header.png");
 }
-.nav__wrapper a {
-  line-height: 2;
-}
+
 .regular-padding {
   padding: 0.5em;
 }
+.nav__wrapper a {
+  line-height: 2;
+  padding: 0.5em 1.25em 0.5em 1.25em;
+  text-decoration: none;
+  border-right: 1px solid var(--accent);
+  border-top: 2px solid var(--highlight);
+  border-bottom: 3px solid var(--darker-background);
+  box-sizing: border-box;
+}
 .nav__wrapper {
-  grid-area: nav;
+  margin: 2px 0 3px 0;
 }
 
 .main__wrapper {
   background-color: var(--light-background);
   border-radius: 0em;
   margin: 0 auto 0 auto;
-  min-width: 320px;
-  max-width: 640px;
-  display: grid;
-  grid-template-areas:
-    "nav"
-    "header"
-    "map";
+  min-width: 360px;
+  max-width: 900px;
 }
 .wide__wrapper {
   font-family: "K2D", sans-serif;
