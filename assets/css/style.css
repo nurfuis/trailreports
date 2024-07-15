@@ -253,6 +253,9 @@ header::after {
   white-space: wrap;
   min-width: 200px;
 }
+.sign-in p {
+  border: 1px dashed var(--accent);
+}
 .sign-in a {
   font-weight: 500;
 }
