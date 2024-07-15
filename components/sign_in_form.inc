@@ -9,10 +9,10 @@
     <input type="checkbox" id="showPassword">
     <label for="showPassword">Show Password</label><br><br>
 
-    <input type="submit" value="Log in"><br><br>
+    <input type="submit" value="Sign in"><br><br>
   </form>
   <form method="post" action="/pages/process_email_login.php">
-    <p><b>OR</b> Sign in with a link sent to your email address:</p>
+    <p><b>OR</b> have a log in link sent to your email address:</p>
     <label for="email">Email Address:</label><br>
     <input type="email" autocomplete="email" id="email" name="email" placeholder="Enter email" required><br><br>
     <input type="submit" value="Send Link"><br><br>
