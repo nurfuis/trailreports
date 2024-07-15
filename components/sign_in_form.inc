@@ -12,7 +12,7 @@
     <input type="submit" value="Sign in"><br><br>
   </form>
   <form method="post" action="/pages/process_email_login.php">
-    <p><b>OR</b> have a log in link sent to your email address:</p>
+    <p><b>OR</b> have a secure link sent to your inbox:</p>
     <label for="email">Email Address:</label><br>
     <input type="email" autocomplete="email" id="email" name="email" placeholder="Enter email" required><br><br>
     <input type="submit" value="Send Link"><br><br>
