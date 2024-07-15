@@ -250,5 +250,5 @@ header::after {
   white-space: nowrap;
 }
 .sign-in {
-  white-space: nowrap;
+  white-space: wrap;
 }
