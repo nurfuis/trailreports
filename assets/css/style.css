@@ -85,6 +85,10 @@ form {
 h2 {
   margin: 0.5em;
 }
+.header__wrapper a {
+  text-decoration: none;
+  color: var(--light-background);
+}
 .header__wrapper p {
   background-color: var(--darker-background);
   text-align: justify;
@@ -100,27 +104,13 @@ h2 {
   color: var(--light-background);
   background-repeat: no-repeat;
   background-position: center;
-
+  max-width: 900px;
+  box-sizing: border-box;
   background-image: url("../images/photo-header.png");
 }
 
 .regular-padding {
   padding: 0.5em;
-}
-.nav__wrapper a {
-  line-height: 2;
-  padding: 0.5em 1.25em 0.5em 1.25em;
-  text-decoration: none;
-  border-right: 1px solid var(--accent);
-  border-top: 1px solid var(--highlight);
-  border-bottom: 3px solid var(--darker-background);
-  box-sizing: border-box;
-  border-radius: 4px;
-  margin: 0em;
-  display: inline-block;
-}
-.nav__wrapper {
-  margin: 2px 0 3px 0;
 }
 
 .main__wrapper {
@@ -203,4 +193,62 @@ h2 {
   min-height: 150px;
   height: 35vh;
   resize: vertical;
+}
+.header {
+  background-color: #f3f3f3;
+  display: flex;
+  align-items: baseline;
+  padding: 0.5rem;
+  gap: 1rem;
+}
+header::after {
+  clear: both;
+}
+
+.link {
+  background: none;
+  border: none;
+  text-decoration: none;
+  color: #777;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+.dropdown.active > .link,
+.link:hover {
+  color: black;
+}
+.link:hover {
+  color: black;
+}
+.dropdown {
+  position: relative;
+}
+.dropdown-menu {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 0.25rem);
+  background-color: var(--light-background);
+  padding: 0.75em;
+  border-radius: 0.25em;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+  pointer-events: none;
+}
+.dropdown.active > .link + .dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+.link-grid {
+  display: grid;
+  grid-template-columns: 1, max-content;
+  gap: 2em;
+  white-space: nowrap;
+}
+.sign-in {
+  white-space: nowrap;
 }

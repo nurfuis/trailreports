@@ -1,6 +1,7 @@
 <?php
-$page_title = "Keep Sur Wild";
+$page_title = "Trail Reports for Big Sur, California";
 $page_css = "./assets/css/style.css";
+session_start();
 
 include_once realpath("./components/head.inc");
 
@@ -13,6 +14,7 @@ include_once realpath("./components/header.inc");
 require_once realpath("../config.php");
 
 require_once realpath("../db_connect.php");
+
 
 $sql = "SELECT tr.*, f.name AS feature_name, 
        COALESCE(tr.title, 'Untitled') AS report_title, u.username
@@ -86,14 +88,10 @@ if ($result->num_rows >= 1) {
 
 $mysqli->close();
 
-// session_start();
-// if (isset($_SESSION['user_id'])) {
-// $username = $_SESSION['username'];
-// include_once realpath("./components/sign_out_form.inc");
-// } else {
-// include_once realpath("./components/sign_in_form.inc");
-// }
-include_once realpath("./components/links.inc");
+
+
+
+
 
 include_once realpath("./components/tail.inc");
 ?>
