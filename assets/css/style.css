@@ -252,3 +252,6 @@ header::after {
 .sign-in {
   white-space: wrap;
 }
+.sign-in a {
+  font-weight: 500;
+}
