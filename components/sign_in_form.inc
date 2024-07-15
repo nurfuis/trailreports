@@ -2,9 +2,9 @@
   <h3>User Sign In</h3>
 
   <form method="post" action="/pages/process_sign_in.php">
-    <label for="username">Username:</label>
+    <label for="username">Username:</label><br>
     <input type="text" autocomplete="username" id="username" name="username" required><br><br>
-    <label for="password">Password:</label>
+    <label for="password">Password:</label><br>
     <input type="password" autocomplete="current-password" id="password" name="password" required><br><br>
     <input type="checkbox" id="showPassword">
     <label for="showPassword">Show Password</label><br><br>
@@ -13,7 +13,7 @@
   </form>
   <form method="post" action="/pages/process_email_login.php">
     <p><b>OR</b> Sign in with a link sent to your email address:</p>
-    <label for="email">Email Address:</label>
+    <label for="email">Email Address:</label><br>
     <input type="email" autocomplete="email" id="email" name="email" placeholder="Enter email" required><br><br>
     <input type="submit" value="Send Link"><br><br>
   </form>

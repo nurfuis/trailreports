@@ -1,15 +1,4 @@
 <div class="header">
-
-  <div class="dropdown" data-dropdown>
-    <button class="link" data-dropdown-button>Menu</button>
-    <div class="dropdown-menu link-grid">
-      <a href="./pages/display_reports.php" class="link">View Trail Reports</a>
-      <a href="./pages/add_report.php" class="link">Submit Trail Reports</a>
-      <a href="./pages/features.php" class="link">Trail Index</a>
-      <a href="./pages/topo-map.html" class="link">Topo Map</a>
-    </div>
-  </div>
-
   <div class="dropdown" data-dropdown>
     <button class="link" data-dropdown-button>Login</button>
     <div class="dropdown-menu sign-in">
@@ -23,6 +12,17 @@
       ?>
     </div>
   </div>
+  <div class="dropdown" data-dropdown>
+    <button class="link" data-dropdown-button>Menu</button>
+    <div class="dropdown-menu link-grid">
+      <a href="./pages/display_reports.php" class="link">View Trail Reports</a>
+      <a href="./pages/add_report.php" class="link">Submit Trail Reports</a>
+      <a href="./pages/features.php" class="link">Trail Index</a>
+      <a href="./pages/topo-map.html" class="link">Topo Map</a>
+    </div>
+  </div>
+
+
   <div class="dropdown" data-dropdown>
     <button class="link" data-dropdown-button>About</button>
   </div>
