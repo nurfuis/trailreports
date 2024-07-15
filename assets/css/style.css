@@ -26,7 +26,7 @@ p {
   font-style: normal;
 }
 form {
-  padding-bottom: 1rem;
+  padding: 0;
 }
 .show {
   display: block;
@@ -81,33 +81,6 @@ form {
 .map__wrapper {
   grid-area: map;
 }
-.header__wrapper h1,
-h2 {
-  margin: 0.5rem;
-}
-.header__wrapper a {
-  text-decoration: none;
-  color: var(--light-background);
-}
-.header__wrapper p {
-  background-color: var(--darker-background);
-  text-align: justify;
-  text-indent: 2rem;
-  padding: 1rem 6rem 2rem 2rem;
-  font-weight: 400;
-  line-height: 2;
-}
-.header__wrapper {
-  background-color: var(--darker-background);
-  border-radius: 0rem;
-  border: var(--darker-background);
-  color: var(--light-background);
-  background-repeat: no-repeat;
-  background-position: center;
-  max-width: 900px;
-  box-sizing: border-box;
-  background-image: url("../images/photo-header.png");
-}
 
 .regular-padding {
   padding: 0.5rem;
@@ -151,10 +124,11 @@ h2 {
 .indented {
   padding-left: 2rem;
 }
-.single-report__wrapper h3 {
+
+.single-report h3 {
   border-bottom: 1px solid var(--accent);
 }
-.single-report__wrapper {
+.single-report {
   background-color: var(--light-background);
   margin: 0;
   min-width: 320px;
@@ -259,4 +233,32 @@ header::after {
 }
 .sign-in a {
   font-weight: 500;
+}
+
+.main__intro h1,
+h2 {
+  margin: 0.5rem;
+}
+.main__intro a {
+  text-decoration: none;
+  color: var(--light-background);
+}
+.main__intro p {
+  background-color: var(--darker-background);
+  text-align: justify;
+  text-indent: 2rem;
+  padding: 1rem 6rem 2rem 2rem;
+  font-weight: 400;
+  line-height: 2;
+}
+.main__intro {
+  background-color: var(--darker-background);
+  border-radius: 0rem;
+  border: var(--darker-background);
+  color: var(--light-background);
+  background-repeat: no-repeat;
+  background-position: center;
+  max-width: 900px;
+  box-sizing: border-box;
+  background-image: url("../images/photo-header.png");
 }
