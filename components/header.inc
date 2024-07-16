@@ -1,5 +1,5 @@
 <div class="header">
-  
+
   <div class="dropdown" data-dropdown>
     <button class="link" data-dropdown-button>Login</button>
     <div class="dropdown-menu sign-in">
