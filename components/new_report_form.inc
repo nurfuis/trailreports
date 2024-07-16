@@ -10,13 +10,14 @@ if (!$resultFeatures) {
     die("Error retrieving features: " . $mysqli->error);
 }
 ?>
+<div class="trail-report__form">
 <h1>New Trail Report</h1>
 
 <form action="process_new_report.php" method="post">
     <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 
     <label for="title">Report Title:</label><br><br>
-    <input type="text" name="title" id="title" placeholder="Enter a descriptive title for your report"><br><br>
+    <input type="text" name="title" id="title" placeholder="Enter a descriptive title"><br><br>
 
 
 
@@ -76,7 +77,7 @@ if (!$resultFeatures) {
     <button type="submit">Submit Report</button>
 
 </form>
-
+</div>
 <?php
 $mysqli->close();
 ?>

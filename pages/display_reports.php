@@ -1,75 +1,70 @@
-
 <?php
 
 $page_title = "Trail Reports";
 $page_css = "../assets/css/style.css";
 
 session_start();
+require_once realpath("../../config.php");
 
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");
 
 require_once realpath("../../db_connect.php");
+?>
+<div class="trail-reports">
+  <h2>Trail Reports</h2>
 
-echo "<h2>Trail Reports</h2>";
-
-// Write the query to select all reports with user information and add report ID
-$sql = "SELECT tr.*, f.name AS feature_name, u.username
+  <?php
+  // Write the query to select all reports with user information and add report ID
+  $sql = "SELECT tr.*, f.name AS trail_name, u.username
 FROM trail_reports tr
 INNER JOIN features f ON tr.feature_id = f.id
 INNER JOIN users u ON tr.user_id = u.user_id;";
 
-$result = mysqli_query($mysqli, $sql);
+  $result = mysqli_query($mysqli, $sql);
+  $ratings = array_flip(OVERALL_RATINGS);
 
-// Check for errors
-if (!$result) {
-  echo "Error: " . mysqli_error($mysqli);
-  exit;
-}
-
-// Check if there are any reports
-if (mysqli_num_rows($result) === 0) {
-  echo "<p>There are currently no trail reports.</p>";
-} else {
-
-  // Start the HTML table
-  echo "<table>";
-
-  // Create table headers with report ID
-  echo "<tr>";
-  echo "<th>Report ID</th>";  // Added header for report ID
-  echo "<th>Submitted By</th>";
-  echo "<th>Trail Name</th>";
-  echo "<th>Rating</th>";
-  echo "<th>Summary</th>";
-  // Add a header for date submitted if needed
-  echo "<th>Date Submitted</th>";
-  echo "</tr>";
-
-  // Process results and display data in table rows with report ID
-  while ($row = mysqli_fetch_assoc($result)) {
-
-    $report_id = $row['id'];  // Get report ID
-    $username = $row['username'];
-    $feature_name = $row['feature_name'];
-    $rating = $row['rating'];
-    $summary = $row['summary'];
-
-    echo "<tr>";
-    echo "<td>" . $report_id . "</td>";  // Display report ID
-    echo "<td>" . $username . "</td>";
-    echo "<td>" . $feature_name . "</td>";
-    echo "<td>" . $rating . "</td>";
-    echo "<td>" . $summary . "</td>";
-    // Add a table cell for date submitted if included
-    echo "<td>" . date("Y-m-d", strtotime($row['created_at'])) . "</td>";
-    echo "</tr>";
+  // Check for errors
+  if (!$result) {
+    echo "Error: " . mysqli_error($mysqli);
+    exit;
   }
 
-  echo "</table>";
-}
+  // Check if there are any reports
+  if (mysqli_num_rows($result) === 0) {
+    echo "<p>There are currently no trail reports.</p>";
+  } else {
 
-mysqli_close($mysqli);
+    // Loop through results and display each report as a separate item
+    while ($report = mysqli_fetch_assoc($result)) {
+      $summary = substr($report['summary'], 0, BLURB_LIMIT) . '...'; // Truncate summary
+  
+      echo "<div class='report-item'>";
+      echo "  <p><a href='./trail_report.php?id=" . $report['id'] . "'>" . $report['trail_name'] . "</a></p>";
+      echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
+      echo "  <p><span>Submitted by:</span> " . $report['username'] . "</p>";
+      echo "  <p><span>Submitted on:</span> " . date("Y-m-d", strtotime($report['created_at'])) . "</p>";
+      $summary = $report['summary'];
 
-include_once realpath("../components/tail.inc");
+      if (strlen($summary) > BLURB_LIMIT) {
+        $summary = substr($summary, 0, BLURB_LIMIT) . '...'; // Truncate and add ellipsis
+        $showReadMore = true; // Flag to indicate truncation
+      } else {
+        $showReadMore = false; // Flag remains false if not truncated
+      }
+      echo "  <p class='indented'>" . nl2br($summary);
+      ;
 
+      if ($showReadMore): ?>
+        <a href="./trail_report.php?id=<?php echo $report['id']; ?>" class="read-more-btn">read more</a>
+      <?php endif;
+      echo "</p>";
+      echo "</div>";
+    }
+  }
+  mysqli_close($mysqli);
+
+  echo "</div>";
+  include_once realpath("../components/tail.inc");
+
+  ?>

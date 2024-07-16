@@ -1,7 +1,15 @@
 <div class="header">
 
   <div class="dropdown" data-dropdown>
-    <button class="link" data-dropdown-button>Login</button>
+    <button class="link" data-dropdown-button>
+      <?php
+      if (isset($_SESSION['username'])) {
+        echo $_SESSION['username'];
+      } else {
+        echo "Login";
+      }
+      ?>
+    </button>
     <div class="dropdown-menu sign-in">
       <?php
       if (isset($_SESSION['user_id'])) {
@@ -13,6 +21,7 @@
       ?>
     </div>
   </div>
+
   <div class="dropdown" data-dropdown>
     <button class="link" data-dropdown-button>Trails</button>
     <div class="dropdown-menu link-grid">

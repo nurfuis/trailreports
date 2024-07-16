@@ -45,14 +45,30 @@ if ($result->num_rows >= 1) {
 
     <div class="single-report">
         <h3>Latest Report</h3>
-        <p><strong>Trail Survey:</strong> <?php echo $report['feature_name']; ?></p>
-
+        <p><strong>Trail:</strong> <?php echo $report['feature_name']; ?></p>
         <p><strong>Title:</strong> <?php echo $report['report_title']; ?></p>
         <p><strong>Submitted by:</strong> <?php echo $report['username']; ?></p>
         <p><strong>Rating:</strong> <?php echo $ratings[$report['rating']]; ?></p>
         <p><strong>Report:</strong></p>
 
-        <p class="indented"><?php echo nl2br($report['summary']); ?></p>
+        <?php
+        $summary = $report['summary'];
+
+        if (strlen($summary) > SUMMARY_LIMIT) {
+            $summary = substr($summary, 0, SUMMARY_LIMIT) . '...'; // Truncate and add ellipsis
+            $showReadMore = true; // Flag to indicate truncation
+        } else {
+            $showReadMore = false; // Flag remains false if not truncated
+        }
+
+        ?>
+        <p class="indented"><?php echo nl2br($summary); ?>
+
+            <?php if ($showReadMore): ?>
+                <a href="./pages/trail_report.php?id=<?php echo $report['id']; ?>" class="read-more-btn">read more</a>
+
+            <?php endif; ?>
+        </p>
         <p class="indented-top light-text"><i>Submitted on: <?php echo $report['created_at']; ?></i></p>
     </div>
 
@@ -71,7 +87,9 @@ if ($result->num_rows >= 1) {
         while ($recent_report = $result->fetch_assoc()) {
             ?>
             <div class="recent-report">
-                <a href="#"><?php echo $recent_report['report_title']; ?></a> -
+                <a
+                    href="./pages/trail_report.php?id=<?php echo $recent_report['id']; ?>"><?php echo $recent_report['report_title']; ?></a>
+                -
                 <?php echo $recent_report['feature_name']; ?>
             </div>
             <?php
