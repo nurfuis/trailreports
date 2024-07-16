@@ -53,9 +53,9 @@ if ($result->num_rows >= 1) {
         <p><strong>Report:</strong></p>
 
         <p class="indented"><?php echo nl2br($report['summary']); ?></p>
-        <p class="indented-top"><i>Submitted on: <?php echo $report['created_at']; ?></i></p>
+        <p class="indented-top light-text"><i>Submitted on: <?php echo $report['created_at']; ?></i></p>
     </div>
-    
+
     <?php
 } else {
     echo "<p>No recent reports found.</p>";

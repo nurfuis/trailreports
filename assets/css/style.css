@@ -1,10 +1,12 @@
 :root {
-  --text: #000080ff;
+  --text: #050709;
+  --text-light: #696969;
   --light-background: #f2f3f4ff;
-  --dark-background: #5a2328;
-  --darker-background: #2a3439;
-  --highlight: #fb4d3d;
+  --dark-background: #3d1410;
+  --darker-background: #002627;
+  --highlight: #d91e18;
   --accent: #57a773;
+  --links: #00008b;
 }
 a:hover {
   color: var(--accent);
@@ -124,7 +126,9 @@ form {
 .indented {
   padding-left: 2rem;
 }
-
+.single-report strong {
+  color: var(--text-light);
+}
 .single-report h3 {
   border-bottom: 1px solid var(--accent);
 }
@@ -169,18 +173,20 @@ form {
   resize: vertical;
 }
 .header {
-  background-color: #f3f3f3;
+  background-color: var(--light-background);
   display: flex;
   align-items: baseline;
   padding: 0.75rem;
   gap: 1rem;
 }
-
+.light-text {
+  color: var(--text-light);
+}
 .link {
   background: none;
   border: none;
   text-decoration: none;
-  color: #777;
+  color: var(--links);
   font-family: inherit;
   font-size: inherit;
   cursor: pointer;

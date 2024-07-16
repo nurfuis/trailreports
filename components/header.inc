@@ -14,11 +14,11 @@
     </div>
   </div>
   <div class="dropdown" data-dropdown>
-    <button class="link" data-dropdown-button>Menu</button>
+    <button class="link" data-dropdown-button>Trails</button>
     <div class="dropdown-menu link-grid">
       <a href="./pages/display_reports.php" class="link">View Trail Reports</a>
-      <a href="./pages/add_report.php" class="link">Submit Trail Reports</a>
-      <a href="./pages/features.php" class="link">Trail Index</a>
+      <a href="./pages/add_report.php" class="link">Submit a Trail Report</a>
+      <a href="./pages/features.php" class="link">Trails Index</a>
       <a href="./pages/topo-map.html" class="link">Topo Map</a>
     </div>
   </div>

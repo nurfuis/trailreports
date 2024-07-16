@@ -83,8 +83,12 @@ if (!empty($errorMessage)) {
   include realpath("../components/sign_in_form.inc");
 
 } else if (!empty($successMessage)) {
-  echo "<p style='color: blue;'>$successMessage</p>";
-  header("Location: $redirect_path?success=true");
+  if (!!$redirect_path) {
+    header("Location: $redirect_path?success=true");
+
+  } else {
+
+  }
 
 }
 
