@@ -225,7 +225,7 @@ header::after {
 }
 .sign-in {
   white-space: wrap;
-  min-width: 200px;
+  min-width: 240px;
 }
 .notice {
   border: 1px dashed var(--accent);
