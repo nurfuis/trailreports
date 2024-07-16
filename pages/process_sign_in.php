@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $username = mysqli_real_escape_string($mysqli, trim($_POST['username']));
   $password = mysqli_real_escape_string($mysqli, trim($_POST['password']));
+  $redirect_path = trim($_POST['currentPagePath']);
 
   $sql = "SELECT user_id, username, password_hash, account_status, login_attempts, last_login_attempt FROM users WHERE username = ?";
   $stmt = mysqli_prepare($mysqli, $sql);
@@ -30,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $currentTime = time();
     $threshold = LOGIN_ATTEMPTS;
     $lockoutTime = LOCKOUT_TIME;
-    
+
     if ($attempts >= $threshold && ($currentTime - $lastAttempt) < $lockoutTime) {
       // account is locked
       $errorMessage = "Your account has been temporarily locked due to multiple failed login attempts. Please try again later.";
@@ -83,6 +84,8 @@ if (!empty($errorMessage)) {
 
 } else if (!empty($successMessage)) {
   echo "<p style='color: blue;'>$successMessage</p>";
+  header("Location: $redirect_path?success=true");
+
 }
 
 include realpath("../components/tail.inc");

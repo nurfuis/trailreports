@@ -1,6 +1,7 @@
 <?php
 $page_title = "Trail Reports for Big Sur, California";
 $page_css = "./assets/css/style.css";
+$currentPagePath = $_SERVER['SCRIPT_NAME'];
 
 session_start();
 

@@ -2,6 +2,7 @@
 
 $page_title = "Add report";
 $page_css = "../assets/css/style.css";
+$currentPagePath = $_SERVER['SCRIPT_NAME'];
 
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/single.inc");
