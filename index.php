@@ -37,6 +37,13 @@ if (!$result) {
 if ($result->num_rows >= 1) {
     $report = $result->fetch_assoc();
     $ratings = array_flip(OVERALL_RATINGS);
+    $summary = $report['summary'];
+    if (strlen($summary) > SUMMARY_LIMIT) {
+        $summary = substr($summary, 0, SUMMARY_LIMIT) . '...';
+        $showReadMore = true;
+    } else {
+        $showReadMore = false;
+    }
     ?>
 
     <div class="single-report">
@@ -46,21 +53,6 @@ if ($result->num_rows >= 1) {
         <p><strong>Submitted by:</strong> <?php echo $report['username']; ?></p>
         <p><strong>Rating:</strong> <?php echo $ratings[$report['rating']]; ?></p>
         <p><strong>Report:</strong></p>
-
-        <?php
-        $summary = $report['summary'];
-        echo "Checkpoint";
-        //     $summary = substr($summary, 0, SUMMARY_LIMIT) . '...';
-        //     $showReadMore = true;
-        // if (strlen($summary) > SUMMARY_LIMIT) {
-        //     $summary = substr($summary, 0, SUMMARY_LIMIT) . '...';
-        //     $showReadMore = true;
-        //     echo "1";
-        // } else {
-        //     $showReadMore = false;
-        //     echo "0";
-        }
-        ?>
         <p class="indented">
             <?php echo nl2br($summary) ?>
             <?php if ($showReadMore): ?>
