@@ -35,12 +35,12 @@
 
   <div class="dropdown" data-dropdown>
     <button class="link" data-dropdown-button>About</button>
+    <div class="dropdown-menu link-grid">
+      <a href="/" class="link">Support Us</a>
+    </div>
   </div>
 
-  <div class="dropdown" data-dropdown>
-    <button class="link" data-dropdown-button>Support Us</ </div>
 
-  </div>
 </div>
 <script>
   document.addEventListener('click', e => {
