@@ -13,13 +13,46 @@ require_once realpath("../../db_connect.php");
 ?>
 <div class="trail-reports">
   <h2>Trail Reports</h2>
-
+  <form action="" method="get"> <label for="sort-by">Sort By:</label>
+    <select name="sort-by" id="sort-by">
+      <option value="recent" selected>Most Recent</option>
+      <option value="oldest">Oldest First</option>
+      <option value="rating_high">Rating (High to Low)</option>
+      <option value="rating_low">Rating (Low to High)</option>
+    </select>
+    <input type="submit" value="Sort">
+  </form>
   <?php
   // Write the query to select all reports with user information and add report ID
+  
+  if (isset($_GET['sort-by'])) {
+    $sort_by = $_GET['sort-by'];
+    switch ($sort_by) {
+      case "recent":
+        $order_by = "tr.created_at DESC"; // Same order as before
+        break;
+      case "oldest":
+        $order_by = "tr.created_at ASC"; // Ascending order for oldest first
+        break;
+      case "rating_high":
+        $order_by = "tr.rating ASC";
+        break;
+      case "rating_low":
+        $order_by = "tr.rating DESC";
+        break;
+      default:
+        $order_by = "tr.created_at DESC"; // Default to recent
+    }
+  } else {
+    $order_by = "tr.created_at DESC"; // Default if no sorting chosen
+  }
+
   $sql = "SELECT tr.*, f.name AS trail_name, u.username
-FROM trail_reports tr
-INNER JOIN features f ON tr.feature_id = f.id
-INNER JOIN users u ON tr.user_id = u.user_id;";
+  FROM trail_reports tr
+  INNER JOIN features f ON tr.feature_id = f.id
+  INNER JOIN users u ON tr.user_id = u.user_id
+  ORDER BY $order_by;";
+
 
   $result = mysqli_query($mysqli, $sql);
   $ratings = array_flip(OVERALL_RATINGS);
@@ -42,7 +75,7 @@ INNER JOIN users u ON tr.user_id = u.user_id;";
       echo "<div class='report-item'>";
       echo "  <h4><a href='./trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a></h4>";
       echo "  <p><span>Trail:</span> " . $report['trail_name'] . "</a></p>";
-      echo "  <p><span>Submitted by:</span> " . $report['username'] . "</p>";
+      echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
 
       echo "  <p><span>Submitted on:</span> " . date("Y-m-d", strtotime($report['created_at'])) . "</p>";
       $summary = $report['summary'];
