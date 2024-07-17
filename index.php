@@ -6,15 +6,11 @@ $currentPagePath = $_SERVER['SCRIPT_NAME'];
 session_start();
 
 require_once realpath("../config.php");
-
 require_once realpath("../db_connect.php");
 
 include_once realpath("./components/head.inc");
-
 include_once realpath("./layouts/main.inc");
-
-include_once realpath("./components/header.inc");
-
+// include_once realpath("./components/header.inc");
 include_once realpath("./components/intro.inc");
 
 // main page
@@ -63,10 +59,8 @@ if ($result->num_rows >= 1) {
 
         ?>
         <p class="indented"><?php echo nl2br($summary); ?>
-
             <?php if ($showReadMore): ?>
                 <a href="./pages/trail_report.php?id=<?php echo $report['id']; ?>" class="read-more-btn">read more</a>
-
             <?php endif; ?>
         </p>
         <p class="indented-top light-text"><i>Submitted on: <?php echo $report['created_at']; ?></i></p>
