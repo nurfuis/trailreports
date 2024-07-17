@@ -4,7 +4,7 @@
 require_once realpath("./db_connect.php");
 
 // Check for connection error
-if (!$mysqli) {
+if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
 
@@ -23,12 +23,6 @@ function generateLoremIpsum($paragraphs = 2, $sentences = 3)
     return strip_tags($response);
 }
 
-// Prepare the insert statement with named parameters
-$sql = "INSERT INTO trail_reports (feature_id, user_id, rating, summary, created_at, title) 
-        VALUES (?, ?, ?, ?, NOW(), ?)";
-
-$stmt = $mysqli->prepare($sql);
-
 // Loop and insert data
 for ($i = 0; $i < $numReports; $i++) {
     $featureId = rand(1, 10); // Replace with logic to choose a valid feature ID
@@ -37,20 +31,19 @@ for ($i = 0; $i < $numReports; $i++) {
     $summary = generateLoremIpsum(); // Generate lorem ipsum summary
     $title = "Report " . ($i + 1); // Set a basic title
 
-    // Bind parameters to the statement
-    $stmt->bindParam(1, $featureId, PDO::PARAM_INT);
-    $stmt->bindParam(2, $userId, PDO::PARAM_INT);
-    $stmt->bindParam(3, $rating, PDO::PARAM_INT);
-    $stmt->bindParam(4, $summary, PDO::PARAM_STR);
-    $stmt->bindParam(5, $title, PDO::PARAM_STR);
+    // Construct the SQL query
+    $sql = "INSERT INTO trail_reports (feature_id, user_id, rating, summary, created_at, title) 
+            VALUES ($featureId, $userId, $rating, '$summary', NOW(), '$title')";
 
-    // Execute the insert query
-    $stmt->execute();
+    // Execute the query
+    if ($mysqli->query($sql) === TRUE) {
+        echo "Report " . ($i + 1) . " inserted successfully.\n";
+    } else {
+        echo "Error inserting report: " . $mysqli->error . "\n";
+    }
 }
 
-// Close the connection (assuming it's closed in db_connect.php)
-// $mysqli = null; // If not closed in db_connect.php, uncomment this line
-
-echo "Successfully inserted $numReports trail reports.";
+// Close the connection
+$mysqli->close();
 
 ?>
