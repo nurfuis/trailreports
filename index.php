@@ -38,6 +38,7 @@ if ($result->num_rows >= 1) {
     $report = $result->fetch_assoc();
     $ratings = array_flip(OVERALL_RATINGS);
     $summary = $report['summary'];
+    
     if (strlen($summary) > SUMMARY_LIMIT) {
         $summary = substr($summary, 0, SUMMARY_LIMIT) . '...';
         $showReadMore = true;
