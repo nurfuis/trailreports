@@ -4,7 +4,13 @@
     <button class="link <?php echo isset($_SESSION['username']) ? 'user-btn' : ''; ?>" data-dropdown-button>
       <?php
       if (isset($_SESSION['username'])) {
-        echo $_SESSION['username'];
+        $username = $_SESSION['username'];
+        $short_username = substr($username, 0, 6);
+        echo $short_username;
+
+        if (strlen($username) > 6) {
+          echo "...";
+        }
       } else {
         echo "Login";
       }
