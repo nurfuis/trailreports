@@ -10,7 +10,7 @@ require_once realpath("../db_connect.php");
 
 include_once realpath("./components/head.inc");
 include_once realpath("./layouts/main.inc");
-// include_once realpath("./components/header.inc");
+include_once realpath("./components/header.inc");
 include_once realpath("./components/intro.inc");
 
 // main page
@@ -49,12 +49,12 @@ if ($result->num_rows >= 1) {
 
         <?php
         $summary = $report['summary'];
-
+        echo $summary;
         if (strlen($summary) > SUMMARY_LIMIT) {
-            $summary = substr($summary, 0, SUMMARY_LIMIT) . '...'; // Truncate and add ellipsis
-            $showReadMore = true; // Flag to indicate truncation
+            $summary = substr($summary, 0, SUMMARY_LIMIT) . '...';
+            $showReadMore = true;
         } else {
-            $showReadMore = false; // Flag remains false if not truncated
+            $showReadMore = false;
         }
 
         ?>
