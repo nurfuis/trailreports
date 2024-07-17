@@ -124,6 +124,7 @@ form {
 }
 .indented {
   padding-left: 2rem;
+  overflow: hidden;
 }
 .single-report strong {
   color: var(--text-light);
