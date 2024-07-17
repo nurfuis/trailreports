@@ -50,8 +50,8 @@ if ($result->num_rows >= 1) {
         <?php
         $summary = $report['summary'];
         echo "Checkpoint";
-            $summary = substr($summary, 0, SUMMARY_LIMIT) . '...';
-            $showReadMore = true;
+        //     $summary = substr($summary, 0, SUMMARY_LIMIT) . '...';
+        //     $showReadMore = true;
         // if (strlen($summary) > SUMMARY_LIMIT) {
         //     $summary = substr($summary, 0, SUMMARY_LIMIT) . '...';
         //     $showReadMore = true;
