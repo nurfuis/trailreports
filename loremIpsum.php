@@ -26,7 +26,7 @@ function generateLoremIpsum($paragraphs = 2, $sentences = 3)
 // Loop and insert data
 for ($i = 0; $i < $numReports; $i++) {
     $featureId = rand(1, 10); // Replace with logic to choose a valid feature ID
-    $userId = rand(1, 20); // Replace with logic to choose a valid user ID
+    $userId = rand(1, 5); // Replace with logic to choose a valid user ID
     $rating = rand(1, 5); // Generate random rating between 1 and 5
     $summary = generateLoremIpsum(); // Generate lorem ipsum summary
     $title = "Report " . ($i + 1); // Set a basic title
