@@ -5,6 +5,7 @@ $currentPagePath = $_SERVER['SCRIPT_NAME'];
 
 session_start();
 
+// Remember to update config and db_connect on the deployment server
 require_once realpath("../config.php");
 require_once realpath("../db_connect.php");
 
@@ -38,7 +39,7 @@ if ($result->num_rows >= 1) {
     $report = $result->fetch_assoc();
     $ratings = array_flip(OVERALL_RATINGS);
     $summary = $report['summary'];
-    
+
     if (strlen($summary) > SUMMARY_LIMIT) {
         $summary = substr($summary, 0, SUMMARY_LIMIT) . '...';
         $showReadMore = true;
