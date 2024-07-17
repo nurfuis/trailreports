@@ -1,8 +1,10 @@
 <?php
 
+// Include your database connection file
 require_once realpath("./db_connect.php");
 
-if ($mysqli->connect_error) {
+// Check for connection error
+if (!$conn) {
     die("Connection failed: " . $mysqli->connect_error);
 }
 
@@ -21,11 +23,11 @@ function generateLoremIpsum($paragraphs = 2, $sentences = 3)
     return strip_tags($response);
 }
 
-// Prepare the insert statement
+// Prepare the insert statement with named parameters
 $sql = "INSERT INTO trail_reports (feature_id, user_id, rating, summary, created_at, title) 
-        VALUES (:feature_id, :user_id, :rating, :summary, NOW(), :title)";
+        VALUES (?, ?, ?, ?, NOW(), ?)";
 
-$stmt = $mysqli->prepare($sql);
+$stmt = $conn->prepare($sql);
 
 // Loop and insert data
 for ($i = 0; $i < $numReports; $i++) {
@@ -36,18 +38,18 @@ for ($i = 0; $i < $numReports; $i++) {
     $title = "Report " . ($i + 1); // Set a basic title
 
     // Bind parameters to the statement
-    $stmt->bindParam(':feature_id', $featureId);
-    $stmt->bindParam(':user_id', $userId);
-    $stmt->bindParam(':rating', $rating);
-    $stmt->bindParam(':summary', $summary);
-    $stmt->bindParam(':title', $title);
+    $stmt->bindParam(1, $featureId, PDO::PARAM_INT);
+    $stmt->bindParam(2, $userId, PDO::PARAM_INT);
+    $stmt->bindParam(3, $rating, PDO::PARAM_INT);
+    $stmt->bindParam(4, $summary, PDO::PARAM_STR);
+    $stmt->bindParam(5, $title, PDO::PARAM_STR);
 
     // Execute the insert query
     $stmt->execute();
 }
 
-// Close the connection
-$mysqli = null;
+// Close the connection (assuming it's closed in db_connect.php)
+// $conn = null; // If not closed in db_connect.php, uncomment this line
 
 echo "Successfully inserted $numReports trail reports.";
 
