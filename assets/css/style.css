@@ -30,6 +30,7 @@ p {
 form {
   padding: 0;
 }
+
 .show {
   display: block;
 }
@@ -171,6 +172,7 @@ form {
   height: 35vh;
   resize: vertical;
 }
+
 .header {
   background-color: var(--light-background);
   display: flex;
@@ -328,6 +330,28 @@ h2 {
 }
 .features {
   padding: 0.25rem;
+}
+.trail-reports form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.trail-reports form label {
+  display: inline-block;
+  margin-right: 10px;
+  width: 120px;
+}
+.user-btn {
+  color: var(--text-light);
+}
+select,
+input {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 10px;
 }
 @media (min-width: 768px) {
   .report-list {

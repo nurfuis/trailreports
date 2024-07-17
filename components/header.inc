@@ -1,7 +1,7 @@
 <div class="header">
 
   <div class="dropdown" data-dropdown>
-    <button class="link" data-dropdown-button>
+    <button class="link <?php echo isset($_SESSION['username']) ? 'user-btn' : ''; ?>" data-dropdown-button>
       <?php
       if (isset($_SESSION['username'])) {
         echo $_SESSION['username'];
