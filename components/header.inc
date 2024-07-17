@@ -27,8 +27,8 @@
     <div class="dropdown-menu link-grid">
       <a href="./pages/display_reports.php" class="link">View Trail Reports</a>
       <a href="./pages/add_report.php" class="link">Submit a Trail Report</a>
-      <a href="./pages/features.php" class="link">Trails Index</a>
-      <a href="./pages/topo-map.html" class="link">Topo Map</a>
+      <a href="./pages/features.php" class="link hidden">Trails Index</a>
+      <a href="./pages/topo-map.html" class="link hidden">Topo Map</a>
     </div>
   </div>
 
@@ -37,6 +37,9 @@
     <button class="link" data-dropdown-button>About</button>
     <div class="dropdown-menu link-grid">
       <a href="/" class="link">Support Us</a>
+      <a href="/" class="link">Learn More</a>
+      <a href="/" class="link">Contact</a>
+
     </div>
   </div>
 
