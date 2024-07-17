@@ -49,16 +49,17 @@ if ($result->num_rows >= 1) {
 
         <?php
         $summary = $report['summary'];
-        echo $summary;
         if (strlen($summary) > SUMMARY_LIMIT) {
             $summary = substr($summary, 0, SUMMARY_LIMIT) . '...';
             $showReadMore = true;
+            echo "1";
         } else {
             $showReadMore = false;
+            echo "0";
         }
-
         ?>
-        <p class="indented"><?php echo nl2br($summary); ?>
+        <p class="indented">
+            <?php echo nl2br($summary) ?>
             <?php if ($showReadMore): ?>
                 <a href="./pages/trail_report.php?id=<?php echo $report['id']; ?>" class="read-more-btn">read more</a>
             <?php endif; ?>
