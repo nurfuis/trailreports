@@ -4,7 +4,7 @@
 require_once realpath("./db_connect.php");
 
 // Check for connection error
-if (!$conn) {
+if (!$mysqli) {
     die("Connection failed: " . $mysqli->connect_error);
 }
 
@@ -27,7 +27,7 @@ function generateLoremIpsum($paragraphs = 2, $sentences = 3)
 $sql = "INSERT INTO trail_reports (feature_id, user_id, rating, summary, created_at, title) 
         VALUES (?, ?, ?, ?, NOW(), ?)";
 
-$stmt = $conn->prepare($sql);
+$stmt = $mysqli->prepare($sql);
 
 // Loop and insert data
 for ($i = 0; $i < $numReports; $i++) {
@@ -49,7 +49,7 @@ for ($i = 0; $i < $numReports; $i++) {
 }
 
 // Close the connection (assuming it's closed in db_connect.php)
-// $conn = null; // If not closed in db_connect.php, uncomment this line
+// $mysqli = null; // If not closed in db_connect.php, uncomment this line
 
 echo "Successfully inserted $numReports trail reports.";
 
