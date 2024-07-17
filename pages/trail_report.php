@@ -50,10 +50,10 @@ mysqli_close($mysqli);
 
     <div class="single-report">
         <h3>Trail Report</h3>
-        <p><strong>Trail:</strong> <?php echo $report['feature_name']; ?></p>
         <p><strong>Title:</strong> <?php echo $report['report_title']; ?></p>
-        <p><strong>Submitted by:</strong> <?php echo $report['username']; ?></p>
+        <p><strong>Trail:</strong> <?php echo $report['feature_name']; ?></p>
         <p><strong>Rating:</strong> <?php echo $ratings[$report['rating']]; ?></p>
+        <p><strong>Submitted by:</strong> <?php echo $report['username']; ?></p>
         <p><strong>Report:</strong></p>
 
         <?php

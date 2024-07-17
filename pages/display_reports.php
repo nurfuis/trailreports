@@ -42,6 +42,8 @@ INNER JOIN users u ON tr.user_id = u.user_id;";
       echo "<div class='report-item'>";
       echo "  <h4><a href='./trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a></h4>";
       echo "  <p><span>Trail:</span> " . $report['trail_name'] . "</a></p>";
+      echo "  <p><span>Submitted by:</span> " . $report['username'] . "</p>";
+
       echo "  <p><span>Submitted on:</span> " . date("Y-m-d", strtotime($report['created_at'])) . "</p>";
       $summary = $report['summary'];
 
