@@ -16,7 +16,6 @@ if (isset($_GET['feature_id'])) {
         exit;
     }
     ?>
-    <a href="#content"></a>
     <div class="regular-padding" id="content">
         <h2><?php echo $feature['name'] ?></h2>
         <div class="regular-padding">

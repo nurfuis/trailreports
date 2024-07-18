@@ -8,6 +8,7 @@ if (!$trail_result) {
     exit;
 }
 ?>
+<a href="#content"></a>
 
 <div class="main__trail-select regular-padding">
     <form action="#content" method="get" id="trail-select-form">
