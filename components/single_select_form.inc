@@ -13,7 +13,7 @@ if (!$trail_result) {
     <form action="#trail-select-form" method="get" id="trail-select-form">
         <label for="trail-select">Select a Trail:</label>
         <select name="feature_id" id="trail-select">
-            <option value="recent">-- Select a Trail --</option>
+            <option value="recent">-- Latest Updates --</option>
             <?php while ($trail = mysqli_fetch_assoc($trail_result)): ?>
                 <option value="<?php echo $trail['id']; ?>" <?php if (isset($_GET['feature_id']) && $_GET['feature_id'] == $trail['id']): ?> selected <?php endif; ?>>
                     <?php echo $trail['name']; ?>
