@@ -16,7 +16,7 @@ if (isset($_GET['feature_id'])) {
         exit;
     }
     ?>
-    <div class="regular-padding" id="content">
+    <div class="regular-padding">
         <h2><?php echo $feature['name'] ?></h2>
         <div class="regular-padding">
             <p> <a href="./pages/add_report.php"><span class="em">Submit a Report</span></a><br>
