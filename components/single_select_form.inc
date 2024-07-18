@@ -10,7 +10,7 @@ if (!$trail_result) {
 ?>
 
 <div class="main__trail-select regular-padding">
-    <form action="" method="get">
+    <form action="#content" method="get" id="trail-select-form">
         <label for="trail-select">Select a Trail:</label>
         <select name="feature_id" id="trail-select">
             <option value="recent">-- Select a Trail --</option>
