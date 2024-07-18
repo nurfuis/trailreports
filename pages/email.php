@@ -17,9 +17,13 @@ if (!isset($_SESSION['user_id'])) {
   <h2>Join Our Trail Reporting Community</h2>
   <p>
     To ensure the quality and credibility of trail reports on our platform, we
-    highly recommend verifying your email address. This email will also be used
-    for password recovery if needed. We take your privacy seriously and will never
-    sell or share your information with third parties.
+    highly recommend verifying your email address.</p>
+  <p>We take your privacy seriously and will never
+    sell or share your information with third parties. Your email will not be used
+    to identify you on the website. </p>
+  <p>You will only recieve emails in response to a request
+    for verification, login, or a password change. This is to
+    securely manage access to your account.
   </p>
 
   <?php
