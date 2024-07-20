@@ -174,7 +174,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
       </select>
     </div>
   </form>
-
+  <hr>
   <?php
   // Only show pagination if there are more than one page
   if ($total_pages > 1) {
