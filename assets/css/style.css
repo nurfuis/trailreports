@@ -61,6 +61,7 @@ button {
   display: none; /* Initially hidden */
   text-align: center; /* Center content horizontally */
   z-index: 999; /* Overlay sits above the map */
+  flex-wrap: wrap;
 }
 #fade-out-paragraph {
   position: relative;
