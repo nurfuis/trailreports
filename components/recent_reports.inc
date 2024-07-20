@@ -46,9 +46,7 @@ if ($result->num_rows >= 1) {
             <?php endif; ?>
         </p>
         <p class="indented-top light-text"><i>Submitted on: <?php echo $report['created_at']; ?></i></p>
-        <p><br> <a href="./pages/add_report.php ?>"><span class="em">Submit a
-                    Report</span></a><br>
-        </p>
+
     </div>
 
     <?php
@@ -77,6 +75,10 @@ if ($result->num_rows >= 1) {
         echo "<p>No recent reports found.</p>";
     }
     ?><br>
-    <p> <a href="./pages/display_reports.php ?>"><span class="em">View More Reports</span></a><br>
+    <hr>
+    <p><br> <a href="./pages/add_report.php"><span class="em">Submit a
+                Report</span></a><br>
+    </p>
+    <p> <a href="./pages/display_reports.php"><span class="em">View More Reports</span></a><br>
     </p>
 </div>

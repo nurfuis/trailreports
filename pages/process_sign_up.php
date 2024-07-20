@@ -4,7 +4,7 @@ $page_title = "Register";
 $page_css = "/assets/css/style.css";
 
 include_once realpath("../components/head.inc");
-include_once realpath("../layouts/single.inc");
+include_once realpath("../layouts/wide.inc");
 
 require_once realpath("../../db_connect.php");
 
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // username is good
 
     } else {
-        $errorMessage = "Username must be English characters, numerals, and over 5 characters long.";
+        $errorMessage = "Username must be valid characters, numerals, and over 5 characters long.";
         goto after_validation;
     }
 

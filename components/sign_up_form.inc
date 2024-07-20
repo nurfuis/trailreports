@@ -2,7 +2,7 @@
   <h3>New User</h3>
   <form action="/pages/process_sign_up.php" method="post">
     <label for="username">Username:</label>
-    <input type="text" autocomplete="username" name="username" id="username" required /><br><br>
+    <input type="text" autocomplete="username" name="username" id="username" maxlength="30" required /><br><br>
     <p id="username-error" class="alert"></p>
     <script>
       const usernameInput = document.getElementById('username');
@@ -22,7 +22,7 @@
     </script>
 
     <label for="password">Password:</label>
-    <input type="text" autocomplete="new-password" name="password" id="password" required /><br><br>
+    <input type="text" autocomplete="new-password" name="password" id="password" maxlength="256" required /><br><br>
     <p id="password-error" class="alert"></p>
 
     <script>

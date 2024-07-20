@@ -6,6 +6,7 @@
     View and report accurate information on trail conditions in Monterey County's Los Padres National Forest and
     Ventana Wilderness areas. This open-source platform allows you to submit trail reports.
   </p>
+
   <script>
     const paragraph = document.getElementById("fade-out-paragraph");
     const fadeOutThreshold = 20;
@@ -16,4 +17,4 @@
       paragraph.style.opacity = opacity;
     });
   </script>
-</div> 
+</div>

@@ -16,13 +16,9 @@ if (!$resultFeatures) {
     <form action="process_new_report.php" method="post">
         <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 
-        <label for="title">Report Title:</label><br><br>
-        <input type="text" name="title" id="title" placeholder="Enter a descriptive title"><br><br>
-
-
 
         <label for="feature">Select Trail:</label><br><br>
-        <select name="feature" id="feature">
+        <select name="feature" id="feature" required>
             <option value="">-- Select Trail --</option>
             <?php
             // Check if a trail ID is present in the URL parameter
@@ -35,19 +31,24 @@ if (!$resultFeatures) {
                 </option>
             <?php endwhile; ?>
         </select>
-        <br><br>
+        <hr>
 
+        <label for="title">Report Title:</label><br><br>
+        <input type="text" name="title" id="title" size="30" placeholder="Enter a descriptive title" required>
+        <hr>
 
-        <label for="rating">Overall Condition Rating:</label><br><br>
-        <select id="rating" name="rating">
+        <label class="radio" for="rating-group">Overall Condition Rating:</label>
+        <div>
             <?php foreach (OVERALL_RATINGS as $rating_text => $rating_value): ?>
-                <option value="<?php echo $rating_value; ?>">
-                    <?php echo $rating_text; ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
+                <label class="k2d-regular" for="<?php echo $rating_value; ?>">
+                    <input type="radio" id="<?php echo $rating_value; ?>" name="rating" value="<?php echo $rating_value; ?>"
+                        required>
 
-        <br><br><br>
+                    <span><?php echo $rating_text; ?></span>
+                </label><br>
+            <?php endforeach; ?>
+        </div>
+        <hr>
         <label for="summary">Detailed Summary:</label>
         <a href="#" class="toggle-guidance"> (more)</a><br>
 
@@ -79,7 +80,7 @@ if (!$resultFeatures) {
         </script>
         <br>
         <textarea name="summary" id="summary" class="summary-input"
-            placeholder="Provide a detailed description of your experience on the trail."></textarea>
+            placeholder="Provide a detailed description of your experience on the trail." required></textarea>
         <br><br>
 
         <button type="submit">Submit Report</button>

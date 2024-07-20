@@ -3,7 +3,7 @@ $page_title = "Change Password";
 $page_css = "/assets/css/style.css";
 
 include_once realpath("../components/head.inc");
-include_once realpath("../layouts/single.inc");
+include_once realpath("../layouts/wide.inc");
 
 session_start();
 

@@ -4,7 +4,7 @@ $page_title = "Login";
 $page_css = "/assets/css/style.css";
 
 include_once realpath("../components/head.inc");
-include_once realpath("../layouts/single.inc");
+include_once realpath("../layouts/wide.inc");
 
 require_once realpath("../../db_connect.php");
 
