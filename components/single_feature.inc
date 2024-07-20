@@ -20,7 +20,7 @@ if (isset($_GET['feature_id'])) {
         <h2><?php echo $feature['name'] ?></h2>
         <div class="regular-padding">
             <p> <a href="./pages/add_report.php?id=<?php echo $selected_feature_id ?>"><span class="em">Submit a
-                        Report</span></a><br>
+                        Report</span></a><br><br>
             </p>
 
             <?php
@@ -225,7 +225,8 @@ if (isset($_GET['feature_id'])) {
                     }
                 } ?>
 
-                <p> <a href="./pages/display_reports.php?id=<?php echo $selected_feature_id ?>"><span class="em">View More
+                <p><br> <a href="./pages/display_reports.php?id=<?php echo $selected_feature_id ?>"><span class="em">View
+                            More
                             Reports</span></a><br>
                 </p>
             </div>
