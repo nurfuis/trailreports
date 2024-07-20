@@ -464,6 +464,13 @@ input {
   background-color: var(--darker-background);
   padding-bottom: 1rem;
 }
+@media only screen and (max-width: 768px) {
+  .pagination a {
+    font-size: large;
+    display: inline-block;
+    padding: 00.25em;
+  }
+}
 @media (min-width: 768px) {
   .wide__wrapper {
     font-weight: 300;
