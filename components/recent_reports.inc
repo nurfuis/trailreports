@@ -67,7 +67,7 @@ if ($result->num_rows >= 1) {
                 <a
                     href="./pages/trail_report.php?id=<?php echo $recent_report['id']; ?>"><?php echo $recent_report['report_title']; ?></a>
                 -
-                <?php echo $recent_report['feature_name']; ?>
+                <span><?php echo $recent_report['feature_name']; ?></span>
             </div>
             <?php
         }

@@ -144,6 +144,10 @@ button {
   margin: 1rem;
   line-height: 1.5;
 }
+.recent-reports span {
+  font-family: "K2D";
+  font-weight: 300;
+}
 .recent-reports h3 {
   border-bottom: 1px solid var(--accent);
 }
