@@ -66,6 +66,9 @@ button {
   position: relative;
   z-index: 5;
 }
+.guidance-list span {
+  color: var(--text-light);
+}
 .guidance-list {
   font-family: "K2D";
   line-height: 1.7;

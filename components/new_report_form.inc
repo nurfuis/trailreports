@@ -53,18 +53,24 @@ if (!$resultFeatures) {
         <a href="#" class="toggle-guidance"> (more)</a><br>
 
         <ul class="guidance-list" style="display: none;">
-            <li>Trail Conditions: Describe the overall condition of the trail (e.g., well-maintained, muddy in some
+            <li><span>Trail Conditions:</span> Describe the overall condition of the trail (e.g., well-maintained, muddy
+                in some
                 sections, overgrown in parts).</li>
-            <li>Obstacles: Report any obstacles encountered (e.g., downed trees, washed-out sections, wildlife
+            <li><span>Obstacles:</span> Report any obstacles encountered (e.g., downed trees, washed-out sections,
+                wildlife
                 sightings).
             </li>
-            <li>Scenery Highlights: Share any particularly scenic views or interesting landmarks on the trail.</li>
-            <li>Gear Recommendations: Mention any specific gear that might be helpful for hikers (e.g., hiking poles for
+            <li><span>Scenery Highlights:</span> Share any particularly scenic views or interesting landmarks on the
+                trail.</li>
+            <li><span>Gear Recommendations:</span> Mention any specific gear that might be helpful for hikers (e.g.,
+                hiking poles for
                 steep sections, insect repellent for areas with mosquitos).</li>
-            <li>Difficulty Level: Briefly describe the difficulty of the trail (e.g., easy, moderate, challenging) and
+            <li><span>Difficulty Level:</span> Briefly describe the difficulty of the trail (e.g., easy, moderate,
+                challenging) and
                 any
                 specific sections that may be more difficult.</li>
-            <li>Additional Tips: Share any additional tips or insights that may be helpful for future hikers (e.g.,
+            <li><span>Additional Tips:</span> Share any additional tips or insights that may be helpful for future
+                hikers (e.g.,
                 parking
                 availability, best time of day to hike, water or camps along the trail).</li>
         </ul>
