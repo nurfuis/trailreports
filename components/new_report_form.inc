@@ -84,7 +84,7 @@ if (!$resultFeatures) {
         <br><br>
 
         <button type="submit">Submit Report</button>
-
+        <input type="hidden" name="time_submitted" value="<?php echo time(); ?>">
     </form>
 </div>
 <?php

@@ -29,10 +29,10 @@ if (isset($_GET['sort-by'])) {
       $order_by = "tr.created_at ASC";
       break;
     case "rating_high":
-      $order_by = "tr.rating DESC, tr.created_at DESC";
+      $order_by = "tr.rating ASC, tr.created_at DESC";
       break;
     case "rating_low":
-      $order_by = "tr.rating ASC, tr.created_at DESC";
+      $order_by = "tr.rating DESC, tr.created_at DESC";
       break;
     default:
       $order_by = "tr.created_at DESC";
@@ -62,6 +62,27 @@ if (isset($_GET['date-range']) && $_GET['date-range'] != "all") {
       break;
   }
 }
+$items_per_page = 10;
+$current_page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+$offset = ($current_page - 1) * $items_per_page;
+$sql_count = "SELECT COUNT(*) AS total_reports
+              FROM trail_reports tr
+              INNER JOIN features f ON tr.feature_id = f.id";
+$sql_count .= $date_range_sql;
+if (isset($_GET['filter-by-trail']) && $_GET['filter-by-trail'] != "all") {
+  $selected_trail = $_GET['filter-by-trail'];
+  $sql_count .= " WHERE tr.feature_id = $selected_trail";
+}
+$count_result = mysqli_query($mysqli, $sql_count);
+
+if ($count_result) {
+  $count_row = mysqli_fetch_assoc($count_result);
+  $total_reports = $count_row['total_reports'];
+} else {
+  echo "Error: " . mysqli_error($mysqli);
+  exit;
+}
+$total_pages = ceil($total_reports / $items_per_page);
 
 $sql = "SELECT tr.*, f.name AS trail_name, u.username
         FROM trail_reports tr
@@ -73,7 +94,14 @@ if (isset($_GET['filter-by-trail']) && $_GET['filter-by-trail'] != "all") {
   $sql .= " WHERE tr.feature_id = $selected_trail"; // Filter by trail ID
 }
 $sql .= $date_range_sql;
-$sql .= " ORDER BY $order_by;";
+$sql .= " ORDER BY $order_by LIMIT $items_per_page OFFSET $offset;";
+$result = mysqli_query($mysqli, $sql);
+$ratings = array_flip(OVERALL_RATINGS);
+
+
+if (isset($_GET['success']) && $_GET['success'] === 'true') {
+  echo '<p style="color: green;">Your trail report has been successfully added!</p>';
+}
 ?>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -118,12 +146,12 @@ $sql .= " ORDER BY $order_by;";
           echo "selected"; ?>>Most Recent</option>
         <option value="oldest" <?php if ($order_by == "tr.created_at ASC")
           echo "selected"; ?>>Oldest First</option>
-        <option value="rating_high" <?php if ($order_by == "tr.rating DESC, tr.created_at DESC")
+        <option value="rating_high" <?php if ($order_by == "tr.rating ASC, tr.created_at DESC")
           echo "selected"; ?>>
           Rating
           (High to Low)
         </option>
-        <option value="rating_low" <?php if ($order_by == "tr.rating ASC, tr.created_at DESC")
+        <option value="rating_low" <?php if ($order_by == "tr.rating DESC, tr.created_at DESC")
           echo "selected"; ?>>Rating
           (Low to High)
         </option>
@@ -148,9 +176,32 @@ $sql .= " ORDER BY $order_by;";
   </form>
 
   <?php
+  // Only show pagination if there are more than one page
+  if ($total_pages > 1) {
+    $page_links = "";
 
-  $result = mysqli_query($mysqli, $sql);
-  $ratings = array_flip(OVERALL_RATINGS);
+    // Previous page link (if not on the first page)
+    if ($current_page > 1) {
+      $prev_page = $current_page - 1;
+      $page_links .= "<a href='?page=$prev_page" . (isset($_GET['sort-by']) ? "&sort-by=" . $_GET['sort-by'] : "") . (isset($_GET['filter-by-trail']) ? "&filter-by-trail=" . $_GET['filter-by-trail'] : "") . (isset($_GET['date-range']) ? "&date-range=" . $_GET['date-range'] : "") . "'>&laquo; Previous</a> ";
+    }
+
+    // Loop through page numbers
+    for ($i = 1; $i <= $total_pages; $i++) {
+      $active_class = ($i == $current_page) ? "active" : "";
+      $page_links .= "<a href='?page=$i" . (isset($_GET['sort-by']) ? "&sort-by=" . $_GET['sort-by'] : "") . (isset($_GET['filter-by-trail']) ? "&filter-by-trail=" . $_GET['filter-by-trail'] : "") . (isset($_GET['date-range']) ? "&date-range=" . $_GET['date-range'] : "") . "' class='$active_class'>$i</a> ";
+    }
+
+    // Next page link (if not on the last page)
+    if ($current_page < $total_pages) {
+      $next_page = $current_page + 1;
+      $page_links .= "<a href='?page=$next_page" . (isset($_GET['sort-by']) ? "&sort-by=" . $_GET['sort-by'] : "") . (isset($_GET['filter-by-trail']) ? "&filter-by-trail=" . $_GET['filter-by-trail'] : "") . (isset($_GET['date-range']) ? "&date-range=" . $_GET['date-range'] : "") . "'>Next &raquo;</a> ";
+    }
+
+    echo "<div class='pagination'>$page_links</div>";
+  }
+
+
 
   if (!$result) {
     echo "Error: " . mysqli_error($mysqli);
@@ -187,6 +238,30 @@ $sql .= " ORDER BY $order_by;";
       echo "</p>";
       echo "</div>";
     }
+  }
+  // Only show pagination if there are more than one page
+  if ($total_pages > 1) {
+    $page_links = "";
+
+    // Previous page link (if not on the first page)
+    if ($current_page > 1) {
+      $prev_page = $current_page - 1;
+      $page_links .= "<a href='?page=$prev_page" . (isset($_GET['sort-by']) ? "&sort-by=" . $_GET['sort-by'] : "") . (isset($_GET['filter-by-trail']) ? "&filter-by-trail=" . $_GET['filter-by-trail'] : "") . (isset($_GET['date-range']) ? "&date-range=" . $_GET['date-range'] : "") . "'>&laquo; Previous</a> ";
+    }
+
+    // Loop through page numbers
+    for ($i = 1; $i <= $total_pages; $i++) {
+      $active_class = ($i == $current_page) ? "active" : "";
+      $page_links .= "<a href='?page=$i" . (isset($_GET['sort-by']) ? "&sort-by=" . $_GET['sort-by'] : "") . (isset($_GET['filter-by-trail']) ? "&filter-by-trail=" . $_GET['filter-by-trail'] : "") . (isset($_GET['date-range']) ? "&date-range=" . $_GET['date-range'] : "") . "' class='$active_class'>$i</a> ";
+    }
+
+    // Next page link (if not on the last page)
+    if ($current_page < $total_pages) {
+      $next_page = $current_page + 1;
+      $page_links .= "<a href='?page=$next_page" . (isset($_GET['sort-by']) ? "&sort-by=" . $_GET['sort-by'] : "") . (isset($_GET['filter-by-trail']) ? "&filter-by-trail=" . $_GET['filter-by-trail'] : "") . (isset($_GET['date-range']) ? "&date-range=" . $_GET['date-range'] : "") . "'>Next &raquo;</a> ";
+    }
+
+    echo "<div class='pagination'>$page_links</div>";
   }
   mysqli_close($mysqli);
 

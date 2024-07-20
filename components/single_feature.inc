@@ -225,7 +225,8 @@ if (isset($_GET['feature_id'])) {
                     }
                 } ?>
 
-                <p><br> <a href="./pages/display_reports.php?id=<?php echo $selected_feature_id ?>"><span class="em">View
+                <p><br> <a href="./pages/display_reports.php?filter-by-trail=<?php echo $selected_feature_id ?>"><span
+                            class="em">View
                             More
                             Reports</span></a><br>
                 </p>
