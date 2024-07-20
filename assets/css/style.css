@@ -468,7 +468,7 @@ input {
   .pagination a {
     font-size: large;
     display: inline-block;
-    padding: 00.25em;
+    padding: 0.25em;
   }
 }
 @media (min-width: 768px) {
