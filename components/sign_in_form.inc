@@ -31,5 +31,5 @@
     });
   </script>
 
-  <p class="notice">Don't have an account? <a href="/pages/sign_up.php">Register Here</a></p>
+  <div class="notice">Don't have an account? <a href="/pages/sign_up.php">Register Here</a></div>
 </div>

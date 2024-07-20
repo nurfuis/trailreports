@@ -254,12 +254,18 @@ button {
 }
 .sign-in {
   white-space: wrap;
-  min-width: 300px;
+  min-width: 260px;
+  width: 100%;
+}
+
+.notice a {
+  flex-wrap: nowrap;
 }
 .notice {
   border: 1px dashed var(--accent);
   padding: 0.5rem;
   margin: 0;
+  font-family: "K2D", sans-serif;
 }
 .sign-in a {
   font-weight: 500;
@@ -376,7 +382,7 @@ h2 {
 
 select,
 input {
-  padding: 0.5rem 1rem;
+  padding: 0.2rem 0.7rem;
   border: 1px solid #ccc;
   border-radius: 3px;
   margin-bottom: 10px;
