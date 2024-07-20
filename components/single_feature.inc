@@ -46,7 +46,7 @@ if (isset($_GET['feature_id'])) {
                     $geometry_string = "$first_longitude, $first_latitude";
 
                     // Create a link to another page with lat, long, and zoom
-                    $link_url = "./pages/topo_map.php?name=" . $feature['name'] . "&lat=" . $first_latitude . "&long=" . $first_longitude . "&zoom=15";
+                    $link_url = "./pages/topo_map.php?name=" . $feature['name'] . "&lat=" . $first_latitude . "&long=" . $first_longitude . "&zoom=13";
 
                     echo "<p><span>Location:</span> <a href='$link_url'>" . $geometry_string . "</a></p>";
                 } else {
