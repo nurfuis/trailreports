@@ -108,21 +108,14 @@
 
         // Add event listener to tile layer 'load' event
         tileLayer.on('load', function () {
-            document.getElementById('loading').style.display = 'none';
+            setTimeout(function () {
+                document.getElementById('loading').style.display = 'none';
+            }, 500); // Delay for 0.5 seconds
 
         });
 
         // Add the tile layer to the map
         tileLayer.addTo(map);
-
-
-
-        // map.whenReady(isLoaded);
-        // function isLoaded() {
-        //     setTimeout(function () {
-        //         document.getElementById('loading').style.display = 'none';
-        //     }, 500); // Delay for 0.5 seconds
-        // }
     </script>
 
     <div class="overlay">
