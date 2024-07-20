@@ -2,7 +2,7 @@
 
 $page_title = "Trail Reports";
 $page_css = "../assets/css/style.css";
-
+$selected_trail = "";
 session_start();
 
 require_once realpath("../../config.php");
@@ -69,6 +69,7 @@ $sql_count = "SELECT COUNT(*) AS total_reports
               FROM trail_reports tr
               INNER JOIN features f ON tr.feature_id = f.id";
 $sql_count .= $date_range_sql;
+
 if (isset($_GET['filter-by-trail']) && $_GET['filter-by-trail'] != "all") {
   $selected_trail = $_GET['filter-by-trail'];
   $sql_count .= " WHERE tr.feature_id = $selected_trail";
@@ -93,6 +94,7 @@ if (isset($_GET['filter-by-trail']) && $_GET['filter-by-trail'] != "all") {
   $selected_trail = $_GET['filter-by-trail'];
   $sql .= " WHERE tr.feature_id = $selected_trail"; // Filter by trail ID
 }
+
 $sql .= $date_range_sql;
 $sql .= " ORDER BY $order_by LIMIT $items_per_page OFFSET $offset;";
 $result = mysqli_query($mysqli, $sql);
