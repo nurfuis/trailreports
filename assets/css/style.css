@@ -238,7 +238,7 @@ button {
 }
 .sign-in {
   white-space: wrap;
-  min-width: 240px;
+  min-width: 300px;
 }
 .notice {
   border: 1px dashed var(--accent);

@@ -2,7 +2,7 @@
 
 $page_title = "Login";
 $page_css = "/assets/css/style.css";
-
+$currentPagePath = "";
 include realpath("../components/head.inc");
 include realpath("../layouts/single.inc");
 
@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $username = mysqli_real_escape_string($mysqli, trim($_POST['username']));
   $password = mysqli_real_escape_string($mysqli, trim($_POST['password']));
   $redirect_path = trim($_POST['currentPagePath']);
+  $currentPagePath = $redirect_path;
 
   $sql = "SELECT user_id, username, password_hash, account_status, login_attempts, last_login_attempt FROM users WHERE username = ?";
   $stmt = mysqli_prepare($mysqli, $sql);
@@ -84,8 +85,7 @@ if (!empty($errorMessage)) {
 
 } else if (!empty($successMessage)) {
   if (!!$redirect_path) {
-    header("Location: $redirect_path?success=true");
-
+    header("Location: $redirect_path");
   } else {
 
   }

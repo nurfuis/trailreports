@@ -19,7 +19,8 @@ if (isset($_GET['feature_id'])) {
     <div class="regular-padding">
         <h2><?php echo $feature['name'] ?></h2>
         <div class="regular-padding">
-            <p> <a href="./pages/add_report.php"><span class="em">Submit a Report</span></a><br>
+            <p> <a href="./pages/add_report.php?id=<?php echo $selected_feature_id ?>"><span class="em">Submit a
+                        Report</span></a><br>
             </p>
 
             <?php
@@ -130,8 +131,8 @@ if (isset($_GET['feature_id'])) {
 
                 });
             </script>
-            <p><span>Distance:</span> </p>
-            <p><span>Management Area:</span> <?php echo $feature["management_area_id"]; ?></p>
+            <p class="hidden"><span>Distance:</span> </p>
+            <p class="hidden"><span>Management Area:</span> <?php echo $feature["management_area_id"]; ?></p>
             <hr>
             <h3>View Reports</h3>
             <div>
@@ -217,6 +218,11 @@ if (isset($_GET['feature_id'])) {
                         echo "</div>";
                     }
                 } ?>
+
+                <p> <a href="./pages/display_reports.php?filter-by-trail=<?php echo $selected_feature_id ?>"><span
+                            class="em">View More
+                            Reports</span></a><br>
+                </p>
             </div>
         </div>
         <?php

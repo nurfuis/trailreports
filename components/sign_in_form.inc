@@ -1,5 +1,5 @@
 <div class="regular-padding">
-  <h3>User Sign In</h3>
+  <h4>User Sign In</h4>
 
   <form method="post" action="/pages/process_sign_in.php">
     <input type="hidden" name="currentPagePath" value="<?php echo $currentPagePath; ?>">
