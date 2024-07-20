@@ -61,8 +61,14 @@ $pending_email = $fetched['pending_email'];
     </li>
   </ul>
 
+  <hr>
+
+
   <ul class="account-management-list">
-    <li><?php include_once realpath("../components/update_email_form.inc"); ?></li>
+    <li><?php include_once realpath("../components/update_email_form.inc"); ?>
+      <hr>
+    </li>
+    
     <li>
       <?php
       if ($verified === 1) {
@@ -71,8 +77,11 @@ $pending_email = $fetched['pending_email'];
         echo '<h3>Change Password</h3><p>Email verification required to change password.</p>';
       }
       ?>
+      <hr>
     </li>
-    <li><?php include_once realpath("../components/update_account_status.inc"); ?></li>
+    <li><?php include_once realpath("../components/update_account_status.inc"); ?>
+      <hr>
+    </li>
   </ul>
 </div>
 <?php

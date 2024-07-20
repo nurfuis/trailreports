@@ -89,16 +89,11 @@ button {
   list-style-type: none;
   margin: 0;
   padding: 1rem 0;
-  border-bottom: 1px solid var(--accent);
 }
 .account-management-list {
   list-style-type: none;
   margin: 0;
   padding: 1rem 0;
-}
-
-.account-management-list li {
-  margin-bottom: 2rem;
 }
 
 .alert {
