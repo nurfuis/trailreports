@@ -439,7 +439,9 @@ h2 {
     }
   }
 }
-
+.pagination {
+  font-family: "K2D";
+}
 label,
 button {
   /* Style the text labels for radio buttons */
