@@ -2,7 +2,7 @@
 
 $page_title = "Trail Reports";
 $page_css = "../assets/css/style.css";
-$selected_trail = "";
+
 session_start();
 
 require_once realpath("../../config.php");
@@ -211,7 +211,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
   }
 
   if (mysqli_num_rows($result) === 0) {
-    echo "<p>There are currently no trail reports.</p>";
+    echo "<p>There are currently no trail reports for the selected criteria.</p>";
   } else {
 
     while ($report = mysqli_fetch_assoc($result)) {
