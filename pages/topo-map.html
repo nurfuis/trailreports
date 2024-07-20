@@ -39,8 +39,26 @@
   </body>
 
   <script>
+    function getMapParamsFromUrl() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const lat = parseFloat(urlParams.get("lat"));
+      const long = parseFloat(urlParams.get("long"));
+      const zoom = parseInt(urlParams.get("zoom"), 11);
+
+      // Check if all parameters are valid numbers
+      if (isNaN(lat) || isNaN(long) || isNaN(zoom)) {
+        console.error("Invalid lat, long, or zoom in URL");
+        return { lat: 36.3315, long: -121.7615, zoom: 11 };
+      }
+
+      return { lat, long, zoom };
+    }
+
     // ## Leaflet Code ## //
-    var map = L.map("map").setView([36.3315, -121.7615], 11);
+    const { lat, long, zoom } = getMapParamsFromUrl();
+
+    var map = L.map("map").setView([lat, long], zoom);
+
     // Get the window width and height
     var width = window.innerWidth || document.documentElement.clientWidth;
     var height = window.innerHeight || document.documentElement.clientHeight;

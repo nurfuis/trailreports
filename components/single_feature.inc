@@ -32,6 +32,7 @@ if (isset($_GET['feature_id'])) {
                     echo "Error: " . mysqli_error($mysqli);
                     exit;
                 }
+
                 $first_polyline = mysqli_fetch_assoc($polyline_result);
 
                 // Continue processing only if a first polyline is found
@@ -43,10 +44,15 @@ if (isset($_GET['feature_id'])) {
                     $first_latitude = $first_point[1];
 
                     $geometry_string = "$first_longitude, $first_latitude";
-                    echo "<p><span>Location:</span> " . $geometry_string . "</p>";
+
+                    // Create a link to another page with lat, long, and zoom
+                    $link_url = "./pages/topo_map.php?name=" . $feature['name'] . "&lat=" . $first_latitude . "&long=" . $first_longitude . "&zoom=15";
+
+                    echo "<p><span>Location:</span> <a href='$link_url'>" . $geometry_string . "</a></p>";
                 } else {
                     echo "No polylines found for this feature.";
                 }
+
 
                 while ($polyline = mysqli_fetch_assoc($polyline_result)) {
                     echo '<div class="hidden">';
@@ -54,8 +60,8 @@ if (isset($_GET['feature_id'])) {
                     echo "<p>Path: " . $polyline['text_geometry'] . "</p>";
                     echo '</div>';
                 }
-                mysqli_free_result($polyline_result);
             }
+            mysqli_free_result($polyline_result);
 
             if (isset($_GET['sort-by'])) {
                 $sort_by = $_GET['sort-by'];
@@ -219,8 +225,7 @@ if (isset($_GET['feature_id'])) {
                     }
                 } ?>
 
-                <p> <a href="./pages/display_reports.php?filter-by-trail=<?php echo $selected_feature_id ?>"><span
-                            class="em">View More
+                <p> <a href="./pages/display_reports.php?id=<?php echo $selected_feature_id ?>"><span class="em">View More
                             Reports</span></a><br>
                 </p>
             </div>

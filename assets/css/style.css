@@ -46,6 +46,22 @@ button {
 .hidden {
   display: none;
 }
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(
+    246,
+    246,
+    246,
+    0.7
+  ); /* Semi-transparent black background */
+  padding: 2rem;
+  display: none; /* Initially hidden */
+  text-align: center; /* Center content horizontally */
+  z-index: 999; /* Overlay sits above the map */
+}
 .guidance-list li {
   padding: 0.5rem 0 0.5rem 0;
 }
