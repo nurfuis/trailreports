@@ -46,6 +46,9 @@ button {
 .hidden {
   display: none;
 }
+.overlay div {
+  width: 80%;
+}
 .overlay {
   position: fixed;
   top: 0;
@@ -61,7 +64,6 @@ button {
   display: none; /* Initially hidden */
   text-align: center; /* Center content horizontally */
   z-index: 999; /* Overlay sits above the map */
-  flex-wrap: wrap;
 }
 #fade-out-paragraph {
   position: relative;

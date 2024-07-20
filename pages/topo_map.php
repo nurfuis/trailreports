@@ -126,7 +126,9 @@
     </script>
 
     <div class="overlay">
-        <h2><?php echo $featureName; ?></h2>
+        <div>
+            <h2><?php echo $featureName; ?></h2>
+        </div>
         <p id="feature-location">
             <script>document.getElementById('feature-location').innerHTML = `${lat} ${long}`;</script>
         </p>
