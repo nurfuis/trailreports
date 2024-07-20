@@ -128,11 +128,12 @@
     <div class="overlay">
         <div>
             <h2><?php echo $featureName; ?></h2>
+
+            <p id="feature-location">
+                <script>document.getElementById('feature-location').innerHTML = `${lat} ${long}`;</script>
+            </p>
+            <button id="close-overlay">Hide</button>
         </div>
-        <p id="feature-location">
-            <script>document.getElementById('feature-location').innerHTML = `${lat} ${long}`;</script>
-        </p>
-        <button id="close-overlay">Hide</button>
     </div>
     <script>
         const overlay = document.querySelectorAll('.overlay')[0];
