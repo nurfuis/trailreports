@@ -11,6 +11,22 @@
 a:hover {
   color: var(--accent);
 }
+.page-link.active {
+  color: var(--highlight);
+  font-weight: 600;
+  font-size: large;
+  text-decoration: none;
+  border-radius: 0 0.25rem 0 0.25rem;
+  background-color: var(--darker-background);
+  color: var(--light-background);
+  transition: background-color 0.5s ease-in-out;
+}
+
+.page-link:hover {
+  border-radius: 0 0.25rem 0 0.25rem;
+  color: var(--light-background);
+  background-color: var(--text-light);
+}
 body {
   margin: 0px;
   font-family: "Julius Sans One", sans-serif;

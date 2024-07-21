@@ -10,6 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title><?php echo $featureName; ?> - Topo Map</title>
+    <link rel="icon" href="/favicon.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -97,7 +99,13 @@
 
         var map = L.map("map");
 
-        L.marker([lat, long], { icon: redIcon }).addTo(map);
+        const point = L.marker([lat, long], { icon: redIcon }).addTo(map);
+
+        point.on("click", function () {
+            showOverlay();
+        });
+
+        L.control.scale().addTo(map);
 
         map.on("load", function () {
             setTimeout(function () {

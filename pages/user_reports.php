@@ -218,7 +218,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
         // Loop through page numbers
         for ($i = 1; $i <= $total_pages; $i++) {
             $active_class = ($i == $current_page) ? "active" : "";
-            $page_links .= "<a href='?page=$i" . (isset($_GET['sort-by']) ? "&sort-by=" . $_GET['sort-by'] : "") . (isset($_GET['filter-by-trail']) ? "&filter-by-trail=" . $_GET['filter-by-trail'] : "") . (isset($_GET['date-range']) ? "&date-range=" . $_GET['date-range'] : "") . "' class='$active_class'>$i</a> ";
+            $page_links .= "<a class='page-link' href='?page=$i" . (isset($_GET['sort-by']) ? "&sort-by=" . $_GET['sort-by'] : "") . (isset($_GET['filter-by-trail']) ? "&filter-by-trail=" . $_GET['filter-by-trail'] : "") . (isset($_GET['date-range']) ? "&date-range=" . $_GET['date-range'] : "") . "' class='$active_class'>$i</a> ";
         }
 
         // Next page link (if not on the last page)
@@ -230,7 +230,20 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
         echo "<div class='pagination'>$page_links</div>";
     }
 
+    ?>
+    <script>
+        const currentPage = new URLSearchParams(window.location.search).get('page');
+        const pageLinks = document.querySelectorAll('.page-link');
 
+        pageLinks.forEach(link => {
+            const linkPage = link.getAttribute('href').split('?page=')[1];
+            if (linkPage === currentPage) {
+                link.classList.add('active');
+            }
+        });
+    </script>
+
+    <?php
 
     if (!$result) {
         echo "Error: " . mysqli_error($mysqli);
@@ -268,30 +281,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
             echo "</div>";
         }
     }
-    // Only show pagination if there are more than one page
-    if ($total_pages > 1) {
-        $page_links = "";
 
-        // Previous page link (if not on the first page)
-        if ($current_page > 1) {
-            $prev_page = $current_page - 1;
-            $page_links .= "<a href='?page=$prev_page" . (isset($_GET['sort-by']) ? "&sort-by=" . $_GET['sort-by'] : "") . (isset($_GET['filter-by-trail']) ? "&filter-by-trail=" . $_GET['filter-by-trail'] : "") . (isset($_GET['date-range']) ? "&date-range=" . $_GET['date-range'] : "") . "'>&laquo; Previous</a> ";
-        }
-
-        // Loop through page numbers
-        for ($i = 1; $i <= $total_pages; $i++) {
-            $active_class = ($i == $current_page) ? "active" : "";
-            $page_links .= "<a href='?page=$i" . (isset($_GET['sort-by']) ? "&sort-by=" . $_GET['sort-by'] : "") . (isset($_GET['filter-by-trail']) ? "&filter-by-trail=" . $_GET['filter-by-trail'] : "") . (isset($_GET['date-range']) ? "&date-range=" . $_GET['date-range'] : "") . "' class='$active_class'>$i</a> ";
-        }
-
-        // Next page link (if not on the last page)
-        if ($current_page < $total_pages) {
-            $next_page = $current_page + 1;
-            $page_links .= "<a href='?page=$next_page" . (isset($_GET['sort-by']) ? "&sort-by=" . $_GET['sort-by'] : "") . (isset($_GET['filter-by-trail']) ? "&filter-by-trail=" . $_GET['filter-by-trail'] : "") . (isset($_GET['date-range']) ? "&date-range=" . $_GET['date-range'] : "") . "'>Next &raquo;</a> ";
-        }
-
-        echo "<div class='pagination'>$page_links</div>";
-    }
     mysqli_close($mysqli);
     after:
     echo "</div>";
