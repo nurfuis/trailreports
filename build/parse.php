@@ -1,6 +1,6 @@
 <?php
 
-require_once realpath("./db_connect.php");
+require_once realpath("../db_connect.php");
 
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
