@@ -285,9 +285,16 @@ button {
   font-weight: 500;
 }
 
-.main__intro h1,
-h2 {
+.main__intro h1 {
   margin: 0.5rem;
+  border: none;
+}
+h2 {
+  border-bottom: 1px solid var(--accent);
+}
+.main__intro h2 {
+  margin: 0.5rem;
+  border: none;
 }
 .main__intro a {
   text-decoration: none;
@@ -334,10 +341,7 @@ h2 {
 .report-item p {
   margin-top: 0.5rem; /* Space between elements */
 }
-.trail-reports h2 {
-  border-bottom: 1px solid var(--accent);
-  margin: 2rem 0 2rem 0;
-}
+
 .trail-reports {
   padding: 0.25rem;
   max-width: 900px;
@@ -368,10 +372,7 @@ h2 {
 .feature-item p:nth-child(1) {
   font-weight: bold;
 }
-.features h2 {
-  border-bottom: 1px solid var(--accent);
-  margin: 2rem 0 2rem 0;
-}
+
 .feature-item span {
   color: var(--text-light);
 }
@@ -393,7 +394,10 @@ h2 {
 .user-btn {
   color: var(--text-light);
 }
-
+.nav a {
+  font-family: "K2D";
+  display: inline-block;
+}
 .radio {
   display: block;
   cursor: pointer;
@@ -444,13 +448,16 @@ h2 {
     }
   }
 }
+.pagination a {
+  padding: 0.25rem;
+}
 .pagination {
   font-family: "K2D";
+  margin-bottom: 2rem;
 }
 label,
 button {
-  /* Style the text labels for radio buttons */
-  cursor: pointer; /* Indicate clickable element on hover */
+  cursor: pointer;
 }
 select,
 input {

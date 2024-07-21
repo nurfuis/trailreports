@@ -76,9 +76,9 @@ if ($result->num_rows >= 1) {
     }
     ?><br>
     <hr>
-    <p><br> <a href="./pages/add_report.php"><span class="em">Submit a
-                Report</span></a><br>
-    </p>
-    <p> <a href="./pages/display_reports.php"><span class="em">View More Reports</span></a><br>
-    </p>
+    <div class="regular-padding nav">
+        <a href="./pages/add_report.php">Submit a
+            Report</a> <span class="em">or</span> 
+        <a href="./pages/display_reports.php">View More Reports</a>
+    </div>
 </div>

@@ -19,8 +19,8 @@ $pending_email = $fetched['pending_email'];
 
 <div>
 
-  <h2>Account Management</h2>
-
+  <h1>Account</h1>
+  <h2>Make Changes</h2>
 
   <ul class="account-management-list--compact">
     <li>
@@ -68,7 +68,7 @@ $pending_email = $fetched['pending_email'];
     <li><?php include_once realpath("../components/update_email_form.inc"); ?>
       <hr>
     </li>
-    
+
     <li>
       <?php
       if ($verified === 1) {

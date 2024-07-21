@@ -11,8 +11,8 @@ if (!$resultFeatures) {
 }
 ?>
 <div class="trail-report__form">
-    <h1>New Trail Report</h1>
-
+    <h1>New Report</h1>
+    <h2>Submit to Collection</h2>
     <form action="process_new_report.php" method="post">
         <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 

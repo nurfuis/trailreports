@@ -29,7 +29,7 @@
   </div>
 
   <div class="dropdown" data-dropdown>
-    <button class="link" data-dropdown-button>Trails</button>
+    <button class="link" data-dropdown-button>Reports</button>
     <div class="dropdown-menu link-grid">
       <a href="./pages/display_reports.php" class="link">View Trail Reports</a>
       <a href="./pages/add_report.php" class="link">Submit a Trail Report</a>

@@ -83,9 +83,22 @@
         }
 
         // ## Leaflet Code ## //
+        var redIcon = L.icon({
+            iconUrl: '../assets/images/chevron.png',
+            shadowUrl: '../assets/images/chevron-shadow.png',
+
+            iconSize: [64, 64], // size of the icon
+            shadowSize: [64, 64], // size of the shadow
+            iconAnchor: [32, 48], // point of the icon which will correspond to marker's location
+            shadowAnchor: [26, 40],  // the same for the shadow
+            popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
         const { lat, long, zoom } = getMapParamsFromUrl();
 
         var map = L.map("map");
+
+        L.marker([lat, long], { icon: redIcon }).addTo(map);
+
         map.on("load", function () {
             setTimeout(function () {
                 document.getElementById('loading').style.display = 'none';

@@ -83,6 +83,10 @@ if ($count_result) {
   echo "Error: " . mysqli_error($mysqli);
   exit;
 }
+$no_reports = false;
+if ($total_reports == 0) {
+  $no_reports = true;
+}
 $total_pages = ceil($total_reports / $items_per_page);
 
 $sql = "SELECT tr.*, f.name AS trail_name, u.username
@@ -110,6 +114,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
     const sortBySelect = document.getElementById("sort-by");
     const filterByTrailSelect = document.getElementById("filter-by-trail");
     const dateRangeSelect = document.getElementById("date-range");
+    const noReportsInput = document.getElementById("no-reports");
 
     sortBySelect.addEventListener("change", function () {
       this.form.submit(); // Submits form for sort by
@@ -121,11 +126,18 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
     dateRangeSelect.addEventListener("change", function () {
       this.form.submit(); // Submits form for date range
     });
+
+    if (noReportsInput.value == 1) {
+      sortBySelect.disabled = true;
+    }
   });
 </script>
 <div class="trail-reports">
-  <h2>Trail Reports</h2>
+  <h1>Reports</h1>
+  <h2>View Collection</h2>
   <form action="" method="get">
+    <input type="hidden" id="no-reports" value="<?php echo $no_reports ?>">
+
     <div>
       <label for="filter-by-trail">Filter By Trail:</label>
       <select name="filter-by-trail" id="filter-by-trail">
@@ -177,6 +189,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
     </div>
   </form>
   <hr>
+  <h3>Reports:</h3>
   <?php
   // Only show pagination if there are more than one page
   if ($total_pages > 1) {
@@ -213,12 +226,15 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
   if (mysqli_num_rows($result) === 0) {
     echo "<p>There are currently no trail reports for the selected criteria.</p>";
   } else {
-
+    $count = 1;
     while ($report = mysqli_fetch_assoc($result)) {
-      $summary = substr($report['summary'], 0, BLURB_LIMIT) . '...';
+      $reportNumber = ($current_page - 1) * $items_per_page + $count;
+      $count++;
 
+      $summary = substr($report['summary'], 0, BLURB_LIMIT) . '...';
+      echo "<h4>$reportNumber.</h4>";
       echo "<div class='report-item'>";
-      echo "  <h4><a href='./trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a></h4>";
+      echo "  <h5><a href='./trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a></h5>";
       echo "  <p><span>Trail:</span> " . $report['trail_name'] . "</a></p>";
       echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
 

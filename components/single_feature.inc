@@ -19,9 +19,11 @@ if (isset($_GET['feature_id'])) {
     <div class="regular-padding">
         <h2><?php echo $feature['name'] ?></h2>
         <div class="regular-padding">
-            <p> <a href="./pages/add_report.php?id=<?php echo $selected_feature_id ?>"><span class="em">Submit a
-                        Report</span></a><br><br>
-            </p>
+            <div class="nav">
+                <a href="./pages/add_report.php?id=<?php echo $selected_feature_id ?>">
+                    Submit a Report
+                </a>
+            </div>
 
             <?php
             if ($feature['geometry_type'] == 'LineString') {
@@ -140,11 +142,11 @@ if (isset($_GET['feature_id'])) {
             <p class="hidden"><span>Distance:</span> </p>
             <p class="hidden"><span>Management Area:</span> <?php echo $feature["management_area_id"]; ?></p>
             <hr>
-            <h3>View Reports</h3>
+            <h3>Reports:</h3>
             <div>
                 <form action="" method="get">
                     <input type='hidden' name='feature_id' value='<?php echo $selected_feature_id ?>'>
-                    <div>
+                    <div class="hidden">
                         <label for="sort-by">Sort By:</label>
                         <select name="sort-by" id="sort-by">
                             <option value="recent" <?php if ($order_by == "tr.created_at DESC")
@@ -197,12 +199,14 @@ if (isset($_GET['feature_id'])) {
                 if (mysqli_num_rows($result) === 0) {
                     echo "<p>There are currently no trail reports.</p>";
                 } else {
-
+                    $count = 1;
                     while ($report = mysqli_fetch_assoc($result)) {
                         $summary = substr($report['summary'], 0, BLURB_LIMIT) . '...';
-
+                        $reportNumber = $count;
+                        $count++;
+                        echo "<h4>$reportNumber.</h4>";
                         echo "<div class='report-item'>";
-                        echo "  <h4><a href='./pages/trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a></h4>";
+                        echo "  <h5><a href='./pages/trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a></h5>";
                         echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
                         echo "  <p><span>Submitted by:</span> " . $report['username'] . "</p>";
                         echo "  <p><span>Submitted on:</span> " . date("Y-m-d", strtotime($report['created_at'])) . "</p>";
@@ -225,11 +229,11 @@ if (isset($_GET['feature_id'])) {
                     }
                 } ?>
 
-                <p><br> <a href="./pages/display_reports.php?filter-by-trail=<?php echo $selected_feature_id ?>"><span
-                            class="em">View
-                            More
-                            Reports</span></a><br>
-                </p>
+                <div class="nav">.
+                    <a href="./pages/display_reports.php?filter-by-trail=<?php echo $selected_feature_id ?>">
+                        View More Reports
+                    </a>
+                </div>
             </div>
         </div>
         <?php
