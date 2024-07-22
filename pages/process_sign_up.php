@@ -62,7 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_start();
             $_SESSION['username'] = $username;
             $_SESSION['user_id'] = $userId;
-            $_SESSION['authenticated'] = true;
 
             $successMessage = "Registration successful! Welcome " . $_SESSION['username'] . ".";
         } else {

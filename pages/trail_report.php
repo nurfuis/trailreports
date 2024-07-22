@@ -49,6 +49,12 @@ mysqli_close($mysqli);
 <?php if (isset($report)): ?>
 
     <div class="single-report">
+        <?php if (isset($_SESSION['user_level']) && $_SESSION['user_level'] === 'admin'): ?>
+            <form action="hide_report.php" method="post">
+                <input type="hidden" name="report_id" value="<?php echo $report['id']; ?>">
+                <button type="submit">Hide Report</button>
+            </form>
+        <?php endif; ?>
         <h3>Trail Report</h3>
         <p><strong>Title:</strong> <?php echo $report['report_title']; ?></p>
         <p><strong>Trail:</strong> <?php echo $report['feature_name']; ?></p>

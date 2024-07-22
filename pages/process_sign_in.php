@@ -45,7 +45,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         session_start();
         $_SESSION['username'] = $row['username'];
         $_SESSION['user_id'] = $row['user_id'];
-        $_SESSION['authenticated'] = true;
+
+        $sql = "SELECT * FROM authorized_users WHERE user_id = ?";
+        $stmt = mysqli_prepare($mysqli, $sql);  // Prepare statement for security
+        mysqli_stmt_bind_param($stmt, "i", $_SESSION['user_id']);  // Bind user ID
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if (mysqli_num_rows($result) > 0) {
+          $_SESSION['user_level'] = 'admin';
+        } else {
+          $_SESSION['user_level'] = 'user';
+        }
+
 
         if ($row['account_status'] === 'inactive') {
           // Update account status to active
