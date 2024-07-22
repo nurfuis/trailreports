@@ -39,6 +39,8 @@ if (!$result) {
 
 if ($result->num_rows === 1) {
     $report = $result->fetch_assoc();
+    $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
+    $postedOnText = $isUpdated ? 'Updated at:' : 'Submitted on:';
 } else {
     // Handle the case where no report is found for the given ID (e.g., display an error message)
     die("Report not found.");
@@ -50,10 +52,23 @@ mysqli_close($mysqli);
 
     <div class="single-report">
         <?php if (isset($_SESSION['user_level']) && $_SESSION['user_level'] === 'admin'): ?>
-            <form action="hide_report.php" method="post">
+            <form id="hideReportForm" action="hide_report.php" method="post" onsubmit="return confirmHideReport()">
                 <input type="hidden" name="report_id" value="<?php echo $report['id']; ?>">
                 <button type="submit">Hide Report</button>
             </form>
+
+            <script>
+                function confirmHideReport() {
+                    // Access report ID from the hidden form field
+                    const reportId = document.getElementById("hideReportForm").elements["report_id"].value;
+
+                    if (confirm(`Are you sure you want to hide report?`)) {
+                        return true; // Submit the form if confirmed
+                    } else {
+                        return false; // Prevent default form submission
+                    }
+                }
+            </script>
         <?php endif; ?>
         <h3>Trail Report</h3>
         <p><strong>Title:</strong> <?php echo $report['report_title']; ?></p>
@@ -68,7 +83,7 @@ mysqli_close($mysqli);
 
         <p class="indented"><?php echo nl2br($summary); ?> </div< /p>
 
-        <p class="indented-top light-text"><i>Submitted on: <?php echo $report['created_at']; ?></i></p>
+        <p class="indented-top light-text"><i><?php echo $postedOnText ?>     <?php echo $report['time_updated']; ?></i></p>
 
     </div>
 

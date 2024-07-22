@@ -257,7 +257,8 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
 
         while ($report = mysqli_fetch_assoc($result)) {
             $summary = substr($report['summary'], 0, BLURB_LIMIT) . '...';
-
+            $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
+            $postedOnText = $isUpdated ? 'Updated at:' : 'Submitted on:';
             echo "<div class='report-item'>";
             echo "  <h4><a href='./trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a>";
             echo "<a class='edit' href='./edit_report.php?id=" . $report['id'] . "' ><span>Edit</span></a>";
@@ -266,7 +267,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
             echo "  <p><span>Trail:</span> " . $report['trail_name'] . "</a></p>";
             echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
 
-            echo "  <p><span>Submitted on:</span> " . date("Y-m-d", strtotime($report['created_at'])) . "</p>";
+            echo "  <p><span>" . $postedOnText . "</span> " . $report['time_updated'] . "</p>";
             $summary = $report['summary'];
 
             if (strlen($summary) > BLURB_LIMIT) {

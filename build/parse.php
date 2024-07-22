@@ -1,6 +1,6 @@
 <?php
 
-require_once realpath("../db_connect.php");
+require_once realpath("./db_connect.php");
 
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
@@ -113,7 +113,6 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                         // Extract feature properties
                         $name = $feature->properties->Name;
                         echo $name . "\n";
-                        $source = $feature->properties->Source;
                         $geometry_type = $feature->geometry->type; // Assuming a single geometry type per feature
 
                         // Process feature (insert or update)
@@ -145,6 +144,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                         $result = $stmt_get_id->get_result();
                         $row = $result->fetch_assoc();
                         $feature_id = $row['id'];
+                        $source = $feature->properties->Source;
 
                         switch ($geometry_type) {
                             case 'Point':
@@ -159,9 +159,9 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                                 break;
                             case 'LineString':
                                 $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
-                                $sql_line = "INSERT INTO polylines (feature_id, geometry) VALUES (?, ST_GeomFromText(?))";
+                                $sql_line = "INSERT INTO polylines (feature_id, geometry) VALUES (?, ST_GeomFromText(?), ?)";
                                 $stmt_line = $mysqli->prepare($sql_line);
-                                $stmt_line->bind_param("is", $feature_id, $wktString);
+                                $stmt_line->bind_param("iss", $feature_id, $wktString, $source);
                                 $stmt_line->execute();
                                 $stmt_line->close();
                                 break;
