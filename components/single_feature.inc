@@ -27,7 +27,7 @@ if (isset($_GET['feature_id'])) {
 
             <?php
             if ($feature['geometry_type'] == 'LineString') {
-                $polyline_sql = "SELECT ST_AsText(geometry) AS text_geometry FROM polylines WHERE feature_id = $selected_feature_id;";
+                $polyline_sql = "SELECT ST_AsText(geometry) AS text_geometry, source FROM polylines WHERE feature_id = $selected_feature_id;";
                 $polyline_result = mysqli_query($mysqli, $polyline_sql);
 
                 if (!$polyline_result) {
@@ -40,7 +40,7 @@ if (isset($_GET['feature_id'])) {
                 // Continue processing only if a first polyline is found
                 if ($first_polyline) {
                     $points = explode(",", substr($first_polyline['text_geometry'], strpos($first_polyline['text_geometry'], "(") + 1, -1));
-
+                    $source = $first_polyline['source'];
                     $first_point = explode(" ", trim($points[0]));
                     $first_longitude = $first_point[0];
                     $first_latitude = $first_point[1];
@@ -49,7 +49,9 @@ if (isset($_GET['feature_id'])) {
 
                     // Create a link to another page with lat, long, and zoom
                     $link_url = "./pages/topo_map.php?name=" . $feature['name'] . "&lat=" . $first_latitude . "&long=" . $first_longitude . "&zoom=13";
-
+                    if (!empty($source)) {
+                        $link_url .= "&source=" . $source;
+                    }
                     echo "<p><span>Location:</span> <a href='$link_url'>" . $geometry_string . "</a></p>";
                 } else {
                     echo "No polylines found for this feature.";

@@ -1,6 +1,6 @@
 <?php
 
-require_once realpath("./db_connect.php");
+require_once realpath("../db_connect.php");
 
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
@@ -112,6 +112,8 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                     foreach ($data->features as $feature) {
                         // Extract feature properties
                         $name = $feature->properties->Name;
+                        $source = $feature->properties->Source;
+
                         echo $name . "\n";
                         $geometry_type = $feature->geometry->type; // Assuming a single geometry type per feature
 
@@ -144,7 +146,6 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                         $result = $stmt_get_id->get_result();
                         $row = $result->fetch_assoc();
                         $feature_id = $row['id'];
-                        $source = $feature->properties->Source;
 
                         switch ($geometry_type) {
                             case 'Point':
@@ -159,7 +160,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                                 break;
                             case 'LineString':
                                 $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
-                                $sql_line = "INSERT INTO polylines (feature_id, geometry) VALUES (?, ST_GeomFromText(?), ?)";
+                                $sql_line = "INSERT INTO polylines (feature_id, geometry, source) VALUES (?, ST_GeomFromText(?), ?)";
                                 $stmt_line = $mysqli->prepare($sql_line);
                                 $stmt_line->bind_param("iss", $feature_id, $wktString, $source);
                                 $stmt_line->execute();

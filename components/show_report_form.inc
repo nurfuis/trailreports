@@ -1,7 +1,7 @@
 <form id="showReportForm" action="show_report.php" method="post"
     onsubmit="return confirmShowReport(<?php echo $report['id']; ?>)">
     <input type="hidden" name="report_id" value="<?php echo $report['id']; ?>">
-    <button type="submit">Show Report</button>
+    <button type="submit">Unhide Report</button>
 </form>
 <script>
     function confirmShowReport(reportId) {

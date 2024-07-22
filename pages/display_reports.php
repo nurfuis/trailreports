@@ -14,10 +14,18 @@ require_once realpath("../db_connect.php");
 
 $trail_sql = "SELECT DISTINCT f.name AS trail_name, f.id AS trail_id 
               FROM trail_reports tr
-              INNER JOIN features f ON tr.feature_id = f.id WHERE tr.active = 1;";
+              INNER JOIN features f ON tr.feature_id = f.id
+              WHERE tr.active = 1;";
 
 $trail_result = mysqli_query($mysqli, $trail_sql);
 
+$no_trails = false;
+
+// Check total reports and set flag if no reports are found
+$num_trails = mysqli_num_rows($trail_result);
+if ($num_trails === 0) {
+  $no_trails = true;
+}
 
 if (isset($_GET['sort-by'])) {
   $sort_by = $_GET['sort-by'];
@@ -120,7 +128,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
     const filterByTrailSelect = document.getElementById("filter-by-trail");
     const dateRangeSelect = document.getElementById("date-range");
     const noReportsInput = document.getElementById("no-reports");
-
+    const noTrailsInput = document.getElementById("no-trails");
     sortBySelect.addEventListener("change", function () {
       this.form.submit(); // Submits form for sort by
     });
@@ -131,7 +139,11 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
     dateRangeSelect.addEventListener("change", function () {
       this.form.submit(); // Submits form for date range
     });
-
+    if (noTrailsInput.value == 1) {
+      sortBySelect.disabled = true;
+      filterByTrailSelect.disabled = true;
+      dateRangeSelect.disabled = true;
+    }
     if (noReportsInput.value == 1) {
       sortBySelect.disabled = true;
     }
@@ -142,6 +154,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
   <h2>View Collection</h2>
   <form action="" method="get">
     <input type="hidden" id="no-reports" value="<?php echo $no_reports ?>">
+    <input type="hidden" id="no-trails" value="<?php echo $no_trails ?>">
 
     <div>
       <label for="filter-by-trail">Filter By Trail:</label>

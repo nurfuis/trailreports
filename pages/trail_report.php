@@ -16,12 +16,23 @@ if ($mysqli->connect_error) {
 
 $reportId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-$sql = "SELECT tr.*, f.name AS feature_name, 
+if (isset($_SESSION['user_level']) && $_SESSION['user_level'] === 'admin') {
+    $sql = "SELECT tr.*, f.name AS feature_name, 
+       COALESCE(tr.title, 'Untitled') AS report_title, u.username
+  FROM trail_reports tr
+ INNER JOIN features f ON tr.feature_id = f.id
+ INNER JOIN users u ON tr.user_id = u.user_id
+ WHERE tr.id = $reportId";
+} else {
+    $sql = "SELECT tr.*, f.name AS feature_name, 
        COALESCE(tr.title, 'Untitled') AS report_title, u.username
   FROM trail_reports tr
  INNER JOIN features f ON tr.feature_id = f.id
  INNER JOIN users u ON tr.user_id = u.user_id
  WHERE tr.id = $reportId AND active = 1;";
+}
+
+
 
 
 if ($mysqli->connect_error) {
@@ -51,7 +62,7 @@ mysqli_close($mysqli);
 <?php if (isset($report)): ?>
 
     <div class="single-report">
-        <?php if (isset($_SESSION['user_level']) && $_SESSION['user_level'] === 'admin'): ?>
+        <?php if (isset($_SESSION['user_level']) && $_SESSION['user_level'] === 'admin' && $report['active'] == 1): ?>
             <form id="hideReportForm" action="hide_report.php" method="post" onsubmit="return confirmHideReport()">
                 <input type="hidden" name="report_id" value="<?php echo $report['id']; ?>">
                 <button type="submit">Hide Report</button>

@@ -1,5 +1,7 @@
-<?php $featureName = isset($_GET['name']) ? $_GET['name'] : '';
-
+<?php
+$featureName = isset($_GET['name']) ? $_GET['name'] : '';
+$source = isset($_GET['source']) ? $_GET['source'] : '';
+$shortSource = substr($source, 0, 12);
 ?>
 
 <!DOCTYPE html>
@@ -124,7 +126,7 @@
 
         var tileLayer = L.tileLayer("https://tile.opentopomap.org/{z}/{x}/{y}.png", {
             maxZoom: 19,
-            attribution: '&copy; <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)',
+            attribution: '&copy; <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA) <span class="source" id="source-span"><span class="source-toggle" id="source-span"> <?php echo $shortSource; ?></span>',
         });
 
         // Add event listener to tile layer 'load' event
@@ -150,6 +152,17 @@
         </div>
     </div>
     <script>
+
+        const sourceSpan = document.getElementById('source-span');
+        const fullSource = '<?php echo $source; ?>'; // Store the full source in a variable
+
+        sourceSpan.addEventListener('click', function () {
+            if (sourceSpan.textContent.length <= 13) {
+                sourceSpan.textContent = fullSource;
+            } else {
+                sourceSpan.textContent = sourceSpan.textContent.substring(0, 10) + '...';
+            }
+        });
         const overlay = document.querySelectorAll('.overlay')[0];
         const closeButton = document.getElementById('close-overlay');
 

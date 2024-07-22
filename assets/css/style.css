@@ -35,6 +35,9 @@ body {
   background-color: var(--dark-background);
   color: var(--text);
 }
+.center {
+  text-align: center;
+}
 .em {
   font-weight: 500;
 }
@@ -508,6 +511,22 @@ input {
   color: var(--light-background);
   background-color: var(--darker-background);
   padding-bottom: 1rem;
+}
+.confirm-delete button {
+  margin-right: 1rem;
+  border: 1px solid var(--highlight);
+}
+.confirm-delete a {
+  display: inline-block;
+  border: 1px solid var(--darker-background);
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  font-family: "K2D";
+  font-size: small;
+}
+.source {
+  font-family: "K2D";
+  font-weight: 200;
+  color: var(--darker-background);
 }
 @media only screen and (max-width: 768px) {
   .pagination a {

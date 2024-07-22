@@ -37,15 +37,15 @@ mysqli_stmt_close($stmt);
 ?>
 
 <main>
-
   <h2>Confirm Report Deletion</h2>
   <p>Are you sure you want to delete the report titled "<b><?php echo $reportTitle; ?></b>"?</p>
-
-  <form action="./process_delete.php" method="post">
-    <input type="hidden" name="report_id" value="<?php echo $reportId; ?>"> <button type="submit" class="btn btn-danger">Delete</button>
-    <a href="./user_reports.php" class="btn-secondary">Cancel</a>
-  </form>
-
+  <div class="confirm-delete">
+    <form action="./process_delete.php" method="post">
+      <input type="hidden" name="report_id" value="<?php echo $reportId; ?>"> <button type="submit"
+        class="btn btn-danger">Delete</button>
+      <a href="./user_reports.php" class="btn-secondary">Cancel</a>
+    </form>
+  </div>
 </main>
 
 </body>

@@ -16,6 +16,8 @@
   <?php
   if (isset($_SESSION['user_level']) && $_SESSION['user_level'] === 'admin') {
     echo '<p><a href="/pages/hidden_reports.php">Hidden Reports</a></p>';
+    echo '<p><a href="/pages/display_users.php">Display Users</a></p>';
+
   }
   ?>
   <p><a href="/pages/user_reports.php">Edit Reports</a></p>
