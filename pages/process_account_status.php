@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_id'])) {
   exit;
 }
 
-require_once realpath("../../db_connect.php"); // $msqli connect
+require_once realpath("../db_connect.php"); // $msqli connect
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $user_id = $_SESSION['user_id']; // Get user ID from session

@@ -9,13 +9,13 @@ docs
 data
 *.sql
 *.sh
+*.txt
 # User-specific files
 *.rsuser
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
-
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

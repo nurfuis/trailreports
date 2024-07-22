@@ -4,12 +4,12 @@ $page_title = "User's Reports";
 $page_css = "../assets/css/style.css";
 $currentPagePath = $_SERVER['SCRIPT_NAME'];
 
-require_once realpath("../../config.php");
+require_once realpath(".././config.php");
 
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");
 
-require_once realpath("../../db_connect.php");
+require_once realpath("../db_connect.php");
 
 session_start();
 if (isset($_SESSION['user_id'])) {
