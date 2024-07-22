@@ -66,15 +66,20 @@ $items_per_page = 10;
 $current_page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $offset = ($current_page - 1) * $items_per_page;
 $sql_count = "SELECT COUNT(*) AS total_reports
-              FROM trail_reports tr
-              INNER JOIN features f ON tr.feature_id = f.id WHERE tr.active = 1";
-$sql_count .= $date_range_sql;
+             FROM trail_reports tr
+             INNER JOIN features f ON tr.feature_id = f.id
+             WHERE tr.active = 1";
 
 if (isset($_GET['filter-by-trail']) && $_GET['filter-by-trail'] != "all") {
-  $selected_trail = $_GET['filter-by-trail'];
-  $sql_count .= " WHERE tr.feature_id = $selected_trail";
+  $selected_trail = (int) $_GET['filter-by-trail'];  // Cast to integer for safety
+  $stmt = mysqli_prepare($mysqli, $sql_count . " AND tr.feature_id = ?");  // Prepare statement
+  mysqli_stmt_bind_param($stmt, "i", $selected_trail);  // Bind parameter safely
+  mysqli_stmt_execute($stmt);
+  $count_result = mysqli_stmt_get_result($stmt);  // Get results from prepared statement
+  mysqli_stmt_close($stmt);
+} else {
+  $count_result = mysqli_query($mysqli, $sql_count);
 }
-$count_result = mysqli_query($mysqli, $sql_count);
 
 if ($count_result) {
   $count_row = mysqli_fetch_assoc($count_result);
@@ -90,13 +95,13 @@ if ($total_reports == 0) {
 $total_pages = ceil($total_reports / $items_per_page);
 
 $sql = "SELECT tr.*, f.name AS trail_name, u.username
-        FROM trail_reports tr
+        FROM trail_reports tr 
         INNER JOIN features f ON tr.feature_id = f.id
         INNER JOIN users u ON tr.user_id = u.user_id WHERE tr.active = 1";
 
 if (isset($_GET['filter-by-trail']) && $_GET['filter-by-trail'] != "all") {
   $selected_trail = $_GET['filter-by-trail'];
-  $sql .= " WHERE tr.feature_id = $selected_trail"; // Filter by trail ID
+  $sql .= " AND tr.feature_id = $selected_trail"; // Filter by trail ID
 }
 
 $sql .= $date_range_sql;
@@ -241,7 +246,8 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
     while ($report = mysqli_fetch_assoc($result)) {
       $reportNumber = ($current_page - 1) * $items_per_page + $count;
       $count++;
-
+      $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
+      $postedOnText = $isUpdated ? 'Updated at:' : 'Submitted on:';
       $summary = substr($report['summary'], 0, BLURB_LIMIT) . '...';
       echo "<h4>$reportNumber.</h4>";
       echo "<div class='report-item'>";
@@ -249,7 +255,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
       echo "  <p><span>Trail:</span> " . $report['trail_name'] . "</a></p>";
       echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
 
-      echo "  <p><span>Submitted on:</span> " . date("Y-m-d", strtotime($report['created_at'])) . "</p>";
+      echo "  <p><span>" . $postedOnText . "</span> " . $report['time_updated'] . "</p>";
       $summary = $report['summary'];
 
       if (strlen($summary) > BLURB_LIMIT) {

@@ -23,6 +23,8 @@ if ($result->num_rows >= 1) {
     $report = $result->fetch_assoc();
     $ratings = array_flip(OVERALL_RATINGS);
     $summary = $report['summary'];
+    $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
+    $postedOnText = $isUpdated ? 'Updated at:' : 'Submitted on:';
 
     if (strlen($summary) > SUMMARY_LIMIT) {
         $summary = substr($summary, 0, SUMMARY_LIMIT) . '...';
@@ -45,7 +47,7 @@ if ($result->num_rows >= 1) {
                 <a href="./pages/trail_report.php?id=<?php echo $report['id']; ?>" class="read-more-btn">read more</a>
             <?php endif; ?>
         </p>
-        <p class="indented-top light-text"><i>Submitted on: <?php echo $report['created_at']; ?></i></p>
+        <p class="indented-top light-text"><i><?php echo $postedOnText ?> <?php echo $report['time_updated']; ?></i></p>
 
     </div>
 

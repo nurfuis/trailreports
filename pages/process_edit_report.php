@@ -29,9 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($reportId) || empty($featureId) || empty($rating) || empty($summary) || empty($title)) {
         $errorMessage = "Please fill out all required fields.";
     } else {
-        $sql = "UPDATE trail_reports SET feature_id = ?, rating = ?, summary = ?, title = ? WHERE id = ?";
+        $sql = "UPDATE trail_reports SET feature_id = ?, rating = ?, summary = ?, title = ?, time_updated = NOW() WHERE id = ?";
         $stmt = mysqli_prepare($mysqli, $sql);
-        mysqli_stmt_bind_param($stmt, "iissi", $featureId, $rating, $summary, $title, $reportId); // Bind parameters
+        mysqli_stmt_bind_param($stmt, "iissi", $featureId, $rating, $summary, $title, $reportId);
 
         if (mysqli_stmt_execute($stmt)) {
             $successMessage = "Trail report updated successfully!";

@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errorMessage = "Please fill out all required fields.";
     } else {
 
-        $sql = "INSERT INTO trail_reports (feature_id, user_id, rating, summary, title) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO trail_reports (feature_id, user_id, rating, summary, title, time_updated) VALUES (?, ?, ?, ?, ?, NOW())";
         $stmt = mysqli_prepare($mysqli, $sql);
         mysqli_stmt_bind_param($stmt, "iiiss", $featureId, $userId, $rating, $summary, $title); // Bind title parameter
 
