@@ -4,7 +4,7 @@ $page_title = "User's Reports";
 $page_css = "../assets/css/style.css";
 $currentPagePath = $_SERVER['SCRIPT_NAME'];
 
-require_once realpath(".././config.php");
+require_once realpath("../../config.php");
 
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");
@@ -22,7 +22,8 @@ if (isset($_SESSION['user_id'])) {
 
 $trail_sql = "SELECT DISTINCT f.name AS trail_name, f.id AS trail_id 
               FROM trail_reports tr
-              INNER JOIN features f ON tr.feature_id = f.id;";
+              INNER JOIN features f ON tr.feature_id = f.id
+              WHERE tr.user_id = " . $_SESSION['user_id'];
 
 $trail_result = mysqli_query($mysqli, $trail_sql);
 
@@ -135,7 +136,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
                 <?php
                 if ($trail_result && mysqli_num_rows($trail_result) > 0) {
                     while ($trail = mysqli_fetch_assoc($trail_result)) {
-                        $selected = ($selected_trail == $trail['trail_id']) ? "selected" : ""; // Check for selected trail
+                        $selected = ($selected_trail == $trail['trail_id']) ? "selected" : "";
                         echo "<option value='" . $trail['trail_id'] . "' $selected>" . $trail['trail_name'] . "</option>";
                     }
                 }

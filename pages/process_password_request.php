@@ -7,7 +7,7 @@ include_once realpath("../layouts/wide.inc");
 
 session_start();
 
-require_once realpath(".././config.php");
+require_once realpath("../../config.php");
 require_once realpath("../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

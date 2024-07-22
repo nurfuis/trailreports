@@ -6,7 +6,7 @@ $currentPagePath = "";
 include realpath("../components/head.inc");
 include realpath("../layouts/wide.inc");
 
-require_once realpath(".././config.php");
+require_once realpath("../../config.php");
 require_once realpath("../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

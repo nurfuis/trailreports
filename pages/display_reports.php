@@ -5,7 +5,7 @@ $page_css = "../assets/css/style.css";
 
 session_start();
 
-require_once realpath(".././config.php");
+require_once realpath("../../config.php");
 
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");
