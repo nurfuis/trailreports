@@ -9,40 +9,52 @@ include_once realpath("../layouts/wide.inc");
 require_once realpath("../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_SESSION['last_submitted_time'])) {
-        $lastSubmittedTime = (int) $_SESSION['last_submitted_time'];
-
-        $timeDifference = $currentTime - $lastSubmittedTime;
-        if ($timeDifference < 15) {
-            $errorMessage = "Please wait a moment before submitting again.";
-            goto after_validation;
-        }
+  if (isset($_SESSION['last_submitted_time'])) {
+    $lastSubmittedTime = (int) $_SESSION['last_submitted_time'];
+    $timeDifference = $currentTime - $lastSubmittedTime;
+    if ($timeDifference < 15) {
+      $errorMessage = "Please wait a moment before submitting again.";
+      goto after_validation;
     }
+  }
 
-    $reportId = (int) mysqli_real_escape_string($mysqli, trim($_POST['report_id'])); // Get report ID for update
-    $userId = (int) mysqli_real_escape_string($mysqli, trim($_POST['user_id'])); // Get user ID
-    $featureId = (int) mysqli_real_escape_string($mysqli, trim($_POST['feature']));
-    $rating = (int) mysqli_real_escape_string($mysqli, trim($_POST['rating']));
-    $summary = trim($_POST['summary']);
-    $title = mysqli_real_escape_string($mysqli, trim($_POST['title'])); // Get the title
+  $reportId = (int) mysqli_real_escape_string($mysqli, trim($_POST['report_id'])); // Get report ID for update
+  $userId = (int) mysqli_real_escape_string($mysqli, trim($_POST['user_id'])); // Get user ID
+  $featureId = (int) mysqli_real_escape_string($mysqli, trim($_POST['feature']));
+  $rating = (int) mysqli_real_escape_string($mysqli, trim($_POST['rating']));
+  $summary = trim($_POST['summary']);
+  $title = mysqli_real_escape_string($mysqli, trim($_POST['title'])); // Get the title
 
-    if (empty($reportId) || empty($featureId) || empty($rating) || empty($summary) || empty($title)) {
-        $errorMessage = "Please fill out all required fields.";
+  if (empty($reportId) || empty($featureId) || empty($rating) || empty($summary) || empty($title)) {
+    $errorMessage = "Please fill out all required fields.";
+  } else {
+    // Check editing time limit
+    $sqlCheck = "SELECT created_at FROM trail_reports WHERE id = ?";
+    $stmtCheck = mysqli_prepare($mysqli, $sqlCheck);
+    mysqli_stmt_bind_param($stmtCheck, "i", $reportId);
+    mysqli_stmt_execute($stmtCheck);
+    mysqli_stmt_bind_result($stmtCheck, $createdAt);
+    mysqli_stmt_fetch($stmtCheck);
+    mysqli_stmt_close($stmtCheck);
+
+    $oneHourAgo = $currentTime - 3600; // 1 hour in seconds
+
+    if ($createdAt < $oneHourAgo) {
+      $errorMessage = "This report cannot be edited after one hour of creation.";
     } else {
-        $sql = "UPDATE trail_reports SET feature_id = ?, rating = ?, summary = ?, title = ? WHERE id = ?";
-        $stmt = mysqli_prepare($mysqli, $sql);
-        mysqli_stmt_bind_param($stmt, "iissi", $featureId, $rating, $summary, $title, $reportId); // Bind parameters
-
-        if (mysqli_stmt_execute($stmt)) {
-            $successMessage = "Trail report updated successfully!";
-            header("Location: ./user_reports.php?success=true"); // Redirect to reports page
-
-        } else {
-            $errorMessage = "Error updating report: " . mysqli_stmt_error($stmt);
-        }
-
-        mysqli_stmt_close($stmt);
+      // Update report if allowed
+      $sql = "UPDATE trail_reports SET feature_id = ?, rating = ?, summary = ?, title = ?, time_updated = ? WHERE id = ?";
+      $stmt = mysqli_prepare($mysqli, $sql);
+      mysqli_stmt_bind_param($stmt, "iissiii", $featureId, $rating, $summary, $title, $currentTime, $reportId); // Bind parameters with updated time
+      if (mysqli_stmt_execute($stmt)) {
+        $successMessage = "Trail report updated successfully!";
+        header("Location: ./user_reports.php?success=true"); // Redirect to reports page
+      } else {
+        $errorMessage = "Error updating report: " . mysqli_stmt_error($stmt);
+      }
+      mysqli_stmt_close($stmt);
     }
+  }
 }
 
 after_validation:
@@ -52,14 +64,15 @@ $_SESSION['last_submitted_time'] = $currentTime;
 mysqli_close($mysqli);
 
 ?>
+
 <main>
 
-    <?php if (!empty($errorMessage)): ?>
-        <p style="color: red;"><?= $errorMessage ?></p>
-    <?php elseif (!empty($successMessage)): ?>
-        <p style="color: green;"><?= $successMessage ?></p>
-        <h2>Your report has been updated!</h2>
-    <?php endif; ?>
+  <?php if (!empty($errorMessage)): ?>
+    <p style="color: red;"><?= $errorMessage ?></p>
+  <?php elseif (!empty($successMessage)): ?>
+    <p style="color: green;"><?= $successMessage ?></p>
+    <h2>Your report has been updated!</h2>
+  <?php endif; ?>
 
 </main>
 
