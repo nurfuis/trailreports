@@ -4,7 +4,7 @@ $page_title = "User's Reports";
 $page_css = "../assets/css/style.css";
 $currentPagePath = $_SERVER['SCRIPT_NAME'];
 
-require_once realpath("../../config.php");
+require_once realpath("../config.php");
 
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");
@@ -23,7 +23,7 @@ if (isset($_SESSION['user_id'])) {
 $trail_sql = "SELECT DISTINCT f.name AS trail_name, f.id AS trail_id 
               FROM trail_reports tr
               INNER JOIN features f ON tr.feature_id = f.id
-              WHERE tr.user_id = " . $_SESSION['user_id'];
+              WHERE tr.user_id = " . $_SESSION['user_id'] . " AND active = 1";
 
 $trail_result = mysqli_query($mysqli, $trail_sql);
 
@@ -78,7 +78,7 @@ $offset = ($current_page - 1) * $items_per_page;
 $sql_count = "SELECT COUNT(*) AS total_reports
               FROM trail_reports tr
               INNER JOIN features f ON tr.feature_id = f.id
-              WHERE tr.user_id = " . $_SESSION['user_id'];
+              WHERE tr.user_id = " . $_SESSION['user_id'] . " AND active = 1";
 
 $sql_count .= $date_range_sql; // Apply date range filter
 
@@ -106,7 +106,7 @@ $sql = "SELECT tr.*, f.name AS trail_name, u.username
         FROM trail_reports tr
         INNER JOIN features f ON tr.feature_id = f.id
         INNER JOIN users u ON tr.user_id = u.user_id
-        WHERE tr.user_id = " . $_SESSION['user_id'];
+        WHERE tr.user_id = " . $_SESSION['user_id'] . " AND active = 1";
 
 if (isset($_GET['filter-by-trail']) && $_GET['filter-by-trail'] != "all") {
     $selected_trail = $_GET['filter-by-trail'];
@@ -259,7 +259,10 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
             $summary = substr($report['summary'], 0, BLURB_LIMIT) . '...';
 
             echo "<div class='report-item'>";
-            echo "  <h4><a href='./trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a></h4>";
+            echo "  <h4><a href='./trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a>";
+            echo "<a class='edit' href='./edit_report.php?id=" . $report['id'] . "' ><span>Edit</span></a>";
+            echo "<a class='delete' href='./confirm_delete.php?id=" . $report['id'] . "'><span>Delete</span></a></h4>";
+
             echo "  <p><span>Trail:</span> " . $report['trail_name'] . "</a></p>";
             echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
 

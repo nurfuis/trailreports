@@ -226,7 +226,22 @@ button {
   height: 35vh;
   resize: vertical;
 }
-
+.edit {
+  font-family: "K2D";
+  font-weight: 300;
+  display: inline-block;
+  font-size: smaller;
+  margin: 0.5rem;
+  color: var(--text-light);
+}
+.delete {
+  font-family: "K2D";
+  font-weight: 300;
+  display: inline-block;
+  font-size: smaller;
+  margin: 0.5rem;
+  color: var(--highlight);
+}
 .header {
   background-color: var(--light-background);
   display: flex;

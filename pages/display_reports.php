@@ -5,7 +5,7 @@ $page_css = "../assets/css/style.css";
 
 session_start();
 
-require_once realpath("../../config.php");
+require_once realpath("../config.php");
 
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");
@@ -14,7 +14,7 @@ require_once realpath("../db_connect.php");
 
 $trail_sql = "SELECT DISTINCT f.name AS trail_name, f.id AS trail_id 
               FROM trail_reports tr
-              INNER JOIN features f ON tr.feature_id = f.id;";
+              INNER JOIN features f ON tr.feature_id = f.id WHERE tr.active = 1;";
 
 $trail_result = mysqli_query($mysqli, $trail_sql);
 
@@ -67,7 +67,7 @@ $current_page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $offset = ($current_page - 1) * $items_per_page;
 $sql_count = "SELECT COUNT(*) AS total_reports
               FROM trail_reports tr
-              INNER JOIN features f ON tr.feature_id = f.id";
+              INNER JOIN features f ON tr.feature_id = f.id WHERE tr.active = 1";
 $sql_count .= $date_range_sql;
 
 if (isset($_GET['filter-by-trail']) && $_GET['filter-by-trail'] != "all") {
@@ -92,7 +92,7 @@ $total_pages = ceil($total_reports / $items_per_page);
 $sql = "SELECT tr.*, f.name AS trail_name, u.username
         FROM trail_reports tr
         INNER JOIN features f ON tr.feature_id = f.id
-        INNER JOIN users u ON tr.user_id = u.user_id";
+        INNER JOIN users u ON tr.user_id = u.user_id WHERE tr.active = 1";
 
 if (isset($_GET['filter-by-trail']) && $_GET['filter-by-trail'] != "all") {
   $selected_trail = $_GET['filter-by-trail'];

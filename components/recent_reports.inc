@@ -4,7 +4,7 @@ $sql = "SELECT tr.*, f.name AS feature_name,
        COALESCE(tr.title, 'Untitled') AS report_title, u.username
   FROM trail_reports tr
   INNER JOIN features f ON tr.feature_id = f.id
-  INNER JOIN users u ON tr.user_id = u.user_id
+  INNER JOIN users u ON tr.user_id = u.user_id WHERE tr.active = 1
   ORDER BY tr.created_at DESC
   LIMIT 6;";
 
@@ -78,7 +78,7 @@ if ($result->num_rows >= 1) {
     <hr>
     <div class="regular-padding nav">
         <a href="./pages/add_report.php">Submit a
-            Report</a> <span class="em">or</span> 
+            Report</a> <span class="em">or</span>
         <a href="./pages/display_reports.php">View More Reports</a>
     </div>
 </div>

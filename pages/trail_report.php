@@ -7,7 +7,7 @@ $previousPage = $_SERVER['HTTP_REFERER'];
 session_start();
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/bud.inc");
-require_once realpath("../../config.php");
+require_once realpath("../config.php");
 require_once realpath("../db_connect.php");
 
 if ($mysqli->connect_error) {
@@ -21,7 +21,7 @@ $sql = "SELECT tr.*, f.name AS feature_name,
   FROM trail_reports tr
  INNER JOIN features f ON tr.feature_id = f.id
  INNER JOIN users u ON tr.user_id = u.user_id
- WHERE tr.id = $reportId;";
+ WHERE tr.id = $reportId AND active = 1;";
 
 
 if ($mysqli->connect_error) {
