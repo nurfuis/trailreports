@@ -1,6 +1,6 @@
 <?php
 
-$tokenBytes = random_bytes(6);
+$tokenBytes = "1111";
 if ($tokenBytes !== false) {
     echo '$tokenBytes';
 } else {
