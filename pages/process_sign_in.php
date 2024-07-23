@@ -97,6 +97,8 @@ if (!empty($errorMessage)) {
 
 } else if (!empty($successMessage)) {
   if (!!$redirect_path) {
+    echo "<p>$successMessage</p>";
+
     header("Location: $redirect_path");
   } else {
 

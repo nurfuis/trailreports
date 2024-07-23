@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errorMessage = "Please enter a valid email address.";
     echo '<p class="alert">' . $errorMessage . '</p>';
     include_once realpath("../components/update_email_form.inc");
-    exit; 
+    exit;
   }
 
   $sql = "SELECT COUNT(*) FROM users WHERE email = ?";
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $subject = "Email Verification for Trail Reports Website";
       $message = "Thank you for registering on Trail Reports! \n\n";
       $message .= "Please click the following link to verify your email address and activate your account: \n";
-      $verification_link = HOST_ADDRESS . "/pages/verify_email.php?token=" . $token;
+      $verification_link = "bigsurtrailreports.net" . "/pages/verify_email.php?token=" . $token;
       $message .= $verification_link . "\n\n";
       $message .= "This link will expire in 24 hours. \n\n";
       $message .= "If you did not register on Trail Reports, please ignore this email. \n\n";
