@@ -2,6 +2,8 @@
 
 $page_title = "Received Messages";
 $page_css = "/assets/css/style.css";
+session_start();
+
 require_once realpath("../components/is_admin.inc");
 
 require_once realpath("../../db_connect.php");
