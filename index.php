@@ -29,4 +29,5 @@ if (isset($_GET['feature_id'])) {
 }
 
 $mysqli->close();
+include_once realpath("./components/footer.inc");
 include_once realpath("./components/tail.inc");

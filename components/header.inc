@@ -33,23 +33,20 @@
     <div class="dropdown-menu link-grid">
       <a href="./pages/display_reports.php" class="link">View Trail Reports</a>
       <a href="./pages/add_report.php" class="link">Submit a Trail Report</a>
-      <a href="./pages/features.php" class="link hidden">Trails Index</a>
+      <a href="./pages/features.php" class="link">Trails Index</a>
       <a href="./pages/topo-map.html" class="link hidden">Topo Map</a>
     </div>
   </div>
 
-
   <div class="dropdown" data-dropdown>
     <button class="link" data-dropdown-button>About</button>
     <div class="dropdown-menu link-grid">
-      <a href="/" class="link">Support Us</a>
-      <a href="/" class="link">Learn More</a>
-      <a href="/" class="link">Contact</a>
+      <a href="./pages/support_us.php" class="link">Support Us</a>
+      <a href="/" class="link hidden">Learn More</a>
+      <a href="./pages/contact.php" class="link">Contact</a>
 
     </div>
   </div>
-
-
 </div>
 
 <script>

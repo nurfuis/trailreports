@@ -1,6 +1,6 @@
 <?php
 
-$page_title = "Features";
+$page_title = "Trail Features";
 $page_css = "../assets/css/style.css";
 
 session_start();
@@ -12,7 +12,8 @@ require_once realpath("../db_connect.php");
 
 ?>
 <div class="features">
-    <h2>Features</h2>
+    <h1>Features</h1>
+    <h2>Trails Collection</h2>
 
     <?php
     // Write the query to select all features with collection name
@@ -107,15 +108,18 @@ INNER JOIN collections c ON f.collections_id = c.id;";
             // Formatted feature details
             echo "<div class='feature-item'>";
             echo "  <p>" . $name . "</p>";
-            echo "  <p><span>Collection:</span> " . $collection_name . "</p>";
-            echo "  <p><span>Coords:</span> " . $geometry_string . "</p>";
-            // Add any additional details you want to display (description, etc.)
+            echo '<div class="nav"><a href="./add_report.php?id=' . $feature_id . '">Submit a Report</a></div>';
+            $link_url = "./topo_map.php?name=" . $feature['name'] . "&lat=" . $first_latitude . "&long=" . $first_longitude . "&zoom=13";
+            if (!empty($source)) {
+                $link_url .= "&source=" . $source;
+            }
+            echo "<p><span>Location:</span> <a href='$link_url'>" . $geometry_string . "</a></p>";
+            echo '<div class="nav"><a href="./display_reports.php?filter-by-trail=' . $feature_id . '">View Reports</a></div>';
             echo "</div>";
         }
     }
     echo "</div>";
     mysqli_close($mysqli);
 
-    include_once realpath("../components/add_feature_form.inc");
 
     include_once realpath("../components/tail.inc");
