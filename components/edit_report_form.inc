@@ -5,7 +5,7 @@ require_once realpath("../../db_connect.php");
 $selectedFeature = "";
 $reportId = isset($_GET['id']) ? $_GET['id'] : '';
 
-$sqlFeatures = "SELECT id, name FROM features WHERE collections_id IN (" . implode(",", COLLECTION_IDS) . ")";
+$sqlFeatures = "SELECT id, name FROM features WHERE collections_id IN (1)";
 $resultFeatures = $mysqli->query($sqlFeatures);
 if (!$resultFeatures) {
   die("Error retrieving features: " + $mysqli->error);
