@@ -1,10 +1,8 @@
 <?php
 
-$tokenBytes = random_bytes(16);
+$tokenBytes = random_bytes(6);
 if ($tokenBytes !== false) {
-  $token = bin2hex($tokenBytes);
-  // Use the token here...
+    $token = bin2hex($tokenBytes);
 } else {
-  // Handle the error: log it or display a user-friendly message
-  error_log("Failed to generate random bytes for token");
+    error_log("Failed to generate random bytes for token");
 }
