@@ -1,6 +1,5 @@
 <?php
-
-$trail_sql = "SELECT id, name FROM features WHERE collections_id IN (" . implode(",", COLLECTION_IDS) . ")";
+$trail_sql = "SELECT id, name FROM features WHERE collections_id IN ('" . implode("','", COLLECTION_IDS) . "')";
 $trail_result = mysqli_query($mysqli, $trail_sql);
 
 if (!$trail_result) {
