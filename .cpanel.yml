@@ -11,3 +11,4 @@ deployment:
     - /bin/cp -R 500.html $DEPLOYPATH
     - /bin/cp -R favicon.png $DEPLOYPATH
     - /bin/cp -R home.php $DEPLOYPATH
+    - /bin/cp -R index.html $DEPLOYPATH
