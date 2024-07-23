@@ -4,7 +4,7 @@ $page_title = "Hidden Reports";
 $page_css = "../assets/css/style.css";
 
 session_start();
-require_once realpath(("../components/is_admin.inc"));
+require_once realpath("../components/is_admin.inc");
 
 require_once realpath("../../config.php");
 

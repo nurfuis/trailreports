@@ -3,8 +3,8 @@
 $page_title = "Display Users";
 $page_css = "../assets/css/style.css";
 session_start();
+require_once realpath("../components/is_admin.inc");
 
-require_once realpath(("../components/is_admin.inc"));
 include_once realpath("../components/head.inc"); // Top section up to and including body tag
 include_once realpath("../layouts/wide.inc"); // An open div with layout class
 require_once realpath("../../db_connect.php"); // $msqli connection
