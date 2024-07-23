@@ -4,11 +4,11 @@ $page_title = "Email Verification";
 $page_css = "/assets/css/style.css";
 
 include_once realpath("../components/head.inc");
-include_once realpath("../layouts/single.inc");
+include_once realpath("../layouts/wide.inc");
 
 session_start();
 
-require_once realpath("../../db_connect.php");
+require_once realpath("../db_connect.php");
 
 if (isset($_GET['token'])) {
 

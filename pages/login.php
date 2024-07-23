@@ -4,9 +4,9 @@ $page_title = "Login";
 $page_css = "/assets/css/style.css";
 
 include_once realpath("../components/head.inc");
-include_once realpath("../layouts/single.inc");
+include_once realpath("../layouts/wide.inc");
 
-require_once realpath("../../db_connect.php");
+require_once realpath("../db_connect.php");
 
 if (isset($_GET['token'])) {
 
@@ -37,8 +37,18 @@ if (isset($_GET['token'])) {
     session_start();
     $_SESSION['user_id'] = $user_id;
     $_SESSION['username'] = $username;
-    $_SESSION['authenticated'] = true;
 
+    $sql = "SELECT * FROM authorized_users WHERE user_id = ?";
+    $stmt = mysqli_prepare($mysqli, $sql);  // Prepare statement for security
+    mysqli_stmt_bind_param($stmt, "i", $_SESSION['user_id']);  // Bind user ID
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if (mysqli_num_rows($result) > 0) {
+      $_SESSION['user_level'] = 'admin';
+    } else {
+      $_SESSION['user_level'] = 'user';
+    }
 
     $sql = "UPDATE users SET login_token = NULL, login_token_expiry = NULL, email_login_attempts = 0 WHERE user_id = ?";
     $stmt = mysqli_prepare($mysqli, $sql);
