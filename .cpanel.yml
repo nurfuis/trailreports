@@ -9,4 +9,4 @@ deployment:
     - /bin/cp -R 404.html $DEPLOYPATH
     - /bin/cp -R 500.html $DEPLOYPATH
     - /bin/cp -R favicon.png $DEPLOYPATH
-    - /bin/cp -R index.php $DEPLOYPATH
+    - /bin/cp -R home.php $DEPLOYPATH
