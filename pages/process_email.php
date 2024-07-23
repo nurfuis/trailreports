@@ -32,18 +32,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   } else {
     session_start();
+    echo 'post exists';
 
     $user_id = $_SESSION['user_id'];
+    echo $user_id;
+
     $token = bin2hex(random_bytes(16));
+    echo $token;
+
     $expiry = date("Y-m-d H:i:s", strtotime("+24 hours"));
+    echo $expiry;
 
     $sql = "UPDATE users SET pending_email = ?, verification_token = ?, verification_token_expiry = ? WHERE user_id = ?";
     $stmt = mysqli_prepare($mysqli, $sql);
     mysqli_stmt_bind_param($stmt, "ssss", $email, $token, $expiry, $user_id);
 
     if (mysqli_stmt_execute($stmt)) {
-      echo 'post exists';
-
       $successMessage = "Email registration is pending. Please verify your email address by clicking the link in the confirmation email we sent you. Once verified, you will be able to post and edit trail reports.";
 
       $to = $email;
