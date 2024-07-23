@@ -3,7 +3,7 @@
 $page_title = "Received Messages";
 $page_css = "/assets/css/style.css";
 
-require_once realpath(("../components/is_admin.inc"));
+require_once realpath("../components/is_admin.inc");
 require_once realpath("../../db_connect.php");
 
 include_once realpath("../components/head.inc");
