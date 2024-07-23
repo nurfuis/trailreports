@@ -37,7 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user_id'];
     echo $user_id;
 
-    $token = bin2hex(random_bytes(16));
+    $token = "token";
+    // $token = bin2hex(random_bytes(16));
     echo $token;
 
     $expiry = date("Y-m-d H:i:s", strtotime("+24 hours"));
