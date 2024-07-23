@@ -81,7 +81,7 @@ if (!empty($errorMessage)) {
 
 } else if (!empty($successMessage)) {
     echo "<p style='color: blue;'>$successMessage</p>";
-    header("Location: /pages/email.php");
+    header("Location: ./email.php");
 }
 
 
