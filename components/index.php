@@ -1,4 +1,4 @@
 <?php
 // Send a permanent (301) redirect header
-header("Location: /");
+header("Location: /home.php");
 exit;
