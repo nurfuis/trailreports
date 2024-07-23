@@ -1,5 +1,5 @@
 <?php
-$trail_sql = "SELECT id, name FROM features WHERE collections_id IN 1";
+$trail_sql = "SELECT id, name FROM features WHERE collections_id IN (1)";
 $trail_result = mysqli_query($mysqli, $trail_sql);
 
 if (!$trail_result) {
