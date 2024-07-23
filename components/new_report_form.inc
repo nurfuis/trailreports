@@ -3,8 +3,11 @@ require_once realpath("../config.php");
 require_once realpath("../db_connect.php");
 
 $selectedFeature = "";
-$sqlFeatures = "SELECT id, name FROM features WHERE collections_id IN (" . implode(",", COLLECTION_IDS) . ")";
+$quotedIds = array_map(function ($id) {
+    return "'$id'";  // Wrap each ID in quotes
+}, COLLECTION_IDS);
 
+$sqlFeatures = "SELECT id, name FROM features WHERE collections_id IN (" . implode(",", $quotedIds) . ")";
 $resultFeatures = $mysqli->query($sqlFeatures);
 if (!$resultFeatures) {
     die("Error retrieving features: " . $mysqli->error);
