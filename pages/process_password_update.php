@@ -12,8 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_password = mysqli_real_escape_string($mysqli, trim($_POST['new_password']));
     $user_id = mysqli_real_escape_string($mysqli, trim($_POST['user_id']));
 
-    echo $user_id;
-
     $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
     $sql = "UPDATE users SET password_hash = ?, reset_token = NULL, reset_token_expiry = NULL, login_attempts = 0 WHERE user_id = ?";

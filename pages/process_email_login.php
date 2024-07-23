@@ -57,8 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $message .= $login_link . "\n\n";
                 $message .= "This link will expire in 1 hour. \n\n";
                 $message .= "If you did not request a login link, please ignore this email. \n\n";
-
-                if (mail($to, $subject, $message)) {
+                $headers = 'From: noreply@bigsurtrailreports.net' . "\r\n";
+                if (mail($to, $subject, $message, $headers)) {
                     $successMessage = "A login link has been sent to your email address.";
                 } else {
                     $errorMessage = "Failed to send login link. Please try again.";
