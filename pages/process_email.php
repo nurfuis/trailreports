@@ -10,7 +10,6 @@ require_once realpath("../../config.php");
 require_once realpath("../../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  echo 'post exists';
   $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
 
   if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
@@ -33,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   } else {
     session_start();
+    echo 'post exists';
 
     $user_id = $_SESSION['user_id'];
     $token = bin2hex(random_bytes(16));
