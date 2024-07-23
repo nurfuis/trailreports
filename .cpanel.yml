@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/example/public_html/
-    - /bin/cp -R repositories/tralreports/ $DEPLOYPATH
+    - export DEPLOYPATH=/home/bigsurtr/public_html/
+    - /bin/cp -R assets $DEPLOYPATH
