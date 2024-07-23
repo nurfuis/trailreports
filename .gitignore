@@ -10,6 +10,7 @@ data
 *.sql
 *.sh
 *.txt
+bigsurtr_connect.php
 # User-specific files
 *.rsuser
 *.suo
