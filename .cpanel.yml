@@ -3,3 +3,10 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/bigsurtr/public_html/
     - /bin/cp -R assets $DEPLOYPATH
+    - /bin/cp -R components $DEPLOYPATH
+    - /bin/cp -R layouts $DEPLOYPATH
+    - /bin/cp -R pages $DEPLOYPATH
+    - /bin/cp -R 404.html $DEPLOYPATH
+    - /bin/cp -R 500.html $DEPLOYPATH
+    - /bin/cp -R favicon.png $DEPLOYPATH
+    - /bin/cp -R index.php $DEPLOYPATH

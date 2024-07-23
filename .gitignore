@@ -5,6 +5,7 @@
 db_connect.php
 config.php
 html
+build
 docs
 data
 *.sql
