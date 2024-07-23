@@ -7,7 +7,8 @@ $quotedIds = array_map(function ($id) {
     return "'$id'";  // Wrap each ID in quotes
 }, COLLECTION_IDS);
 
-$sqlFeatures = "SELECT id, name FROM features WHERE collections_id IN (" . implode(",", $quotedIds) . ")";
+$sqlFeatures = "SELECT id, name FROM features WHERE collections_id IN ('" . implode("','", COLLECTION_IDS) . "')";
+
 $resultFeatures = $mysqli->query($sqlFeatures);
 if (!$resultFeatures) {
     die("Error retrieving features: " . $mysqli->error);
