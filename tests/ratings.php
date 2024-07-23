@@ -1,6 +1,7 @@
 <?php
 include_once realpath('../../config.php');
-echo OVERALL_RATINGS;
+
+echo OVERALL_RATINGS[1];
 
 foreach (OVERALL_RATINGS as $rating_text => $rating_value): ?>
     <label class="k2d-regular" for="<?php echo $rating_value; ?>">
