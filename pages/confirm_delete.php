@@ -5,7 +5,7 @@ $page_css = "/assets/css/style.css";
 session_start();
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");
-require_once realpath("../db_connect.php");
+require_once realpath("../../db_connect.php");
 
 // Check if report ID is provided and user is logged in
 if (empty($_GET['id']) || !isset($_SESSION['user_id'])) {

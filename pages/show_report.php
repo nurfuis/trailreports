@@ -2,8 +2,8 @@
 session_start();
 
 // Include database connection and functions (replace with your paths)
-require_once realpath("../config.php");
-require_once realpath("../db_connect.php");
+require_once realpath("../../config.php");
+require_once realpath("../../db_connect.php");
 
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);

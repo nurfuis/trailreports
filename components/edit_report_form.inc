@@ -1,6 +1,6 @@
 <?php
-require_once realpath("../config.php");
-require_once realpath("../db_connect.php");
+require_once realpath("../../config.php");
+require_once realpath("../../db_connect.php");
 
 $selectedFeature = "";
 $reportId = isset($_GET['id']) ? $_GET['id'] : '';

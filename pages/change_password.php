@@ -9,7 +9,7 @@ include_once realpath("../layouts/wide.inc");
 session_start();
 session_destroy();
 
-require_once realpath("../db_connect.php");
+require_once realpath("../../db_connect.php");
 
 $errorMessage = "";
 $successMessage = "";

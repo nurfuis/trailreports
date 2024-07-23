@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require_once realpath("../db_connect.php");
+require_once realpath("../../db_connect.php");
 
 if (empty($_POST['report_id']) || !isset($_SESSION['user_id'])) {
   header("Location: ./user_reports.php?error=unauthorized");

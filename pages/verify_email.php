@@ -8,7 +8,7 @@ include_once realpath("../layouts/wide.inc");
 
 session_start();
 
-require_once realpath("../db_connect.php");
+require_once realpath("../../db_connect.php");
 
 if (isset($_GET['token'])) {
 

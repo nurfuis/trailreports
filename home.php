@@ -7,7 +7,7 @@ session_start();
 
 // Remember to update config and db_connect on the deployment server
 require_once realpath("../config.php");
-require_once realpath("../db_connect.php");
+require_once realpath("../../db_connect.php");
 
 include_once realpath("./components/head.inc");
 include_once realpath("./layouts/main.inc");
