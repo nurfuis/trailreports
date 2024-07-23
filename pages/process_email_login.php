@@ -38,7 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // account is not locked
             $user_id = $row['user_id'];
 
-            $token = bin2hex(random_bytes(16));
+            $token = md5(uniqid(mt_rand(), true));
+
             $expiry = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
             // Update user record with login token and expiry

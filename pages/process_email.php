@@ -32,18 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errorMessage = "Email already exists. Please use a different email.";
 
   } else {
-    echo 'post exists';
-
     $user_id = $_SESSION['user_id'];
-    echo $user_id;
-
-    $token = "token";
-    // $token = bin2hex(random_bytes(16));
-    echo $token;
-
+    $token = md5(uniqid(mt_rand(), true));
     $expiry = date("Y-m-d H:i:s", strtotime("+24 hours"));
-    echo $expiry;
-
     $sql = "UPDATE users SET pending_email = ?, verification_token = ?, verification_token_expiry = ? WHERE user_id = ?";
     $stmt = mysqli_prepare($mysqli, $sql);
     mysqli_stmt_bind_param($stmt, "ssss", $email, $token, $expiry, $user_id);

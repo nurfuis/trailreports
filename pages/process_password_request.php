@@ -25,7 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($fetched_email) {
         $email = $fetched_email['email'];
 
-        $token = bin2hex(random_bytes(16));
+        $token = md5(uniqid(mt_rand(), true));
+
         $expiry = date("Y-m-d H:i:s", strtotime("+1 hour"));
 
         $sql = "UPDATE users SET reset_token = ?, reset_token_expiry = ? WHERE user_id = ?";
