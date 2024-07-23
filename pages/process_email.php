@@ -50,7 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $message .= $verification_link . "\n\n";
       $message .= "This link will expire in 24 hours. \n\n";
       $message .= "If you did not register on Trail Reports, please ignore this email. \n\n";
-      echo 'pre email';
       $success = mail($to, $subject, $message);
 
       if ($success) {
