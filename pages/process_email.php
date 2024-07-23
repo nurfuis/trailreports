@@ -10,7 +10,7 @@ require_once realpath("../../config.php");
 require_once realpath("../../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+  echo 'post exists';
   $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
 
   if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $message .= $verification_link . "\n\n";
       $message .= "This link will expire in 24 hours. \n\n";
       $message .= "If you did not register on Trail Reports, please ignore this email. \n\n";
-
+      echo 'pre email';
       $success = mail($to, $subject, $message);
 
       if ($success) {
