@@ -2,6 +2,7 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/bigsurtr/public_html/
+    - /bin/cp -R tests $DEPLOYPATH
     - /bin/cp -R assets $DEPLOYPATH
     - /bin/cp -R components $DEPLOYPATH
     - /bin/cp -R layouts $DEPLOYPATH
