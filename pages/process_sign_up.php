@@ -6,7 +6,7 @@ $page_css = "/assets/css/style.css";
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");
 
-require_once realpath("../../db_connect.php");
+require_once realpath("../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -83,6 +83,5 @@ if (!empty($errorMessage)) {
     echo "<p style='color: blue;'>$successMessage</p>";
     header("Location: /pages/email.php");
 }
-
 
 include_once realpath("../components/tail.inc");
