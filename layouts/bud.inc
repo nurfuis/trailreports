@@ -5,7 +5,7 @@
             echo "<a href='$previousPage'>Go Back</a>";
         } else {
 
-            echo "<a href='/'>Go Back</a>";
+            echo "<a href='/home.php'>Go Back</a>";
         }
         ?>
     </div>
