@@ -41,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (mysqli_stmt_execute($stmt)) {
       $successMessage = "Email registration is pending. Please verify your email address by clicking the link in the confirmation email we sent you. Once verified, you will be able to post and edit trail reports.";
-      $headers = 'From: noreply@bigsurtrailreports.net' . "\r\n";
       $to = $email;
       $subject = "Email Verification for Big Sur Trail Reports Website";
       $message = "Thank you for registering on Big Sur Trail Reports! \n\n";
@@ -50,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $message .= $verification_link . "\n\n";
       $message .= "This link will expire in 24 hours. \n\n";
       $message .= "If you did not register on Big Sur Trail Reports, please ignore this email. \n\n";
+      $headers = 'From: noreply@bigsurtrailreports.net' . "\r\n";
       $success = mail($to, $subject, $message, $headers);
       if ($success) {
         $successMessage = "A verification email has been sent.";
