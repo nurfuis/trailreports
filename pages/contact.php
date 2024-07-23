@@ -13,10 +13,10 @@ include_once realpath("../layouts/wide.inc");
     <h2>Send a Message</h2>
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
         <label for="email">Email Address:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
         <br>
         <label for="message">Message:</label><br>
-        <textarea id="message" name="message" rows="5" required></textarea>
+        <textarea id="message" name="message" rows="5" placeholder="Compose your message" required></textarea>
         <br>
         <button type="submit">Send Message</button>
     </form>

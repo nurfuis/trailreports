@@ -4,6 +4,7 @@ $page_title = "Hidden Reports";
 $page_css = "../assets/css/style.css";
 
 session_start();
+require_once realpath(("../components/is_admin.inc"));
 
 require_once realpath("../config.php");
 
@@ -12,9 +13,6 @@ include_once realpath("../layouts/wide.inc");
 
 require_once realpath("../db_connect.php");
 
-if (isset($_SESSION['user_level']) && $_SESSION['user_level'] !== 'admin') {
-    goto after;
-}
 
 $trail_sql = "SELECT DISTINCT f.name AS trail_name, f.id AS trail_id 
               FROM trail_reports tr
@@ -300,7 +298,6 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
 
     mysqli_close($mysqli);
     echo "</div>";
-    after:
     include_once realpath("../components/tail.inc");
 
     ?>

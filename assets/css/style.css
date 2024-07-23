@@ -1,3 +1,15 @@
+.k2d-thin {
+  font-family: "K2D", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.k2d-regular {
+  font-family: "K2D", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 :root {
   --text: #050709;
   --text-light: #696969;
@@ -13,7 +25,7 @@ a:hover {
 }
 .page-link.active {
   color: var(--highlight);
-  font-weight: 600;
+  font-weight: 500;
   font-size: large;
   text-decoration: none;
   border-radius: 0 0.25rem 0 0.25rem;
@@ -206,26 +218,7 @@ button {
   box-sizing: border-box;
   padding: 2rem;
 }
-.single__wrapper {
-  background-color: var(--light-background);
-  margin: 0 auto 0 auto;
-  min-width: 320px;
-  max-width: 640px;
-  box-sizing: border-box;
-  padding: 0.25rem;
-}
-.view-details__wrapper {
-  background-color: var(--light-background);
-  border-radius: 0;
-  margin: 0 auto 0 auto;
-  min-width: 320px;
-  max-width: 640px;
-  display: grid;
-  grid-template-areas:
-    "-"
-    "-"
-    "-";
-}
+
 .toggle-guidance {
   text-decoration: none;
   color: blue;
@@ -412,7 +405,7 @@ h2 {
 }
 
 .feature-item p:nth-child(1) {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .feature-item span {
@@ -569,7 +562,8 @@ textarea {
   color: var(--accent);
 }
 
-.feature-item div, p {
+.feature-item div,
+p {
   padding: 1rem;
 }
 @media only screen and (max-width: 768px) {

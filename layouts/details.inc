@@ -1,1 +1,0 @@
-<div class="view-details__wrapper regular-padding">

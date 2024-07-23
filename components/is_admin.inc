@@ -7,4 +7,3 @@ if (isset($_SESSION['user_level']) && $_SESSION['user_level'] === 'admin') {
     header('Location: sign_in.php');
     exit;
 }
-?>

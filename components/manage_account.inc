@@ -18,7 +18,6 @@ $pending_email = $fetched['pending_email'];
 ?>
 
 <div>
-
   <h1>Account</h1>
   <h2>Make Changes</h2>
 
