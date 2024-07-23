@@ -2,17 +2,19 @@
 
 $page_title = "Login";
 $page_css = "/assets/css/style.css";
-
+$currentPagePath = "";
 include realpath("../components/head.inc");
-include realpath("../layouts/single.inc");
+include realpath("../layouts/wide.inc");
 
-require_once realpath("../../config.php");
-require_once realpath("../../db_connect.php");
+require_once realpath("../config.php");
+require_once realpath("../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $username = mysqli_real_escape_string($mysqli, trim($_POST['username']));
   $password = mysqli_real_escape_string($mysqli, trim($_POST['password']));
+  $redirect_path = trim($_POST['currentPagePath']);
+  $currentPagePath = $redirect_path;
 
   $sql = "SELECT user_id, username, password_hash, account_status, login_attempts, last_login_attempt FROM users WHERE username = ?";
   $stmt = mysqli_prepare($mysqli, $sql);
@@ -30,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $currentTime = time();
     $threshold = LOGIN_ATTEMPTS;
     $lockoutTime = LOCKOUT_TIME;
-    
+
     if ($attempts >= $threshold && ($currentTime - $lastAttempt) < $lockoutTime) {
       // account is locked
       $errorMessage = "Your account has been temporarily locked due to multiple failed login attempts. Please try again later.";
@@ -43,7 +45,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         session_start();
         $_SESSION['username'] = $row['username'];
         $_SESSION['user_id'] = $row['user_id'];
-        $_SESSION['authenticated'] = true;
+
+        $sql = "SELECT * FROM authorized_users WHERE user_id = ?";
+        $stmt = mysqli_prepare($mysqli, $sql);  // Prepare statement for security
+        mysqli_stmt_bind_param($stmt, "i", $_SESSION['user_id']);  // Bind user ID
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if (mysqli_num_rows($result) > 0) {
+          $_SESSION['user_level'] = 'admin';
+        } else {
+          $_SESSION['user_level'] = 'user';
+        }
+
 
         if ($row['account_status'] === 'inactive') {
           // Update account status to active
@@ -78,11 +92,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 mysqli_close($mysqli);
 
 if (!empty($errorMessage)) {
-  echo "<p style='color: red;'>$errorMessage</p>";
+  echo "<p class='alert'>$errorMessage</p>";
   include realpath("../components/sign_in_form.inc");
 
 } else if (!empty($successMessage)) {
-  echo "<p style='color: blue;'>$successMessage</p>";
+  if (!!$redirect_path) {
+    header("Location: $redirect_path");
+  } else {
+
+  }
+
 }
 
 include realpath("../components/tail.inc");

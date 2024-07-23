@@ -11,6 +11,6 @@ $page_title = "Account Management";
 $page_css = "/assets/css/style.css";
 
 include_once realpath("../components/head.inc");
-include_once realpath("../layouts/single.inc");
+include_once realpath("../layouts/wide.inc");
 include_once realpath("../components/manage_account.inc");
 include_once realpath("../components/tail.inc");

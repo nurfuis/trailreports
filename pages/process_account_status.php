@@ -4,7 +4,7 @@ $page_title = "Deactivate Account";
 $page_css = "/assets/css/style.css";
 
 include_once realpath("../components/head.inc"); // Top section up to and including body tag
-include_once realpath("../layouts/single.inc"); // An open div with layout class
+include_once realpath("../layouts/wide.inc"); // An open div with layout class
 
 session_start();
 
@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_id'])) {
   exit;
 }
 
-require_once realpath("../../db_connect.php"); // $msqli connect
+require_once realpath("../db_connect.php"); // $msqli connect
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $user_id = $_SESSION['user_id']; // Get user ID from session

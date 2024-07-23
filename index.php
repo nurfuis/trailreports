@@ -1,23 +1,33 @@
 <?php
-$page_title = "Keep Sur Wild";
+$page_title = "Trail Reports for Big Sur, California";
 $page_css = "./assets/css/style.css";
-
-include_once realpath("./components/head.inc");
-
-include_once realpath("./layouts/main.inc");
-
-include_once realpath("./components/nav.inc");
-
-include_once realpath("./components/header.inc");
-
-include_once realpath("./components/topo_map.inc");
+$currentPagePath = $_SERVER['SCRIPT_NAME'];
 
 session_start();
-if (isset($_SESSION['user_id'])) {
-    $username = $_SESSION['username'];
-    include_once realpath("./components/sign_out_form.inc");
+
+// Remember to update config and db_connect on the deployment server
+require_once realpath("./config.php");
+require_once realpath("./db_connect.php");
+
+include_once realpath("./components/head.inc");
+include_once realpath("./layouts/main.inc");
+include_once realpath("./components/header.inc");
+include_once realpath("./components/intro.inc");
+
+include_once realpath("./components/single_select_form.inc");
+
+if (isset($_GET['feature_id'])) {
+    $selected_feature_id = $_GET['feature_id'];
+    if ($selected_feature_id == 'recent') {
+        include_once realpath("./components/recent_reports.inc");
+
+    } else {
+        include_once realpath("./components/single_feature.inc");
+    }
 } else {
-    include_once realpath("./components/sign_in_form.inc");
+    include_once realpath("./components/recent_reports.inc");
 }
 
+$mysqli->close();
+include_once realpath("./components/footer.inc");
 include_once realpath("./components/tail.inc");

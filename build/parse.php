@@ -1,25 +1,28 @@
 <?php
 
-require_once realpath("./db_connect.php");
+require_once realpath("../db_connect.php");
 
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
 
-$base_dir = "/media/usb/";
+$base_dir = "../data/";
 
 if (is_dir($base_dir) && is_readable($base_dir)) {
     $dh = opendir($base_dir);
-
     if ($dh) {
+
         while (($dir = readdir($dh)) !== false) {
+
             // Skip non-directories and special entries ('.', '..')
             if (!is_dir($base_dir . $dir) || in_array($dir, array('.', '..'))) {
                 continue;
             }
+            echo "Found directory: ";
 
             // Get collections_id based on directory name
             $collections_id = get_collections_id($mysqli, $dir);
+
             if ($collections_id === false) {
                 echo "Warning: Could not find collections_id for directory '$dir' \n";
                 continue; // Skip this directory if no matching collection found
@@ -27,7 +30,6 @@ if (is_dir($base_dir) && is_readable($base_dir)) {
 
             // Define the subdirectory path for GeoJSON files
             $sub_dir = $base_dir . $dir;
-
             // Process GeoJSON files within the subdirectory
             process_geojson_files($mysqli, $collections_id, $sub_dir);
         }
@@ -110,14 +112,18 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                     foreach ($data->features as $feature) {
                         // Extract feature properties
                         $name = $feature->properties->Name;
-                        echo $name . "\n";
+                        $source = $feature->properties->Source;
 
+                        echo $name . "\n";
                         $geometry_type = $feature->geometry->type; // Assuming a single geometry type per feature
 
-
                         // Process feature (insert or update)
-                        $sql = "INSERT IGNORE INTO features (name, collections_id, geometry_type) VALUES (?, ?, ?)";
-
+                        $sql = "INSERT INTO features (name, collections_id, geometry_type) 
+                        VALUES (?, ?, ?) 
+                        ON DUPLICATE KEY UPDATE 
+                            name = VALUES(name), 
+                            collections_id = VALUES(collections_id), 
+                            geometry_type = VALUES(geometry_type)";
                         $stmt = $mysqli->prepare($sql);
                         $stmt->bind_param("sis", $name, $collections_id, $geometry_type);
                         $stmt->execute();
@@ -132,6 +138,7 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
 
                         $coordinates = $feature->geometry->coordinates;
 
+                        // get the id from the added feature to store the line segments under
                         $sql_get_id = "SELECT id FROM features WHERE name=?";
                         $stmt_get_id = $mysqli->prepare($sql_get_id);
                         $stmt_get_id->bind_param("s", $name);
@@ -139,7 +146,6 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                         $result = $stmt_get_id->get_result();
                         $row = $result->fetch_assoc();
                         $feature_id = $row['id'];
-
 
                         switch ($geometry_type) {
                             case 'Point':
@@ -154,23 +160,13 @@ function process_geojson_files($mysqli, $collections_id, $sub_dir)
                                 break;
                             case 'LineString':
                                 $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
-                                $sql_line = "INSERT INTO polylines (feature_id, geometry) VALUES (?, ST_GeomFromText(?))";
+                                $sql_line = "INSERT INTO polylines (feature_id, geometry, source) VALUES (?, ST_GeomFromText(?), ?)";
                                 $stmt_line = $mysqli->prepare($sql_line);
-                                $stmt_line->bind_param("is", $feature_id, $wktString);
+                                $stmt_line->bind_param("iss", $feature_id, $wktString, $source);
                                 $stmt_line->execute();
                                 $stmt_line->close();
                                 break;
-                            // case 'Polygon':
-                            //     $wktString = convertCoordinatesToWKT($geometry_type, $coordinates);
 
-                            //     echo $wktString;
-
-                            //     $sql = "INSERT INTO polygons (feature_id, geometry) VALUES (?, ?)";
-                            //     $stmt = $mysqli->prepare($sql);
-                            //     $stmt->bind_param("is", $feature_id, $wktString);
-                            //     $stmt->execute();
-                            //     $stmt->close();
-                            //     break;
                             default:
                                 echo "Unsupported geometry type: $geometry_type \n";
                         }

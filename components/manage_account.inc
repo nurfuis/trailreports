@@ -2,7 +2,7 @@
 
 $user_id = $_SESSION['user_id'];
 
-require_once realpath("../../db_connect.php");
+require_once realpath("../db_connect.php");
 $sql = "SELECT email, pending_email, verified, verification_token_expiry, registration_date FROM users WHERE user_id = ?";
 $stmt = mysqli_prepare($mysqli, $sql);
 mysqli_stmt_bind_param($stmt, "i", $user_id); // Bind the user ID
@@ -18,9 +18,8 @@ $pending_email = $fetched['pending_email'];
 ?>
 
 <div>
-
-  <h2>Account Management</h2>
-
+  <h1>Account</h1>
+  <h2>Make Changes</h2>
 
   <ul class="account-management-list--compact">
     <li>
@@ -61,8 +60,14 @@ $pending_email = $fetched['pending_email'];
     </li>
   </ul>
 
+  <hr>
+
+
   <ul class="account-management-list">
-    <li><?php include_once realpath("../components/update_email_form.inc"); ?></li>
+    <li><?php include_once realpath("../components/update_email_form.inc"); ?>
+      <hr>
+    </li>
+
     <li>
       <?php
       if ($verified === 1) {
@@ -71,8 +76,11 @@ $pending_email = $fetched['pending_email'];
         echo '<h3>Change Password</h3><p>Email verification required to change password.</p>';
       }
       ?>
+      <hr>
     </li>
-    <li><?php include_once realpath("../components/update_account_status.inc"); ?></li>
+    <li><?php include_once realpath("../components/update_account_status.inc"); ?>
+      <hr>
+    </li>
   </ul>
 </div>
 <?php

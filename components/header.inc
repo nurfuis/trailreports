@@ -1,8 +1,68 @@
-<div class="header__wrapper">
-  <h1>TrailDex</h1>
-  <h2>Big Sur, California</h2>
-  <p>
-    Select a trail from the dropdown list or search using the topographic
-    map.
-  </p>
+<div class="header">
+
+  <div class="dropdown" data-dropdown>
+    <button class="link <?php echo isset($_SESSION['username']) ? 'user-btn' : ''; ?>" data-dropdown-button>
+      <?php
+      if (isset($_SESSION['username'])) {
+        $username = $_SESSION['username'];
+        $short_username = substr($username, 0, 6);
+        echo $short_username;
+
+        if (strlen($username) > 6) {
+          echo "...";
+        }
+      } else {
+        echo "Login";
+      }
+      ?>
+    </button>
+    <div class="dropdown-menu sign-in">
+      <?php
+      if (isset($_SESSION['user_id'])) {
+        $username = $_SESSION['username'];
+        include_once realpath("./components/sign_out_form.inc");
+      } else {
+        include_once realpath("./components/sign_in_form.inc");
+      }
+      ?>
+    </div>
+  </div>
+
+  <div class="dropdown" data-dropdown>
+    <button class="link" data-dropdown-button>Reports</button>
+    <div class="dropdown-menu link-grid">
+      <a href="./pages/display_reports.php" class="link">View Trail Reports</a>
+      <a href="./pages/add_report.php" class="link">Submit a Trail Report</a>
+      <a href="./pages/features.php" class="link">Trails Index</a>
+      <a href="./pages/topo-map.html" class="link hidden">Topo Map</a>
+    </div>
+  </div>
+
+  <div class="dropdown" data-dropdown>
+    <button class="link" data-dropdown-button>About</button>
+    <div class="dropdown-menu link-grid">
+      <a href="./pages/support_us.php" class="link">Support Us</a>
+      <a href="/" class="link hidden">Learn More</a>
+      <a href="./pages/contact.php" class="link">Contact</a>
+
+    </div>
+  </div>
 </div>
+
+<script>
+  document.addEventListener('click', e => {
+    const isDropdownButton = e.target.matches("[data-dropdown-button]")
+    if (!isDropdownButton && e.target.closest('[data-dropdown') != null) return
+
+    let currentDopdown;
+    if (isDropdownButton) {
+      currentDopdown = e.target.closest('[data-dropdown')
+      currentDopdown.classList.toggle('active')
+    }
+    document.querySelectorAll("[data-dropdown].active").forEach(dropdown => {
+      if (dropdown === currentDopdown) return
+      dropdown.classList.remove('active');
+
+    });
+  })
+</script>
