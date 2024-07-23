@@ -108,12 +108,13 @@ INNER JOIN collections c ON f.collections_id = c.id;";
             // Formatted feature details
             echo "<div class='feature-item'>";
             echo "  <p>" . $name . "</p>";
-            echo '<div class="nav"><a href="./add_report.php?id=' . $feature_id . '">Submit a Report</a></div>';
             $link_url = "./topo_map.php?name=" . $feature['name'] . "&lat=" . $first_latitude . "&long=" . $first_longitude . "&zoom=13";
             if (!empty($source)) {
                 $link_url .= "&source=" . $source;
             }
             echo "<p><span>Location:</span> <a href='$link_url'>" . $geometry_string . "</a></p>";
+            echo '<div class="nav"><a href="./add_report.php?id=' . $feature_id . '">Submit a Report</a></div>';
+
             echo '<div class="nav"><a href="./display_reports.php?filter-by-trail=' . $feature_id . '">View Reports</a></div>';
             echo "</div>";
         }

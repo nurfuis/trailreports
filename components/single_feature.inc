@@ -17,8 +17,9 @@ if (isset($_GET['feature_id'])) {
     }
     ?>
     <div>
-        <h2><?php echo $feature['name'] ?></h2>
         <div class="regular-padding">
+            <h2><?php echo $feature['name'] ?></h2>
+
             <div class="nav">
                 <a href="./pages/add_report.php?id=<?php echo $selected_feature_id ?>">
                     Submit a Report
@@ -52,7 +53,7 @@ if (isset($_GET['feature_id'])) {
                     if (!empty($source)) {
                         $link_url .= "&source=" . $source;
                     }
-                    echo '<p><span>Location:</span> <a href="$link_url">' . $geometry_string . '</a></p>';
+                    echo '<p><span>Location:</span> <a href="' . $link_url . '">' . $geometry_string . '</a></p>';
                 } else {
                     echo "No polylines found for this feature.";
                 }
