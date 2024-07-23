@@ -2,6 +2,7 @@
 
 $page_title = "Register Email";
 $page_css = "/assets/css/style.css";
+session_start();
 
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");
@@ -31,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errorMessage = "Email already exists. Please use a different email.";
 
   } else {
-    session_start();
     echo 'post exists';
 
     $user_id = $_SESSION['user_id'];
