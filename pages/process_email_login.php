@@ -83,13 +83,6 @@ if (!empty($errorMessage)) {
 
 } else if (!empty($successMessage)) {
     echo "<p style='color: blue;'>$successMessage</p>";
-    ?>
-        <script type="text/javascript">
-            window.location.href = "/home.php" 
-        </script>
-
-    <?php
-
 }
 
 include_once realpath("../components/tail.inc"); // closing tags for layout div, body, and html 
