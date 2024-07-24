@@ -82,8 +82,12 @@ if (!empty($errorMessage)) {
 } else if (!empty($successMessage)) {
     echo "<p style='color: blue;'>$successMessage</p>";
     echo '<p><a href="/pages/email.php">Register an Email.</p>';
-    header("Location: /pages/email.php");
-    exit;
+    ?>
+        <script type="text/javascript">
+            window.location.href = "/pages/email.php" 
+        </script>
+        <?php
+        exit;
 }
 
 include_once realpath("../components/tail.inc");
