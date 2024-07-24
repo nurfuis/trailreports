@@ -27,8 +27,13 @@ if (isset($_GET['collection'])) {
 } else {
     $trail_sql = "SELECT id, name FROM features WHERE collections_id IN (1)";
     $trail_result = mysqli_query($mysqli, $trail_sql);
-}
 
+    if (!$trail_result) {
+        echo "Error: " . mysqli_error($mysqli);
+        exit;
+    }
+
+}
 
 if (isset($_GET['feature_id'])) {
     $selected_feature_id = $_GET['feature_id'];

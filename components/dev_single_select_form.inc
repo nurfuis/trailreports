@@ -6,10 +6,6 @@
 //     $trail_result = mysqli_query($mysqli, $trail_sql);
 // }
 
-if (!$trail_result) {
-    echo "Error: " . mysqli_error($mysqli);
-    exit;
-}
 
 $collections_sql = "SELECT id, name FROM collections";
 $collections_result = mysqli_query($mysqli, $collections_sql);
