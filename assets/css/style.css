@@ -450,6 +450,9 @@ h2 {
   width: 128px;
   margin-left: 2rem;
 }
+#trail-select {
+  max-width: 90% -2rem;
+}
 .section {
   display: flex;
   align-items: center;
@@ -459,7 +462,6 @@ h2 {
   display: inline-block;
 }
 option {
-  max-width: 100% - 2rem;
   overflow-wrap: break-word;
 }
 .radio {
