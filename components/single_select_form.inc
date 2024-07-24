@@ -10,6 +10,7 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
 
 <div class="main__trail-select regular-padding">
     <form action="#trail-select-form" method="get" id="trail-select-form">
+        <input hidden name="collection" value="<?php echo $collection ?>">
         <label for="trail-select">Select a Trail:</label>
         <select name="feature_id" id="trail-select">
             <option value="recent">-- Latest Updates --</option>
