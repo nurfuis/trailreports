@@ -191,8 +191,14 @@ if (isset($_GET['feature_id'])) {
                 <?php
 
                 $result = mysqli_query($mysqli, $sql);
-
-                $ratings = array_flip(OVERALL_RATINGS);
+                $OVERALL_RATINGS = [
+                    'Good' => 1,
+                    'Passable' => 2,
+                    'Poor' => 3,
+                    'Impassable' => 4,
+                    'Gone' => 5
+                ];
+                $ratings = array_flip($OVERALL_RATINGS);
 
                 if (!$result) {
                     echo "Error: " . mysqli_error($mysqli);

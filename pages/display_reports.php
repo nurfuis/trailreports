@@ -115,7 +115,14 @@ if (isset($_GET['filter-by-trail']) && $_GET['filter-by-trail'] != "all") {
 $sql .= $date_range_sql;
 $sql .= " ORDER BY $order_by LIMIT $items_per_page OFFSET $offset;";
 $result = mysqli_query($mysqli, $sql);
-$ratings = array_flip(OVERALL_RATINGS);
+$OVERALL_RATINGS = [
+  'Good' => 1,
+  'Passable' => 2,
+  'Poor' => 3,
+  'Impassable' => 4,
+  'Gone' => 5
+];
+$ratings = array_flip($OVERALL_RATINGS);
 
 
 if (isset($_GET['success']) && $_GET['success'] === 'true') {
