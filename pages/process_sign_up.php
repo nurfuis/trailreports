@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once realpath("../../db_connect.php");
 
 $page_title = "Register";
 $page_css = "/assets/css/style.css";
@@ -7,7 +8,6 @@ $page_css = "/assets/css/style.css";
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");
 
-require_once realpath("../../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -83,6 +83,7 @@ if (!empty($errorMessage)) {
     echo "<p style='color: blue;'>$successMessage</p>";
     echo '<p><a href="/pages/email.php">Register an Email.</p>';
     header("Location: /pages/email.php");
+    exit;
 }
 
 include_once realpath("../components/tail.inc");
