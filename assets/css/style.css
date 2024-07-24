@@ -319,9 +319,8 @@ button {
 .trail-select-form {
   margin: 2rem;
 }
-.advanced-search-form {
-  min-height: 120px;
-  background-color: var(--dark-background);
+#advanced-search-form {
+  margin-top: 1.37rem;
 }
 .advanced-search a {
   text-decoration: none;
@@ -332,7 +331,7 @@ button {
 }
 .advanced-search {
   display: block;
-  margin: 1.37rem;
+  margin: 1.37rem 0 0 0;
 }
 .sign-in a {
   font-weight: 500;
