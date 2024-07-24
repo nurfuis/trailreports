@@ -270,7 +270,8 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
     } else {
 
         while ($report = mysqli_fetch_assoc($result)) {
-            $summary = substr($report['summary'], 0, BLURB_LIMIT) . '...';
+            $BLURB_LIMIT = 200;
+            $summary = substr($report['summary'], 0, $BLURB_LIMIT) . '...';
             $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
             $postedOnText = $isUpdated ? 'Updated at:' : 'Submitted on:';
             echo "<div class='report-item'>";
@@ -284,8 +285,8 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
             echo "  <p><span>" . $postedOnText . "</span> " . $report['time_updated'] . "</p>";
             $summary = $report['summary'];
 
-            if (strlen($summary) > BLURB_LIMIT) {
-                $summary = substr($summary, 0, BLURB_LIMIT) . '...';
+            if (strlen($summary) > $BLURB_LIMIT) {
+                $summary = substr($summary, 0, $BLURB_LIMIT) . '...';
                 $showReadMore = true;
             } else {
                 $showReadMore = false;

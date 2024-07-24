@@ -222,9 +222,9 @@ if (isset($_GET['feature_id'])) {
                         echo "  <p><span>Submitted by:</span> " . $report['username'] . "</p>";
                         echo "  <p><span>" . $postedOnText . "</span> " . $report['time_updated'] . "</p>";
                         $summary = $report['summary'];
-
-                        if (strlen($summary) > BLURB_LIMIT) {
-                            $summary = substr($summary, 0, BLURB_LIMIT) . '...';
+                        $BLURB_LIMIT = 200;
+                        if (strlen($summary) > $BLURB_LIMIT) {
+                            $summary = substr($summary, 0, $BLURB_LIMIT) . '...';
                             $showReadMore = true;
                         } else {
                             $showReadMore = false;

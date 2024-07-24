@@ -32,9 +32,9 @@ if ($result->num_rows >= 1) {
     $summary = $report['summary'];
     $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
     $postedOnText = $isUpdated ? 'Updated at:' : 'Submitted on:';
-
-    if (strlen($summary) > SUMMARY_LIMIT) {
-        $summary = substr($summary, 0, SUMMARY_LIMIT) . '...';
+    $SUMMARY_LIMIT = 500;
+    if (strlen($summary) > $SUMMARY_LIMIT) {
+        $summary = substr($summary, 0, $SUMMARY_LIMIT) . '...';
         $showReadMore = true;
     } else {
         $showReadMore = false;
