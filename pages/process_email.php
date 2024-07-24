@@ -73,7 +73,8 @@ if (!empty($errorMessage)) {
 
 } else {
   echo "<p style='color: blue;'>$successMessage</p>";
-  echo '<p><a href="' . $_SESSION['referrer'] . '>Continue your report...</a></p>';
+  $referrer = $_SESSION['referrer'];
+  echo '<p><a href="' . $referrer . '>Continue your report...</a></p>';
 }
 
 include_once realpath("../components/tail.inc");
