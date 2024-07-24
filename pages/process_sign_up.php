@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $_SESSION['username'] = $username;
             $_SESSION['user_id'] = $userId;
-
+            $_SESSION['verified'] = false;
             $successMessage = "Registration successful! Welcome " . $_SESSION['username'] . ".";
         } else {
             $errorMessage = "Registration failed: " . mysqli_stmt_error($stmt);

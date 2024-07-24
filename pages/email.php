@@ -1,12 +1,10 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
-  header("Location: /home.php");
 }
-
+$currentPagePath = $_SESSION['referrer'];
 $page_title = "Verify email";
 $page_css = "/assets/css/style.css";
-
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");
 ?>
@@ -48,9 +46,9 @@ include_once realpath("../layouts/wide.inc");
   }
   function continueWithoutEmail() {
     // Redirect to next page
-
-
-    window.location.href = $_SESSION['referrer'];
+    console.log(<?php echo 1; ?>
+    );
+    window.location.href = "<?php echo $currentPagePath; ?>";
   }
 </script>
 <?php

@@ -67,6 +67,8 @@ mysqli_close($mysqli);
 
 if (!empty($errorMessage)) {
   echo "<p style='color: red;'>$errorMessage</p>";
+  echo '<p><a href="' . $_SESSION['referrer'] . '">Continue your report...</a></p>';
+
   include_once realpath("../components/update_email_form.inc");
 
 } else {
