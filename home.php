@@ -19,7 +19,7 @@ if (isset($_GET['collection'])) {
 } else {
     $collection = 1;
 }
-include_once realpath("./components/dev_single_select_form.inc");
+include_once realpath("./components/single_select_form.inc");
 
 if (isset($_GET['feature_id'])) {
     $selected_feature_id = $_GET['feature_id'];
