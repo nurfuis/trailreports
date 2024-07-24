@@ -17,8 +17,7 @@ if (!isset($_SESSION['user_id'])) {
   <h2>Join Our Trail Reporting Community</h2>
   <p>
     To ensure the quality and credibility of trail reports on our platform, we
-    highly recommend verifying your email address.</p>
-  <p>We take your privacy seriously and will never
+    highly recommend verifying your email address. We take your privacy seriously and will never
     sell or share your information with third parties. Your email will not be used
     to identify you on the website. </p>
   <p>You will only recieve emails in response to a request
@@ -31,18 +30,18 @@ if (!isset($_SESSION['user_id'])) {
   ?>
 </div>
 <div class="regular-padding">
-  <form>
+  <form class="hidden">
     <button type="button" id="skip-button" onclick="skipVerification()">Skip Verification</button>
 
   </form>
 
-  <div id="skip-verification-alert" style="display: none">
+  <div id="skip-verification-alert">
     <p>
       By skipping verification, your account setup will not be complete. This may
       limit your access to certain features on the platform. Are you sure you want
       to continue?
     </p>
-    <button onclick="continueWithoutEmail()">Continue (Limited Access)</button>
+    <button id="contine" onclick="continueWithoutEmail()">Continue (Limited Access)</button>
     <br><br>
   </div>
 </div>
