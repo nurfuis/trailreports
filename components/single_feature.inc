@@ -212,7 +212,7 @@ if (isset($_GET['feature_id'])) {
                     while ($report = mysqli_fetch_assoc($result)) {
                         $summary = substr($report['summary'], 0, BLURB_LIMIT) . '...';
                         $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
-                        $postedOnText = $isUpdated ? 'Updated at:' : 'Submitted on:';
+                        $postedOnText = $isUpdated ? 'Updated:' : 'Posted:';
                         $reportNumber = $count;
                         $count++;
                         echo "<h4>$reportNumber.</h4>";
@@ -220,7 +220,10 @@ if (isset($_GET['feature_id'])) {
                         echo "  <h5><a href='./pages/trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a></h5>";
                         echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
                         echo "  <p><span>Submitted by:</span> " . $report['username'] . "</p>";
-                        echo "  <p><span>" . $postedOnText . "</span> " . $report['time_updated'] . "</p>";
+
+                        $time = $report['time_updated'];
+                        $formattedTime = date("F j, Y", strtotime($time));
+                        echo "  <p><span>" . $postedOnText . "</span> " . $formattedTime . "</p>";
                         $summary = $report['summary'];
                         $BLURB_LIMIT = 200;
                         if (strlen($summary) > $BLURB_LIMIT) {

@@ -31,7 +31,7 @@ if ($result->num_rows >= 1) {
     $ratings = array_flip($OVERALL_RATINGS);
     $summary = $report['summary'];
     $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
-    $postedOnText = $isUpdated ? 'Updated at:' : 'Submitted on:';
+    $postedOnText = $isUpdated ? 'Updated:' : 'Posted:';
     $SUMMARY_LIMIT = 500;
     if (strlen($summary) > $SUMMARY_LIMIT) {
         $summary = substr($summary, 0, $SUMMARY_LIMIT) . '...';
@@ -46,6 +46,9 @@ if ($result->num_rows >= 1) {
         <p><strong>Trail:</strong> <?php echo $report['feature_name']; ?></p>
         <p><strong>Title:</strong> <?php echo $report['report_title']; ?></p>
         <p><strong>Submitted by:</strong> <?php echo $report['username']; ?></p>
+        <p><strong><?php echo $postedOnText ?></strong> <?php
+           $time = $report['time_updated'];
+           echo date("F j, Y", strtotime($time)); ?></p>
         <p><strong>Rating:</strong> <?php echo $ratings[$report['rating']]; ?></p>
         <p><strong>Report:</strong></p>
         <p class="indented">
@@ -54,7 +57,6 @@ if ($result->num_rows >= 1) {
                 <a href="./pages/trail_report.php?id=<?php echo $report['id']; ?>" class="read-more-btn">read more</a>
             <?php endif; ?>
         </p>
-        <p class="indented-top light-text"><i><?php echo $postedOnText ?>     <?php echo $report['time_updated']; ?></i></p>
 
     </div>
 
