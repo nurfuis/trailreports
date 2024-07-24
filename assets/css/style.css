@@ -450,9 +450,7 @@ h2 {
   width: 128px;
   margin-left: 2rem;
 }
-#trail-select {
-  max-width: 90% -2rem;
-}
+
 .section {
   display: flex;
   align-items: center;

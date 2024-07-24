@@ -16,7 +16,14 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
             <option value="recent">-- Latest Updates --</option>
             <?php while ($trail = mysqli_fetch_assoc($trail_result)): ?>
                 <option value="<?php echo $trail['id']; ?>" <?php if (isset($_GET['feature_id']) && $_GET['feature_id'] == $trail['id']): ?> selected <?php endif; ?>>
-                    <?php echo $trail['name']; ?>
+                    <?php
+
+                    $shortenedName = substr($trail['name'], 0, 30);
+                    if (strlen($trail['name']) > 30) {
+                        $shortenedName .= '...';
+                    }
+                    echo $shortenedName;
+                    ?>
                 </option>
             <?php endwhile; ?>
         </select>
