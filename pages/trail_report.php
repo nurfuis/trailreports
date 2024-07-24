@@ -40,6 +40,13 @@ if ($mysqli->connect_error) {
 }
 
 $result = $mysqli->query($sql);
+$OVERALL_RATINGS = [
+    'Good' => 1,
+    'Passable' => 2,
+    'Poor' => 3,
+    'Impassable' => 4,
+    'Gone' => 5
+];
 $ratings = array_flip(OVERALL_RATINGS);
 
 if (!$result) {
