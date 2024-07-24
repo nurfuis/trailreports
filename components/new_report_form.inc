@@ -4,7 +4,7 @@ require_once realpath("../../db_connect.php");
 
 $selectedFeature = "";
 
-$sqlFeatures = "SELECT id, name FROM features WHERE collections_id IN (1)";
+$sqlFeatures = "SELECT id, name FROM features WHERE collections_id IN (1, 2)";
 
 $resultFeatures = $mysqli->query($sqlFeatures);
 if (!$resultFeatures) {
