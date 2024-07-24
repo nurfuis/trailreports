@@ -458,6 +458,9 @@ h2 {
   font-family: "K2D";
   display: inline-block;
 }
+option {
+  max-width: 100%;
+}
 .radio {
   display: block;
   cursor: pointer;
