@@ -112,7 +112,7 @@ if (isset($_GET['feature_id'])) {
                         break;
                 }
             }
-            $numToShow = DEFAULT_PER_PAGE;
+            $numToShow = 5;
 
             $sql = "SELECT tr.*, f.name AS trail_name, u.username
                   FROM trail_reports tr
