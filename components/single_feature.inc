@@ -218,12 +218,12 @@ if (isset($_GET['feature_id'])) {
                         echo "<h4>$reportNumber.</h4>";
                         echo "<div class='report-item'>";
                         echo "  <h5><a href='./pages/trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a></h5>";
-                        echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
                         echo "  <p><span>Submitted by:</span> " . $report['username'] . "</p>";
-
                         $time = $report['time_updated'];
                         $formattedTime = date("F j, Y", strtotime($time));
                         echo "  <p><span>" . $postedOnText . "</span> " . $formattedTime . "</p>";
+                        echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
+
                         $summary = $report['summary'];
                         $BLURB_LIMIT = 200;
                         if (strlen($summary) > $BLURB_LIMIT) {

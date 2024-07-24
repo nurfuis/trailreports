@@ -273,7 +273,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
 
             echo "  <h5><a href='./trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a></h5>";
             echo "  <p><span>Trail:</span> " . $report['trail_name'] . "</a></p>";
-            echo "  <p><span>User:</span> " . $report['username'] . "</p>";
+            echo "  <p><span>Submitted by:</span> " . $report['username'] . "</p>";
 
             $time = $report['time_updated'];
             $formattedTime = date("F j, Y", strtotime($time));

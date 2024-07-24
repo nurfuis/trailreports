@@ -280,11 +280,14 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
             echo "<a class='delete' href='./confirm_delete.php?id=" . $report['id'] . "'><span>Delete</span></a></h4>";
 
             echo "  <p><span>Trail:</span> " . $report['trail_name'] . "</a></p>";
+
+            $time = $report['time_updated'];
+            $formattedTime = date("F j, Y", strtotime($time));
+            echo "  <p><span>" . $postedOnText . "</span> " . $formattedTime . "</p>";
+
             echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
 
-                              $time = $report['time_updated'];
-                        $formattedTime = date("F j, Y", strtotime($time));
-                        echo "  <p><span>" . $postedOnText . "</span> " . $formattedTime . "</p>";            $summary = $report['summary'];
+            $summary = $report['summary'];
 
             if (strlen($summary) > $BLURB_LIMIT) {
                 $summary = substr($summary, 0, $BLURB_LIMIT) . '...';

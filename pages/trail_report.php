@@ -91,11 +91,13 @@ mysqli_close($mysqli);
         <h3>Trail Report</h3>
         <p><strong>Title:</strong> <?php echo $report['report_title']; ?></p>
         <p><strong>Trail:</strong> <?php echo $report['feature_name']; ?></p>
-        <p><strong>Rating:</strong> <?php echo $ratings[$report['rating']]; ?></p><?php
-           $time = $report['time_updated'];
-           $formattedTime = date("F j, Y", strtotime($time));
-           echo " <p><strong>" . $postedOnText . "</strong> " . $formattedTime . "</p>"; ?>
+
         <p><strong>Submitted by:</strong> <?php echo $report['username']; ?></p>
+        <?php
+        $time = $report['time_updated'];
+        $formattedTime = date("F j, Y", strtotime($time));
+        echo " <p><strong>" . $postedOnText . "</strong> " . $formattedTime . "</p>"; ?>
+        <p><strong>Rating:</strong> <?php echo $ratings[$report['rating']]; ?></p>
         <p><strong>Report:</strong></p>
 
         <?php

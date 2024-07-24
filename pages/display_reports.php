@@ -274,11 +274,13 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
       echo "<div class='report-item'>";
       echo "  <h5><a href='./trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a></h5>";
       echo "  <p><span>Trail:</span> " . $report['trail_name'] . "</a></p>";
-      echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
+      echo "  <p><span>Submitted by:</span> " . $report['username'] . "</a></p>";
 
       $time = $report['time_updated'];
       $formattedTime = date("F j, Y", strtotime($time));
       echo "  <p><span>" . $postedOnText . "</span> " . $formattedTime . "</p>";
+      echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
+
       $summary = $report['summary'];
 
       if (strlen($summary) > $BLURB_LIMIT) {
