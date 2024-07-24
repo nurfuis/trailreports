@@ -80,13 +80,15 @@ if (!empty($errorMessage)) {
     include_once realpath("../components/sign_up_form.inc");
 
 } else if (!empty($successMessage)) {
-    echo "<p style='color: blue;'>$successMessage</p>";
-    echo '<p><a href="/pages/email.php">Register an Email.</p>';
     ?>
         <script type="text/javascript">
             window.location.href = "/pages/email.php" 
         </script>
+
         <?php
+        echo "<p style='color: blue;'>$successMessage</p>";
+        echo '<p><a href="/pages/email.php">Register an Email.</p>';
+        header("Location: /pages/email.php");
         exit;
 }
 

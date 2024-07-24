@@ -98,9 +98,15 @@ if (!empty($errorMessage)) {
 
 } else if (!empty($successMessage)) {
   if (!!$redirect_path) {
-    echo "<p>$successMessage</p>";
+    ?>
+      <script type="text/javascript">
+        window.location.href = "<?php echo $redirect_path ?>" 
+      </script>
 
-    header("Location: $redirect_path");
+      <?php
+      echo "<p>$successMessage</p>";
+      header("Location: $redirect_path");
+      exit;
   } else {
 
   }
