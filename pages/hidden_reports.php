@@ -263,7 +263,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
             $reportNumber = ($current_page - 1) * $items_per_page + $count;
             $count++;
             $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
-            $postedOnText = $isUpdated ? 'Updated at:' : 'Submitted on:';
+            $postedOnText = $isUpdated ? 'Updated:' : 'Posted:';
             $BLURB_LIMIT = 500;
             $summary = substr($report['summary'], 0, $BLURB_LIMIT) . '...';
             echo "<h4>$reportNumber.</h4>";
@@ -275,7 +275,9 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
             echo "  <p><span>Trail:</span> " . $report['trail_name'] . "</a></p>";
             echo "  <p><span>User:</span> " . $report['username'] . "</p>";
 
-            echo "  <p><span>" . $postedOnText . "</span> " . $report['time_updated'] . "</p>";
+            $time = $report['time_updated'];
+            $formattedTime = date("F j, Y", strtotime($time));
+            echo "  <p><strong>" . $postedOnText . "</strong> " . $formattedTime . "</p>";
             $summary = $report['summary'];
 
             if (strlen($summary) > $BLURB_LIMIT) {

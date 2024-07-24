@@ -58,7 +58,7 @@ if (!$result) {
 if ($result->num_rows === 1) {
     $report = $result->fetch_assoc();
     $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
-    $postedOnText = $isUpdated ? 'Updated at:' : 'Submitted on:';
+    $postedOnText = $isUpdated ? 'Updated:' : 'Posted:';
 } else {
     // Handle the case where no report is found for the given ID (e.g., display an error message)
     die("Report not found.");
@@ -91,7 +91,10 @@ mysqli_close($mysqli);
         <h3>Trail Report</h3>
         <p><strong>Title:</strong> <?php echo $report['report_title']; ?></p>
         <p><strong>Trail:</strong> <?php echo $report['feature_name']; ?></p>
-        <p><strong>Rating:</strong> <?php echo $ratings[$report['rating']]; ?></p>
+        <p><strong>Rating:</strong> <?php echo $ratings[$report['rating']]; ?></p><?php
+           $time = $report['time_updated'];
+           $formattedTime = date("F j, Y", strtotime($time));
+           echo " <p><strong>" . $postedOnText . "</strong> " . $formattedTime . "</p>"; ?>
         <p><strong>Submitted by:</strong> <?php echo $report['username']; ?></p>
         <p><strong>Report:</strong></p>
 
@@ -101,7 +104,6 @@ mysqli_close($mysqli);
 
         <p class="indented"><?php echo nl2br($summary); ?> </div< /p>
 
-        <p class="indented-top light-text"><i><?php echo $postedOnText ?>     <?php echo $report['time_updated']; ?></i></p>
 
     </div>
 
