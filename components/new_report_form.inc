@@ -66,6 +66,7 @@ if (!$resultFeatures) {
         <a href="#" class="toggle-guidance"> (more)</a><br>
 
         <ul class="guidance-list" style="display: none;">
+            <li><span>Date Hiked:</span> Include the date of your hike./li>
             <li><span>Trail Conditions:</span> Describe the overall condition of the trail (e.g., well-maintained, muddy
                 in some
                 sections, overgrown in parts).</li>
@@ -98,8 +99,8 @@ if (!$resultFeatures) {
             });
         </script>
         <br>
-        <textarea name="summary" id="summary" class="summary-input"
-            placeholder="Date Hiked. A detailed description. " required></textarea>
+        <textarea name="summary" id="summary" class="summary-input" placeholder="Date Hiked. A detailed description. "
+            required></textarea>
         <br><br>
 
         <button type="submit">Submit Report</button>
