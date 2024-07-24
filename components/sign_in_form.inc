@@ -10,22 +10,26 @@
     <input type="checkbox" id="showPassword">
     <label for="showPassword">Show Password</label><br><br>
     <input type="submit" value="Sign in"><br><br>
+  </form>
+  <form method="post" action="/pages/process_email_login.php">
+    <p><b>OR</b> have a secure link sent to your inbox:</p>
+    <label for="email">Email Address:</label><br>
+    <input type="email" autocomplete="email" id="email" name="email" placeholder="Enter email" required><br><br>
+    <input type="submit" value="Send Link"><br><br>
+  </form>
+  <script>
+    const passwordInput = document.getElementById("password");
+    const showPasswordCheckbox = document.getElementById("showPassword");
 
-    <script>
-      const passwordInput = document.getElementById("password");
-      const showPasswordCheckbox = document.getElementById("showPassword");
+    showPasswordCheckbox.addEventListener("change", function () {
+      if (this.checked) {
+        passwordInput.type = "text";
 
-      showPasswordCheckbox.addEventListener("change", function () {
-        if (this.checked) {
-          passwordInput.type = "text";
-          // Focus the password input only when enabling show password
-          passwordInput.focus();
-        } else {
-          passwordInput.type = "password";
-        }
-      });
-    </script>
+      } else {
+        passwordInput.type = "password";
+      }
+    });
+  </script>
 
-
-    <div class="notice">Don't have an account? <a href="/pages/sign_up.php">Register Here</a></div>
+  <div class="notice">Don't have an account? <a href="/pages/sign_up.php">Register Here</a></div>
 </div>
