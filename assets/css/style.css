@@ -216,7 +216,7 @@ button {
   min-width: 320px;
   max-width: 900px;
   box-sizing: border-box;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .toggle-guidance {
@@ -614,7 +614,7 @@ p {
     grid-template-columns: 1fr 2fr;
     grid-gap: 0.5rem;
     max-width: 900px;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 
   .report-item p:first-child {
