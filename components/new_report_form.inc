@@ -99,7 +99,7 @@ if (!$resultFeatures) {
             });
         </script>
         <br>
-        <textarea name="summary" id="summary" class="summary-input" placeholder="Date Hiked. A detailed description. "
+        <textarea name="summary" id="summary" class="summary-input" placeholder="Date hiked. A detailed description. "
             required></textarea>
         <br><br>
 
