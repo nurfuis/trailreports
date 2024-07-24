@@ -1,9 +1,9 @@
 <div class="tos">
     <h1>Terms of Service<h1>
-            <h2>Welcome to bigsurtrailreport.net!</h2>
+            <h2>Welcome to bigsurtrailreports.net!</h2>
 
             <p>
-                These Terms of Service govern your access to and use of the website operated by bigsurtrailreport.net.
+                These Terms of Service govern your access to and use of the website operated by bigsurtrailreports.net.
                 These
                 Terms apply to all visitors, users, and others who access or use the Service (as defined below).
             </p>
@@ -18,8 +18,8 @@
 
             <h3>1. Definitions</h3>
             <p>
-                Service means the bigsurtrailreport.net website, its content, features, and functionalities, offered by
-                bigsurtrailreport.net.</p>
+                Service means the bigsurtrailreports.net website, its content, features, and functionalities, offered by
+                bigsurtrailreports.net.</p>
             <p>
                 Content means all text, data, graphics, images, video, audio, or other materials displayed or available
                 on

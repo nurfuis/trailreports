@@ -1,5 +1,5 @@
 <h1>Privacy Policy</h1>
-<h2>Welcome to bigsurtrailreport.net!</h2>
+<h2>Welcome to bigsurtrailreports.net!</h2>
 <p>
     We are committed to protecting your privacy. This Privacy Policy explains what information we collect, how we use
     it,
