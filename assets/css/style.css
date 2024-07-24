@@ -329,7 +329,7 @@ button {
   transform: translateY(-10px);
   pointer-events: none;
 
-  transition: max-height 0.2s ease-out, transform 0.2s ease-in-out;
+  transition: max-height 0.2s ease-out, transform 0.2s ease-out;
 }
 .advanced-form.expanded {
   max-height: none;

@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $page_title = "Register";
 $page_css = "/assets/css/style.css";
@@ -59,7 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $userId = $row['user_id'];
 
-            session_start();
             $_SESSION['username'] = $username;
             $_SESSION['user_id'] = $userId;
 
@@ -82,8 +82,7 @@ if (!empty($errorMessage)) {
 } else if (!empty($successMessage)) {
     echo "<p style='color: blue;'>$successMessage</p>";
     echo '<p><a href="/pages/email.php">Register an Email.</p>';
-
-    // header("Location: /pages/email.php");
+    header("Location: /pages/email.php");
 }
 
 include_once realpath("../components/tail.inc");

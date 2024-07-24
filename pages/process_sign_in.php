@@ -3,11 +3,13 @@
 $page_title = "Login";
 $page_css = "/assets/css/style.css";
 $currentPagePath = "";
+
+
+require_once realpath("../../db_connect.php");
+
 include realpath("../components/head.inc");
 include realpath("../layouts/wide.inc");
 
-require_once realpath("../../config.php");
-require_once realpath("../../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -57,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
           $_SESSION['user_level'] = 'user';
         }
-
 
         if ($row['account_status'] === 'inactive') {
           // Update account status to active
