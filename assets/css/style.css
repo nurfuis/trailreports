@@ -459,7 +459,7 @@ h2 {
   display: inline-block;
 }
 option {
-  max-width: 100%;
+  max-width: 100% - 2rem;
   overflow-wrap: break-word;
 }
 .radio {
