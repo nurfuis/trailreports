@@ -18,8 +18,8 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
                 <option value="<?php echo $trail['id']; ?>" <?php if (isset($_GET['feature_id']) && $_GET['feature_id'] == $trail['id']): ?> selected <?php endif; ?>>
                     <?php
 
-                    $shortenedName = substr($trail['name'], 0, 30);
-                    if (strlen($trail['name']) > 30) {
+                    $shortenedName = substr($trail['name'], 0, 34);
+                    if (strlen($trail['name']) > 34) {
                         $shortenedName .= '...';
                     }
                     echo $shortenedName;

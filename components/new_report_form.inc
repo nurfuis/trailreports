@@ -29,7 +29,14 @@ if (!$resultFeatures) {
             while ($row = $resultFeatures->fetch_assoc()):
                 ?>
                 <option value="<?php echo $row["id"]; ?>" <?php echo ($selectedTrailId == $row["id"]) ? 'selected' : ''; ?>>
-                    <?php echo $row["name"]; ?>
+                    <?php
+
+                    $shortenedName = substr($row['name'], 0, 34);
+                    if (strlen($row['name']) > 34) {
+                        $shortenedName .= '...';
+                    }
+                    echo $shortenedName;
+                    ?>
                 </option>
             <?php endwhile; ?>
         </select>

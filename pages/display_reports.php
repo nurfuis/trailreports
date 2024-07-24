@@ -171,7 +171,12 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
         if ($trail_result && mysqli_num_rows($trail_result) > 0) {
           while ($trail = mysqli_fetch_assoc($trail_result)) {
             $selected = ($selected_trail == $trail['trail_id']) ? "selected" : ""; // Check for selected trail
-            echo "<option value='" . $trail['trail_id'] . "' $selected>" . $trail['trail_name'] . "</option>";
+        
+            $shortenedName = substr($trail['trail_name'], 0, 34);
+            if (strlen($trail['trail_name']) > 34) {
+              $shortenedName .= '...';
+            }
+            echo "<option value='" . $trail['trail_id'] . "' $selected>" . $shortenedName . "</option>";
           }
         }
         ?>
