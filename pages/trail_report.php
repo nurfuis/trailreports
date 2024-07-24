@@ -47,7 +47,7 @@ $OVERALL_RATINGS = [
     'Impassable' => 4,
     'Gone' => 5
 ];
-$ratings = array_flip(OVERALL_RATINGS);
+$ratings = array_flip($OVERALL_RATINGS);
 
 if (!$result) {
     echo "Error: " . mysqli_error($mysqli);
