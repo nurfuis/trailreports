@@ -25,7 +25,7 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
     <div>
         <div class="advanced-search"><a id="advanced-search" href="#">Show More</a></div>
         <div id="advanced-search-form" style="display: none;">
-            <form id="trail-select-form" method="get">
+            <form id="collection-select-form" method="get">
                 <?php while ($collection = mysqli_fetch_assoc($collections_result)): ?>
                     <input type="radio" name="collection" value="<?php echo $collection['id']; ?>"
                         id="<?php echo $collection['id']; ?>">
@@ -37,7 +37,7 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
         <script>
             const advancedSearch = document.getElementById('advanced-search');
             const advancedSearchForm = document.getElementById('advanced-search-form');
-
+            const collectionForm = document.getElementById("collection-select-form")
             advancedSearch.addEventListener('click', () => {
                 if (advancedSearchForm.style.display === 'none') {
                     advancedSearchForm.style.display = 'block';
