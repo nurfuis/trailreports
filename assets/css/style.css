@@ -564,7 +564,7 @@ textarea {
   text-align: center;
   color: var(--light-background);
   background-color: var(--darker-background);
-  padding-bottom: 1rem;
+  padding-bottom: 0.25rem;
 }
 .confirm-delete button {
   margin-right: 1rem;

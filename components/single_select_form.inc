@@ -27,12 +27,12 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
                 </option>
             <?php endwhile; ?>
         </select>
-        <button type="submit">View</button>
+        <button class="hidden" type="submit">View</button>
     </form>
+    <div class="advanced-search">
+        <button id="advanced-search">Options</button>
+    </div>
     <div>
-        <div class="advanced-search">
-            <button id="advanced-search">Options</button>
-        </div>
         <div id="advanced-search-form" class="advanced-form">
             <form id="collection-select-form" method="get">
                 <?php while ($collection = mysqli_fetch_assoc($collections_result)): ?>
@@ -48,10 +48,16 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
             const advancedSearch = document.getElementById('advanced-search');
             const advancedSearchForm = document.getElementById('advanced-search-form');
             const collectionForm = document.getElementById("collection-select-form");
+            const trailSelectForm = document.getElementById('trail-select-form');
 
             advancedSearch.addEventListener('click', () => {
                 advancedSearchForm.classList.toggle('expanded');
             });
+
+            trailSelectForm.addEventListener('change', (event) => {
+
+                trailSelectForm.submit();
+            })
 
             // Add event listener to the entire form for radio button changes
             collectionForm.addEventListener('change', (event) => {
