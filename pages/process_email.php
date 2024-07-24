@@ -1,14 +1,12 @@
 <?php
+session_start();
+require_once realpath("../../db_connect.php");
 
 $page_title = "Register Email";
 $page_css = "/assets/css/style.css";
-session_start();
 
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");
-
-require_once realpath("../../config.php");
-require_once realpath("../../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
@@ -73,6 +71,7 @@ if (!empty($errorMessage)) {
 
 } else {
   echo "<p style='color: blue;'>$successMessage</p>";
+  echo '<p><a href="' . $_SESSION['referrer'] . '>Continue your report...</a></p>';
 }
 
 include_once realpath("../components/tail.inc");

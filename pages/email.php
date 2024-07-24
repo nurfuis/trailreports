@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
-  header("Location: /index.php");
+  header("Location: /home.php");
 }
 
 $page_title = "Verify email";
@@ -48,7 +48,9 @@ include_once realpath("../layouts/wide.inc");
   }
   function continueWithoutEmail() {
     // Redirect to next page
-    window.location.href = "/home.php";
+
+
+    window.location.href = $_SESSION['referrer'];
   }
 </script>
 <?php

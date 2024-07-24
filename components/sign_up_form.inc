@@ -2,7 +2,6 @@
   <h3>New User</h3>
   <form action="/pages/process_sign_up.php" method="post">
     <input type="hidden" name="currentPagePath" value="<?php echo $currentPagePath; ?>">
-
     <label for="username">Username:</label>
     <input type="text" autocomplete="username" name="username" id="username" maxlength="30" required /><br><br>
     <p id="username-error" class="alert"></p>
