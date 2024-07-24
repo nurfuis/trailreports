@@ -460,6 +460,7 @@ h2 {
 }
 option {
   max-width: 100%;
+  overflow-wrap: break-word;
 }
 .radio {
   display: block;
