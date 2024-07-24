@@ -223,7 +223,7 @@ if (isset($_GET['feature_id'])) {
 
                         $time = $report['time_updated'];
                         $formattedTime = date("F j, Y", strtotime($time));
-                        echo "  <p><strong>" . $postedOnText . "</strong> " . $formattedTime . "</p>";
+                        echo "  <p><span>" . $postedOnText . "</span> " . $formattedTime . "</p>";
                         $summary = $report['summary'];
                         $BLURB_LIMIT = 200;
                         if (strlen($summary) > $BLURB_LIMIT) {
