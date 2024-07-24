@@ -40,6 +40,13 @@ mysqli_close($mysqli);
 if (isset($errorMessage)) {
     echo '<p class="alert">' . $errorMessage . '</p>';
 } else if (isset($successMessage)) {
-    echo '<p style="color: blue;">' . $successMessage . '</p>';
+
+    ?>
+        <script type="text/javascript">
+            window.location.href = "/home.php" 
+        </script>
+
+        <?php
+        echo '<p style="color: blue;">' . $successMessage . '</p>';
 }
 include_once realpath("../components/tail.inc");
