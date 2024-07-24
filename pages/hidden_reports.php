@@ -277,7 +277,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
 
             $time = $report['time_updated'];
             $formattedTime = date("F j, Y", strtotime($time));
-            echo "  <p><strong>" . $postedOnText . "</strong> " . $formattedTime . "</p>";
+            echo "  <p><span>" . $postedOnText . "</span> " . $formattedTime . "</p>";
             $summary = $report['summary'];
 
             if (strlen($summary) > $BLURB_LIMIT) {
