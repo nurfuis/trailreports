@@ -208,12 +208,13 @@ if (isset($_GET['feature_id'])) {
                 if (mysqli_num_rows($result) === 0) {
                     echo "<p>There are currently no trail reports.</p>";
                 } else {
+                    $is_descending = ($order_by === "tr.created_at DESC" || $order_by === "tr.rating ASC, tr.created_at DESC");
                     $count = 1;
                     while ($report = mysqli_fetch_assoc($result)) {
                         $summary = substr($report['summary'], 0, BLURB_LIMIT) . '...';
                         $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
                         $postedOnText = $isUpdated ? 'Updated:' : 'Posted:';
-                        $reportNumber = $count;
+                        $reportNumber = ($is_descending) ? ($current_page - 1) * $items_per_page + $count : ($total_reports - ($current_page - 1) * $items_per_page - $count + 1);
                         $count++;
                         echo "<h4>$reportNumber.</h4>";
                         echo "<div class='report-item'>";
