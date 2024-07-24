@@ -1,12 +1,9 @@
 <?php
-
 session_start();
-
 if (!isset($_SESSION['user_id'])) {
   header("Location: sign_in.php");
   exit;
 }
-
 $page_title = "Account Management";
 $page_css = "/assets/css/style.css";
 

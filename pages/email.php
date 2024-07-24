@@ -1,16 +1,14 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+  header("Location: /index.php");
+}
 
 $page_title = "Verify email";
 $page_css = "/assets/css/style.css";
 
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");
-
-session_start();
-
-if (!isset($_SESSION['user_id'])) {
-  header("Location: /index.php");
-}
 ?>
 
 <div class="regular-padding">
@@ -32,9 +30,7 @@ if (!isset($_SESSION['user_id'])) {
 <div class="regular-padding">
   <form class="hidden">
     <button type="button" id="skip-button" onclick="skipVerification()">Skip Verification</button>
-
   </form>
-
   <div id="skip-verification-alert">
     <p>
       By skipping verification, your account setup will not be complete. This may
@@ -49,9 +45,7 @@ if (!isset($_SESSION['user_id'])) {
   function skipVerification() {
     document.getElementById("skip-verification-alert").style.display = "block";
     document.getElementById("skip-button").style.display = "none";
-
   }
-
   function continueWithoutEmail() {
     // Redirect to next page
     window.location.href = "/home.php";

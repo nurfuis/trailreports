@@ -1,22 +1,20 @@
 <?php
+session_start();
+if (empty($_GET['id']) || !isset($_SESSION['user_id'])) {
+  header("Location: ./user_reports.php?error=unauthorized");
+  exit;
+}
+require_once realpath("../../db_connect.php");
 
 $page_title = "Confirm Report Deletion";
 $page_css = "/assets/css/style.css";
-session_start();
+
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");
-require_once realpath("../../db_connect.php");
-
-// Check if report ID is provided and user is logged in
-if (empty($_GET['id']) || !isset($_SESSION['user_id'])) {
-  header("Location: ./user_reports.php?error=unauthorized");
-  exit; // Terminate script execution
-}
 
 $reportId = (int) $_GET['id'];
 $userId = (int) $_SESSION['user_id'];
 
-// Get report details (optional, for confirmation message)
 $sql = "SELECT title FROM trail_reports WHERE id = ?";
 $stmt = mysqli_prepare($mysqli, $sql);
 mysqli_stmt_bind_param($stmt, "i", $reportId);
@@ -28,6 +26,12 @@ if (mysqli_num_rows($result) === 1) {
   $reportTitle = $row['title'];
 } else {
   // Report not found, redirect with error message
+  ?>
+  <script type="text/javascript">
+    window.location.href = "./user_reports.php?error=report_not_found" 
+  </script>
+
+  <?php
   header("Location: ./user_reports.php?error=report_not_found");
   exit; // Terminate script execution
 }
