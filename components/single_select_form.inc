@@ -30,8 +30,10 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
         <button type="submit">View</button>
     </form>
     <div>
-        <div class="advanced-search"><a id="advanced-search" href="#">Options</a></div>
-        <div id="advanced-search-form" style="display: none;">
+        <div class="advanced-search">
+            <button id="advanced-search">Options</button>
+        </div>
+        <div id="advanced-search-form" class="advanced-form">
             <form id="collection-select-form" method="get">
                 <?php while ($collection = mysqli_fetch_assoc($collections_result)): ?>
                     <input type="radio" name="collection" value="<?php echo $collection['id']; ?>"
@@ -48,11 +50,7 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
             const collectionForm = document.getElementById("collection-select-form");
 
             advancedSearch.addEventListener('click', () => {
-                if (advancedSearchForm.style.display === 'none') {
-                    advancedSearchForm.style.display = 'block';
-                } else {
-                    advancedSearchForm.style.display = 'none';
-                }
+                advancedSearchForm.classList.toggle('expanded');
             });
 
             // Add event listener to the entire form for radio button changes

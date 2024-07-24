@@ -319,18 +319,33 @@ button {
 .trail-select-form {
   margin: 2rem;
 }
-#advanced-search-form {
+
+.advanced-form {
   margin-top: 1.37rem;
+  color: var(--light-background);
+  background-color: var(--darker-background);
+  max-height: 0px;
+  overflow: hidden;
+  transform: translateY(-10px);
+  pointer-events: none;
+
+  transition: max-height 0.2s ease-out, transform 0.2s ease-in-out;
 }
-.advanced-search a {
+.advanced-form.expanded {
+  max-height: none;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.advanced-search button {
   text-decoration: none;
   color: var(--light-background);
+  background-color: var(--darker-background);
   border: 1px solid var(--light-background);
   padding: 0.5rem;
   font-size: x-small;
 }
 .advanced-search {
-  display: block;
   margin: 1.37rem 0 0 0;
 }
 .sign-in a {
