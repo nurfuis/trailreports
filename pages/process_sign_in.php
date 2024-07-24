@@ -1,11 +1,9 @@
 <?php
-
+session_start();
+require_once realpath("../../db_connect.php");
 $page_title = "Login";
 $page_css = "/assets/css/style.css";
 $currentPagePath = "";
-
-
-require_once realpath("../../db_connect.php");
 
 include realpath("../components/head.inc");
 include realpath("../layouts/wide.inc");
@@ -44,7 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       // check login
       if (password_verify($password, $row['password_hash'])) {
         // Login successful - Start session and store user data
-        session_start();
         $_SESSION['username'] = $row['username'];
         $_SESSION['user_id'] = $row['user_id'];
 

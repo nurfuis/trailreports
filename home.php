@@ -10,7 +10,7 @@ if (isset($_GET['collection'])) {
 
 $page_title = "Trail Reports for Big Sur, California";
 $page_css = "./assets/css/style.css";
-$currentPagePath = $_SERVER['HTTP_REFERER'];
+$currentPagePath = $_SERVER['REQUEST_URI'];
 
 include_once realpath("./components/head.inc");
 include_once realpath("./layouts/main.inc");
