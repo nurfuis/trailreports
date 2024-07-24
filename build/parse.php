@@ -8,6 +8,7 @@ if ($mysqli->connect_error) {
 }
 
 $base_dir = "../data/";
+$target_collection_name = "Parks"; // Replace with your desired collection name
 
 if (is_dir($base_dir) && is_readable($base_dir)) {
     $dh = opendir($base_dir);
@@ -18,6 +19,11 @@ if (is_dir($base_dir) && is_readable($base_dir)) {
             // Skip non-directories and special entries ('.', '..')
             if (!is_dir($base_dir . $dir) || in_array($dir, array('.', '..'))) {
                 continue;
+            }
+
+            // Check if the directory name matches the target collection
+            if ($dir !== $target_collection_name) {
+                continue; // Skip directories that don't match the target
             }
             echo "Found directory: ";
 

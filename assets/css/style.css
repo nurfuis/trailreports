@@ -316,6 +316,24 @@ button {
   margin: 0;
   font-family: "K2D", sans-serif;
 }
+.trail-select-form {
+  margin: 2rem;
+}
+.advanced-search-form {
+  min-height: 120px;
+  background-color: var(--dark-background);
+}
+.advanced-search a {
+  text-decoration: none;
+  color: var(--light-background);
+  border: 1px solid var(--light-background);
+  padding: 0.5rem;
+  font-size: x-small;
+}
+.advanced-search {
+  display: block;
+  margin: 1rem;
+}
 .sign-in a {
   font-weight: 500;
 }
