@@ -72,7 +72,7 @@ if (!empty($errorMessage)) {
   include_once realpath("../components/update_email_form.inc");
 
 } else {
-  echo "<p style='color: blue;'>$successMessage</p>";
+  echo '<p style="color: blue;">$successMessage</p>';
   $referrer = $_SESSION['referrer'];
   echo '<p><a href="' . $referrer . '">Continue your report...</a></p>';
 }
