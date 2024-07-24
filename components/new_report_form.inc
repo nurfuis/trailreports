@@ -66,7 +66,7 @@ if (!$resultFeatures) {
         <a href="#" class="toggle-guidance"> (more)</a><br>
 
         <ul class="guidance-list" style="display: none;">
-            <li><span>Date Hiked:</span> Include the date of your hike./li>
+            <li><span>Date Hiked:</span> Include the date of your hike.</li>
             <li><span>Trail Conditions:</span> Describe the overall condition of the trail (e.g., well-maintained, muddy
                 in some
                 sections, overgrown in parts).</li>
