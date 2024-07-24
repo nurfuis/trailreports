@@ -32,7 +32,7 @@ if (mysqli_num_rows($result) === 1) {
   </script>
 
   <?php
-  header("Location: ./user_reports.php?error=report_not_found");
+  // header("Location: ./user_reports.php?error=report_not_found");
   exit; // Terminate script execution
 }
 

@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php
 
             $successMessage = "Trail report updated successfully!";
-            header("Location: ./user_reports.php?success=true"); // Redirect to reports page
+            // header("Location: ./user_reports.php?success=true"); // Redirect to reports page
 
         } else {
             $errorMessage = "Error updating report: " . mysqli_stmt_error($stmt);

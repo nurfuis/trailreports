@@ -88,7 +88,7 @@ if (!empty($errorMessage)) {
         <?php
         echo "<p style='color: blue;'>$successMessage</p>";
         echo '<p><a href="/pages/email.php">Register an Email.</p>';
-        header("Location: /pages/email.php");
+        // header("Location: /pages/email.php");
         exit;
 }
 

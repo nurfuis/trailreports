@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <?php
         $successMessage = "Password updated successfully.";
-        header("Location: /pages/account.php");
+        // header("Location: /pages/account.php");
     } else {
         $errorMessage = "Failed to update password: " . mysqli_stmt_error($stmt);
     }

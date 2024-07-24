@@ -105,7 +105,7 @@ if (!empty($errorMessage)) {
 
       <?php
       echo "<p>$successMessage</p>";
-      header("Location: $redirect_path");
+      // header("Location: $redirect_path");
       exit;
   } else {
 

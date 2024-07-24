@@ -31,7 +31,7 @@ if (mysqli_stmt_execute($stmt)) {
     </script>
 
     <?php
-    header("Location: hidden_reports.php");
+    // header("Location: hidden_reports.php");
     exit;
 } else {
     echo "Error hiding report: " . mysqli_error($mysqli);

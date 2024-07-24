@@ -20,7 +20,7 @@ if (mysqli_stmt_execute($stmt)) {
   </script>
 
   <?php
-  header("Location: ./user_reports.php?success=deleted");
+  // header("Location: ./user_reports.php?success=deleted");
 } else {
   ?>
   <script type="text/javascript">
@@ -28,7 +28,7 @@ if (mysqli_stmt_execute($stmt)) {
   </script>
 
   <?php
-  header("Location: ./user_reports.php?error=delete_failed");
+  // header("Location: ./user_reports.php?error=delete_failed");
 }
 
 mysqli_stmt_close($stmt);
