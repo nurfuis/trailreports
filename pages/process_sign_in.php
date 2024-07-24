@@ -108,7 +108,12 @@ if (!empty($errorMessage)) {
       // header("Location: $redirect_path");
       exit;
   } else {
+    ?>
+      <script type="text/javascript">
+        window.location.href = "/home.php" 
+      </script>
 
+    <?php
   }
 
 }
