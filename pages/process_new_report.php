@@ -34,6 +34,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         mysqli_stmt_bind_param($stmt, "iiiss", $featureId, $userId, $rating, $summary, $title); // Bind title parameter
 
         if (mysqli_stmt_execute($stmt)) {
+
+            ?>
+            <script type="text/javascript">
+                window.location.href = "./display_reports.php?success=true" 
+            </script>
+
+            <?php
             $successMessage = "Trail report submitted successfully!";
             header("Location: ./display_reports.php?success=true");
 

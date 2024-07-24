@@ -21,8 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mysqli_stmt_bind_param($stmt, "si", $hashed_password, $user_id);
 
     if (mysqli_stmt_execute($stmt)) {
-        $successMessage = "Password updated successfully.";
+        ?>
+        <script type="text/javascript">
+            window.location.href = "/pages/account.php" 
+        </script>
 
+        <?php
+        $successMessage = "Password updated successfully.";
         header("Location: /pages/account.php");
     } else {
         $errorMessage = "Failed to update password: " . mysqli_stmt_error($stmt);

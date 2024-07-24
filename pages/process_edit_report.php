@@ -1,12 +1,13 @@
 <?php
+session_start();
+require_once realpath("../../db_connect.php");
 
 $page_title = "Process Edited Trail Report";
 $page_css = "/assets/css/style.css";
 $currentTime = time();
-session_start();
+
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");
-require_once realpath("../../db_connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_SESSION['last_submitted_time'])) {
@@ -34,6 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         mysqli_stmt_bind_param($stmt, "iissi", $featureId, $rating, $summary, $title, $reportId);
 
         if (mysqli_stmt_execute($stmt)) {
+            ?>
+            <script type="text/javascript">
+                window.location.href = "./user_reports.php?success=true" 
+            </script>
+
+            <?php
+
             $successMessage = "Trail report updated successfully!";
             header("Location: ./user_reports.php?success=true"); // Redirect to reports page
 

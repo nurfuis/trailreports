@@ -1,20 +1,16 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+  header("Location: /pages/login.php"); // Redirect to login page if not logged in
+  exit;
+}
+require_once realpath("../../db_connect.php"); // $msqli connect
 
 $page_title = "Deactivate Account";
 $page_css = "/assets/css/style.css";
 
 include_once realpath("../components/head.inc"); // Top section up to and including body tag
 include_once realpath("../layouts/wide.inc"); // An open div with layout class
-
-session_start();
-
-// Check if user is logged in (optional, based on your implementation)
-if (!isset($_SESSION['user_id'])) {
-  header("Location: /pages/login.php"); // Redirect to login page if not logged in
-  exit;
-}
-
-require_once realpath("../../db_connect.php"); // $msqli connect
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $user_id = $_SESSION['user_id']; // Get user ID from session
