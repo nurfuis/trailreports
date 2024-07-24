@@ -99,7 +99,7 @@ if (!$resultFeatures) {
         </script>
         <br>
         <textarea name="summary" id="summary" class="summary-input"
-            placeholder="Provide a detailed description of your experience on the trail." required></textarea>
+            placeholder="Date Hiked. A detailed description. " required></textarea>
         <br><br>
 
         <button type="submit">Submit Report</button>
