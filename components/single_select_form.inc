@@ -23,7 +23,7 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
         <button type="submit">View</button>
     </form>
     <div>
-        <div class="advanced-search"><a id="advanced-search" href="#">Show More Features</a></div>
+        <div class="advanced-search"><a id="advanced-search" href="#">Show More</a></div>
         <div id="advanced-search-form" style="display: none;">
             <form id="trail-select-form" method="get">
                 <?php while ($collection = mysqli_fetch_assoc($collections_result)): ?>
