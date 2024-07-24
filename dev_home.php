@@ -14,7 +14,7 @@ include_once realpath("./layouts/main.inc");
 include_once realpath("./components/header.inc");
 include_once realpath("./components/intro.inc");
 
-if (isset($_GET['feature_id'])) {
+if (isset($_GET['collection'])) {
     $collection = $_GET['collection'];
 } else {
     $collection = 1;
