@@ -1,22 +1,10 @@
 <?php
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $selected_collections = $_POST['collections'] ?? [1];
+//  else {
 
-    // Now you can use $selected_collections for updating your trail list query
-    $collection_ids = implode(',', $selected_collections);
-    $trail_sql = "SELECT id, name FROM features WHERE collections_id IN ($collection_ids)";
-    $trail_result = mysqli_query($mysqli, $trail_sql);
-
-    if (!$trail_result) {
-        echo "Error: " . mysqli_error($mysqli);
-        exit;
-    }
-} else {
-
-    $trail_sql = "SELECT id, name FROM features WHERE collections_id IN (1)";
-    $trail_result = mysqli_query($mysqli, $trail_sql);
-}
+//     $trail_sql = "SELECT id, name FROM features WHERE collections_id IN (1)";
+//     $trail_result = mysqli_query($mysqli, $trail_sql);
+// }
 
 if (!$trail_result) {
     echo "Error: " . mysqli_error($mysqli);
