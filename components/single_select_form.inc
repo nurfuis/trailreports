@@ -38,18 +38,28 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
                         id="<?php echo $collection['id']; ?>">
                     <label for="<?php echo $collection['id']; ?>"><?php echo $collection['name']; ?></label>
                 <?php endwhile; ?>
-                <button type="submit">Update</button>
+
             </form>
         </div>
+
         <script>
             const advancedSearch = document.getElementById('advanced-search');
             const advancedSearchForm = document.getElementById('advanced-search-form');
-            const collectionForm = document.getElementById("collection-select-form")
+            const collectionForm = document.getElementById("collection-select-form");
+
             advancedSearch.addEventListener('click', () => {
                 if (advancedSearchForm.style.display === 'none') {
                     advancedSearchForm.style.display = 'block';
                 } else {
                     advancedSearchForm.style.display = 'none';
+                }
+            });
+
+            // Add event listener to the entire form for radio button changes
+            collectionForm.addEventListener('change', (event) => {
+                if (event.target.type === 'radio' && event.target.checked) {
+                    // Submit the form programmatically when a radio button is selected
+                    collectionForm.submit();
                 }
             });
         </script>
