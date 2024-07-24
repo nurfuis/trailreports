@@ -73,7 +73,13 @@ mysqli_close($mysqli);
 if (!empty($errorMessage)) {
   echo "<p style='color: red;'>$errorMessage</p>";
 } else if (!empty($successMessage)) {
-  echo "<p style='color: blue;'>$successMessage</p>";
+  ?>
+    <script type="text/javascript">
+      window.location.href = "/home.php" 
+    </script>
+
+    <?php
+    echo "<p style='color: blue;'>$successMessage</p>";
 }
 
 include_once realpath("../components/tail.inc");
