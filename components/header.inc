@@ -1,7 +1,7 @@
 <div class="header">
 
   <div class="dropdown" data-dropdown>
-    <button class="link <?php echo isset($_SESSION['username']) ? 'user-btn' : ''; ?>" data-dropdown-button>
+    <button class="dropdown__link <?php echo isset($_SESSION['username']) ? 'user-btn' : ''; ?>" data-dropdown-button>
       <?php
       if (isset($_SESSION['username'])) {
         $username = $_SESSION['username'];
@@ -29,21 +29,21 @@
   </div>
 
   <div class="dropdown" data-dropdown>
-    <button class="link" data-dropdown-button>Reports</button>
-    <div class="dropdown-menu link-grid">
-      <a href="./pages/display_reports.php" class="link">All Reports</a>
-      <a href="./pages/add_report.php" class="link">Submit a Report</a>
-      <a href="./pages/features.php" class="link hidden">Index</a>
-      <a href="./pages/topo-map.html" class="link hidden">Topo Map</a>
+    <button class="dropdown__link" data-dropdown-button>Reports</button>
+    <div class="dropdown-menu dropdown__link-grid">
+      <a href="./pages/display_reports.php" class="dropdown__link">All Reports</a>
+      <a href="./pages/add_report.php" class="dropdown__link">Submit a Report</a>
+      <a href="./pages/features.php" class="dropdown__link hidden">Index</a>
+      <a href="./pages/topo-map.html" class="dropdown__link hidden">Topo Map</a>
     </div>
   </div>
 
   <div class="dropdown" data-dropdown>
-    <button class="link" data-dropdown-button>About</button>
-    <div class="dropdown-menu link-grid">
-      <a href="./pages/support_us.php" class="link">Support Us</a>
-      <a href="/" class="link hidden">Learn More</a>
-      <a href="./pages/contact.php" class="link">Contact</a>
+    <button class="dropdown__link" data-dropdown-button>About</button>
+    <div class="dropdown-menu dropdown__link-grid">
+      <a href="./pages/support_us.php" class="dropdown__link">Support Us</a>
+      <a href="/" class="dropdown__link hidden">Learn More</a>
+      <a href="./pages/contact.php" class="dropdown__link">Contact</a>
 
     </div>
   </div>

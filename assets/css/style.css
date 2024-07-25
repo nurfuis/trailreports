@@ -273,7 +273,7 @@ button {
   font-size: larger;
   text-decoration: none;
 }
-.link {
+.dropdown__link {
   background: none;
   border: none;
   text-decoration: none;
@@ -283,11 +283,11 @@ button {
   cursor: pointer;
   padding: 0;
 }
-.dropdown.active > .link,
-.link:hover {
+.dropdown.active > .dropdown__link,
+.dropdown__link:hover {
   color: black;
 }
-.link:hover {
+.dropdown__link:hover {
   color: black;
 }
 .dropdown {
@@ -307,12 +307,12 @@ button {
   pointer-events: none;
   z-index: 10;
 }
-.dropdown.active > .link + .dropdown-menu {
+.dropdown.active > .dropdown__link + .dropdown-menu {
   opacity: 1;
   transform: translateY(0);
   pointer-events: all;
 }
-.link-grid {
+.dropdown__link-grid {
   display: grid;
   grid-template-columns: 1, max-content;
   gap: 2rem;
