@@ -258,8 +258,7 @@ button {
 }
 .enter:hover {
   color: var(--dark-background);
-  transform: scaleX(1.2);
-  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
 }
 .enter {
   font-family: "K2D";
