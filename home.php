@@ -10,7 +10,7 @@ $lightTheme = "";
 
 if (date('G') >= 4 && date('G') < 12) {
     $lightTheme = './assets/css/morning.css';
-} elseif (date('G') >= 12 && date('G') < 18) {
+} elseif (date('G') >= 12 && date('G') < 20) {
     $lightTheme = './assets/css/afternoon.css';
 } else {
     $lightTheme = './assets/css/night.css';
