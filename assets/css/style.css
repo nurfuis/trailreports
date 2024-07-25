@@ -258,7 +258,7 @@ button {
 }
 .enter:hover {
   color: var(--dark-background);
-  transition: color 0.3s ease-in-out;
+  transition: color 150ms ease-in-out;
 }
 .enter {
   font-family: "K2D";
