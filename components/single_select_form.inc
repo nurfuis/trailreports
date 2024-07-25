@@ -59,10 +59,8 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
                 trailSelectForm.submit();
             })
 
-            // Add event listener to the entire form for radio button changes
             collectionForm.addEventListener('change', (event) => {
                 if (event.target.type === 'radio' && event.target.checked) {
-                    // Submit the form programmatically when a radio button is selected
                     collectionForm.submit();
                 }
             });
