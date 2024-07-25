@@ -1,6 +1,6 @@
 <?php
 
-$to = "cramer.ross@gmail.com";
+$to = "noreply@bigsurtrailreports.net";
 $subject = "Test Email from Server";
 
 $message = "This is a test email to verify if email sending works on the server.";
