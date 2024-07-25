@@ -35,9 +35,10 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
         <button class="advanced__button--toggle">Options</button>
         <div class="advanced__form-wrapper">
             <form class="advanced__form" method="get">
-                <?php while ($collection = mysqli_fetch_assoc($collections_result)): ?>
-                    <input type="radio" name="collection" value="<?php echo $collection['id']; ?>" id="<?php echo $collection['id']; ?>">
-                    <label for="<?php echo $collection['id']; ?>"><?php echo $collection['name']; ?></label><?php endwhile; ?>
+                <?php while ($collection = mysqli_fetch_assoc($collections_result)): ?><input type="radio"
+                        name="collection" value="<?php echo $collection['id']; ?>" id="<?php echo $collection['id']; ?>">
+                    <label
+                        for="<?php echo $collection['id']; ?>"><?php echo $collection['name']; ?></label><?php endwhile; ?>
             </form>
         </div>
     </div>
