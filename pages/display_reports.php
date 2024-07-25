@@ -136,6 +136,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
     const dateRangeSelect = document.getElementById("date-range");
     const noReportsInput = document.getElementById("no-reports");
     const noTrailsInput = document.getElementById("no-trails");
+
     sortBySelect.addEventListener("change", function () {
       this.form.submit(); // Submits form for sort by
     });
@@ -150,9 +151,11 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
       sortBySelect.disabled = true;
       filterByTrailSelect.disabled = true;
       dateRangeSelect.disabled = true;
+      this.form.submit();
     }
     if (noReportsInput.value == 1) {
       sortBySelect.disabled = true;
+      this.form.submit();
     }
   });
 </script>
