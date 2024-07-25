@@ -1,4 +1,13 @@
 <?php
+$SUMMARY_LIMIT = 500;
+$OVERALL_RATINGS = [
+    'Good' => 1,
+    'Passable' => 2,
+    'Poor' => 3,
+    'Impassable' => 4,
+    'Gone' => 5
+];
+$ratings = array_flip($OVERALL_RATINGS);
 
 $sql = "SELECT tr.*, f.name AS feature_name, 
        COALESCE(tr.title, 'Untitled') AS report_title, u.username
@@ -7,10 +16,6 @@ $sql = "SELECT tr.*, f.name AS feature_name,
   INNER JOIN users u ON tr.user_id = u.user_id WHERE tr.active = 1
   ORDER BY tr.created_at DESC
   LIMIT 6;";
-
-if ($mysqli->connect_error) {
-    die("Connection failed: " . $mysqli->connect_error);
-}
 
 $result = $mysqli->query($sql);
 
@@ -21,24 +26,17 @@ if (!$result) {
 
 if ($result->num_rows >= 1) {
     $report = $result->fetch_assoc();
-    $OVERALL_RATINGS = [
-        'Good' => 1,
-        'Passable' => 2,
-        'Poor' => 3,
-        'Impassable' => 4,
-        'Gone' => 5
-    ];
-    $ratings = array_flip($OVERALL_RATINGS);
     $summary = $report['summary'];
-    $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
-    $postedOnText = $isUpdated ? 'Updated:' : 'Posted:';
-    $SUMMARY_LIMIT = 500;
     if (strlen($summary) > $SUMMARY_LIMIT) {
         $summary = substr($summary, 0, $SUMMARY_LIMIT) . '...';
         $showReadMore = true;
     } else {
         $showReadMore = false;
     }
+
+    $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
+    $postedOnText = $isUpdated ? 'Updated:' : 'Posted:';
+    $time = $report['time_updated'];
     ?>
 
     <div class="single-report">
@@ -46,18 +44,13 @@ if ($result->num_rows >= 1) {
         <p><strong>Trail:</strong> <?php echo $report['feature_name']; ?></p>
         <p><strong>Title:</strong> <?php echo $report['report_title']; ?></p>
         <p><strong>Submitted by:</strong> <?php echo $report['username']; ?></p>
-        <p><strong><?php echo $postedOnText ?></strong> <?php
-           $time = $report['time_updated'];
-           echo date("F j, Y", strtotime($time)); ?></p>
+        <p><strong><?php echo $postedOnText ?></strong> <?php echo date("F j, Y", strtotime($time)); ?></p>
         <p><strong>Rating:</strong> <?php echo $ratings[$report['rating']]; ?></p>
         <p><strong>Report:</strong></p>
-        <p class="indented">
-            <?php echo nl2br($summary) ?>
-            <?php if ($showReadMore): ?>
-                <a href="./pages/trail_report.php?id=<?php echo $report['id']; ?>" class="read-more-btn">read more</a>
-            <?php endif; ?>
+        <p class="indented"><?php echo nl2br($summary) ?><?php if ($showReadMore): ?><a
+                    href="./pages/trail_report.php?id=<?php echo $report['id']; ?>" class="read-more-btn">read
+                    more</a><?php endif; ?>
         </p>
-
     </div>
 
     <?php
@@ -74,11 +67,9 @@ if ($result->num_rows >= 1) {
 
         while ($recent_report = $result->fetch_assoc()) {
             ?>
-            <div class="recent-report">
-                <a
+            <div class="recent-report"><a
                     href="./pages/trail_report.php?id=<?php echo $recent_report['id']; ?>"><?php echo $recent_report['report_title']; ?></a>
-                -
-                <span><?php echo $recent_report['feature_name']; ?></span>
+                - <span><?php echo $recent_report['feature_name']; ?></span>
             </div>
             <?php
         }

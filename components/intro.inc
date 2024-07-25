@@ -1,4 +1,4 @@
-<div class="main__intro regular-padding">
+<div class="introduction regular-padding">
   <h1>Trail Reports</h1>
   <h2>Big Sur, California</h2>
 

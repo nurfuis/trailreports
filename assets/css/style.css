@@ -353,7 +353,6 @@ button {
   transform: translateY(0);
   pointer-events: all;
 }
-
 .advanced__button--toggle {
   text-decoration: none;
   color: var(--light-background);
@@ -371,22 +370,22 @@ button {
   font-weight: 500;
 }
 
-.main__intro h1 {
+.introduction h1 {
   margin: 0.5rem;
   border: none;
 }
 h2 {
   border-bottom: 1px solid var(--accent);
 }
-.main__intro h2 {
+.introduction h2 {
   margin: 0.5rem;
   border: none;
 }
-.main__intro a {
+.introduction a {
   text-decoration: none;
   color: var(--light-background);
 }
-.main__intro p {
+.introduction p {
   background-color: var(--darker-background);
   border-radius: 2rem;
   text-align: justify;
@@ -395,7 +394,7 @@ h2 {
   font-weight: 400;
   line-height: 2;
 }
-.main__intro {
+.introduction {
   background-color: var(--darker-background);
   border-radius: 0rem;
   border: var(--darker-background);
