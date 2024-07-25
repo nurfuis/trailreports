@@ -182,7 +182,6 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
         <option value="all">-- Select All --</option>
         <?php
         if ($trail_result && mysqli_num_rows($trail_result) > 0) {
-          
           while ($trail = mysqli_fetch_assoc($trail_result)) {
             $selected = ($selected_trail == $trail['trail_id']) ? "selected" : ""; // Check for selected trail
         
@@ -192,7 +191,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
             }
             echo "<option value='" . $trail['trail_id'] . "' $selected>" . $shortenedName . "</option>";
           }
-        } 
+        }
         ?>
       </select>
     </div>
