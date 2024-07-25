@@ -11,16 +11,46 @@ date_default_timezone_set('America/Los_Angeles');
 include_once realpath("../components/head.inc"); // Top section up to and including body tag
 include_once realpath("../layouts/wide.inc"); // An open div with layout class
 
-$sql = "SELECT user_id, username, verified, account_status, login_attempts, last_login_attempt, email_login_attempts, last_email_login_attempt, registration_date 
-        FROM users 
-        ORDER BY registration_date DESC";
+$show_inactive = isset($_GET['show_inactive']) && $_GET['show_inactive'] == 'on';
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $user_id = $_POST['user_id'];
+
+  $sql = "UPDATE users SET account_status = 'inactive' WHERE user_id = ?";
+  $stmt = mysqli_prepare($mysqli, $sql);
+  mysqli_stmt_bind_param($stmt, "i", $user_id);
+  mysqli_stmt_execute($stmt);
+  mysqli_stmt_close($stmt);
+
+  echo '<p>' . $user_id . ' was set to inactive.</p>';
+}
+
+
+$sql = "SELECT user_id, username, verified, account_status, login_attempts, last_login_attempt, email_login_attempts, last_email_login_attempt, registration_date 
+        FROM users";
+
+if (!$show_inactive) {
+  $sql .= " WHERE account_status = 'active'";
+}
+$sql .= " ORDER BY registration_date DESC";
 $result = mysqli_query($mysqli, $sql);
 if (!$result) {
   echo "Error: " . mysqli_error($mysqli);
   exit;
 }
+
+
 ?>
+<h1>Display Users</h1>
+<form method="get">
+  <input type="checkbox" name="show_inactive" id="show_inactive">
+  <label for="show_inactive">Show Inactive Users</label>
+  <button type="submit">Submit</button>
+</form><br><br>
+<form method="post" action="">
+  <input type="text" name="user_id" placeholder="Enter User ID">
+  <button type="submit">Set to Inactive</button>
+</form>
 <div class="user-list">
   <div class="user-list-body">
     <?php while ($row = mysqli_fetch_assoc($result)) {
