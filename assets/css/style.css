@@ -104,7 +104,7 @@ button {
   text-align: center; /* Center content horizontally */
   z-index: 999; /* Overlay sits above the map */
 }
-#fade-out-paragraph {
+.fade-out-paragraph {
   position: relative;
   z-index: 5;
 }

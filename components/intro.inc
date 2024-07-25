@@ -2,13 +2,13 @@
   <h1>Trail Reports</h1>
   <h2>Big Sur, California</h2>
 
-  <p id="fade-out-paragraph">
+  <p class="fade-out-paragraph">
     View and report accurate information on trail conditions in Monterey County's Los Padres National Forest and
     Ventana Wilderness areas. This open-source platform allows you to submit trail reports.
   </p>
 
   <script>
-    const paragraph = document.getElementById("fade-out-paragraph");
+    const paragraph = document.querySelectorAll(".fade-out-paragraph")[0];
     const fadeOutThreshold = 20;
 
     window.addEventListener("scroll", () => {
