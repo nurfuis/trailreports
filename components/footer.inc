@@ -1,10 +1,10 @@
 <div class="footer">
     <div class="regular-padding k2d-thin">
         <a href="./pages/sign_up.php">Join Us</a> |
+        <a href="./pages/contact.php">Contact</a>
 
         <a href="./pages/terms_of_service.php">Terms of Service</a> |
         <a href="./pages/privacy_policy.php">Privacy Policy</a> |
-        <a href="./pages/contact.php">Contact</a>
 
     </div>
     <div class="regular-padding k2d-thin""><span>&copy; <?php echo date('Y'); ?> Ross Clayton Cramer</span>
