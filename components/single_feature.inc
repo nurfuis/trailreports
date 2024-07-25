@@ -162,60 +162,16 @@ if (isset($_GET['feature_id'])) {
             <p class="hidden"><span>Management Area:</span> <?php echo $feature["management_area_id"]; ?></p>
             <hr>
             <h3>Reports:</h3>
-            <div>
-                <form action="" method="get">
-                    <input type='hidden' name='feature_id' value='<?php echo $selected_feature_id ?>'>
-                    <div class="hidden">
-                        <label for="sort-by">Sort By:</label>
-                        <select name="sort-by" id="sort-by">
-                            <option value="recent" <?php if ($order_by == "tr.created_at DESC")
-                                echo "selected"; ?>>Most Recent
-                            </option>
-                            <option value="oldest" <?php if ($order_by == "tr.created_at ASC")
-                                echo "selected"; ?>>Oldest First
-                            </option>
-                            <option value="rating_high" <?php if ($order_by == "tr.rating ASC, tr.created_at DESC")
-                                echo "selected"; ?>>
-                                Rating
-                                (High to Low)
-                            </option>
-                            <option value="rating_low" <?php if ($order_by == "tr.rating DESC, tr.created_at DESC")
-                                echo "selected"; ?>>Rating
-                                (Low to High)
-                            </option>
-                        </select>
-                    </div>
-                    <div class="hidden">
-                        <label for="date-range">Date Range:</label>
 
-                        <select name="date-range" id="date-range">
-                            <option value="all" <?php echo (isset($_GET['date-range']) && $_GET['date-range'] == "all") ? "selected" : ""; ?>>
-                                All Time</option>
-                            <option value="day" <?php echo (isset($_GET['date-range']) && $_GET['date-range'] == "day") ? "selected" : ""; ?>>
-                                Past Day</option>
-                            <option value="week" <?php echo (isset($_GET['date-range']) && $_GET['date-range'] == "week") ? "selected" : ""; ?>>
-                                Past Week</option>
-                            <option value="month" <?php echo (isset($_GET['date-range']) && $_GET['date-range'] == "month") ? "selected" : ""; ?>>Past Month</option>
-                            <option value="year" <?php echo (isset($_GET['date-range']) && $_GET['date-range'] == "year") ? "selected" : ""; ?>>
-                                Past Year</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
             <div class="trail-reports regular-padding">
-
                 <?php
-
                 $result = mysqli_query($mysqli, $sql);
-
                 if (!$result) {
                     echo "Error: " . mysqli_error($mysqli);
                     exit;
                 }
-
                 if (mysqli_num_rows($result) === 0) {
                     echo "<p>There are currently no trail reports for this selection.</p>";
-                    //
                 } else {
                     $is_descending = ($order_by === "tr.created_at DESC" || $order_by === "tr.rating ASC, tr.created_at DESC");
                     $count = 1;
