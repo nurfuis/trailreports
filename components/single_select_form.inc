@@ -9,7 +9,7 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
 
 <div class="trail-select regular-padding">
 
-    <form action="#trail-select__form" method="get" class="trail-select__form">
+    <form action="#app" method="get" id="app" class="trail-select__form">
         <input hidden name="collection" value="<?php echo $collection ?>">
 
         <label for="trail-select">Select a Trail:</label>
