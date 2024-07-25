@@ -404,6 +404,21 @@ h2 {
   box-sizing: border-box;
   background-image: url("../images/photo-header.png");
 }
+.index__image img {
+  width: 80px;
+}
+.index__image {
+  box-sizing: border-box;
+  padding: 1rem 2rem;
+}
+.index__header {
+  box-sizing: border-box;
+  max-width: max-content;
+}
+.index__header-wrapper {
+  display: flex;
+  flex-direction: row;
+}
 .report-list {
   margin: 0 auto; /* Center the list horizontally */
   padding: 1rem; /* Add some padding */
