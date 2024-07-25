@@ -318,7 +318,7 @@ button {
   gap: 2rem;
   white-space: nowrap;
 }
-.sign-in {
+.dropdown__menu--sign-in {
   white-space: wrap;
   min-width: 260px;
 }
@@ -365,7 +365,7 @@ button {
 .advanced-search {
   margin: 1.37rem 0 0 0;
 }
-.sign-in a {
+.dropdown__menu--sign-in a {
   font-weight: 500;
 }
 

@@ -16,7 +16,7 @@
       }
       ?>
     </button>
-    <div class="dropdown__menu sign-in">
+    <div class="dropdown__menu dropdown__menu--sign-in">
       <?php
       if (isset($_SESSION['user_id'])) {
         $username = $_SESSION['username'];
