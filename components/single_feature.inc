@@ -119,9 +119,10 @@ if (isset($_GET['feature_id'])) {
             $numToShow = 5;
 
             $sql = "SELECT tr.*, f.name AS trail_name, u.username
-                  FROM trail_reports tr
-                  INNER JOIN features f ON tr.feature_id = f.id
-                  INNER JOIN users u ON tr.user_id = u.user_id WHERE f.id = $selected_feature_id";
+            FROM trail_reports tr
+            INNER JOIN features f ON tr.feature_id = f.id
+            INNER JOIN users u ON tr.user_id = u.user_id
+            WHERE f.id = $selected_feature_id AND tr.active = 1";
 
             if (isset($_GET['filter-by-trail']) && $_GET['filter-by-trail'] != "all") {
                 $selected_trail = $_GET['filter-by-trail'];
