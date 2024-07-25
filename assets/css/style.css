@@ -365,7 +365,6 @@ button {
   margin: 0.37rem 0 0 0;
 }
 
-
 .dropdown__menu--sign-in a {
   font-weight: 500;
 }
@@ -536,8 +535,8 @@ option {
         margin-right: 5px;
         width: 16px;
         height: 16px;
-        border: 1px solid #ccc;
-        background: #fff;
+        border: 1px solid var(--accent);
+        background: var(--light-background);
       }
       &:after {
         content: "";
