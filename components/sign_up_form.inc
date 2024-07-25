@@ -44,7 +44,7 @@
         if (passwordRegex.test(password)) {
           passwordError.textContent = ''; // Clear any previous error message
         } else {
-          passwordError.innerHTML = 'Password must be at least 8 characters and contain at least:<ul> <li>one lowercase letter</li>, <li>one uppercase letter</li>, <li>one number</li>, <li>and one special character.</li></ul>';
+          passwordError.innerHTML = 'Password must be at least 8 characters and contain at least:<ul><li>one lowercase letter</li><li>one uppercase letter</li><li>one number</li><li>and one special character</li></ul>';
         }
       });
     </script>
