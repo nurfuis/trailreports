@@ -1,5 +1,7 @@
 <div class="footer">
     <div class="regular-padding k2d-thin">
+        <a href="./pages/sign_up.php">Register</a> |
+
         <a href="./pages/terms_of_service.php">Terms of Service</a> |
         <a href="./pages/privacy_policy.php">Privacy Policy</a> |
         <a href="./pages/contact.php">Contact</a>
