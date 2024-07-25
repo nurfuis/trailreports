@@ -72,9 +72,9 @@ if (isset($_GET['date-range']) && $_GET['date-range'] != "all") {
 }
 
 
-$items_per_page = 10;
+$ITEMS_PER_PAGE = 10;
 $current_page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-$offset = ($current_page - 1) * $items_per_page;
+$offset = ($current_page - 1) * $ITEMS_PER_PAGE;
 
 $sql_count = "SELECT COUNT(*) AS total_reports
              FROM trail_reports tr
@@ -105,7 +105,7 @@ if ($total_reports == 0) {
   $no_reports = true;
 }
 
-$total_pages = ceil($total_reports / $items_per_page);
+$total_pages = ceil($total_reports / $ITEMS_PER_PAGE);
 
 $sql = "SELECT tr.*, f.name AS trail_name, u.username
         FROM trail_reports tr 
@@ -118,7 +118,7 @@ if (isset($_GET['filter-by-trail']) && $_GET['filter-by-trail'] != "all") {
 }
 
 $sql .= $date_range_sql;
-$sql .= " ORDER BY $order_by LIMIT $items_per_page OFFSET $offset;";
+$sql .= " ORDER BY $order_by LIMIT $ITEMS_PER_PAGE OFFSET $offset;";
 $result = mysqli_query($mysqli, $sql);
 
 $OVERALL_RATINGS = [
@@ -283,7 +283,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
     $count = 1;
     while ($report = mysqli_fetch_assoc($result)) {
 
-      $reportNumber = ($is_descending) ? ($current_page - 1) * $items_per_page + $count : ($total_reports - ($current_page - 1) * $items_per_page - $count + 1);
+      $reportNumber = ($is_descending) ? ($current_page - 1) * $ITEMS_PER_PAGE + $count : ($total_reports - ($current_page - 1) * $ITEMS_PER_PAGE - $count + 1);
       $count++;
 
       $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different

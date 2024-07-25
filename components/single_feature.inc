@@ -1,7 +1,18 @@
 <?php
-$BLURB_LIMIT = 200;
 $current_page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-$items_per_page = 5;
+
+$ITEMS_PER_PAGE = 5;
+$BLURB_LIMIT = 200;
+$MAP_ZOOM = 13;
+$OVERALL_RATINGS = [
+    'Good' => 1,
+    'Passable' => 2,
+    'Poor' => 3,
+    'Impassable' => 4,
+    'Gone' => 5
+];
+
+$ratings = array_flip($OVERALL_RATINGS);
 
 if (isset($_GET['feature_id'])) {
     $selected_feature_id = $_GET['feature_id'];
@@ -53,10 +64,11 @@ if (isset($_GET['feature_id'])) {
                     $geometry_string = "$first_longitude, $first_latitude";
 
                     // Create a link to another page with lat, long, and zoom
-                    $link_url = "./pages/topo_map.php?name=" . $feature['name'] . "&lat=" . $first_latitude . "&long=" . $first_longitude . "&zoom=13";
+                    $link_url = "./pages/topo_map.php?name=" . $feature['name'] . "&lat=" . $first_latitude . "&long=" . $first_longitude . "&zoom=" . $MAP_ZOOM;
                     if (!empty($source)) {
                         $link_url .= "&source=" . $source;
                     }
+
                     echo '<p><span>Location:</span> <a href="' . $link_url . '">' . $geometry_string . '</a></p>';
                 } else {
                     echo "No polylines found for this feature.";
@@ -116,7 +128,6 @@ if (isset($_GET['feature_id'])) {
                         break;
                 }
             }
-            $numToShow = 5;
 
             $sql = "SELECT tr.*, f.name AS trail_name, u.username
             FROM trail_reports tr
@@ -130,7 +141,7 @@ if (isset($_GET['feature_id'])) {
             }
             $sql .= $date_range_sql;
             $sql .= " ORDER BY $order_by";
-            $sql .= " LIMIT $numToShow;";
+            $sql .= " LIMIT $ITEMS_PER_PAGE;";
             ?>
             <script>
                 document.addEventListener("DOMContentLoaded", function () {
@@ -138,11 +149,11 @@ if (isset($_GET['feature_id'])) {
                     const dateRangeSelect = document.getElementById("date-range");
 
                     sortBySelect.addEventListener("change", function () {
-                        this.form.submit(); // Submits form for sort by
+                        this.form.submit();
                     });
 
                     dateRangeSelect.addEventListener("change", function () {
-                        this.form.submit(); // Submits form for date range
+                        this.form.submit();
                     });
 
                 });
@@ -196,14 +207,6 @@ if (isset($_GET['feature_id'])) {
                 <?php
 
                 $result = mysqli_query($mysqli, $sql);
-                $OVERALL_RATINGS = [
-                    'Good' => 1,
-                    'Passable' => 2,
-                    'Poor' => 3,
-                    'Impassable' => 4,
-                    'Gone' => 5
-                ];
-                $ratings = array_flip($OVERALL_RATINGS);
 
                 if (!$result) {
                     echo "Error: " . mysqli_error($mysqli);
@@ -217,19 +220,13 @@ if (isset($_GET['feature_id'])) {
                     $is_descending = ($order_by === "tr.created_at DESC" || $order_by === "tr.rating ASC, tr.created_at DESC");
                     $count = 1;
                     while ($report = mysqli_fetch_assoc($result)) {
-                        $summary = substr($report['summary'], 0, $BLURB_LIMIT) . '...';
+                        $reportNumber = ($is_descending) ? ($current_page - 1) * $ITEMS_PER_PAGE + $count : ($total_reports - ($current_page - 1) * $ITEMS_PER_PAGE - $count + 1);
+                        $count++;
+
                         $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
                         $postedOnText = $isUpdated ? 'Updated:' : 'Posted:';
-                        $reportNumber = ($is_descending) ? ($current_page - 1) * $items_per_page + $count : ($total_reports - ($current_page - 1) * $items_per_page - $count + 1);
-                        $count++;
-                        echo "<h4>$reportNumber.</h4>";
-                        echo "<div class='report-item'>";
-                        echo "  <h5><a href='./pages/trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a></h5>";
-                        echo "  <p><span>Submitted by:</span> " . $report['username'] . "</p>";
                         $time = $report['time_updated'];
                         $formattedTime = date("F j, Y", strtotime($time));
-                        echo "  <p><span>" . $postedOnText . "</span> " . $formattedTime . "</p>";
-                        echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
 
                         $summary = $report['summary'];
                         if (strlen($summary) > $BLURB_LIMIT) {
@@ -238,22 +235,24 @@ if (isset($_GET['feature_id'])) {
                         } else {
                             $showReadMore = false;
                         }
-                        echo "  <p class='indented'>" . nl2br($summary);
-                        ;
 
+                        echo "<h4>$reportNumber.</h4>";
+                        echo "<div class='report-item'>";
+                        echo "  <h5><a href='./pages/trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a></h5>";
+                        echo "  <p><span>Submitted by:</span> " . $report['username'] . "</p>";
+                        echo "  <p><span>" . $postedOnText . "</span> " . $formattedTime . "</p>";
+                        echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
+                        echo "  <p class='indented'>" . nl2br($summary);
                         if ($showReadMore): ?>
                             <a href="./pages/trail_report.php?id=<?php echo $report['id']; ?>" class="read-more-btn">read more</a>
                         <?php endif;
                         echo "</p>";
                         echo "</div>";
                     }
-                    //
                     echo '<div class="nav">';
                     echo '<a href="./pages/display_reports.php?filter-by-trail=' . $selected_feature_id . '">View More Reports';
                     echo '</a></div>';
                 } ?>
-
-
             </div>
         </div>
         <?php
