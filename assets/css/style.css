@@ -560,6 +560,28 @@ option {
     }
   }
 }
+.user-list {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.user-list-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-item {
+  display: flex;
+}
+.user-item span {
+  font-weight: 400;
+  font-family: "K2D";
+}
+.user-item div {
+  flex: 1;
+  padding: 1rem;
+}
 .pagination a {
   padding: 0.25rem;
 }
