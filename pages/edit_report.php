@@ -1,7 +1,7 @@
 <?php
 
 $page_title = "Edit report";
-$page_css = "../assets/css/style.css";
+$stylesheet = "../assets/css/style.css";
 $currentPagePath = $_SERVER['REQUEST_URI'];
 
 include_once realpath("../components/head.inc");

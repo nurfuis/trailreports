@@ -1,0 +1,9 @@
+.main__intro {
+  background-color: var(--darker-background);
+  border: var(--darker-background);
+  color: var(--light-background);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-image: url("../images/night-desktop.png");
+}

@@ -5,7 +5,7 @@ if (!isset($_SESSION['user_id'])) {
   exit;
 }
 $page_title = "Account Management";
-$page_css = "/assets/css/style.css";
+$stylesheet = "/assets/css/style.css";
 
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");

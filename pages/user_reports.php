@@ -1,7 +1,7 @@
 <?php
 
 $page_title = "User's Reports";
-$page_css = "../assets/css/style.css";
+$stylesheet = "../assets/css/style.css";
 $currentPagePath = $_SERVER['REQUEST_URI'];
 
 require_once realpath("../../config.php");

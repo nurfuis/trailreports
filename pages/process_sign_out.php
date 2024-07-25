@@ -1,7 +1,7 @@
 <?php
 
 $page_title = "Logout";
-$page_css = "/assets/css/style.css";
+$stylesheet = "/assets/css/style.css";
 
 include_once realpath("../components/head.inc"); // Top section up to and including body tag
 include_once realpath("../layouts/wide.inc"); // An open div with layout class

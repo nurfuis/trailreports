@@ -4,7 +4,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 $currentPagePath = $_SESSION['referrer'];
 $page_title = "Verify email";
-$page_css = "/assets/css/style.css";
+$stylesheet = "/assets/css/style.css";
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");
 ?>

@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_id'])) {
 require_once realpath("../../db_connect.php"); // $msqli connect
 
 $page_title = "Deactivate Account";
-$page_css = "/assets/css/style.css";
+$stylesheet = "/assets/css/style.css";
 
 include_once realpath("../components/head.inc"); // Top section up to and including body tag
 include_once realpath("../layouts/wide.inc"); // An open div with layout class

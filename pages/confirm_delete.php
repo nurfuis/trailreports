@@ -7,7 +7,7 @@ if (empty($_GET['id']) || !isset($_SESSION['user_id'])) {
 require_once realpath("../../db_connect.php");
 
 $page_title = "Confirm Report Deletion";
-$page_css = "/assets/css/style.css";
+$stylesheet = "/assets/css/style.css";
 
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");

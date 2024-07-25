@@ -1,6 +1,6 @@
 <?php
 $page_title = "Trail Report";
-$page_css = "../assets/css/style.css";
+$stylesheet = "../assets/css/style.css";
 
 $previousPage = $_SERVER['HTTP_REFERER'];
 

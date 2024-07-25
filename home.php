@@ -2,6 +2,20 @@
 session_start();
 require_once realpath("../db_connect.php");
 
+date_default_timezone_set('America/Los_Angeles');
+$californiaTime = date('g:i a');
+
+$stylesheet = "./assets/css/style.css";
+$lightTheme = "";
+
+if (date('G') >= 6 && date('G') < 12) {
+    $lightTheme = './assets/css/morning.css';
+} elseif (date('G') >= 12 && date('G') < 18) {
+    $lightTheme = './assets/css/afternoon.css';
+} else {
+    $lightTheme = './assets/css/night.css';
+}
+
 if (isset($_GET['collection'])) {
     $collection = $_GET['collection'];
 } else {
@@ -9,7 +23,6 @@ if (isset($_GET['collection'])) {
 }
 
 $page_title = "Trail Reports for Big Sur, California";
-$page_css = "./assets/css/style.css";
 $currentPagePath = $_SERVER['REQUEST_URI'];
 
 include_once realpath("./components/head.inc");

@@ -1,7 +1,7 @@
 <?php
 
 $page_title = "Trail Features";
-$page_css = "../assets/css/style.css";
+$stylesheet = "../assets/css/style.css";
 
 session_start();
 

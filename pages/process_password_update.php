@@ -1,6 +1,6 @@
 <?php
 $page_title = "New Password";
-$page_css = "/assets/css/style.css";
+$stylesheet = "/assets/css/style.css";
 
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");

@@ -1,7 +1,7 @@
 <?php
 
 $page_title = "Process Trail Report";
-$page_css = "/assets/css/style.css";
+$stylesheet = "/assets/css/style.css";
 $currentTime = time();
 session_start();
 include_once realpath("../components/head.inc");

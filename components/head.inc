@@ -11,7 +11,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="<?php echo $page_css ?>" />
+  <link rel="stylesheet" href="<?php echo $stylesheet ?>" />
+  <link rel="stylesheet" href="<?php echo $lightTheme ?>" />
+
 </head>
 
 <body>

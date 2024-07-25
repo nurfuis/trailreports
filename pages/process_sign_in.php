@@ -2,7 +2,7 @@
 session_start();
 require_once realpath("../../db_connect.php");
 $page_title = "Login";
-$page_css = "/assets/css/style.css";
+$stylesheet = "/assets/css/style.css";
 $currentPagePath = "";
 
 include realpath("../components/head.inc");

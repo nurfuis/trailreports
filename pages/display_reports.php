@@ -3,7 +3,7 @@ session_start();
 require_once realpath("../../db_connect.php");
 
 $page_title = "Trail Reports";
-$page_css = "../assets/css/style.css";
+$stylesheet = "../assets/css/style.css";
 $BLURB_LIMIT = 500;
 
 include_once realpath("../components/head.inc");

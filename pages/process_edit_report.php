@@ -3,7 +3,7 @@ session_start();
 require_once realpath("../../db_connect.php");
 
 $page_title = "Process Edited Trail Report";
-$page_css = "/assets/css/style.css";
+$stylesheet = "/assets/css/style.css";
 $currentTime = time();
 
 include_once realpath("../components/head.inc");
