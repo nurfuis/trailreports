@@ -33,7 +33,7 @@
     <div class="dropdown-menu link-grid">
       <a href="./pages/display_reports.php" class="link">All Reports</a>
       <a href="./pages/add_report.php" class="link">Submit a Report</a>
-      <a href="./pages/features.php" class="link">Index</a>
+      <a href="./pages/features.php" class="link hidden">Index</a>
       <a href="./pages/topo-map.html" class="link hidden">Topo Map</a>
     </div>
   </div>
