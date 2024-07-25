@@ -1,5 +1,9 @@
 <div>
-  <h3>New User</h3>
+  <h1>New User</h1>
+  <h2>Account Creation</h2>
+  <p> Create an account in seconds. No email needed to get started! Enjoy complete anonymity or add your email later for
+    extra security. Your online identity, your rules.</p>
+
   <form action="/pages/process_sign_up.php" method="post">
     <input type="hidden" name="currentPagePath" value="<?php echo $currentPagePath; ?>">
     <label for="username">Username:</label>
