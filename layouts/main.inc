@@ -1,1 +1,1 @@
-<div class="main__wrapper">
+<div class="main">

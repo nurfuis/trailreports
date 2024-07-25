@@ -162,7 +162,7 @@ button {
   padding: 0.5rem;
 }
 
-.main__wrapper {
+.main {
   background-color: var(--light-background);
   border-radius: 0rem;
   margin: 0 auto 0 auto;

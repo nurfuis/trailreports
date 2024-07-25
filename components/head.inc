@@ -11,7 +11,6 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="<?php echo $stylesheet ?>" />
   <link rel="stylesheet" href="<?php echo $lightTheme ?>" />
-
 </head>
 
 <body>
