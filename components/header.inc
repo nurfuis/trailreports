@@ -16,7 +16,7 @@
       }
       ?>
     </button>
-    <div class="dropdown-menu sign-in">
+    <div class="dropdown__menu sign-in">
       <?php
       if (isset($_SESSION['user_id'])) {
         $username = $_SESSION['username'];
@@ -30,7 +30,7 @@
 
   <div class="dropdown" data-dropdown>
     <button class="dropdown__link" data-dropdown-button>Reports</button>
-    <div class="dropdown-menu dropdown__link-grid">
+    <div class="dropdown__menu dropdown__link-grid">
       <a href="./pages/display_reports.php" class="dropdown__link">All Reports</a>
       <a href="./pages/add_report.php" class="dropdown__link">Submit a Report</a>
       <a href="./pages/features.php" class="dropdown__link hidden">Index</a>
@@ -40,7 +40,7 @@
 
   <div class="dropdown" data-dropdown>
     <button class="dropdown__link" data-dropdown-button>About</button>
-    <div class="dropdown-menu dropdown__link-grid">
+    <div class="dropdown__menu dropdown__link-grid">
       <a href="./pages/support_us.php" class="dropdown__link">Support Us</a>
       <a href="/" class="dropdown__link hidden">Learn More</a>
       <a href="./pages/contact.php" class="dropdown__link">Contact</a>

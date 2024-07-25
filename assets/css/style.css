@@ -293,7 +293,7 @@ button {
 .dropdown {
   position: relative;
 }
-.dropdown-menu {
+.dropdown__menu {
   position: absolute;
   left: 0;
   top: calc(100% + 0.25rem);
@@ -307,7 +307,7 @@ button {
   pointer-events: none;
   z-index: 10;
 }
-.dropdown.active > .dropdown__link + .dropdown-menu {
+.dropdown.active > .dropdown__link + .dropdown__menu {
   opacity: 1;
   transform: translateY(0);
   pointer-events: all;
