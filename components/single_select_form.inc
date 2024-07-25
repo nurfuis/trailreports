@@ -6,7 +6,6 @@ $trail_result = mysqli_query($mysqli, $trail_sql);
 $collections_sql = "SELECT id, name FROM collections";
 $collections_result = mysqli_query($mysqli, $collections_sql);
 ?>
-
 <div class="trail-select regular-padding">
 
     <form action="#app" method="get" id="app" class="trail-select__form">
@@ -33,9 +32,7 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
     </form>
 
     <div class="advanced">
-
         <button class="advanced__button--toggle">Options</button>
-
         <div class="advanced__form-wrapper">
             <form class="advanced__form" method="get">
                 <?php while ($collection = mysqli_fetch_assoc($collections_result)): ?>
@@ -43,28 +40,26 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
                         id="<?php echo $collection['id']; ?>">
                     <label for="<?php echo $collection['id']; ?>"><?php echo $collection['name']; ?></label>
                 <?php endwhile; ?>
-
             </form>
         </div>
-
-        <script>
-            const trailSelectForm = document.querySelectorAll('.trail-select__form')[0];
-            trailSelectForm.addEventListener('change', (event) => {
-                trailSelectForm.submit();
-            })
-
-            const optionsForm = document.querySelectorAll('.advanced__form')[0];
-            optionsForm.addEventListener('change', (event) => {
-                if (event.target.type === 'radio' && event.target.checked) {
-                    optionsForm.submit();
-                }
-            });
-
-            const optionsButton = document.querySelectorAll('.advanced__button--toggle')[0];
-            const optionsWrapper = document.querySelectorAll('.advanced__form-wrapper')[0];
-            optionsButton.addEventListener('click', () => {
-                optionsWrapper.classList.toggle('expanded');
-            });
-        </script>
     </div>
 </div>
+<script>
+    const trailSelectForm = document.querySelectorAll('.trail-select__form')[0];
+    trailSelectForm.addEventListener('change', (event) => {
+        trailSelectForm.submit();
+    })
+
+    const optionsForm = document.querySelectorAll('.advanced__form')[0];
+    optionsForm.addEventListener('change', (event) => {
+        if (event.target.type === 'radio' && event.target.checked) {
+            optionsForm.submit();
+        }
+    });
+
+    const optionsButton = document.querySelectorAll('.advanced__button--toggle')[0];
+    const optionsWrapper = document.querySelectorAll('.advanced__form-wrapper')[0];
+    optionsButton.addEventListener('click', () => {
+        optionsWrapper.classList.toggle('expanded');
+    });
+</script>
