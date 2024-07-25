@@ -38,8 +38,8 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
                 <?php while ($collection = mysqli_fetch_assoc($collections_result)): ?>
                     <input type="radio" name="collection" value="<?php echo $collection['id']; ?>"
                         id="<?php echo $collection['id']; ?>">
-                    <label for="<?php echo $collection['id']; ?>"><?php echo $collection['name']; ?></label>
-                <?php endwhile; ?>
+                    <label
+                        for="<?php echo $collection['id']; ?>"><?php echo $collection['name']; ?></label><?php endwhile; ?>
             </form>
         </div>
     </div>
