@@ -120,7 +120,7 @@ if (isset($_GET['feature_id'])) {
 
             $sql = "SELECT tr.*, f.name AS trail_name, u.username
                   FROM trail_reports tr
-                  INNER JOIN features f ON tr.feature_id = f.id
+                  INNER JOIN features f ON tr.feature_id = f.id WHERE tr.active = 1
                   INNER JOIN users u ON tr.user_id = u.user_id WHERE f.id = $selected_feature_id";
 
             if (isset($_GET['filter-by-trail']) && $_GET['filter-by-trail'] != "all") {
