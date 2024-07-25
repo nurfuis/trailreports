@@ -1,28 +1,25 @@
 <?php
+session_start();
+require_once realpath("../../db_connect.php");
 
 $page_title = "Trail Reports";
 $page_css = "../assets/css/style.css";
-
-session_start();
-
-require_once realpath("../../config.php");
+$BLURB_LIMIT = 500;
 
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");
 
-require_once realpath("../../db_connect.php");
-
+// get the trails for which there are active reports
 $trail_sql = "SELECT DISTINCT f.name AS trail_name, f.id AS trail_id 
               FROM trail_reports tr
               INNER JOIN features f ON tr.feature_id = f.id
               WHERE tr.active = 1;";
-
 $trail_result = mysqli_query($mysqli, $trail_sql);
 
-$no_trails = false;
+$num_trails = mysqli_num_rows($trail_result);
 
 // Check total reports and set flag if no reports are found
-$num_trails = mysqli_num_rows($trail_result);
+$no_trails = false;
 if ($num_trails === 0) {
   $no_trails = true;
 }
@@ -48,9 +45,12 @@ if (isset($_GET['sort-by'])) {
 } else {
   $order_by = "tr.created_at DESC";
 }
+
 $selected_trail = isset($_GET['filter-by-trail']) ? $_GET['filter-by-trail'] : "all";
 
+
 $date_range_sql = "";
+
 if (isset($_GET['date-range']) && $_GET['date-range'] != "all") {
   switch ($_GET['date-range']) {
     case "day":
@@ -70,20 +70,23 @@ if (isset($_GET['date-range']) && $_GET['date-range'] != "all") {
       break;
   }
 }
+
+
 $items_per_page = 10;
 $current_page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $offset = ($current_page - 1) * $items_per_page;
+
 $sql_count = "SELECT COUNT(*) AS total_reports
              FROM trail_reports tr
              INNER JOIN features f ON tr.feature_id = f.id
              WHERE tr.active = 1";
 
 if (isset($_GET['filter-by-trail']) && $_GET['filter-by-trail'] != "all") {
-  $selected_trail = (int) $_GET['filter-by-trail'];  // Cast to integer for safety
-  $stmt = mysqli_prepare($mysqli, $sql_count . " AND tr.feature_id = ?");  // Prepare statement
-  mysqli_stmt_bind_param($stmt, "i", $selected_trail);  // Bind parameter safely
+  $selected_trail = (int) $_GET['filter-by-trail'];
+  $stmt = mysqli_prepare($mysqli, $sql_count . " AND tr.feature_id = ?");
+  mysqli_stmt_bind_param($stmt, "i", $selected_trail);
   mysqli_stmt_execute($stmt);
-  $count_result = mysqli_stmt_get_result($stmt);  // Get results from prepared statement
+  $count_result = mysqli_stmt_get_result($stmt);
   mysqli_stmt_close($stmt);
 } else {
   $count_result = mysqli_query($mysqli, $sql_count);
@@ -96,10 +99,12 @@ if ($count_result) {
   echo "Error: " . mysqli_error($mysqli);
   exit;
 }
+
 $no_reports = false;
 if ($total_reports == 0) {
   $no_reports = true;
 }
+
 $total_pages = ceil($total_reports / $items_per_page);
 
 $sql = "SELECT tr.*, f.name AS trail_name, u.username
@@ -115,6 +120,7 @@ if (isset($_GET['filter-by-trail']) && $_GET['filter-by-trail'] != "all") {
 $sql .= $date_range_sql;
 $sql .= " ORDER BY $order_by LIMIT $items_per_page OFFSET $offset;";
 $result = mysqli_query($mysqli, $sql);
+
 $OVERALL_RATINGS = [
   'Good' => 1,
   'Passable' => 2,
@@ -124,45 +130,49 @@ $OVERALL_RATINGS = [
 ];
 $ratings = array_flip($OVERALL_RATINGS);
 
-
 if (isset($_GET['success']) && $_GET['success'] === 'true') {
-  echo '<p style="color: green;">Your trail report has been successfully added!</p>';
+  echo '<p style="color: blue;">Your trail report has been successfully added!</p>';
 }
 ?>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const sortBySelect = document.getElementById("sort-by");
     const filterByTrailSelect = document.getElementById("filter-by-trail");
+    const sortBySelect = document.getElementById("sort-by");
     const dateRangeSelect = document.getElementById("date-range");
+
     const noReportsInput = document.getElementById("no-reports");
     const noTrailsInput = document.getElementById("no-trails");
 
-    sortBySelect.addEventListener("change", function () {
-      this.form.submit(); // Submits form for sort by
+    filterByTrailSelect.addEventListener("change", function () {
+      this.form.submit();
     });
 
-    filterByTrailSelect.addEventListener("change", function () {
-      this.form.submit(); // Submits form for filter by trail
+    sortBySelect.addEventListener("change", function () {
+      this.form.submit();
     });
+
     dateRangeSelect.addEventListener("change", function () {
-      this.form.submit(); // Submits form for date range
+      this.form.submit();
     });
+
     if (noTrailsInput.value == 1) {
       sortBySelect.disabled = true;
       filterByTrailSelect.disabled = true;
       dateRangeSelect.disabled = true;
-      this.form.submit();
     }
+
     if (noReportsInput.value == 1) {
       sortBySelect.disabled = true;
-      this.form.submit();
     }
   });
 </script>
+
 <div class="trail-reports">
   <h1>Reports</h1>
   <h2>View Collection</h2>
+
   <form action="" method="get">
+
     <input type="hidden" id="no-reports" value="<?php echo $no_reports ?>">
     <input type="hidden" id="no-trails" value="<?php echo $no_trails ?>">
 
@@ -172,6 +182,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
         <option value="all">-- Select All --</option>
         <?php
         if ($trail_result && mysqli_num_rows($trail_result) > 0) {
+          
           while ($trail = mysqli_fetch_assoc($trail_result)) {
             $selected = ($selected_trail == $trail['trail_id']) ? "selected" : ""; // Check for selected trail
         
@@ -181,7 +192,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
             }
             echo "<option value='" . $trail['trail_id'] . "' $selected>" . $shortenedName . "</option>";
           }
-        }
+        } 
         ?>
       </select>
     </div>
@@ -221,26 +232,24 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
       </select>
     </div>
   </form>
+
   <hr>
+
   <h3>Reports:</h3>
   <?php
-  // Only show pagination if there are more than one page
   if ($total_pages > 1) {
     $page_links = "";
 
-    // Previous page link (if not on the first page)
     if ($current_page > 1) {
       $prev_page = $current_page - 1;
       $page_links .= "<a href='?page=$prev_page" . (isset($_GET['sort-by']) ? "&sort-by=" . $_GET['sort-by'] : "") . (isset($_GET['filter-by-trail']) ? "&filter-by-trail=" . $_GET['filter-by-trail'] : "") . (isset($_GET['date-range']) ? "&date-range=" . $_GET['date-range'] : "") . "'>&laquo; Previous</a> ";
     }
 
-    // Loop through page numbers
     for ($i = 1; $i <= $total_pages; $i++) {
       $active_class = ($i == $current_page) ? "active" : "";
       $page_links .= "<a class='page-link' href='?page=$i" . (isset($_GET['sort-by']) ? "&sort-by=" . $_GET['sort-by'] : "") . (isset($_GET['filter-by-trail']) ? "&filter-by-trail=" . $_GET['filter-by-trail'] : "") . (isset($_GET['date-range']) ? "&date-range=" . $_GET['date-range'] : "") . "' class='$active_class'>$i</a> ";
     }
 
-    // Next page link (if not on the last page)
     if ($current_page < $total_pages) {
       $next_page = $current_page + 1;
       $page_links .= "<a href='?page=$next_page" . (isset($_GET['sort-by']) ? "&sort-by=" . $_GET['sort-by'] : "") . (isset($_GET['filter-by-trail']) ? "&filter-by-trail=" . $_GET['filter-by-trail'] : "") . (isset($_GET['date-range']) ? "&date-range=" . $_GET['date-range'] : "") . "'>Next &raquo;</a> ";
@@ -249,6 +258,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
     echo "<div class='pagination'>$page_links</div>";
   }
   ?>
+
   <script>
     const currentPage = new URLSearchParams(window.location.search).get('page');
     const pageLinks = document.querySelectorAll('.page-link');
@@ -273,22 +283,14 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
     $is_descending = ($order_by === "tr.created_at DESC" || $order_by === "tr.rating ASC, tr.created_at DESC");
     $count = 1;
     while ($report = mysqli_fetch_assoc($result)) {
+
       $reportNumber = ($is_descending) ? ($current_page - 1) * $items_per_page + $count : ($total_reports - ($current_page - 1) * $items_per_page - $count + 1);
       $count++;
+
       $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
       $postedOnText = $isUpdated ? 'Updated:' : 'Posted:';
-      $BLURB_LIMIT = 500;
-      $summary = substr($report['summary'], 0, $BLURB_LIMIT) . '...';
-      echo "<h4>$reportNumber.</h4>";
-      echo "<div class='report-item'>";
-      echo "  <h5><a href='./trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a></h5>";
-      echo "  <p><span>Trail:</span> " . $report['trail_name'] . "</a></p>";
-      echo "  <p><span>Submitted by:</span> " . $report['username'] . "</a></p>";
-
       $time = $report['time_updated'];
       $formattedTime = date("F j, Y", strtotime($time));
-      echo "  <p><span>" . $postedOnText . "</span> " . $formattedTime . "</p>";
-      echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
 
       $summary = $report['summary'];
 
@@ -298,12 +300,27 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
       } else {
         $showReadMore = false;
       }
-      echo "  <p class='indented'>" . nl2br($summary);
-      ;
 
-      if ($showReadMore): ?>
-        <a href="./trail_report.php?id=<?php echo $report['id']; ?>" class="read-more-btn">read more</a>
-      <?php endif;
+      echo "<h4>$reportNumber.</h4>";
+
+      echo "<div class='report-item'>";
+
+      echo "  <h5><a href='./trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a></h5>";
+
+      echo "  <p><span>Trail:</span> " . $report['trail_name'] . "</a></p>";
+
+      echo "  <p><span>Submitted by:</span> " . $report['username'] . "</a></p>";
+
+      echo "  <p><span>" . $postedOnText . "</span> " . $formattedTime . "</p>";
+
+      echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
+
+
+      echo "  <p class='indented'>" . nl2br($summary);
+
+      if ($showReadMore) {
+        echo '<a href="./trail_report.php?id=' . $report['id'] . '" class="read-more-btn">read more</a>';
+      }
       echo "</p>";
       echo "</div>";
     }

@@ -1,4 +1,8 @@
 <?php
+$BLURB_LIMIT = 200;
+$current_page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+$items_per_page = 5;
+
 if (isset($_GET['feature_id'])) {
     $selected_feature_id = $_GET['feature_id'];
 
@@ -206,12 +210,13 @@ if (isset($_GET['feature_id'])) {
                 }
 
                 if (mysqli_num_rows($result) === 0) {
-                    echo "<p>There are currently no trail reports.</p>";
+                    echo "<p>There are currently no trail reports for this selection.</p>";
+                    //
                 } else {
                     $is_descending = ($order_by === "tr.created_at DESC" || $order_by === "tr.rating ASC, tr.created_at DESC");
                     $count = 1;
                     while ($report = mysqli_fetch_assoc($result)) {
-                        $summary = substr($report['summary'], 0, BLURB_LIMIT) . '...';
+                        $summary = substr($report['summary'], 0, $BLURB_LIMIT) . '...';
                         $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
                         $postedOnText = $isUpdated ? 'Updated:' : 'Posted:';
                         $reportNumber = ($is_descending) ? ($current_page - 1) * $items_per_page + $count : ($total_reports - ($current_page - 1) * $items_per_page - $count + 1);
@@ -226,7 +231,6 @@ if (isset($_GET['feature_id'])) {
                         echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
 
                         $summary = $report['summary'];
-                        $BLURB_LIMIT = 200;
                         if (strlen($summary) > $BLURB_LIMIT) {
                             $summary = substr($summary, 0, $BLURB_LIMIT) . '...';
                             $showReadMore = true;
@@ -242,13 +246,13 @@ if (isset($_GET['feature_id'])) {
                         echo "</p>";
                         echo "</div>";
                     }
+                    //
+                    echo '<div class="nav">';
+                    echo '<a href="./pages/display_reports.php?filter-by-trail=' . $selected_feature_id . '">View More Reports';
+                    echo '</a></div>';
                 } ?>
 
-                <div class="nav">.
-                    <a href="./pages/display_reports.php?filter-by-trail=<?php echo $selected_feature_id ?>">
-                        View More Reports
-                    </a>
-                </div>
+
             </div>
         </div>
         <?php
