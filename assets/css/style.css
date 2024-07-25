@@ -337,7 +337,7 @@ button {
   margin: 2rem;
 }
 
-.advanced-form {
+.advanced__form-wrapper {
   margin-top: 1.37rem;
   color: var(--light-background);
   background-color: var(--darker-background);
@@ -348,13 +348,13 @@ button {
 
   transition: max-height 0.2s ease-out, transform 0.2s ease-out;
 }
-.advanced-form.expanded {
+.advanced__form-wrapper.expanded {
   max-height: none;
   transform: translateY(0);
   pointer-events: all;
 }
 
-.advanced-search button {
+.advanced__button--toggle {
   text-decoration: none;
   color: var(--light-background);
   background-color: var(--darker-background);
@@ -362,9 +362,11 @@ button {
   padding: 0.5rem;
   font-size: smaller;
 }
-.advanced-search {
+.advanced {
   margin: 1.37rem 0 0 0;
 }
+
+
 .dropdown__menu--sign-in a {
   font-weight: 500;
 }
@@ -586,13 +588,13 @@ textarea {
   font-size: large;
   font-weight: 400;
 }
-.main__trail-select label {
+.trail-select label {
   margin: 0.5em;
 }
-.main__trail-select select#trail-select {
+.trail-select select#trail-select {
   margin: 0.5rem;
 }
-.main__trail-select {
+.trail-select {
   text-align: center;
   color: var(--light-background);
   background-color: var(--darker-background);
