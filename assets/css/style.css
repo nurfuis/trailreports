@@ -334,11 +334,11 @@ button {
   font-family: "K2D", sans-serif;
 }
 .trail-select__form {
-  margin: 2rem;
+  margin: 0.37rem;
 }
 
 .advanced__form-wrapper {
-  margin-top: 1.37rem;
+  margin-top: 0.37rem;
   color: var(--light-background);
   background-color: var(--darker-background);
   max-height: 0px;
@@ -362,7 +362,7 @@ button {
   font-size: smaller;
 }
 .advanced {
-  margin: 1.37rem 0 0 0;
+  margin: 0.37rem 0 0 0;
 }
 
 
