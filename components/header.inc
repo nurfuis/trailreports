@@ -16,6 +16,7 @@
       }
       ?>
     </button>
+
     <div class="dropdown__menu dropdown__menu--sign-in">
       <?php
       if (isset($_SESSION['user_id'])) {
@@ -34,7 +35,7 @@
       <a href="./pages/display_reports.php" class="dropdown__link">All Reports</a>
       <a href="./pages/add_report.php" class="dropdown__link">Submit a Report</a>
       <a href="./pages/features.php" class="dropdown__link hidden">Index</a>
-      <a href="./pages/topo-map.html" class="dropdown__link hidden">Topo Map</a>
+      <a href="./pages/topo_map.php" class="dropdown__link hidden">Topo Map</a>
     </div>
   </div>
 
@@ -62,7 +63,6 @@
     document.querySelectorAll("[data-dropdown].active").forEach(dropdown => {
       if (dropdown === currentDopdown) return
       dropdown.classList.remove('active');
-
     });
   })
 </script>
