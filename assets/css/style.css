@@ -256,6 +256,24 @@ button {
 .light-text {
   color: var(--text-light);
 }
+.enter:hover {
+  color: var(--dark-background);
+  transform: scaleX(1.2);
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+.enter {
+  font-family: "K2D";
+  font-weight: 600;
+  max-width: 200px;
+  padding: 1rem;
+  margin: 1rem auto 1rem auto;
+  background-color: var(--accent);
+  color: var(--light-background);
+  display: block;
+  text-align: center;
+  font-size: larger;
+  text-decoration: none;
+}
 .link {
   background: none;
   border: none;
