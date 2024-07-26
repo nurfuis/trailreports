@@ -42,7 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <?php
             $successMessage = "Trail report submitted successfully!";
-            sendReportNotification($title, $summary);
 
             function sendReportNotification($title, $summary)
             {
@@ -55,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 mail($to, $subject, $message, $headers);
             }
+            sendReportNotification($title, $summary);
 
         } else {
             $errorMessage = "Error submitting report: " . mysqli_stmt_error($stmt);
