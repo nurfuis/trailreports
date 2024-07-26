@@ -42,6 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <?php
             $successMessage = "Trail report submitted successfully!";
+            sendReportNotification($title, $summary);
+
             function sendReportNotification($title, $summary)
             {
                 $to = 'mod@bigsurtrailreports.net';
