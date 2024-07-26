@@ -1,15 +1,12 @@
 <?php
+session_start();
+require_once realpath("../../db_connect.php");
 
 $page_title = "Trail Features";
 $stylesheet = "../assets/css/style.css";
 
-session_start();
-
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");
-
-require_once realpath("../../db_connect.php");
-
 ?>
 <div class="features">
     <h1>Features</h1>
@@ -107,6 +104,8 @@ INNER JOIN collections c ON f.collections_id = c.id;";
 
             // Formatted feature details
             echo "<div class='feature-item'>";
+            echo "  <p>Id:" . $feature_id . "</p>";
+            echo "  <p>Collection:" . $collection_name . "</p>";
             echo "  <p>" . $name . "</p>";
             $link_url = "./topo_map.php?name=" . $feature['name'] . "&lat=" . $first_latitude . "&long=" . $first_longitude . "&zoom=13";
             if (!empty($source)) {
