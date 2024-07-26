@@ -42,7 +42,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <?php
             $successMessage = "Trail report submitted successfully!";
-            // header("Location: ./display_reports.php?success=true");
+            function sendReportNotification($title, $summary)
+            {
+                $to = 'mod@bigsurtrailreports.net';
+                $subject = 'New Report: ' . $title;
+                $message = "A new report has been submitted: \n";
+                $message .= "Title: $title \n";
+                $message .= "Description: $summary \n";
+                $headers = 'From: Big Sur Trail Reports <noreply@bigsurtrailreports.net>';
+
+                mail($to, $subject, $message, $headers);
+            }
 
         } else {
             $errorMessage = "Error submitting report: " . mysqli_stmt_error($stmt);
