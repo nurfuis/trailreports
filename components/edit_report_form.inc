@@ -1,6 +1,9 @@
 <?php
-require_once realpath("../../config.php");
 require_once realpath("../../db_connect.php");
+$isModerator = false;
+if (isset($_SESSION['user_level']) && $_SESSION['user_level'] === 'admin') {
+    $isModerator = true;
+}
 
 $selectedFeature = "";
 $reportId = isset($_GET['id']) ? $_GET['id'] : '';
@@ -14,22 +17,25 @@ if (!$resultFeatures) {
 $sqlReport = "";
 
 // Check if a report ID is present and user is logged in
-if ($reportId && isset($user_id)) {
-  $sqlReport = "SELECT tr.*, f.name AS trail_name FROM trail_reports tr
-                INNER JOIN features f ON tr.feature_id = f.id
-                WHERE tr.id = $reportId AND tr.user_id = $user_id";
+if ($reportId) {
+  $sqlReport = "SELECT tr.*, f.name AS trail_name, tr.user_id AS report_creator_id 
+               FROM trail_reports tr
+               INNER JOIN features f ON tr.feature_id = f.id
+               WHERE tr.id = $reportId";
   $resultReport = $mysqli->query($sqlReport);
   if (!$resultReport) {
     die("Error retrieving report: " . $mysqli->error);
   }
-}
 
-// Check if report exists and display an error message if not
-if (!$resultReport || $resultReport->num_rows == 0) {
-  die("Report not found or you are not authorized to edit this report.");
-}
+  $reportData = $resultReport->fetch_assoc();
 
-$reportData = $resultReport->fetch_assoc();
+  // Check authorization
+  $isAuthorized = ($user_id == $reportData['report_creator_id']) || $isModerator; // Assuming $isModerator is a flag indicating moderator status
+  
+  if (!$isAuthorized) {
+    die("You are not authorized to edit this report.");
+  }
+}
 ?>
 
 <div class="trail-report__form">

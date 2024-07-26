@@ -1,22 +1,30 @@
 <?php
-$page_title = "Trail Report";
-$stylesheet = "../assets/css/style.css";
+session_start();
+require_once realpath("../../db_connect.php");
+
+$isModerator = false;
+if (isset($_SESSION['user_level']) && $_SESSION['user_level'] === 'admin') {
+    $isModerator = true;
+}
 
 $previousPage = $_SERVER['HTTP_REFERER'];
 
-session_start();
-include_once realpath("../components/head.inc");
-include_once realpath("../layouts/bud.inc");
-require_once realpath("../../config.php");
-require_once realpath("../../db_connect.php");
-
-if ($mysqli->connect_error) {
-    die("Connection failed: " . $mysqli->connect_error);
-}
-
 $reportId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-if (isset($_SESSION['user_level']) && $_SESSION['user_level'] === 'admin') {
+$OVERALL_RATINGS = [
+    'Good' => 1,
+    'Passable' => 2,
+    'Poor' => 3,
+    'Impassable' => 4,
+    'Gone' => 5
+];
+$ratings = array_flip($OVERALL_RATINGS);
+
+$page_title = "Trail Report";
+$stylesheet = "../assets/css/style.css";
+
+
+if ($isModerator) {
     $sql = "SELECT tr.*, f.name AS feature_name, 
        COALESCE(tr.title, 'Untitled') AS report_title, u.username
   FROM trail_reports tr
@@ -32,48 +40,36 @@ if (isset($_SESSION['user_level']) && $_SESSION['user_level'] === 'admin') {
  WHERE tr.id = $reportId AND active = 1;";
 }
 
-
-
-
-if ($mysqli->connect_error) {
-    die("Connection failed: " . $mysqli->connect_error);
-}
-
 $result = $mysqli->query($sql);
-$OVERALL_RATINGS = [
-    'Good' => 1,
-    'Passable' => 2,
-    'Poor' => 3,
-    'Impassable' => 4,
-    'Gone' => 5
-];
-$ratings = array_flip($OVERALL_RATINGS);
 
 if (!$result) {
-    echo "Error: " . mysqli_error($mysqli);
+    // echo "Error: " . mysqli_error($mysqli);
     exit;
 }
 
-
 if ($result->num_rows === 1) {
     $report = $result->fetch_assoc();
-    $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
+
+    $isUpdated = $report['time_updated'] !== $report['created_at'];
     $postedOnText = $isUpdated ? 'Updated:' : 'Posted:';
 } else {
-    // Handle the case where no report is found for the given ID (e.g., display an error message)
     die("Report not found.");
 }
-
 mysqli_close($mysqli);
+
+include_once realpath("../components/head.inc");
+include_once realpath("../layouts/bud.inc");
 ?>
 <?php if (isset($report)): ?>
 
     <div class="single-report">
-        <?php if (isset($_SESSION['user_level']) && $_SESSION['user_level'] === 'admin' && $report['active'] == 1): ?>
+        <?php if ($isModerator && $report['active'] == 1): ?>
             <form id="hideReportForm" action="hide_report.php" method="post" onsubmit="return confirmHideReport()">
                 <input type="hidden" name="report_id" value="<?php echo $report['id']; ?>">
                 <button type="submit">Hide Report</button>
             </form>
+
+            <a class="edit" href="./edit_report.php?id=<?php echo $reportId; ?>"><span>Edit</span></a>
 
             <script>
                 function confirmHideReport() {
