@@ -3,7 +3,7 @@ $trail_sql = "SELECT id, name FROM features WHERE collections_id IN ($collection
 $trail_result = mysqli_query($mysqli, $trail_sql);
 
 
-$collections_sql = "SELECT id, name FROM collections";
+$collections_sql = "SELECT id, name FROM collections LIMIT 2";
 $collections_result = mysqli_query($mysqli, $collections_sql);
 ?>
 <div class="trail-select regular-padding">
