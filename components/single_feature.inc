@@ -223,7 +223,7 @@ if (isset($_GET['feature_id'])) {
                         $reportNumber = ($is_descending) ? ($current_page - 1) * $ITEMS_PER_PAGE + $count : ($total_reports - ($current_page - 1) * $ITEMS_PER_PAGE - $count + 1);
                         $count++;
 
-                        $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
+                        // $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
                         $postedOnText = $isUpdated ? 'Updated:' : 'Posted:';
                         $time = $report['time_updated'];
                         $formattedTime = date("F j, Y", strtotime($time));

@@ -272,7 +272,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
         while ($report = mysqli_fetch_assoc($result)) {
             $BLURB_LIMIT = 200;
             $summary = substr($report['summary'], 0, $BLURB_LIMIT) . '...';
-            $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
+            // $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
             $postedOnText = $isUpdated ? 'Updated:' : 'Posted:';
             echo "<div class='report-item'>";
             echo "  <h4><a href='./trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a>";
