@@ -34,7 +34,7 @@ if ($result->num_rows >= 1) {
         $showReadMore = false;
     }
 
-    // $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
+    $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
     $postedOnText = $isUpdated ? 'Updated:' : 'Posted:';
     $time = $report['time_updated'];
     ?>

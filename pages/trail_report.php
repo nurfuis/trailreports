@@ -50,7 +50,7 @@ if (!$result) {
 if ($result->num_rows === 1) {
     $report = $result->fetch_assoc();
     $isUpdated = false;
-    // $isUpdated = $report['time_updated'] !== $report['created_at'];
+    $isUpdated = $report['time_updated'] !== $report['created_at'];
     $postedOnText = $isUpdated ? 'Updated:' : 'Posted:';
 } else {
     die("Report not found.");
