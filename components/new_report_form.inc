@@ -2,7 +2,7 @@
 require_once realpath("../../db_connect.php");
 
 $selectedFeature = "";
-$sqlFeatures = "SELECT id, name FROM features WHERE collections_id IN (1, 2)";
+$sqlFeatures = "SELECT id, name FROM features WHERE collections_id IN (1, 2) ORDER BY collections_id, name ASC;";
 $resultFeatures = $mysqli->query($sqlFeatures);
 if (!$resultFeatures) {
     die("Error retrieving features: " . $mysqli->error);

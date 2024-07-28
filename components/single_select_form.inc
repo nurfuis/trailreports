@@ -1,5 +1,5 @@
 <?php
-$trail_sql = "SELECT id, name FROM features WHERE collections_id IN ($collection)";
+$trail_sql = "SELECT id, name FROM features WHERE collections_id IN ($collection) ORDER BY name ASC;";
 $trail_result = mysqli_query($mysqli, $trail_sql);
 
 
