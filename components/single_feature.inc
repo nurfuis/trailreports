@@ -44,6 +44,7 @@ if (isset($_GET['feature_id'])) {
             <?php
             if ($feature['geometry_type'] == 'LineString') {
                 $polyline_sql = "SELECT ST_AsText(geometry) AS text_geometry, source FROM polylines WHERE feature_id = $selected_feature_id;";
+                
                 $polyline_result = mysqli_query($mysqli, $polyline_sql);
 
                 if (!$polyline_result) {
@@ -76,7 +77,7 @@ if (isset($_GET['feature_id'])) {
 
 
                 while ($polyline = mysqli_fetch_assoc($polyline_result)) {
-                    echo '<div class="hidden">';
+                    echo '<div class="show">';
                     echo "<h4>Segment</h4>";
                     echo "<p>Path: " . $polyline['text_geometry'] . "</p>";
                     echo '</div>';
