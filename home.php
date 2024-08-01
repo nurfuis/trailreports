@@ -2,7 +2,7 @@
 session_start();
 require_once realpath("../db_connect.php");
 
-$page_title = "Trail Reports for Big Sur, California";
+$page_title = "Trail Reports";
 $currentPagePath = $_SERVER['REQUEST_URI'];
 
 date_default_timezone_set('America/Los_Angeles');
