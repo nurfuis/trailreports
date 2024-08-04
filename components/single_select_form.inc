@@ -80,6 +80,7 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
     clearButton.addEventListener('click', () => {
         sessionStorage.removeItem('collectionSelected'); // Clear flag on clear
         optionsWrapper.classList.remove('expanded'); // Hide options
+        window.location.href = 'home.php';
     });
 
     // Check for existing flag on page load
