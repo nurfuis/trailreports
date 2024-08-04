@@ -5,6 +5,9 @@ $trail_result = mysqli_query($mysqli, $trail_sql);
 
 $collections_sql = "SELECT id, name FROM collections LIMIT 2";
 $collections_result = mysqli_query($mysqli, $collections_sql);
+
+$isCollectionSet = isset($_GET['collection']);
+
 ?>
 <div class="trail-select regular-padding">
 
@@ -12,10 +15,15 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
         <input hidden name="collection" value="<?php echo $collection ?>">
 
         <label for="trail-select">Select a Trail:</label>
+
         <select name="feature_id" id="trail-select">
             <option value="recent"> -- Recent Updates -- </option>
+
             <?php while ($trail = mysqli_fetch_assoc($trail_result)): ?>
-                <option value="<?php echo $trail['id']; ?>" <?php if (isset($_GET['feature_id']) && $_GET['feature_id'] == $trail['id']): ?> selected <?php endif; ?>>
+
+                <option 
+                    value="<?php echo $trail['id']; ?>" 
+                    <?php if (isset($_GET['feature_id']) && $_GET['feature_id'] == $trail['id']): ?> selected <?php endif; ?>>
                     <?php
 
                     $shortenedName = substr($trail['name'], 0, 34);
@@ -25,6 +33,7 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
                     echo $shortenedName;
                     ?>
                 </option>
+
             <?php endwhile; ?>
         </select>
 
@@ -32,13 +41,18 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
     </form>
 
     <div class="advanced">
+
         <button class="advanced__button--toggle">Options</button>
-        <div class="advanced__form-wrapper">
+
+        <div class="advanced__form-wrapper <?php echo $isCollectionSet ? 'expanded' : ''; ?>">
             <form class="advanced__form" method="get">
-                <?php while ($collection = mysqli_fetch_assoc($collections_result)): ?><input type="radio"
-                        name="collection" value="<?php echo $collection['id']; ?>" id="<?php echo $collection['id']; ?>">
+                <?php while ($collection = mysqli_fetch_assoc($collections_result)): ?>
+                    
+                    <input type="radio" name="collection" value="<?php echo $collection['id']; ?>" id="<?php echo $collection['id']; ?>" <?php if (isset($_GET['collection']) && $_GET['collection'] == $collection['id']): ?> checked <?php endif; ?>>
                     <label
-                        for="<?php echo $collection['id']; ?>"><?php echo $collection['name']; ?></label><?php endwhile; ?>
+                        for="<?php echo $collection['id']; ?>"><?php echo $collection['name']; ?>
+                    </label>
+                <?php endwhile; ?>
             </form>
         </div>
     </div>
@@ -58,7 +72,10 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
 
     const optionsButton = document.querySelectorAll('.advanced__button--toggle')[0];
     const optionsWrapper = document.querySelectorAll('.advanced__form-wrapper')[0];
+
     optionsButton.addEventListener('click', () => {
         optionsWrapper.classList.toggle('expanded');
     });
+
+
 </script>

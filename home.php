@@ -22,7 +22,7 @@ if (date('G') >= 4 && date('G') < 12) {
 if (isset($_GET['collection'])) {
     $collection = $_GET['collection'];
 } else {
-    $collection = 1;
+    $collection = "1, 2";
 }
 
 include_once realpath("./components/head.inc");
