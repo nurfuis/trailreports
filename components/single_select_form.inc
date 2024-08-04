@@ -6,7 +6,6 @@ $trail_result = mysqli_query($mysqli, $trail_sql);
 $collections_sql = "SELECT id, name FROM collections LIMIT 2";
 $collections_result = mysqli_query($mysqli, $collections_sql);
 
-$isCollectionSet = isset($_GET['collection']);
 
 ?>
 <div class="trail-select regular-padding">
@@ -43,7 +42,7 @@ $isCollectionSet = isset($_GET['collection']);
             <button class="advanced__button--toggle">Options</button>
             <button class="clear-button">Clear</button>
         </div>
-        <div class="advanced__form-wrapper <?php echo $isCollectionSet ? 'expanded' : ''; ?>">
+        <div class="advanced__form-wrapper">
             <form class="advanced__form" method="get">
                 <?php while ($collection = mysqli_fetch_assoc($collections_result)) : ?>
 
@@ -64,6 +63,7 @@ $isCollectionSet = isset($_GET['collection']);
     const optionsForm = document.querySelectorAll('.advanced__form')[0];
     optionsForm.addEventListener('change', (event) => {
         if (event.target.type === 'radio' && event.target.checked) {
+            sessionStorage.setItem('collectionSelected', true); // Set flag on selection
             optionsForm.submit();
         }
     });
@@ -78,6 +78,13 @@ $isCollectionSet = isset($_GET['collection']);
     const clearButton = document.querySelector('.clear-button');
 
     clearButton.addEventListener('click', () => {
-        window.location.href = 'home.php';
+        sessionStorage.removeItem('collectionSelected'); // Clear flag on clear
+        optionsWrapper.classList.remove('expanded'); // Hide options
     });
+
+    // Check for existing flag on page load
+    const collectionSelected = sessionStorage.getItem('collectionSelected');
+    if (collectionSelected) {
+        optionsWrapper.classList.add('expanded'); // Show options if flag set
+    }
 </script>
