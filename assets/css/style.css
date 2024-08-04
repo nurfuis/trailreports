@@ -362,6 +362,14 @@ button {
   padding: 0.5rem;
   font-size: smaller;
 }
+.clear-button {
+  text-decoration: none;
+  color: var(--light-background);
+  background-color: var(--darker-background);
+  border: 1px solid var(--light-background);
+  padding: 0.5rem;
+  font-size: smaller;
+}
 .advanced {
   margin: 0.37rem 0 0 0;
 }

@@ -19,11 +19,9 @@ $isCollectionSet = isset($_GET['collection']);
         <select name="feature_id" id="trail-select">
             <option value="recent"> -- Recent Updates -- </option>
 
-            <?php while ($trail = mysqli_fetch_assoc($trail_result)): ?>
+            <?php while ($trail = mysqli_fetch_assoc($trail_result)) : ?>
 
-                <option 
-                    value="<?php echo $trail['id']; ?>" 
-                    <?php if (isset($_GET['feature_id']) && $_GET['feature_id'] == $trail['id']): ?> selected <?php endif; ?>>
+                <option value="<?php echo $trail['id']; ?>" <?php if (isset($_GET['feature_id']) && $_GET['feature_id'] == $trail['id']) : ?> selected <?php endif; ?>>
                     <?php
 
                     $shortenedName = substr($trail['name'], 0, 34);
@@ -41,16 +39,16 @@ $isCollectionSet = isset($_GET['collection']);
     </form>
 
     <div class="advanced">
-
-        <button class="advanced__button--toggle">Options</button>
-
+        <div>
+            <button class="advanced__button--toggle">Options</button>
+            <button class="clear-button">Clear</button>
+        </div>
         <div class="advanced__form-wrapper <?php echo $isCollectionSet ? 'expanded' : ''; ?>">
             <form class="advanced__form" method="get">
-                <?php while ($collection = mysqli_fetch_assoc($collections_result)): ?>
-                    
-                    <input type="radio" name="collection" value="<?php echo $collection['id']; ?>" id="<?php echo $collection['id']; ?>" <?php if (isset($_GET['collection']) && $_GET['collection'] == $collection['id']): ?> checked <?php endif; ?>>
-                    <label
-                        for="<?php echo $collection['id']; ?>"><?php echo $collection['name']; ?>
+                <?php while ($collection = mysqli_fetch_assoc($collections_result)) : ?>
+
+                    <input type="radio" name="collection" value="<?php echo $collection['id']; ?>" id="<?php echo $collection['id']; ?>" <?php if (isset($_GET['collection']) && $_GET['collection'] == $collection['id']) : ?> checked <?php endif; ?>>
+                    <label for="<?php echo $collection['id']; ?>"><?php echo $collection['name']; ?>
                     </label>
                 <?php endwhile; ?>
             </form>
@@ -77,5 +75,9 @@ $isCollectionSet = isset($_GET['collection']);
         optionsWrapper.classList.toggle('expanded');
     });
 
+    const clearButton = document.querySelector('.clear-button');
 
+    clearButton.addEventListener('click', () => {
+        window.location.href = 'home.php';
+    });
 </script>
