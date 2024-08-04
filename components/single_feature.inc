@@ -77,7 +77,7 @@ if (isset($_GET['feature_id'])) {
 
 
                 while ($polyline = mysqli_fetch_assoc($polyline_result)) {
-                    echo '<div class="show">';
+                    echo '<div class="hidden">';
                     echo "<h4>Segment</h4>";
                     echo "<p>Path: " . $polyline['text_geometry'] . "</p>";
                     echo '</div>';
