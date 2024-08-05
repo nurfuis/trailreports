@@ -23,14 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $password = mysqli_real_escape_string($mysqli, trim($_POST['password']));
 
-    if (strlen($password) < 8) {
-        $errorMessage = "Password must be at least 8 characters long.";
+    if (strlen($password) < 8 || (!preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\da-zA-Z])(?!.*\s).{8,}$/', $password) && strlen($password) < 15)) {
+        $errorMessage = "Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one special character. Or, it can be 15 characters or longer.";
         goto after_validation;
     }
-    if (!preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\da-zA-Z])(?!.*\s).{8,}$/', $password)) {
-        $errorMessage = "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character.";
-        goto after_validation;
-    }
+
 
     $sql = "SELECT COUNT(*) FROM users WHERE username = ?";
     $stmt = mysqli_prepare($mysqli, $sql);
@@ -78,18 +75,17 @@ mysqli_close($mysqli);
 if (!empty($errorMessage)) {
     echo "<p style='color: red;'>$errorMessage</p>";
     include_once realpath("../components/sign_up_form.inc");
-
 } else if (!empty($successMessage)) {
-    ?>
-        <script type="text/javascript">
-            window.location.href = "/pages/email.php" 
-        </script>
+?>
+    <script type="text/javascript">
+        window.location.href = "/pages/email.php"
+    </script>
 
-        <?php
-        echo "<p style='color: blue;'>$successMessage</p>";
-        echo '<p><a href="/pages/email.php">Register an Email.</p>';
-        // header("Location: /pages/email.php");
-        exit;
+<?php
+    echo "<p style='color: blue;'>$successMessage</p>";
+    echo '<p><a href="/pages/email.php">Register an Email.</p>';
+    // header("Location: /pages/email.php");
+    exit;
 }
 
 include_once realpath("../components/tail.inc");

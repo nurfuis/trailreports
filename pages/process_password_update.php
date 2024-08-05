@@ -10,6 +10,12 @@ require_once realpath("../../db_connect.php");
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $new_password = mysqli_real_escape_string($mysqli, trim($_POST['new_password']));
+
+    if (strlen($password) < 8 || (!preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\da-zA-Z])(?!.*\s).{8,}$/', $password) && strlen($password) < 15)) {
+        $errorMessage = "Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one special character. Or, it can be 15 characters or longer.";
+        goto after_validation;
+    }
+    
     $user_id = mysqli_real_escape_string($mysqli, trim($_POST['user_id']));
 
     $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
@@ -34,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     mysqli_stmt_close($stmt);
 }
+after_validation:
 
 mysqli_close($mysqli);
 

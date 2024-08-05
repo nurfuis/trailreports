@@ -7,21 +7,28 @@
     <p id="password-error" class="alert"></p>
 
     <script>
-        const passwordInput = document.getElementById('password');
-        const passwordError = document.getElementById('password-error');
+      const passwordInput = document.getElementById('password');
+      const passwordError = document.getElementById('password-error');
 
-        passwordInput.addEventListener('keyup', function () {
-            const password = passwordInput.value;
+      passwordInput.addEventListener('keyup',
+        function() {
+          const password = passwordInput.value;
 
-            // Regular expression for password validation (example)
-            const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\da-zA-Z])(?!.*\s).{8,}$/;
+          // Check password length first
+          if (password.length >= 15) {
+            passwordError.textContent = '';
+            return; // Password is long enough, no further validation needed
+          }
 
-            // Check if password matches the regex
-            if (passwordRegex.test(password)) {
-                passwordError.textContent = ''; // Clear any previous error message
-            } else {
-                passwordError.textContent = 'Password must be at least 8 characters and contain at least one lowercase letter, one uppercase letter, one number, and one special character.';
-            }
+          // Regular expression for password validation (for passwords shorter than 15 characters)
+          const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\da-zA-Z])(?!.*\s).{8,}$/;
+
+          // Check if password matches the regex
+          if (passwordRegex.test(password)) {
+            passwordError.textContent = ''; // Clear any previous error message
+          } else {
+            passwordError.innerHTML = 'Password must be at least 15 characters OR<br>8 characters and contain at least:<ul><li>one lowercase letter</li><li>one uppercase letter</li><li>one number</li><li>and one special character</li></ul>';
+          }
         });
     </script>
 
