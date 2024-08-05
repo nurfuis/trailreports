@@ -291,7 +291,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
       $time = $report['time_updated'];
       $formattedTime = date("F j, Y", strtotime($time));
 
-      $summary = $report['summary'];
+      $summary = htmlspecialchars($report['summary'], ENT_QUOTES, 'UTF-8');
 
       if (strlen($summary) > $BLURB_LIMIT) {
         $summary = substr($summary, 0, $BLURB_LIMIT) . '...';

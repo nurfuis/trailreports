@@ -1,17 +1,15 @@
 <?php
+session_start();
+require_once realpath("../../db_connect.php");
+$currentPagePath = $_SERVER['REQUEST_URI'];
 
 $page_title = "User's Reports";
 $stylesheet = "../assets/css/style.css";
-$currentPagePath = $_SERVER['REQUEST_URI'];
-
-require_once realpath("../../config.php");
 
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");
 
-require_once realpath("../../db_connect.php");
 
-session_start();
 if (isset($_SESSION['user_id'])) {
     $username = $_SESSION['username'];
     $user_id = $_SESSION['user_id'];

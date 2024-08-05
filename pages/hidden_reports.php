@@ -266,6 +266,8 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
             $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
             $postedOnText = $isUpdated ? 'Updated:' : 'Posted:';
             $BLURB_LIMIT = 500;
+            $summary = htmlspecialchars($report['summary'], ENT_QUOTES, 'UTF-8');
+
             $summary = substr($report['summary'], 0, $BLURB_LIMIT) . '...';
             echo "<h4>$reportNumber.</h4>";
             include realpath('../components/show_report_form.inc');

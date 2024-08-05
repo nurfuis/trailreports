@@ -26,7 +26,8 @@ if (!$result) {
 
 if ($result->num_rows >= 1) {
     $report = $result->fetch_assoc();
-    $summary = $report['summary'];
+    $summary = htmlspecialchars($report['summary'], ENT_QUOTES, 'UTF-8');
+    
     if (strlen($summary) > $SUMMARY_LIMIT) {
         $summary = substr($summary, 0, $SUMMARY_LIMIT) . '...';
         $showReadMore = true;
@@ -37,7 +38,7 @@ if ($result->num_rows >= 1) {
     $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
     $postedOnText = $isUpdated ? 'Updated:' : 'Posted:';
     $time = $report['time_updated'];
-    ?>
+?>
 
     <div class="single-report">
         <h3>Latest Report</h3>
@@ -47,13 +48,12 @@ if ($result->num_rows >= 1) {
         <p><strong><?php echo $postedOnText ?></strong> <?php echo date("F j, Y", strtotime($time)); ?></p>
         <p><strong>Rating:</strong> <?php echo $ratings[$report['rating']]; ?></p>
         <p><strong>Report:</strong></p>
-        <p class="indented"><?php echo nl2br($summary) ?><?php if ($showReadMore): ?><a
-                    href="./pages/trail_report.php?id=<?php echo $report['id']; ?>" class="read-more-btn">read
-                    more</a><?php endif; ?>
+        <p class="indented"><?php echo nl2br($summary) ?><?php if ($showReadMore) : ?><a href="./pages/trail_report.php?id=<?php echo $report['id']; ?>" class="read-more-btn">read
+                more</a><?php endif; ?>
         </p>
     </div>
 
-    <?php
+<?php
 } else {
     echo "<p>No recent reports found.</p>";
 }
@@ -66,12 +66,11 @@ if ($result->num_rows >= 1) {
         $result->data_seek(1);
 
         while ($recent_report = $result->fetch_assoc()) {
-            ?>
-            <div class="recent-report"><a
-                    href="./pages/trail_report.php?id=<?php echo $recent_report['id']; ?>"><?php echo $recent_report['report_title']; ?></a>
+    ?>
+            <div class="recent-report"><a href="./pages/trail_report.php?id=<?php echo $recent_report['id']; ?>"><?php echo $recent_report['report_title']; ?></a>
                 - <span><?php echo $recent_report['feature_name']; ?></span>
             </div>
-            <?php
+    <?php
         }
     } else {
         echo "<p>No recent reports found.</p>";
