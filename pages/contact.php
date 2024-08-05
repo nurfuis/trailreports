@@ -44,13 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       goto after_validation;
     }
   
-    $honeyPot = isset($_POST['honeyPot']) ? $_POST['honeyPot'] : '';
-    if (!empty($honeyPot)) {
-      $errorMessage = "Invalid submission.";
-      goto after_validation;
-    }
-
-
     $email = $_POST["email"];
     $message = $_POST["message"];
 
