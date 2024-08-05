@@ -28,8 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ip = $_SERVER['REMOTE_ADDR'];
     $maxSubmissionsPerHour = 5;
     $expireTime = time() - 3600;
-    echo date('Y-m-d H:i:s', $expireTime);
-    echo "\n" . date('Y-m-d H:i:s', time());
+    // echo date('Y-m-d H:i:s', $expireTime);
+    // echo "\n" . date('Y-m-d H:i:s', time());
     $sql = "SELECT COUNT(*) AS submissions FROM contact_messages WHERE ip = ? AND created_at > ?";
 
     $stmt = $mysqli->prepare($sql);
