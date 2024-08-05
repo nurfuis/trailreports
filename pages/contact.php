@@ -27,9 +27,8 @@ include_once realpath("../layouts/wide.inc");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ip = $_SERVER['REMOTE_ADDR'];
     $maxSubmissionsPerHour = 5;
-    $expireTime = time() - 3600;
-    // echo date('Y-m-d H:i:s', $expireTime);
-    // echo "\n" . date('Y-m-d H:i:s', time());
+    $expireTime = time() - 36000;
+  
     $sql = "SELECT COUNT(*) AS submissions FROM contact_messages WHERE ip = ? AND created_at > ?";
 
     $stmt = $mysqli->prepare($sql);
@@ -39,7 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $row = $result->fetch_assoc();
     $submissions = (int) $row['submissions'];
     $stmt->close();
-
 
     if ($submissions >= $maxSubmissionsPerHour) {
       $errorMessage = "Too many submissions. Please try again later.";
