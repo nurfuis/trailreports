@@ -1,12 +1,12 @@
 <?php
+session_start();
+require_once realpath("../../db_connect.php");
 
 $page_title = "Received Messages";
 $stylesheet = "/assets/css/style.css";
-session_start();
 
 require_once realpath("../components/is_admin.inc");
 
-require_once realpath("../../db_connect.php");
 
 include_once realpath("../components/head.inc");
 include_once realpath("../layouts/wide.inc");

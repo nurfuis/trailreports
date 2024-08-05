@@ -5,7 +5,6 @@ require_once realpath("../components/is_admin.inc");
 
 $page_title = "Display Users";
 $stylesheet = "../assets/css/style.css";
-date_default_timezone_set('America/Los_Angeles');
 
 
 include_once realpath("../components/head.inc"); // Top section up to and including body tag
