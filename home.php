@@ -15,6 +15,7 @@ $dateTime->setTimezone(new DateTimeZone('America/Los_Angeles'));
 $hour = (int)$dateTime->format('G');
 
 $lightTheme = "";
+
 if ($hour >= 4 && $hour < 12) {
     $lightTheme = './assets/css/morning.css';
 } elseif ($hour >= 12 && $hour < 20) {
@@ -27,7 +28,7 @@ if ($hour >= 4 && $hour < 12) {
 if (isset($_GET['collection'])) {
     $collection = $_GET['collection'];
 } else {
-    $collection = "1, 2";
+    $collection = "1, 2"; // setting magic #s is sad
 }
 
 include_once realpath("./components/head.inc");

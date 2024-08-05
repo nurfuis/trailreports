@@ -1,9 +1,9 @@
 <?php
+// $collection is setting the initial dropdown list
 $trail_sql = "SELECT id, name FROM features WHERE collections_id IN ($collection) ORDER BY name ASC;";
 $trail_result = mysqli_query($mysqli, $trail_sql);
 
-
-$collections_sql = "SELECT id, name FROM collections LIMIT 2";
+$collections_sql = "SELECT id, name FROM collections LIMIT 2"; // magic number to limit collection filters
 $collections_result = mysqli_query($mysqli, $collections_sql);
 
 
@@ -78,14 +78,14 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
     const clearButton = document.querySelector('.clear-button');
 
     clearButton.addEventListener('click', () => {
-        sessionStorage.removeItem('collectionSelected'); // Clear flag on clear
-        optionsWrapper.classList.remove('expanded'); // Hide options
+        sessionStorage.removeItem('collectionSelected');
+        optionsWrapper.classList.remove('expanded');
         window.location.href = 'home.php';
     });
 
     // Check for existing flag on page load
     const collectionSelected = sessionStorage.getItem('collectionSelected');
     if (collectionSelected) {
-        optionsWrapper.classList.add('expanded'); // Show options if flag set
+        optionsWrapper.classList.add('expanded');
     }
 </script>
