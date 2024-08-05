@@ -4,20 +4,25 @@ require_once realpath("../db_connect.php");
 
 $page_title = "Trail Reports";
 $currentPagePath = $_SERVER['REQUEST_URI'];
-
-date_default_timezone_set('America/Los_Angeles');
-$californiaTime = date('g:i a');
-
 $stylesheet = "./assets/css/style.css";
-$lightTheme = "";
 
-if (date('G') >= 4 && date('G') < 12) {
+
+$currentTime = time();
+$dateTime = new DateTime();
+$dateTime->setTimestamp($currentTime);
+$dateTime->setTimezone(new DateTimeZone('America/Los_Angeles'));
+
+$hour = (int)$dateTime->format('G');
+
+$lightTheme = "";
+if ($hour >= 4 && $hour < 12) {
     $lightTheme = './assets/css/morning.css';
-} elseif (date('G') >= 12 && date('G') < 20) {
+} elseif ($hour >= 12 && $hour < 20) {
     $lightTheme = './assets/css/afternoon.css';
 } else {
     $lightTheme = './assets/css/night.css';
 }
+
 
 if (isset($_GET['collection'])) {
     $collection = $_GET['collection'];
