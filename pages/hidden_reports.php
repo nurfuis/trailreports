@@ -274,7 +274,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
 
             echo "<div class='report-item'>";
 
-            echo "  <h5><a href='./trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a></h5>";
+            echo "  <h5><a href='./trail_report.php?id=" . $report['id'] . "'>" . htmlspecialchars($report['title'], ENT_QUOTES, 'UTF-8') . "</a></h5>";
             echo "  <p><span>Trail:</span> " . $report['trail_name'] . "</a></p>";
             echo "  <p><span>Submitted by:</span> " . $report['username'] . "</p>";
 

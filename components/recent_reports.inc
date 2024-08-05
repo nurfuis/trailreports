@@ -43,7 +43,7 @@ if ($result->num_rows >= 1) {
     <div class="single-report">
         <h3>Latest Report</h3>
         <p><strong>Trail:</strong> <?php echo $report['feature_name']; ?></p>
-        <p><strong>Title:</strong> <?php echo $report['report_title']; ?></p>
+        <p><strong>Title:</strong> <?php echo htmlspecialchars($report['report_title'], ENT_QUOTES, 'UTF-8'); ?></p>
         <p><strong>Submitted by:</strong> <?php echo $report['username']; ?></p>
         <p><strong><?php echo $postedOnText ?></strong> <?php echo date("F j, Y", strtotime($time)); ?></p>
         <p><strong>Rating:</strong> <?php echo $ratings[$report['rating']]; ?></p>
@@ -67,7 +67,7 @@ if ($result->num_rows >= 1) {
 
         while ($recent_report = $result->fetch_assoc()) {
     ?>
-            <div class="recent-report"><a href="./pages/trail_report.php?id=<?php echo $recent_report['id']; ?>"><?php echo $recent_report['report_title']; ?></a>
+            <div class="recent-report"><a href="./pages/trail_report.php?id=<?php echo $recent_report['id']; ?>"><?php echo htmlspecialchars($recent_report['report_title'], ENT_QUOTES, 'UTF-8'); ?></a>
                 - <span><?php echo $recent_report['feature_name']; ?></span>
             </div>
     <?php

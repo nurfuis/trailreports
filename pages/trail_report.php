@@ -85,7 +85,7 @@ include_once realpath("../layouts/bud.inc");
             </script>
         <?php endif; ?>
         <h3>Trail Report</h3>
-        <p><strong>Title:</strong> <?php echo $report['report_title']; ?></p>
+        <p><strong>Title:</strong> <?php echo htmlspecialchars($report['report_title'], ENT_QUOTES, 'UTF-8'); ?></p>
         <p><strong>Trail:</strong> <?php echo $report['feature_name']; ?></p>
 
         <p><strong>Submitted by:</strong> <?php echo $report['username']; ?></p>

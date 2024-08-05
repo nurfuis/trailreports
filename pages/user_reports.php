@@ -273,7 +273,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
             $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
             $postedOnText = $isUpdated ? 'Updated:' : 'Posted:';
             echo "<div class='report-item'>";
-            echo "  <h4><a href='./trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a>";
+            echo "  <h4><a href='./trail_report.php?id=" . $report['id'] . "'>" . htmlspecialchars($report['title'], ENT_QUOTES, 'UTF-8') . "</a>";
             echo "<a class='edit' href='./edit_report.php?id=" . $report['id'] . "' ><span>Edit</span></a>";
             echo "<a class='delete' href='./confirm_delete.php?id=" . $report['id'] . "'><span>Delete</span></a></h4>";
 

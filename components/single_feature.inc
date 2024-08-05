@@ -239,7 +239,7 @@ if (isset($_GET['feature_id'])) {
 
                         echo "<h4>$reportNumber.</h4>";
                         echo "<div class='report-item'>";
-                        echo "  <h5><a href='./pages/trail_report.php?id=" . $report['id'] . "'>" . $report['title'] . "</a></h5>";
+                        echo "  <h5><a href='./pages/trail_report.php?id=" . $report['id'] . "'>" . htmlspecialchars($report['title'], ENT_QUOTES, 'UTF-8') . "</a></h5>";
                         echo "  <p><span>Submitted by:</span> " . $report['username'] . "</p>";
                         echo "  <p><span>" . $postedOnText . "</span> " . $formattedTime . "</p>";
                         echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
