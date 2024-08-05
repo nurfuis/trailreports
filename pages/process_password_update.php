@@ -11,8 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $new_password = mysqli_real_escape_string($mysqli, trim($_POST['new_password']));
 
-    if (strlen($password) < 8 || (!preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\da-zA-Z])(?!.*\s).{8,}$/', $password) && strlen($password) < 15)) {
-        $errorMessage = "Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one special character. Or, it can be 15 characters or longer.";
+    if (strlen($new_password) < 8 || (!preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\da-zA-Z])(?!.*\s).{8,}$/', $new_password) && strlen($new_password) < 15)) {
+        $errorMessage = "New password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one special character. Or, it can be 15 characters or longer.";
         goto after_validation;
     }
     
