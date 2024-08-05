@@ -385,6 +385,10 @@ button {
 h2 {
   border-bottom: 1px solid var(--accent);
 }
+.larger {
+  font-size: larger;
+  line-height: 2;
+}
 .introduction h2 {
   margin: 0.5rem;
   border: none;

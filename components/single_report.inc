@@ -12,6 +12,11 @@ $OVERALL_RATINGS = [
 ];
 
 $ratings = array_flip($OVERALL_RATINGS);
+
+$time = $report['time_updated'];
+$formattedTime = date("F j, Y", strtotime($time));
+$title = htmlspecialchars($report['report_title'], ENT_QUOTES, 'UTF-8');
+$summary = htmlspecialchars($report['summary'], ENT_QUOTES, 'UTF-8');
 ?>
 
 
@@ -26,42 +31,21 @@ $ratings = array_flip($OVERALL_RATINGS);
 
         <script>
             function confirmHideReport() {
-                // Access report ID from the hidden form field
                 const reportId = document.getElementById("hideReportForm").elements["report_id"].value;
-
                 if (confirm(`Are you sure you want to hide report?`)) {
-                    return true; // Submit the form if confirmed
+                    return true;
                 } else {
-                    return false; // Prevent default form submission
+                    return false;
                 }
             }
         </script>
     <?php endif; ?>
 
-
-    <h3>Trail Report</h3>
-    <p><strong>Title:</strong> <?php echo htmlspecialchars($report['report_title'], ENT_QUOTES, 'UTF-8'); ?></p>
-    
-    <p><strong>Trail:</strong> <?php echo $report['feature_name']; ?></p>
-
+    <h1>Trail Report</h1>
+    <h2><?php echo $report['feature_name']; ?></h2>
     <p><strong>Submitted by:</strong> <?php echo $report['username']; ?></p>
-    
-    
-    <?php
-    $time = $report['time_updated'];
-    $formattedTime = date("F j, Y", strtotime($time));
-    echo " <p><strong>" . $postedOnText . "</strong> " . $formattedTime . "</p>"; ?>
-
-
+    <p><strong><?php echo $postedOnText; ?></strong><?php echo $formattedTime; ?></p>
+    <h3><?php echo nl2br($title); ?> </h3>
     <p><strong>Rating:</strong> <?php echo $ratings[$report['rating']]; ?></p>
-    
-    <p><strong>Report:</strong>
-
-    <?php
-    $summary = htmlspecialchars($report['summary'], ENT_QUOTES, 'UTF-8');
-    ?>
-    </p>
-
-    <p class="indented"><?php echo nl2br($summary); ?> </div></p>
-
+    <p class="indented larger"><?php echo nl2br($summary); ?></p>
 </div>

@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once realpath("../db_connect.php");
+require_once realpath("./components/user_roles.php");
 
 $page_title = "Trail Reports";
 $currentPagePath = $_SERVER['REQUEST_URI'];

@@ -23,41 +23,15 @@ if (!$result) {
     echo "Error: " . mysqli_error($mysqli);
     exit;
 }
+$report = $result->fetch_assoc();
 
-if ($result->num_rows >= 1) {
-    $report = $result->fetch_assoc();
-    $summary = htmlspecialchars($report['summary'], ENT_QUOTES, 'UTF-8');
-    
-    if (strlen($summary) > $SUMMARY_LIMIT) {
-        $summary = substr($summary, 0, $SUMMARY_LIMIT) . '...';
-        $showReadMore = true;
-    } else {
-        $showReadMore = false;
-    }
-
-    $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
-    $postedOnText = $isUpdated ? 'Updated:' : 'Posted:';
-    $time = $report['time_updated'];
-?>
-
-    <div class="single-report">
-        <h3>Latest Report</h3>
-        <p><strong>Trail:</strong> <?php echo $report['feature_name']; ?></p>
-        <p><strong>Title:</strong> <?php echo htmlspecialchars($report['report_title'], ENT_QUOTES, 'UTF-8'); ?></p>
-        <p><strong>Submitted by:</strong> <?php echo $report['username']; ?></p>
-        <p><strong><?php echo $postedOnText ?></strong> <?php echo date("F j, Y", strtotime($time)); ?></p>
-        <p><strong>Rating:</strong> <?php echo $ratings[$report['rating']]; ?></p>
-        <p><strong>Report:</strong></p>
-        <p class="indented"><?php echo nl2br($summary) ?><?php if ($showReadMore) : ?><a href="./pages/trail_report.php?id=<?php echo $report['id']; ?>" class="read-more-btn">read
-                more</a><?php endif; ?>
-        </p>
-    </div>
-
-<?php
+if (isset($report)) {
+    include_once realpath("./components/single_report.inc");
 } else {
-    echo "<p>No recent reports found.</p>";
+    echo "<p>Report not found.</p>";
 }
 ?>
+
 
 <div class="recent-reports">
     <h3>Recent Reports</h3>
