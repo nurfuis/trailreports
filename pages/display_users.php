@@ -50,6 +50,7 @@ if (!$result) {
   <input type="text" name="user_id" placeholder="Enter User ID">
   <button type="submit">Set to Inactive</button>
 </form>
+
 <div class="user-list">
   <div class="user-list-body">
     <?php while ($row = mysqli_fetch_assoc($result)) {

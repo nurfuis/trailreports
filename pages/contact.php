@@ -26,7 +26,7 @@ include_once realpath("../layouts/wide.inc");
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ip = $_SERVER['REMOTE_ADDR'];
-    $maxSubmissionsPerHour = 5;
+    $maxSubmissionsPerHour = 100;
     $expireTime = time() - 36000;
   
     $sql = "SELECT COUNT(*) AS submissions FROM contact_messages WHERE ip = ? AND created_at > ?";
@@ -54,6 +54,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   
     if ($stmt->execute() === TRUE) {
         echo '<p class="success">Thank you for contacting us! We will get back to you soon.</p>';
+        
+        function sendContactNotification($email, $message, $ip)
+        {
+            $to = 'mod@bigsurtrailreports.net';
+            $subject = 'New Message: ';
+            $contents = "Sender: $email \n";
+            $contents .= "IP: $ip \n";
+            $contents .= "A new message has been submitted: \n $message";
+            $headers = 'From: Big Sur Trail Reports <noreply@bigsurtrailreports.net>';
+
+            mail($to, $subject, $contents, $headers);
+        }
+        sendContactNotification($email, $message, $ip);
     } else {
         echo "Error: " . $sql . "<br>" . $mysqli->error;
     }

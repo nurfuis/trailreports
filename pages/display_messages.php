@@ -20,15 +20,36 @@ if (!$result) {
 }
 
 if (mysqli_num_rows($result) > 0) {
-  echo "<h2>Received Messages</h2>";
+  echo "<h1>Messages</h1>";
+  ?>
+  <div class="user-list">
+  <div class="user-list-body">
+    <?php while ($row = mysqli_fetch_assoc($result)) {
+      ?>
+      <div class="user-item">
+        <div><span>message id:</span> <?php echo $row["id"]; ?></div>
+        <div>
+          <div ><span>Email:</span> <?php echo htmlspecialchars($row["email"], ENT_QUOTES, 'UTF-8'); ?></div>
+          <div><span>Message:</span> <?php echo htmlspecialchars($row["message"], ENT_QUOTES, 'UTF-8'); ?></div>
+          <div><span>IP:</span> <?php echo $row["ip"]; ?></div>
+
+          <div><span>Created at:</span> <?php echo $row["created_at"]; ?>
+          </div>
+        </div>
+      </div>
+    <?php } ?>
+  </div>
+</div>
+
+<?php
   echo "<table>";
   echo "<tr><th>ID</th><th>Email</th><th>Message</th><th>IP</th><th>Received On</th></tr>";
 
   while ($row = mysqli_fetch_assoc($result)) {
     echo "<tr>";
     echo "<td>" . $row["id"] . "</td>";
-    echo "<td>" . $row["email"] . "</td>";
-    echo "<td>" . $row["message"] . "</td>";
+    echo "<td>" . htmlspecialchars($row["email"], ENT_QUOTES, 'UTF-8') . "</td>";
+    echo "<td>" . htmlspecialchars($row["message"], ENT_QUOTES, 'UTF-8') . "</td>";
     echo "<td>" . $row["ip"] . "</td>";
     echo "<td>" . $row["created_at"] . "</td>";
     echo "</tr>";
