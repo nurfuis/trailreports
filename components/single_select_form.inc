@@ -3,7 +3,7 @@
 $trail_sql = "SELECT id, name FROM features WHERE collections_id IN ($collection) ORDER BY name ASC;";
 $trail_result = mysqli_query($mysqli, $trail_sql);
 
-$collections_sql = "SELECT id, name FROM collections LIMIT 2"; // magic number to limit collection filters
+$collections_sql = "SELECT id, name FROM collections LIMIT 4"; // magic number to limit collection filters
 $collections_result = mysqli_query($mysqli, $collections_sql);
 
 
