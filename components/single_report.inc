@@ -52,11 +52,56 @@ $userId = $report['user_id'];
         <div class="vertical-divider"></div>
     </div>
 
-    <h1>Trail Report</h1>
+    <div class="slider__header-container">
+        <h1 class="slider__header">Trail Report</h1>
+    </div>
+
+    
+    <div class="content">
+        <div class="trigger-element">Trigger slide-in</div>
+        <div class="second-element">Second element</div>
+    </div>
+
+    <script>
+        const header = document.querySelector('.slider__header');
+
+        function slideInHeader() {
+            header.style.left = '0';
+        }
+
+        function slideOutHeader() {
+            header.style.left = '-100%';
+        }
+        const triggerElement = document.querySelector('.trigger-element');
+        const secondElement = document.querySelector('.second-element');
+
+        const headerOptions = {
+            rootMargin: '0px 0px -100px 0px' // Trigger when element is 100px above viewport
+        };
+
+        const headerObserver = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
+                header.classList.add('slide-in');
+                headerObserver.unobserve(triggerElement); // Stop observing after first intersection
+            }
+        }, headerOptions);
+
+        headerObserver.observe(triggerElement);
+
+        // Optional: Observe second element to trigger another action
+        const secondElementObserver = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
+                // Trigger action when second element enters viewport
+                console.log('Second element entered viewport');
+            }
+        });
+
+        secondElementObserver.observe(secondElement);
+    </script>
+
     <h2><?php echo $report['feature_name']; ?></h2>
     <p><strong>Submitted by:</strong> <?php echo $report['username']; ?></p>
     <p><strong><?php echo $postedOnText; ?></strong><?php echo $formattedTime; ?></p>
-
 
 
     <h3><?php echo nl2br($title); ?> </h3>

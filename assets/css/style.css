@@ -359,6 +359,20 @@ button {
   margin: 0.37rem;
 }
 
+.slider__header-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.slider__header {
+  position: absolute;
+  top: 0;
+  left: -100%; 
+  width: 100%;
+  transition: left 0.5s ease-in-out;
+}
+
+
 .advanced__form-wrapper {
   margin-top: 0.37rem;
   color: var(--light-background);
