@@ -30,8 +30,9 @@ if (isset($report)) {
 } else {
     echo "<p>Report not found.</p>";
 }
-?>
 
+
+?>
 
 <div class="recent-reports">
     <h3>Recent Reports</h3>
@@ -40,9 +41,16 @@ if (isset($report)) {
         $result->data_seek(1);
 
         while ($recent_report = $result->fetch_assoc()) {
+            $id = $recent_report['id'];
+            $title = htmlspecialchars($recent_report['report_title'], ENT_QUOTES, 'UTF-8');
+            $feature = $recent_report['feature_name'];
+            $posted = $recent_report['created_at'];
+            $month = date('F d', strtotime($posted));
     ?>
-            <div class="recent-report"><a href="./pages/trail_report.php?id=<?php echo $recent_report['id']; ?>"><?php echo htmlspecialchars($recent_report['report_title'], ENT_QUOTES, 'UTF-8'); ?></a>
-                - <span><?php echo $recent_report['feature_name']; ?></span>
+            <div class="recent-report">
+                <span class="em"><?php echo $month; ?></span> - 
+                <span><?php echo $feature; ?></span>: 
+                <a href="./pages/trail_report.php?id=<?php echo $id; ?>"><?php echo $title; ?></a>
             </div>
     <?php
         }
