@@ -4,7 +4,7 @@
 
   <p class="fade-out-paragraph">
     <span class="em larger">Help us keep our trails open and accessible!</span>
-    Share your adventures and discoveries by submitting a trail report. Your firsthand knowledge is invaluable to fellow hikers, bikers, and equestrians. By sharing trail conditions, you're contributing to a thriving outdoor community and helping protect our natural spaces for generations to come. Let's work together to preserve our beloved trails!
+    Share your adventures and discoveries by submitting a trail report. Your firsthand knowledge is invaluable. By sharing trail conditions, you're contributing to a thriving outdoor community to preserve our beloved trails!
   </p>
 </div>
 <script>
