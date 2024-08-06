@@ -3,7 +3,7 @@
   <h2>Big Sur, California</h2>
 
   <p class="fade-out-paragraph">
-    <span class="em larger">Help us keep our trails open and accessible!</span>
+    <span class="em larger">Help keep our trails open and accessible!</span>
     Share your adventures and discoveries by submitting a trail report. Your firsthand knowledge is invaluable. By sharing trail conditions, you're contributing to a thriving outdoor community to preserve our beloved trails!
   </p>
 </div>
