@@ -13,9 +13,7 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
     <form action="#app" method="get" id="app" class="trail-select__form">
         <input hidden name="collection" value="<?php echo $collection ?>">
 
-        <label for="trail-select">Select a Trail:</label>
-
-        <select name="feature_id" id="trail-select">
+        <label for="trail-select">Select a Trail:</label><select name="feature_id" id="trail-select">
             <option value="recent"> -- Recent Updates -- </option>
 
             <?php while ($trail = mysqli_fetch_assoc($trail_result)) : ?>
