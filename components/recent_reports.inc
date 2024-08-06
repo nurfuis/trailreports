@@ -49,7 +49,7 @@ if (isset($report)) {
     ?>
             <div class="recent-report">
                 <span class="em"><?php echo $month; ?></span> - 
-                <span><?php echo $feature; ?></span>: 
+                <span><?php echo $feature; ?></span> 
                 <a href="./pages/trail_report.php?id=<?php echo $id; ?>"><?php echo $title; ?></a>
             </div>
     <?php
