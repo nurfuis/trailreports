@@ -3,8 +3,8 @@
   <h2>Big Sur, California</h2>
 
   <p class="fade-out-paragraph">
-    View and report accurate information on trail conditions in Monterey County's Los Padres National Forest and
-    Ventana Wilderness areas. This open-source platform allows you to submit trail reports.
+    <span class="em larger">Help us keep our trails open and accessible!</span>
+    Share your adventures and discoveries by submitting a trail report. Your firsthand knowledge is invaluable to fellow hikers, bikers, and equestrians. By sharing trail conditions, you're contributing to a thriving outdoor community and helping protect our natural spaces for generations to come. Let's work together to preserve our beloved trails!
   </p>
 </div>
 <script>
