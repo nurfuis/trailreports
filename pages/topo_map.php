@@ -136,7 +136,7 @@ $shortSource = substr($source, 0, 12);
 
         var map = L.map("map", {
             renderer: L.canvas({
-                tolerance: 20
+                tolerance: 8
             })
         });
 
