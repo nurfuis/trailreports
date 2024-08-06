@@ -39,10 +39,11 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
         <div class="advanced__form-wrapper">
             <form class="advanced__form" method="get">
                 <?php while ($collection = mysqli_fetch_assoc($collections_result)) : ?>
-
+                    <div class="no-wrap">
                     <input type="radio" name="collection" value="<?php echo $collection['id']; ?>" id="<?php echo $collection['id']; ?>" <?php if (isset($_GET['collection']) && $_GET['collection'] == $collection['id']) : ?> checked <?php endif; ?>>
                     <label for="<?php echo $collection['id']; ?>"><?php echo $collection['name']; ?>
                     </label>
+                    </div>
                 <?php endwhile; ?>
             </form>
         </div>

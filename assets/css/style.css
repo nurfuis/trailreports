@@ -405,6 +405,10 @@ button {
   width: 10px;
   height: 10px;
 }
+.no-wrap {
+  flex-wrap: nowrap;
+  display: inline-flex;
+}
 .advanced button {
   text-decoration: none;
   color: var(--light-background);
