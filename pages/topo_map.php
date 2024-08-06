@@ -1,16 +1,28 @@
 <?php
 require_once realpath("../../db_connect.php");
 
-$sql = "SELECT ST_AsGeoJSON(geometry) AS geojson FROM polylines;";
+$sql = "SELECT ST_AsGeoJSON(geometry) AS geojson, p.feature_id, f.name AS feature_name
+FROM polylines p
+INNER JOIN features f ON p.feature_id = f.id;";
+
 $result = mysqli_query($mysqli, $sql);
 
 $geojsonFeatures = [];
 
 while ($row = mysqli_fetch_assoc($result)) {
-    $geojsonFeatures[] = ['type' => 'Feature', 'geometry' => json_decode($row['geojson'], true)];
+    $geojsonFeatures[] = [
+        'type' => 'Feature',
+        'geometry' => json_decode($row['geojson'], true),
+        'properties' => [
+            'feature_id' => $row['feature_id'],
+            'feature_name' => $row['feature_name']
+        ]
+    ];
 }
 
 $geojsonData = ['type' => 'FeatureCollection', 'features' => $geojsonFeatures];
+
+
 
 $featureName = isset($_GET['name']) ? $_GET['name'] : '';
 $source = isset($_GET['source']) ? $_GET['source'] : '';
@@ -163,9 +175,10 @@ $shortSource = substr($source, 0, 12);
         });
         tileLayer.addTo(map);
 
-        const popup = "New Pop Up!"
 
         geojsonData.features.forEach(feature => {
+            const popup = feature.properties.feature_name;
+
             L.geoJSON(feature, {
                 style: {
                     color: 'red'
