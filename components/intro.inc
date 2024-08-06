@@ -4,7 +4,7 @@
 
   <p class="fade-out-paragraph">
     <span class="em larger">Help keep our trails open and accessible!</span>
-    Share your adventures and discoveries by submitting a trail report. Your firsthand knowledge is invaluable. By sharing trail conditions, you're contributing to a thriving outdoor community to preserve our beloved trails!
+    Your firsthand knowledge is invaluable. By sharing trail conditions, you're contributing to a thriving outdoor community and helping to preserve our beloved trails! Use the selector below to find a trail, camp, or other points of interest.
   </p>
 </div>
 <script>
