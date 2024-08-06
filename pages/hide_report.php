@@ -2,7 +2,7 @@
 session_start();
 if (!isset($_SESSION['user_level']) || $_SESSION['user_level'] !== 'admin') {
     // Redirect if user is not admin
-    header("Location: display_reports.php");
+    header("Location: /home.php");
     exit;
 }
 require_once realpath("../../db_connect.php");
@@ -26,7 +26,7 @@ if (mysqli_stmt_execute($stmt)) {
     mysqli_close($mysqli);
     ?>
     <script type="text/javascript">
-        window.location.href = "hidden_reports.php" 
+        window.location.href = "/home.php" 
     </script>
 
     <?php
