@@ -167,7 +167,7 @@ $shortSource = substr($source, 0, 12);
         document.getElementById("map").style.height = height + "px";
 
         var tileLayer = L.tileLayer("https://tile.opentopomap.org/{z}/{x}/{y}.png", {
-            maxZoom: 19,
+            maxZoom: 15,
             attribution: '&copy; <a href="https://opentopomap.org">OpenTopoMap</a> <span class="source" id="source-span"><span class="source-toggle" id="source-span"> <?php echo $shortSource; ?></span>',
         });
 
