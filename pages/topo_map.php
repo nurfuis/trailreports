@@ -182,7 +182,8 @@ $shortSource = substr($source, 0, 12);
             L.geoJSON(feature, {
                 style: {
                     color: 'red'
-                }
+                },
+                renderer: L.canvas({ tolerance: 20 })
             }).bindPopup(function(layer) {
                 return popup;
             }).addTo(map);
