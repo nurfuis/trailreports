@@ -400,6 +400,11 @@ button {
   text-decoration: none;
 
 }
+.my-div-icon {
+  background-color: #d91e18;
+  width: 10px;
+  height: 10px;
+}
 .advanced button {
   text-decoration: none;
   color: var(--light-background);

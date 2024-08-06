@@ -1,6 +1,7 @@
 <?php
 require_once realpath("../../db_connect.php");
 
+
 $sql = "SELECT ST_AsGeoJSON(geometry) AS geojson, p.feature_id, f.name AS feature_name
 FROM polylines p
 INNER JOIN features f ON p.feature_id = f.id;";
@@ -19,10 +20,31 @@ while ($row = mysqli_fetch_assoc($result)) {
         ]
     ];
 }
-
 $geojsonData = ['type' => 'FeatureCollection', 'features' => $geojsonFeatures];
 
 
+$sql_points = "SELECT ST_AsGeoJSON(geometry) AS geojson, p.feature_id, f.name AS feature_name
+FROM points p
+INNER JOIN features f ON p.feature_id = f.id;";
+
+$result_points = mysqli_query($mysqli, $sql_points);
+
+$geojsonFeatures_points = [];
+
+$geojsonFeatures_points = [];
+
+while ($row = mysqli_fetch_assoc($result_points)) {
+    $geojsonFeatures_points[] = [
+        'type' => 'Feature',
+        'geometry' => json_decode($row['geojson'], true),
+        'properties' => [
+            'feature_id' => $row['feature_id'],
+            'feature_name' => $row['feature_name']
+        ]
+    ];
+}
+
+$geojsonDataPoints = ['type' => 'FeatureCollection', 'features' => $geojsonFeatures_points];
 
 $featureName = isset($_GET['name']) ? $_GET['name'] : '';
 $source = isset($_GET['source']) ? $_GET['source'] : '';
@@ -92,6 +114,11 @@ $shortSource = substr($source, 0, 12);
 
     <script>
         const geojsonData = JSON.parse('<?php echo json_encode($geojsonData); ?>');
+        const geojsonDataPoints = JSON.parse('<?php echo json_encode($geojsonDataPoints); ?>');
+
+
+        console.log(geojsonData)
+        console.log(geojsonDataPoints)
 
         function getMapParamsFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -187,6 +214,28 @@ $shortSource = substr($source, 0, 12);
                 style: {
                     color: 'red'
                 }
+            }).bindPopup(function(layer) {
+                return popup;
+            }).addTo(map);
+        });
+
+        var geojsonMarkerOptions = {
+            radius: 6,
+            fillColor: "#ff7800",
+            color: "#000",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
+        };
+
+        geojsonDataPoints.features.forEach(feature => {
+            const popup = feature.properties.feature_name;
+
+            L.geoJSON(feature, {
+                pointToLayer: function(feature, latlng) {
+                    return L.circleMarker(latlng, geojsonMarkerOptions);
+                }
+
             }).bindPopup(function(layer) {
                 return popup;
             }).addTo(map);

@@ -30,7 +30,7 @@ if (isset($_GET['feature_id'])) {
         echo "Feature not found.";
         exit;
     }
-    ?>
+?>
     <div>
         <div class="regular-padding">
             <h2><?php echo $feature['name'] ?></h2>
@@ -44,7 +44,7 @@ if (isset($_GET['feature_id'])) {
             <?php
             if ($feature['geometry_type'] == 'LineString') {
                 $polyline_sql = "SELECT ST_AsText(geometry) AS text_geometry, source FROM polylines WHERE feature_id = $selected_feature_id;";
-                
+
                 $polyline_result = mysqli_query($mysqli, $polyline_sql);
 
                 if (!$polyline_result) {
@@ -82,8 +82,36 @@ if (isset($_GET['feature_id'])) {
                     echo "<p>Path: " . $polyline['text_geometry'] . "</p>";
                     echo '</div>';
                 }
+            } elseif ($feature['geometry_type'] == 'Point') {
+                $point_sql = "SELECT ST_AsText(geometry) AS text_geometry FROM points WHERE feature_id = $selected_feature_id;";
+                $point_result = mysqli_query($mysqli, $point_sql);
+
+                if (!$point_result) {
+                    echo "Error: " . mysqli_error($mysqli);
+                    exit;
+                }
+
+                $first_point = mysqli_fetch_assoc($point_result);
+
+                if ($first_point) {
+                    $point_coords = explode(" ", substr($first_point['text_geometry'], strpos($first_point['text_geometry'], "(") + 1, -1));
+                    
+                    $longitude = trim($point_coords[0]);
+                    $latitude = trim($point_coords[1]);
+                    
+
+                    $geometry_string = "$longitude, $latitude";
+
+                    // Create a link to another page with lat, long, and zoom
+                    $link_url = "./pages/topo_map.php?name=" . $feature['name'] . "&lat=" . $latitude . "&long=" . $longitude . "&zoom=" . $MAP_ZOOM;
+
+                    echo '<p><span>Location:</span> <a href="' . $link_url . '">' . $geometry_string . '</a></p>';
+                } else {
+                    echo "No point found for this feature.";
+                }
+
+                mysqli_free_result($point_result);
             }
-            mysqli_free_result($polyline_result);
 
             if (isset($_GET['sort-by'])) {
                 $sort_by = $_GET['sort-by'];
@@ -145,15 +173,15 @@ if (isset($_GET['feature_id'])) {
             $sql .= " LIMIT $ITEMS_PER_PAGE;";
             ?>
             <script>
-                document.addEventListener("DOMContentLoaded", function () {
+                document.addEventListener("DOMContentLoaded", function() {
                     const sortBySelect = document.getElementById("sort-by");
                     const dateRangeSelect = document.getElementById("date-range");
 
-                    sortBySelect.addEventListener("change", function () {
+                    sortBySelect.addEventListener("change", function() {
                         this.form.submit();
                     });
 
-                    dateRangeSelect.addEventListener("change", function () {
+                    dateRangeSelect.addEventListener("change", function() {
                         this.form.submit();
                     });
 
@@ -170,18 +198,18 @@ if (isset($_GET['feature_id'])) {
                         <label for="sort-by">Sort By:</label>
                         <select name="sort-by" id="sort-by">
                             <option value="recent" <?php if ($order_by == "tr.created_at DESC")
-                                echo "selected"; ?>>Most Recent
+                                                        echo "selected"; ?>>Most Recent
                             </option>
                             <option value="oldest" <?php if ($order_by == "tr.created_at ASC")
-                                echo "selected"; ?>>Oldest First
+                                                        echo "selected"; ?>>Oldest First
                             </option>
                             <option value="rating_high" <?php if ($order_by == "tr.rating ASC, tr.created_at DESC")
-                                echo "selected"; ?>>
+                                                            echo "selected"; ?>>
                                 Rating
                                 (High to Low)
                             </option>
                             <option value="rating_low" <?php if ($order_by == "tr.rating DESC, tr.created_at DESC")
-                                echo "selected"; ?>>Rating
+                                                            echo "selected"; ?>>Rating
                                 (Low to High)
                             </option>
                         </select>
@@ -244,9 +272,9 @@ if (isset($_GET['feature_id'])) {
                         echo "  <p><span>" . $postedOnText . "</span> " . $formattedTime . "</p>";
                         echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
                         echo "  <p class='indented'>" . nl2br($summary);
-                        if ($showReadMore): ?>
+                        if ($showReadMore) : ?>
                             <a href="./pages/trail_report.php?id=<?php echo $report['id']; ?>" class="read-more-btn">read more</a>
-                        <?php endif;
+                <?php endif;
                         echo "</p>";
                         echo "</div>";
                     }
@@ -256,8 +284,8 @@ if (isset($_GET['feature_id'])) {
                 } ?>
             </div>
         </div>
-        <?php
+    <?php
 } else {
     echo "Please select a trail to view details.";
 }
-?>
+    ?>
