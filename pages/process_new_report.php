@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             ?>
             <script type="text/javascript">
-                window.location.href = "./display_reports.php?success=true" 
+                window.location.href = "/home.php?success=true" 
             </script>
 
             <?php

@@ -1,5 +1,4 @@
 <?php
-$SUMMARY_LIMIT = 500;
 $OVERALL_RATINGS = [
     'Good' => 1,
     'Passable' => 2,
