@@ -1,4 +1,17 @@
 <?php
+require_once realpath("../../db_connect.php");
+
+$sql = "SELECT ST_AsGeoJSON(geometry) AS geojson FROM polylines;";
+$result = mysqli_query($mysqli, $sql);
+
+$geojsonFeatures = [];
+
+while ($row = mysqli_fetch_assoc($result)) {
+    $geojsonFeatures[] = ['type' => 'Feature', 'geometry' => json_decode($row['geojson'], true)];
+}
+
+$geojsonData = ['type' => 'FeatureCollection', 'features' => $geojsonFeatures];
+
 $featureName = isset($_GET['name']) ? $_GET['name'] : '';
 $source = isset($_GET['source']) ? $_GET['source'] : '';
 $shortSource = substr($source, 0, 12);
@@ -16,16 +29,12 @@ $shortSource = substr($source, 0, 12);
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/style.css" />
 
     <!-- Leaflet Code -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <style>
         #map {
             height: 100vh;
@@ -70,6 +79,8 @@ $shortSource = substr($source, 0, 12);
     <div id="map"></div>
 
     <script>
+        const geojsonData = JSON.parse('<?php echo json_encode($geojsonData); ?>');
+
         function getMapParamsFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
             const lat = parseFloat(urlParams.get("lat"));
@@ -78,11 +89,19 @@ $shortSource = substr($source, 0, 12);
 
             // Check if all parameters are valid numbers
             if (isNaN(lat) || isNaN(long) || isNaN(zoom)) {
-                console.error("Invalid lat, long, or zoom in URL");
-                return { lat: 36.3315, long: -121.7615, zoom: 11 };
+                console.warn("Invalid lat, long, or zoom in URL");
+                return {
+                    lat: 36.3315,
+                    long: -121.7615,
+                    zoom: 11
+                };
             }
 
-            return { lat, long, zoom };
+            return {
+                lat,
+                long,
+                zoom
+            };
         }
 
         // ## Leaflet Code ## //
@@ -93,26 +112,34 @@ $shortSource = substr($source, 0, 12);
             iconSize: [64, 64], // size of the icon
             shadowSize: [64, 64], // size of the shadow
             iconAnchor: [32, 48], // point of the icon which will correspond to marker's location
-            shadowAnchor: [26, 40],  // the same for the shadow
+            shadowAnchor: [26, 40], // the same for the shadow
             popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
         });
-        const { lat, long, zoom } = getMapParamsFromUrl();
+
+        const {
+            lat,
+            long,
+            zoom
+        } = getMapParamsFromUrl();
 
         var map = L.map("map");
 
-        const point = L.marker([lat, long], { icon: redIcon }).addTo(map);
+        const point = L.marker([lat, long], {
+            icon: redIcon
+        }).addTo(map);
 
-        point.on("click", function () {
+        point.on("click", function() {
             showOverlay();
         });
 
         L.control.scale().addTo(map);
 
-        map.on("load", function () {
-            setTimeout(function () {
+        map.on("load", function() {
+            setTimeout(function() {
                 document.getElementById('loading').style.display = 'none';
             }, 500);
         });
+
         map.setView([lat, long], zoom);
 
         // Get the window width and height
@@ -128,16 +155,25 @@ $shortSource = substr($source, 0, 12);
             attribution: '&copy; <a href="https://opentopomap.org">OpenTopoMap</a> <span class="source" id="source-span"><span class="source-toggle" id="source-span"> <?php echo $shortSource; ?></span>',
         });
 
-        // Add event listener to tile layer 'load' event
-        tileLayer.on('load', function () {
-            setTimeout(function () {
+        tileLayer.on('load', function() {
+            setTimeout(function() {
                 document.getElementById('loading').style.display = 'none';
             }, 500); // Delay for 0.5 seconds
 
         });
-
-        // Add the tile layer to the map
         tileLayer.addTo(map);
+
+        const popup = "New Pop Up!"
+
+        geojsonData.features.forEach(feature => {
+            L.geoJSON(feature, {
+                style: {
+                    color: 'red'
+                }
+            }).bindPopup(function(layer) {
+                return popup;
+            }).addTo(map);
+        });
     </script>
 
     <div class="overlay">
@@ -145,17 +181,18 @@ $shortSource = substr($source, 0, 12);
             <h2><?php echo $featureName; ?></h2>
 
             <p id="feature-location">
-                <script>document.getElementById('feature-location').innerHTML = `${lat} ${long}`;</script>
+                <script>
+                    document.getElementById('feature-location').innerHTML = `${lat} ${long}`;
+                </script>
             </p>
             <button id="close-overlay">Hide</button>
         </div>
     </div>
     <script>
-
         const sourceSpan = document.getElementById('source-span');
         const fullSource = '<?php echo $source; ?>'; // Store the full source in a variable
 
-        sourceSpan.addEventListener('click', function () {
+        sourceSpan.addEventListener('click', function() {
             if (sourceSpan.textContent.length <= 13) {
                 sourceSpan.textContent = fullSource;
             } else {
