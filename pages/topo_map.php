@@ -134,7 +134,11 @@ $shortSource = substr($source, 0, 12);
             zoom
         } = getMapParamsFromUrl();
 
-        var map = L.map("map");
+        var map = L.map("map", {
+            renderer: L.canvas({
+                tolerance: 20
+            })
+        });
 
         const point = L.marker([lat, long], {
             icon: redIcon
@@ -182,8 +186,7 @@ $shortSource = substr($source, 0, 12);
             L.geoJSON(feature, {
                 style: {
                     color: 'red'
-                },
-                renderer: L.canvas({ tolerance: 20 })
+                }
             }).bindPopup(function(layer) {
                 return popup;
             }).addTo(map);
