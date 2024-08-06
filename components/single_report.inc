@@ -25,12 +25,12 @@ $userId = get_user_id();
 ?>
 
 <div class="single-report">
-    <div class="whitespace-container">
+    <!-- <div class="whitespace-container">
         <div class="vertical-divider"></div>
 
         <div class="scroll-text">scroll</div>
         <div class="vertical-divider"></div>
-    </div>
+    </div> -->
 
 
     <?php if ($userId == $submitterId) : ?>
@@ -70,11 +70,11 @@ $userId = get_user_id();
     <h3><?php echo nl2br($title); ?> </h3>
     <p><strong>Rating:</strong> <?php echo $ratings[$report['rating']]; ?></p>
     <p class="indented larger"><?php echo nl2br($summary); ?></p>
-
+<!-- 
     <div class="whitespace-container">
         <div class="vertical-divider"></div>
 
         <div class="scroll-text">scroll</div>
         <div class="vertical-divider"></div>
-    </div>
+    </div> -->
 </div>
