@@ -42,7 +42,7 @@ if ($reportId) {
 
 <div class="trail-report__form">
   <h1>Edit Report</h1>
-  <h2>Submit to Collection</h2>
+  <h2>Update Collection</h2>
   <form action="process_edit_report.php" method="post">
     <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
     <input type="hidden" name="report_id" value="<?php echo $reportData['id']; ?>">

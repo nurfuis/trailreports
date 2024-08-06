@@ -33,7 +33,7 @@ $userId = get_user_id();
     </div> -->
 
 
-    <?php if ($userId == $submitterId) : ?>
+    <?php if ($userId == $submitterId || is_admin()) : ?>
         <a class="edit" href="/pages/edit_report.php?id=<?php echo $reportId; ?>"><span>Edit</span></a>
     <?php endif; ?>
 
