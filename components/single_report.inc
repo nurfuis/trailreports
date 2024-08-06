@@ -64,7 +64,7 @@ $userId = get_user_id();
 
     <h2><?php echo $report['feature_name']; ?></h2>
     <p><strong>Submitted by:</strong> <?php echo $report['username']; ?></p>
-    <p><strong><?php echo $postedOnText; ?></strong><?php echo $formattedTime; ?></p>
+    <p><strong><?php echo $postedOnText; ?></strong> <?php echo $formattedTime; ?></p>
 
 
     <h3><?php echo nl2br($title); ?> </h3>
