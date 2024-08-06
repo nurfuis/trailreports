@@ -88,6 +88,28 @@ button {
 .overlay div {
   width: 80%;
 }
+.whitespace-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 200px; /* Adjust height as needed */
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+
+}
+
+.vertical-divider {
+  width: 2px;
+  height: 100%;
+  background-color: #ccc; /* Adjust color as needed */
+  margin: 0 10px; /* Add spacing around the divider */
+}
+
+.scroll-text {
+  display: flex;
+  align-items: center;
+  height: 100%; /* Ensure text is vertically centered */
+}
 .overlay {
   position: fixed;
   top: 0;
@@ -107,6 +129,7 @@ button {
 .fade-out-paragraph {
   position: relative;
   z-index: 5;
+  user-select: none;
 }
 .guidance-list span {
   color: var(--text-light);
@@ -380,6 +403,13 @@ button {
 .introduction h1 {
   margin: 0.5rem;
   border: none;
+  user-select: none;
+}
+.introduction h2 {
+  margin: 0.5rem;
+  border: none;
+  user-select: none;
+
 }
 h2 {
   border-bottom: 1px solid var(--accent);
@@ -387,10 +417,6 @@ h2 {
 .larger {
   font-size: larger;
   line-height: 2;
-}
-.introduction h2 {
-  margin: 0.5rem;
-  border: none;
 }
 .introduction a {
   text-decoration: none;
@@ -676,6 +702,9 @@ p {
   }
 }
 @media (min-width: 768px) {
+  .whitespace-container {
+    display: none;
+  }
   .wide__wrapper {
     font-weight: 300;
     font-style: normal;

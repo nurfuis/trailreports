@@ -39,8 +39,8 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
 
     <div class="advanced">
         <div>
-            <button class="advanced__button--toggle">Options</button>
-            <button class="clear-button">Clear</button>
+            <button class="advanced__button--toggle">Filter</button>
+            <button class="clear-button">Reset</button>
         </div>
         <div class="advanced__form-wrapper">
             <form class="advanced__form" method="get">

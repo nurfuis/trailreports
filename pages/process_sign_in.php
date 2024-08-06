@@ -46,8 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user_id'] = $row['user_id'];
 
         $sql = "SELECT * FROM authorized_users WHERE user_id = ?";
-        $stmt = mysqli_prepare($mysqli, $sql);  // Prepare statement for security
-        mysqli_stmt_bind_param($stmt, "i", $_SESSION['user_id']);  // Bind user ID
+        $stmt = mysqli_prepare($mysqli, $sql);
+        mysqli_stmt_bind_param($stmt, "i", $_SESSION['user_id']);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
 

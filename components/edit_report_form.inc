@@ -1,5 +1,7 @@
 <?php
 require_once realpath("../../db_connect.php");
+require_once realpath("../components/user_roles.php");
+
 $isModerator = false;
 if (isset($_SESSION['user_level']) && $_SESSION['user_level'] === 'admin') {
     $isModerator = true;
