@@ -27,7 +27,7 @@
           if (passwordRegex.test(password)) {
             passwordError.textContent = ''; // Clear any previous error message
           } else {
-            passwordError.innerHTML = '<span class="em">Password must be greater than 14 characters</span><br>or greater than 7 characters and contain at least:<ul><li>one lowercase letter</li><li>one uppercase letter</li><li>one number</li><li>and one special character</li></ul>';
+            passwordError.innerHTML = '<span class="em">Password must be at least 15 characters</span><br><br>or at least 8 characters and contain at least:<ul><li>one lowercase letter</li><li>one uppercase letter</li><li>one number</li><li>and one special character</li></ul>';
           }
         });
     </script>

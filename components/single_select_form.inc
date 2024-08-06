@@ -13,11 +13,10 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
     <form action="#app" method="get" id="app" class="trail-select__form">
         <input hidden name="collection" value="<?php echo $collection ?>">
 
-        <label for="trail-select">Select a Trail:</label><select name="feature_id" id="trail-select">
+        <label class="no-select" for="trail-select">Select a Trail:</label><select name="feature_id" id="trail-select">
             <option value="recent"> -- Recent Updates -- </option>
 
             <?php while ($trail = mysqli_fetch_assoc($trail_result)) : ?>
-
                 <option value="<?php echo $trail['id']; ?>" <?php if (isset($_GET['feature_id']) && $_GET['feature_id'] == $trail['id']) : ?> selected <?php endif; ?>>
                     <?php
 
@@ -28,17 +27,14 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
                     echo $shortenedName;
                     ?>
                 </option>
-
             <?php endwhile; ?>
         </select>
-
         <button class="hidden" type="submit">View</button>
     </form>
 
     <div class="advanced">
         <div>
-            <button class="advanced__button--toggle">Filter</button>
-            <button class="clear-button">Reset</button>
+            <button class="advanced__button--toggle">Filter</button><button class="clear-button">Reset</button>
         </div>
         <div class="advanced__form-wrapper">
             <form class="advanced__form" method="get">

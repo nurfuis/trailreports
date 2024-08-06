@@ -398,19 +398,24 @@ button {
 }
 .advanced__button--toggle {
   text-decoration: none;
-  color: var(--light-background);
-  background-color: var(--darker-background);
-  border: 1px solid var(--light-background);
-  padding: 0.5rem;
-  font-size: smaller;
+
 }
-.clear-button {
+.advanced button {
   text-decoration: none;
   color: var(--light-background);
   background-color: var(--darker-background);
   border: 1px solid var(--light-background);
   padding: 0.5rem;
   font-size: smaller;
+  margin: 0 0.37rem 0 0.37rem;
+}
+.no-select {
+  user-select: none;
+  cursor: default;
+}
+.clear-button {
+  text-decoration: none;
+
 }
 .advanced {
   margin: 0.37rem 0 0 0;

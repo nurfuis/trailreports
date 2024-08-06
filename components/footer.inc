@@ -7,7 +7,7 @@
         <a href="./pages/privacy_policy.php">Privacy Policy</a>
 
     </div>
-    <div class="regular-padding k2d-thin"><span>&copy; <?php echo date('Y'); ?> Ross Clayton Cramer</span>
+    <div class="regular-padding k2d-thin no-select"><span>&copy; <?php echo date('Y'); ?> Ross Clayton Cramer</span>
     </div>
     <div class=" regular-padding">
         <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
