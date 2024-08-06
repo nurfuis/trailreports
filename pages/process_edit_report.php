@@ -37,13 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (mysqli_stmt_execute($stmt)) {
             ?>
             <script type="text/javascript">
-                window.location.href = "./user_reports.php?success=true" 
+                window.location.href = "/home.php?success=true" 
             </script>
 
             <?php
 
             $successMessage = "Trail report updated successfully!";
-            // header("Location: ./user_reports.php?success=true"); // Redirect to reports page
 
         } else {
             $errorMessage = "Error updating report: " . mysqli_stmt_error($stmt);
