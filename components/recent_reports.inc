@@ -1,4 +1,14 @@
 <?php
+function ordinal($number) {
+    $ends = array('th','st','nd','rd','th','th','th','th','th','th');
+    if (($number % 100) >= 11 && ($number % 100) <= 13) {
+        $suffix = 'th';
+    } else {
+        $suffix = $ends[$number % 10];
+    }
+    return $number . $suffix;
+}
+
 $OVERALL_RATINGS = [
     'Good' => 1,
     'Passable' => 2,
@@ -44,10 +54,11 @@ if (isset($report)) {
             $title = htmlspecialchars($recent_report['report_title'], ENT_QUOTES, 'UTF-8');
             $feature = $recent_report['feature_name'];
             $posted = $recent_report['created_at'];
-            $month = date('F d', strtotime($posted));
-    ?>
+            $month = date('F', strtotime($posted));
+            $day = ordinal(date('d', strtotime($posted)));
+            $formattedDate = "$month $day";    ?>
             <div class="recent-report">
-                <span class="em"><?php echo $month; ?></span> - 
+                <span class="em"><?php echo $formattedDate; ?></span> - 
                 <span><?php echo $feature; ?></span> 
                 <a href="./pages/trail_report.php?id=<?php echo $id; ?>"><?php echo $title; ?></a>
             </div>
