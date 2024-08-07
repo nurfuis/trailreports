@@ -80,6 +80,7 @@ $collectionName = "Features";
         if (event.target.type === 'radio' && event.target.checked) {
             sessionStorage.setItem('collectionSelected', true); // Set flag on selection
             optionsForm.submit();
+
         }
     });
 
@@ -104,9 +105,9 @@ $collectionName = "Features";
     // Check for existing flag on page load
     const collectionSelected = sessionStorage.getItem('collectionSelected');
     if (collectionSelected) {
+        document.getElementById('app').scrollIntoView();
         optionsWrapper.classList.add('expanded');
         optionsButton.classList.toggle('active');
-        document.getElementById('app').scrollIntoView();
 
     }
 </script>
