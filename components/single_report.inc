@@ -34,27 +34,8 @@ $userId = get_user_id();
 
 
     <?php if ($userId == $submitterId || is_admin()) : ?>
-        <a class="edit" href="/pages/edit_report.php?id=<?php echo $reportId; ?>"><span>Edit</span></a>
-    <?php endif; ?>
+        <a class="small-button" href="/pages/edit_report.php?id=<?php echo $reportId; ?>"><span>Edit</span></a>
 
-    <?php if (is_admin()) : ?>
-
-        <form id="hideReportForm" action="/pages/hide_report.php" method="post" onsubmit="return confirmHideReport()">
-            <input type="hidden" name="report_id" value="<?php echo $report['id']; ?>">
-            <button class="small-button" type="submit">Hide Report</button>
-        </form>
-
-
-        <script>
-            function confirmHideReport() {
-                const reportId = document.getElementById("hideReportForm").elements["report_id"].value;
-                if (confirm(`Are you sure you want to hide report?`)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        </script>
     <?php endif; ?>
 
     <div class="slider__header-container">

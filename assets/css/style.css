@@ -79,10 +79,7 @@ form {
 button {
   padding: 0.5rem 1rem 0.5rem 1rem;
 }
-.small-button {
-  padding: 0.25rem;
 
-}
 .show {
   display: block;
 }
@@ -258,14 +255,21 @@ button {
   height: 35vh;
   resize: vertical;
 }
-.edit {
+.small-button {
   font-family: "K2D";
   font-weight: 300;
   display: inline-block;
   font-size: smaller;
   margin: 0.5rem;
   color: var(--text-light);
+  border: 1px solid var(--darker-background);
+  padding: 0.25rem;
+  text-decoration: none;
+  border-radius: 4px;
+  background-color: var(--light-background);
+
 }
+
 .delete {
   font-family: "K2D";
   font-weight: 300;

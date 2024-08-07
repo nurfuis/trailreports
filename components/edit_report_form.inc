@@ -2,28 +2,24 @@
 require_once realpath("../../db_connect.php");
 require_once realpath("../components/user_roles.php");
 
-$isModerator = false;
-if (isset($_SESSION['user_level']) && $_SESSION['user_level'] === 'admin') {
-    $isModerator = true;
-}
-
-$selectedFeature = "";
+// $selectedFeature = "";
 $reportId = isset($_GET['id']) ? $_GET['id'] : '';
 
-$sqlFeatures = "SELECT id, name FROM features WHERE collections_id IN (1)";
+$sqlFeatures = "SELECT id, name FROM features WHERE collections_id IN (1, 2, 3, 4, 5, 6)";
 $resultFeatures = $mysqli->query($sqlFeatures);
+
 if (!$resultFeatures) {
   die("Error retrieving features: " + $mysqli->error);
 }
 
 $sqlReport = "";
 
-// Check if a report ID is present and user is logged in
 if ($reportId) {
   $sqlReport = "SELECT tr.*, f.name AS trail_name, tr.user_id AS report_creator_id 
                FROM trail_reports tr
                INNER JOIN features f ON tr.feature_id = f.id
                WHERE tr.id = $reportId";
+
   $resultReport = $mysqli->query($sqlReport);
   if (!$resultReport) {
     die("Error retrieving report: " . $mysqli->error);
@@ -31,9 +27,8 @@ if ($reportId) {
 
   $reportData = $resultReport->fetch_assoc();
 
-  // Check authorization
-  $isAuthorized = ($user_id == $reportData['report_creator_id']) || $isModerator; // Assuming $isModerator is a flag indicating moderator status
-  
+  $isAuthorized = ($user_id == $reportData['report_creator_id']) || is_admin();
+
   if (!$isAuthorized) {
     die("You are not authorized to edit this report.");
   }
@@ -42,7 +37,26 @@ if ($reportId) {
 
 <div class="trail-report__form">
   <h1>Edit Report</h1>
+  <form id="hideReportForm" action="/pages/hide_report.php" method="post" onsubmit="return confirmHideReport()">
+    <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+    <input type="hidden" name="report_id" value="<?php echo $reportData['id']; ?>">
+    <button class="small-button" type="submit">Delete Report</button>
+  </form>
+
+
+  <script>
+    function confirmHideReport() {
+      const reportId = document.getElementById("hideReportForm").elements["report_id"].value;
+      if (confirm(`Are you sure you want to hide report?`)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  </script>
   <h2>Update Collection</h2>
+
+
   <form action="process_edit_report.php" method="post">
     <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
     <input type="hidden" name="report_id" value="<?php echo $reportData['id']; ?>">
@@ -51,12 +65,14 @@ if ($reportId) {
     <select name="feature" id="feature" required>
       <option value="">-- Select Trail --</option>
       <?php
-      while ($row = $resultFeatures->fetch_assoc()):
-        ?>
+      while ($row = $resultFeatures->fetch_assoc()) :
+      ?>
         <option value="<?php echo $row["id"]; ?>" <?php echo ($reportData['feature_id'] == $row["id"]) ? 'selected' : ''; ?>>
           <?php echo $row["name"]; ?>
         </option>
       <?php endwhile; ?>
+
+
     </select>
     <hr>
 
@@ -66,8 +82,8 @@ if ($reportId) {
 
     <label class="radio" for="rating-group">Overall Condition Rating:</label>
     <div>
-      <?php 
-      
+      <?php
+
       $OVERALL_RATINGS = [
         'Good' => 1,
         'Passable' => 2,
@@ -75,10 +91,9 @@ if ($reportId) {
         'Impassable' => 4,
         'Gone' => 5
       ];
-      foreach ($OVERALL_RATINGS as $rating_text => $rating_value): ?>
+      foreach ($OVERALL_RATINGS as $rating_text => $rating_value) : ?>
         <label class="k2d-regular" for="<?php echo $rating_value; ?>">
-          <input type="radio" id="<?php echo $rating_value; ?>" name="rating" value="<?php echo $rating_value; ?>"
-            <?php echo ($reportData['rating'] == $rating_value) ? 'checked' : ''; ?> required>
+          <input type="radio" id="<?php echo $rating_value; ?>" name="rating" value="<?php echo $rating_value; ?>" <?php echo ($reportData['rating'] == $rating_value) ? 'checked' : ''; ?> required>
 
           <span><?php echo $rating_text; ?></span>
         </label><br>
@@ -92,12 +107,11 @@ if ($reportId) {
     <ul class="guidance-list" style="display: none;">
       <li><span>Trail Conditions:</span> Describe the overall condition of the trail (e.g., well-maintained, muddy
         in some sections, overgrown in parts).</li>
-      </ul>
+    </ul>
     <script>
-      </script>
+    </script>
     <br>
-    <textarea name="summary" id="summary" class="summary-input"
-              placeholder="Provide a detailed description of your experience on the trail." required><?php echo $reportData['summary']; ?></textarea>
+    <textarea name="summary" id="summary" class="summary-input" placeholder="Provide a detailed description of your experience on the trail." required><?php echo $reportData['summary']; ?></textarea>
     <br><br>
 
     <button type="submit">Save Changes</button>
@@ -106,5 +120,5 @@ if ($reportId) {
 </div>
 
 <?php
-    mysqli_close($mysqli);
-    ?>
+mysqli_close($mysqli);
+?>
