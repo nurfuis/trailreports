@@ -29,7 +29,7 @@ if ($hour >= 4 && $hour < 12) {
 if (isset($_GET['collection'])) {
     $collection = $_GET['collection'];
 } else {
-    $collection = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12"; // setting magic #s is sad
+    $collection = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16"; // setting magic #s is sad
 }
 
 include_once realpath("./components/head.inc");
