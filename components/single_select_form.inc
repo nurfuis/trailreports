@@ -56,9 +56,9 @@ $collectionName = "Features";
 
                 <?php while ($collection = mysqli_fetch_assoc($collections_result)) : ?>
                     <div class="no-wrap">
-                        <input type="radio" name="collection" value="<?php echo $collection['id']; ?>" id="<?php echo $collection['id']; ?>" <?php if (isset($_GET['collection']) && $_GET['collection'] == $collection['id']) : ?> checked <?php endif; ?>>
-                        <label for="<?php echo $collection['id']; ?>"><?php echo $collection['name']; ?>
-                        </label>
+                    <input type="radio" name="collection" value="<?php echo $collection['id']; ?>" id="<?php echo $collection['id']; ?>" <?php if (isset($_GET['collection']) && $_GET['collection'] == $collection['id']) : ?> checked <?php endif; ?>>
+                    <label for="<?php echo $collection['id']; ?>"><?php echo $collection['name']; ?>
+                    </label>
                     </div>
                 <?php endwhile; ?>
             </form>
@@ -89,10 +89,7 @@ $collectionName = "Features";
     optionsButton.addEventListener('click', () => {
         optionsWrapper.classList.toggle('expanded');
         optionsButton.classList.toggle('active');
-        document.getElementById('app').scrollIntoView({
-
-            block: "start"
-        });
+        document.getElementById('app').scrollIntoView();
 
     });
 
@@ -109,10 +106,7 @@ $collectionName = "Features";
     if (collectionSelected) {
         optionsWrapper.classList.add('expanded');
         optionsButton.classList.toggle('active');
-        document.getElementById('app').scrollIntoView({
-
-            block: "start"
-        });
+        document.getElementById('app').scrollIntoView();
 
     }
 </script>
