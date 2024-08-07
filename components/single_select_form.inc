@@ -89,10 +89,7 @@ $collectionName = "Features";
     optionsButton.addEventListener('click', () => {
         optionsWrapper.classList.toggle('expanded');
         optionsButton.classList.toggle('active');
-        document.getElementById('app').scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+        document.getElementById('app').scrollIntoView();
 
     });
 
@@ -109,10 +106,7 @@ $collectionName = "Features";
     if (collectionSelected) {
         optionsWrapper.classList.add('expanded');
         optionsButton.classList.toggle('active');
-        document.getElementById('app').scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+        document.getElementById('app').scrollIntoView();
 
     }
 </script>
