@@ -90,7 +90,8 @@ $collectionName = "Features";
         optionsWrapper.classList.toggle('expanded');
         optionsButton.classList.toggle('active');
         document.getElementById('app').scrollIntoView({
-            behavior: "smooth"
+            behavior: "smooth",
+            block: "start"
         });
 
     });
@@ -109,7 +110,8 @@ $collectionName = "Features";
         optionsWrapper.classList.add('expanded');
         optionsButton.classList.toggle('active');
         document.getElementById('app').scrollIntoView({
-            behavior: "smooth"
+            behavior: "smooth",
+            block: "start"
         });
 
     }
