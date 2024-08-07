@@ -19,7 +19,7 @@ $OVERALL_RATINGS = [
 $ratings = array_flip($OVERALL_RATINGS);
 
 $sql = "SELECT tr.*, f.name AS feature_name, 
-       COALESCE(tr.title, 'Untitled') AS report_title, u.username
+       COALESCE(tr.title, 'Untitled') AS report_title, u.username, geometry_type
   FROM trail_reports tr
   INNER JOIN features f ON tr.feature_id = f.id
   INNER JOIN users u ON tr.user_id = u.user_id WHERE tr.active = 1
@@ -33,7 +33,6 @@ if (!$result) {
     exit;
 }
 $report = $result->fetch_assoc();
-
 if (isset($report)) {
     include_once realpath("./components/single_report.inc");
 } else {

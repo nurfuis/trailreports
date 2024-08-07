@@ -21,7 +21,8 @@ $summary = htmlspecialchars($report['summary'], ENT_QUOTES, 'UTF-8');
 $submitterId = $report['user_id'];
 $reportId = $report['id'];
 $userId = get_user_id();
-
+$geometryType = $report["geometry_type"];
+$selected_feature_id = $report['feature_id'];
 ?>
 
 <div class="single-report">
@@ -49,11 +50,12 @@ $userId = get_user_id();
 
 
     <h3><?php echo nl2br($title); ?> </h3>
-
+   
     <p><strong>Rating:</strong> <?php echo $ratings[$report['rating']]; ?></p>
     <p class="indented larger">
-    <img class="map-icon" src="../assets/images/map-icon-lg.png">
-    <?php echo nl2br($summary); ?></p>
+        <img class="map-icon" src="../assets/images/map-icon-lg.png">
+        <?php echo nl2br($summary); ?>
+    </p>
     <!-- 
     <div class="whitespace-container">
         <div class="vertical-divider"></div>
