@@ -24,7 +24,7 @@ $sql = "SELECT tr.*, f.name AS feature_name,
   INNER JOIN features f ON tr.feature_id = f.id
   INNER JOIN users u ON tr.user_id = u.user_id WHERE tr.active = 1
   ORDER BY tr.created_at DESC
-  LIMIT 8;";
+  LIMIT 6;";
 
 $result = $mysqli->query($sql);
 
