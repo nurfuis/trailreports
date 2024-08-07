@@ -6,15 +6,21 @@ $trail_result = mysqli_query($mysqli, $trail_sql);
 $collections_sql = "SELECT id, name FROM collections LIMIT 16"; // magic number to limit collection filters
 $collections_result = mysqli_query($mysqli, $collections_sql);
 
+$collectionName = "Features";
 
 ?>
 <div class="trail-select regular-padding">
 
     <form action="#app" method="get" id="app" class="trail-select__form">
+
         <input hidden name="collection" value="<?php echo $collection ?>">
 
+
         <label class="no-select" for="trail-select">Select a Feature:</label><select name="feature_id" id="trail-select">
-            <option value="recent"> -- Features -- </option>
+
+
+            <option id="collecions-title" value="recent"> -- <?php echo $collectionName; ?> -- </option>
+
 
             <?php while ($trail = mysqli_fetch_assoc($trail_result)) : ?>
                 <option value="<?php echo $trail['id']; ?>" <?php if (isset($_GET['feature_id']) && $_GET['feature_id'] == $trail['id']) : ?> selected <?php endif; ?>>
@@ -29,15 +35,25 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
                 </option>
             <?php endwhile; ?>
         </select>
+
         <button class="hidden" type="submit">View</button>
     </form>
 
+
+
+
     <div class="advanced">
+
+
         <div>
             <button class="advanced__button--toggle">Filter</button><button class="clear-button">Reset</button>
         </div>
+
+
         <div class="advanced__form-wrapper">
+
             <form class="advanced__form" method="get">
+
                 <?php while ($collection = mysqli_fetch_assoc($collections_result)) : ?>
                     <div class="no-wrap">
                     <input type="radio" name="collection" value="<?php echo $collection['id']; ?>" id="<?php echo $collection['id']; ?>" <?php if (isset($_GET['collection']) && $_GET['collection'] == $collection['id']) : ?> checked <?php endif; ?>>
@@ -50,11 +66,15 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
     </div>
 </div>
 <script>
+    // change selection 
     const trailSelectForm = document.querySelectorAll('.trail-select__form')[0];
     trailSelectForm.addEventListener('change', (event) => {
         trailSelectForm.submit();
+        sessionStorage.removeItem('collectionSelected');
+        optionsWrapper.classList.remove('expanded');
     })
 
+    // change collection
     const optionsForm = document.querySelectorAll('.advanced__form')[0];
     optionsForm.addEventListener('change', (event) => {
         if (event.target.type === 'radio' && event.target.checked) {
@@ -68,6 +88,9 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
 
     optionsButton.addEventListener('click', () => {
         optionsWrapper.classList.toggle('expanded');
+        optionsButton.classList.toggle('active');
+        document.getElementById('app').scrollIntoView();
+
     });
 
     const clearButton = document.querySelector('.clear-button');
@@ -82,5 +105,8 @@ $collections_result = mysqli_query($mysqli, $collections_sql);
     const collectionSelected = sessionStorage.getItem('collectionSelected');
     if (collectionSelected) {
         optionsWrapper.classList.add('expanded');
+        optionsButton.classList.toggle('active');
+        document.getElementById('app').scrollIntoView();
+
     }
 </script>

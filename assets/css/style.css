@@ -467,7 +467,10 @@ button {
   pointer-events: all;
   padding: 1rem;
 }
-
+.advanced__button--toggle.active {
+  border:  3px solid var(--accent);
+  font-weight: 600;
+}
 .advanced__button--toggle {
   text-decoration: none;
 
