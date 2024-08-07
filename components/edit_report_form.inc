@@ -5,7 +5,7 @@ require_once realpath("../components/user_roles.php");
 // $selectedFeature = "";
 $reportId = isset($_GET['id']) ? $_GET['id'] : '';
 
-$sqlFeatures = "SELECT id, name FROM features WHERE collections_id IN (1, 2, 3, 4, 5, 6)";
+$sqlFeatures = "SELECT id, name FROM features WHERE collections_id IN (1, 2, 3, 4, 5, 6, 7, 8)";
 $resultFeatures = $mysqli->query($sqlFeatures);
 
 if (!$resultFeatures) {
