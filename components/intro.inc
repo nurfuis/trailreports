@@ -4,7 +4,7 @@
 
   <p class="fade-out-paragraph">
     <span class="em larger">Help keep our trails open and accessible!</span>
-    Your firsthand knowledge is invaluable. By sharing trail conditions, you are giving back to the outdoor community!<br> <span class="em larger">Use the selector below</span> to find a trail, camp, or other points of interest.
+    Your firsthand knowledge is invaluable. By sharing trail conditions, you are giving back to the outdoor community!<br> <span class="em larger">Use the selector below</span> to find trails, camps, or other points of interest.
   </p>
 </div>
 <script>
