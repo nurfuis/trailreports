@@ -269,7 +269,14 @@ button {
   background-color: var(--light-background);
 
 }
-
+.map-icon {
+  width: 48px;
+  vertical-align: top;
+  margin-right: 1rem;
+}
+.map-icon__wrapper {
+  margin: .5rem;
+}
 .delete {
   font-family: "K2D";
   font-weight: 300;
