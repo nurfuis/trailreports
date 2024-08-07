@@ -457,7 +457,7 @@ button {
   overflow: hidden;
   transform: translateY(-10px);
   pointer-events: none;
-  text-align: justify;
+  text-align: left;
   transition: max-height 0.2s ease-out, transform 0.2s ease-out;
 }
 
