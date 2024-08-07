@@ -564,7 +564,7 @@ h2 {
   background-position: center;
   max-width: 900px;
   box-sizing: border-box;
-  background-image: url("../images/photo-header.png");
+  background-image: url("../images/photo-header.webp");
 }
 
 .index__image img {
