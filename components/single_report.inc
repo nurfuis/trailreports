@@ -42,7 +42,7 @@ $selected_feature_id = $report['feature_id'];
     <div class="slider__header-container">
     </div>
     <div class="map-icon__wrapper">
-        <img class="map-icon" src="../assets/images/map-icon-lg.png">
+        <img class="map-icon" src="../assets/images/map-icon-lg.webp">
     </div>
     <h1>Trail Report</h1>
 
