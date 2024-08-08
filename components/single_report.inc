@@ -47,7 +47,7 @@ $selected_feature_id = $report['feature_id'];
 
 
 
-    <div style="width: 300px" id="map-inset"></div>
+    <div id="map-inset"></div>
 
     <script>
         // const geojsonData = JSON.parse('<?php echo json_encode($geojsonData); ?>');
@@ -122,6 +122,7 @@ $selected_feature_id = $report['feature_id'];
             const parent = element.parentElement;
             return parent.offsetWidth;
         }
+
         var width = getParentWidth('map-inset');
         var height = 200;
 
