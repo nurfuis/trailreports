@@ -569,6 +569,7 @@ h2 {
 #map-inset {
   width: 100%;
   height: 200px;
+  pointer-events: none;
 }
 .index__image img {
   width: 60px;
