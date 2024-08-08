@@ -258,8 +258,9 @@ $geojsonDataPoints = ['type' => 'FeatureCollection', 'features' => $geojsonFeatu
                 mapInset.style.display = 'none';
             }
         });
-        map.fitBounds(L.geoJSON.getBounds());
-        map.setMaxBounds(map.getBounds());
+
+
+        map.setMaxBounds(allBounds);
         // TODO resize map on window resize
     </script>
 
