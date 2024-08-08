@@ -40,19 +40,20 @@ function formatSummaryWithBreaks($summary) {
     $formattedSummary = '';
     $sentenceCount = 0;
     foreach ($sentences as $sentence) {
-      $formattedSummary .= $sentence . '. ';
+      $formattedSummary .= $sentence;
       $sentenceCount++;
   
       if ($sentenceCount % 3 === 0) {
         $formattedSummary .= "<br><br>";
+      } else if ($sentenceCount !== count($sentences)) {
+        $formattedSummary .= ". ";
       }
     }
   
-    // Remove the last extra newlines if necessary
-    $formattedSummary = rtrim($formattedSummary, "<br>");
-  
     return $formattedSummary;
   }
+  
+  
 $formattedSummary = formatSummaryWithBreaks($summary);
 
 $submitterId = $report['user_id'];
