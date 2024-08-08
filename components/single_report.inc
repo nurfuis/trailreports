@@ -47,7 +47,7 @@ $selected_feature_id = $report['feature_id'];
 
 
 
-    <div id="map-inset"></div>
+    <div style="display: none;" id="map-inset"></div>
 
     <script>
         // const geojsonData = JSON.parse('<?php echo json_encode($geojsonData); ?>');
@@ -104,7 +104,7 @@ $selected_feature_id = $report['feature_id'];
         // }).addTo(map);
 
         // point.on("click", function() {
-            // showOverlay();
+        // showOverlay();
         // });
 
         L.control.scale().addTo(map);
@@ -188,6 +188,12 @@ $selected_feature_id = $report['feature_id'];
         //         return popup;
         //     }).addTo(map);
         // });
+        const mapIcon = document.querySelector('.map-icon');
+        const mapInset = document.getElementById('map-inset');
+
+        mapIcon.addEventListener('click', () => {
+            mapInset.style.display = 'block';
+        });
     </script>
     <h2><?php echo $report['feature_name']; ?></h2>
 
