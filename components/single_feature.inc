@@ -77,6 +77,7 @@ if (isset($_GET['feature_id'])) {
     <div>
         <div class="regular-padding">
             <h1><?php echo $feature['name'] ?></h1>
+
             <div id="map-inset"></div>
 
             <!-- Map -->
@@ -131,6 +132,14 @@ if (isset($_GET['feature_id'])) {
                     allBounds.extend(geoJsonLayer.getBounds());
                 });
 
+                var geojsonMarkerOptions = {
+                    radius: 6,
+                    fillColor: "#ff7800",
+                    color: "#000",
+                    weight: 1,
+                    opacity: 1,
+                    fillOpacity: 0.8
+                };
                 // Process features from geojsonDataPoints
                 geojsonDataPoints.features.forEach(feature => {
                     const popup = feature.properties.feature_name;
@@ -241,85 +250,21 @@ if (isset($_GET['feature_id'])) {
             }
 
 
-            // sorting
-            if (isset($_GET['sort-by'])) {
-                $sort_by = $_GET['sort-by'];
-                switch ($sort_by) {
-                    case "recent":
-                        $order_by = "tr.created_at DESC";
-                        break;
-                    case "oldest":
-                        $order_by = "tr.created_at ASC";
-                        break;
-                    case "rating_high":
-                        $order_by = "tr.rating ASC, tr.created_at DESC";
-                        break;
-                    case "rating_low":
-                        $order_by = "tr.rating DESC, tr.created_at DESC";
-                        break;
-                    default:
-                        $order_by = "tr.created_at DESC";
-                }
-            } else {
-                $order_by = "tr.created_at DESC";
-            }
-            $selected_trail = isset($_GET['feature_id']) ? $_GET['feature_id'] : "recent";
-
-            $date_range_sql = "";
-
-            if (isset($_GET['date-range']) && $_GET['date-range'] != "all") {
-                switch ($_GET['date-range']) {
-                    case "day":
-                        $date_range_sql = " AND tr.created_at >= CURDATE() - INTERVAL 1 DAY";
-                        break;
-                    case "week":
-                        $date_range_sql = " AND tr.created_at >= CURDATE() - INTERVAL 1 WEEK";
-                        break;
-                    case "month":
-                        $date_range_sql = " AND tr.created_at >= CURDATE() - INTERVAL 1 MONTH";
-                        break;
-                    case "year":
-                        $date_range_sql = " AND tr.created_at >= CURDATE() - INTERVAL 1 YEAR";
-                        break;
-                    default:
-                        // Handle invalid selection or no selection
-                        break;
-                }
-            }
-
             $sql = "SELECT tr.*, f.name AS trail_name, u.username
             FROM trail_reports tr
             INNER JOIN features f ON tr.feature_id = f.id
             INNER JOIN users u ON tr.user_id = u.user_id
             WHERE f.id = $selected_feature_id AND tr.active = 1";
-
-            if (isset($_GET['filter-by-trail']) && $_GET['filter-by-trail'] != "all") {
-                $selected_trail = $_GET['filter-by-trail'];
-                $sql .= " WHERE tr.feature_id = $selected_trail"; // Filter by trail ID
-            }
-            $sql .= $date_range_sql;
-            $sql .= " ORDER BY $order_by";
-            $sql .= " LIMIT $ITEMS_PER_PAGE;";
             ?>
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    const sortBySelect = document.getElementById("sort-by");
-                    const dateRangeSelect = document.getElementById("date-range");
 
-                    sortBySelect.addEventListener("change", function() {
-                        this.form.submit();
-                    });
-
-                    dateRangeSelect.addEventListener("change", function() {
-                        this.form.submit();
-                    });
-
-                });
-            </script>
-            <p class="hidden"><span>Distance:</span> </p>
-            <p class="hidden"><span>Management Area:</span> <?php echo $feature["management_area_id"]; ?></p>
             <hr>
+
             <h3>Reports:</h3>
+            <div class="nav">
+                <a href="./pages/add_report.php?id=<?php echo $selected_feature_id ?>">
+                    Submit a Report
+                </a>
+            </div>
             <div class="trail-reports regular-padding">
 
                 <?php
