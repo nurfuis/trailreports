@@ -47,7 +47,7 @@ $selected_feature_id = $report['feature_id'];
 
 
 
-    <div style="display: none;" id="map-inset"></div>
+    <!-- <div style="display: none;" id="map-inset"></div>
 
     <script>
         // const geojsonData = JSON.parse('<?php echo json_encode($geojsonData); ?>');
@@ -194,7 +194,7 @@ $selected_feature_id = $report['feature_id'];
         mapIcon.addEventListener('click', () => {
             mapInset.style.display = 'block';
         });
-    </script>
+    </script> -->
     <h2><?php echo $report['feature_name']; ?></h2>
 
     <p><strong>Submitted by:</strong> <?php echo $report['username']; ?></p>
