@@ -33,11 +33,11 @@ $sql = "SELECT ST_AsGeoJSON(geometry) AS geojson, p.feature_id, f.name AS featur
 FROM polylines p
 INNER JOIN features f ON p.feature_id = f.id WHERE p.feature_id = " . $selected_feature_id . ";";
 
-$result = mysqli_query($mysqli, $sql);
+$result_polylines = mysqli_query($mysqli, $sql);
 
 $geojsonFeatures = [];
 
-while ($row = mysqli_fetch_assoc($result)) {
+while ($row = mysqli_fetch_assoc($result_polylines)) {
     $geojsonFeatures[] = [
         'type' => 'Feature',
         'geometry' => json_decode($row['geojson'], true),
