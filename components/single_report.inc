@@ -28,7 +28,32 @@ $updateTimeFormat = date("F j, Y", strtotime($timeUpdated));
 
 $title = htmlspecialchars($report['report_title'], ENT_QUOTES, 'UTF-8');
 
-$summary = htmlspecialchars($report['summary'], ENT_QUOTES, 'UTF-8');
+$summary = $report['summary'];
+
+function formatSummaryWithBreaks($summary) {
+    $summary = htmlspecialchars($summary, ENT_QUOTES, 'UTF-8');
+  
+    // Split the summary into sentences
+    $sentences = explode('. ', $summary);
+  
+    // Rebuild the summary with newlines every third sentence
+    $formattedSummary = '';
+    $sentenceCount = 0;
+    foreach ($sentences as $sentence) {
+      $formattedSummary .= $sentence . '. ';
+      $sentenceCount++;
+  
+      if ($sentenceCount % 3 === 0) {
+        $formattedSummary .= "<br><br>";
+      }
+    }
+  
+    // Remove the last extra newlines if necessary
+    $formattedSummary = rtrim($formattedSummary, "<br>");
+  
+    return $formattedSummary;
+  }
+$formattedSummary = formatSummaryWithBreaks($summary);
 
 $submitterId = $report['user_id'];
 
@@ -317,7 +342,7 @@ $MAP_ZOOM = 13;
 
     <p><strong>Trail Condition:</strong> <?php echo $ratings[$report['rating']]; ?></p>
     <p class="indented larger">
-        <?php echo nl2br($summary); ?>
+        <?php echo nl2br($formattedSummary); ?>
     </p>
 
 </div>
