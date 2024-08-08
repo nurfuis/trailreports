@@ -315,6 +315,8 @@ button {
   right: 0;
   width: 48px;
   margin: 1rem 0.25rem 0 0;
+  transition: transform 0.3s ease-in-out;
+
 }
 
 .map-icon__wrapper {

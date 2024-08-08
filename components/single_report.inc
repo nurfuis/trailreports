@@ -181,10 +181,17 @@ $MAP_ZOOM = 13;
         // After iterating through all features
         map.fitBounds(allBounds);
 
-        const mapIcon = document.querySelector('.map-icon');
+        const compassIcon = document.querySelector('.map-icon');
+
         const mapInset = document.getElementById('map-inset');
 
-        mapIcon.addEventListener('click', () => {});
+        let rotationAngle = 0;
+
+        compassIcon.addEventListener('click', () => {
+            rotationAngle += 360; 
+            compassIcon.style.transform = `rotate(${rotationAngle}deg)`;
+
+        });
 
         map.setMaxBounds(allBounds);
 
