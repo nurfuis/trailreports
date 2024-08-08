@@ -27,7 +27,6 @@ if ($result->num_rows === 1) {
 } else {
     die("Report not found.");
 }
-mysqli_close($mysqli);
 
 if (isset($report)) {
     //$page_title = "Trail Report";
