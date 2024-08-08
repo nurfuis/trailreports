@@ -23,6 +23,10 @@ $reportId = $report['id'];
 $userId = get_user_id();
 $geometryType = $report["geometry_type"];
 $selected_feature_id = $report['feature_id'];
+
+
+// sql
+
 ?>
 
 <div class="single-report">
@@ -47,7 +51,7 @@ $selected_feature_id = $report['feature_id'];
 
 
 
-    <!-- <div style="display: none;" id="map-inset"></div>
+    <div id="map-inset"></div>
 
     <script>
         // const geojsonData = JSON.parse('<?php echo json_encode($geojsonData); ?>');
@@ -96,7 +100,8 @@ $selected_feature_id = $report['feature_id'];
         var map = L.map("map-inset", {
             renderer: L.canvas({
                 tolerance: 8
-            })
+            }),
+            zoomControl: false,
         });
 
         // const point = L.marker([lat, long], {
@@ -107,7 +112,7 @@ $selected_feature_id = $report['feature_id'];
         // showOverlay();
         // });
 
-        L.control.scale().addTo(map);
+        // L.control.scale().addTo(map);
 
         // map.on("load", function() {
         //     setTimeout(function() {
@@ -116,6 +121,7 @@ $selected_feature_id = $report['feature_id'];
         // });
 
         map.setView([lat, long], zoom);
+        map.setMaxBounds(map.getBounds());
 
         function getParentWidth(elementId) {
             const element = document.getElementById(elementId);
@@ -123,7 +129,7 @@ $selected_feature_id = $report['feature_id'];
             return parent.offsetWidth;
         }
 
-        var width = getParentWidth('map-inset');
+        var width = getParentWidth("map-inset");
         var height = 200;
 
         document.getElementById("map-inset").style.width = width * 0.8 + "px";
@@ -131,7 +137,6 @@ $selected_feature_id = $report['feature_id'];
 
         var tileLayer = L.tileLayer("https://tile.opentopomap.org/{z}/{x}/{y}.png", {
             maxZoom: 15,
-            attribution: '&copy; <a href="https://opentopomap.org">OpenTopoMap</a> <span class="source" id="source-span"><span class="source-toggle" id="source-span"> <?php echo $shortSource; ?></span>',
         });
 
         // const sourceSpan = document.getElementById('source-span');
@@ -188,13 +193,18 @@ $selected_feature_id = $report['feature_id'];
         //         return popup;
         //     }).addTo(map);
         // });
+
         const mapIcon = document.querySelector('.map-icon');
         const mapInset = document.getElementById('map-inset');
 
         mapIcon.addEventListener('click', () => {
-            mapInset.style.display = 'block';
+            if (mapInset.style.display == "none") {
+                mapInset.style.display = 'block';
+            } else {
+                mapInset.style.display = 'none';
+            }
         });
-    </script> -->
+    </script>
     <h2><?php echo $report['feature_name']; ?></h2>
 
     <p><strong>Submitted by:</strong> <?php echo $report['username']; ?></p>

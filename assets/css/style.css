@@ -566,7 +566,10 @@ h2 {
   box-sizing: border-box;
   background-image: url("../images/photo-header.webp");
 }
-
+#map-inset {
+  width: 100%;
+  height: 200px;
+}
 .index__image img {
   width: 60px;
 }
