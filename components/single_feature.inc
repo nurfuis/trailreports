@@ -249,10 +249,6 @@ if (isset($_GET['feature_id'])) {
                 mysqli_free_result($point_result);
             }
 
-
-
-            $selected_trail = isset($_GET['feature_id']) ? $_GET['feature_id'] : "recent";
-
             $sql = "SELECT tr.*, f.name AS trail_name, u.username
             FROM trail_reports tr
             INNER JOIN features f ON tr.feature_id = f.id

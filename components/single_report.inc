@@ -81,6 +81,8 @@ while ($row = mysqli_fetch_assoc($result_points)) {
 }
 
 $geojsonDataPoints = ['type' => 'FeatureCollection', 'features' => $geojsonFeatures_points];
+$MAP_ZOOM = 13;
+
 ?>
 
 
@@ -194,7 +196,78 @@ $geojsonDataPoints = ['type' => 'FeatureCollection', 'features' => $geojsonFeatu
             map.invalidateSize();
         });
     </script>
+    <?php
+    if ($geometryType == 'LineString') {
+        $polyline_sql = "SELECT ST_AsText(geometry) AS text_geometry, source FROM polylines WHERE feature_id = $selected_feature_id;";
 
+        $polyline_result = mysqli_query($mysqli, $polyline_sql);
+
+        if (!$polyline_result) {
+            echo "Error: " . mysqli_error($mysqli);
+            exit;
+        }
+
+        $first_polyline = mysqli_fetch_assoc($polyline_result);
+
+        // Continue processing only if a first polyline is found
+        if ($first_polyline) {
+            $points = explode(",", substr($first_polyline['text_geometry'], strpos($first_polyline['text_geometry'], "(") + 1, -1));
+            $source = $first_polyline['source'];
+            $first_point = explode(" ", trim($points[0]));
+            $first_longitude = $first_point[0];
+            $first_latitude = $first_point[1];
+
+            $geometry_string = "$first_longitude, $first_latitude";
+
+            // Create a link to another page with lat, long, and zoom
+            $link_url = "./pages/topo_map.php?name=" . $report['feature_name'] . "&lat=" . $first_latitude . "&long=" . $first_longitude . "&zoom=" . $MAP_ZOOM;
+            if (!empty($source)) {
+                $link_url .= "&source=" . $source;
+            }
+
+            echo '<p><span>Map:</span> <a href="' . $link_url . '">' . $geometry_string . '</a></p>';
+        } else {
+            echo "No polylines found for this feature.";
+        }
+
+
+        while ($polyline = mysqli_fetch_assoc($polyline_result)) {
+            echo '<div class="hidden">';
+            echo "<h4>Segment</h4>";
+            echo "<p>Path: " . $polyline['text_geometry'] . "</p>";
+            echo '</div>';
+        }
+    } elseif ($geometryType == 'Point') {
+        $point_sql = "SELECT ST_AsText(geometry) AS text_geometry FROM points WHERE feature_id = $selected_feature_id;";
+        $point_result = mysqli_query($mysqli, $point_sql);
+
+        if (!$point_result) {
+            echo "Error: " . mysqli_error($mysqli);
+            exit;
+        }
+
+        $first_point = mysqli_fetch_assoc($point_result);
+
+        if ($first_point) {
+            $point_coords = explode(" ", substr($first_point['text_geometry'], strpos($first_point['text_geometry'], "(") + 1, -1));
+
+            $longitude = trim($point_coords[0]);
+            $latitude = trim($point_coords[1]);
+
+
+            $geometry_string = "$longitude, $latitude";
+
+            // Create a link to another page with lat, long, and zoom
+            $link_url = "./pages/topo_map.php?name=" . $report['feature_name'] . "&lat=" . $latitude . "&long=" . $longitude . "&zoom=" . $MAP_ZOOM;
+
+            echo '<p><span>Map:</span> <a href="' . $link_url . '">' . $geometry_string . '</a></p>';
+        } else {
+            echo "No point found for this feature.";
+        }
+
+        mysqli_free_result($point_result);
+    }
+    ?>
     <h2><?php echo $report['feature_name']; ?></h2>
 
     <p><strong>Submitted by:</strong> <?php echo $report['username']; ?></p>
