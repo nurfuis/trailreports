@@ -94,7 +94,8 @@ $MAP_ZOOM = 13;
 
 
     <div class="map-icon__wrapper">
-        <img class="map-icon" src="../assets/images/map-icon-lg.webp">
+        <div class="map-icon__dashes"></div>
+        <img class="map-icon" src="../assets/images/compass-icon.webp">
     </div>
 
 
