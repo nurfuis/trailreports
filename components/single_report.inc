@@ -170,7 +170,6 @@ $geojsonDataPoints = ['type' => 'FeatureCollection', 'features' => $geojsonFeatu
         //     }, 500);
         // });
 
-        map.setView([lat, long], zoom);
 
 
         function getParentWidth(elementId) {
@@ -261,6 +260,8 @@ $geojsonDataPoints = ['type' => 'FeatureCollection', 'features' => $geojsonFeatu
 
 
         map.setMaxBounds(allBounds);
+        // map.setView([lat, long], zoom);
+
         // TODO resize map on window resize
     </script>
 
