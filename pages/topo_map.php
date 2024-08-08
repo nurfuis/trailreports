@@ -116,10 +116,6 @@ $shortSource = substr($source, 0, 12);
         const geojsonData = JSON.parse('<?php echo json_encode($geojsonData); ?>');
         const geojsonDataPoints = JSON.parse('<?php echo json_encode($geojsonDataPoints); ?>');
 
-
-        console.log(geojsonData)
-        console.log(geojsonDataPoints)
-
         function getMapParamsFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
             const lat = parseFloat(urlParams.get("lat"));
@@ -143,16 +139,15 @@ $shortSource = substr($source, 0, 12);
             };
         }
 
-        // ## Leaflet Code ## //
         var redIcon = L.icon({
             iconUrl: '../assets/images/chevron.png',
             shadowUrl: '../assets/images/chevron-shadow.png',
 
-            iconSize: [64, 64], // size of the icon
-            shadowSize: [64, 64], // size of the shadow
-            iconAnchor: [32, 48], // point of the icon which will correspond to marker's location
-            shadowAnchor: [26, 40], // the same for the shadow
-            popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+            iconSize: [64, 64],
+            shadowSize: [64, 64],
+            iconAnchor: [32, 48],
+            shadowAnchor: [26, 40],
+            popupAnchor: [-3, -76]
         });
 
         const {
@@ -185,11 +180,9 @@ $shortSource = substr($source, 0, 12);
 
         map.setView([lat, long], zoom);
 
-        // Get the window width and height
         var width = window.innerWidth || document.documentElement.clientWidth;
         var height = window.innerHeight || document.documentElement.clientHeight;
 
-        // Set the map container size
         document.getElementById("map").style.width = width + "px";
         document.getElementById("map").style.height = height + "px";
 
@@ -197,7 +190,18 @@ $shortSource = substr($source, 0, 12);
             maxZoom: 15,
             attribution: '&copy; <a href="https://opentopomap.org">OpenTopoMap</a> <span class="source" id="source-span"><span class="source-toggle" id="source-span"> <?php echo $shortSource; ?></span>',
         });
+        const sourceSpan = document.getElementById('source-span');
+        const fullSource = '<?php echo $source; ?>';
 
+        sourceSpan.addEventListener('click', function() {
+            if (sourceSpan.textContent.length <= 13) {
+                sourceSpan.textContent = fullSource;
+            } else {
+                sourceSpan.textContent = sourceSpan.textContent.substring(0, 10) + '...';
+            }
+        });
+
+        
         tileLayer.on('load', function() {
             setTimeout(function() {
                 document.getElementById('loading').style.display = 'none';
@@ -255,16 +259,9 @@ $shortSource = substr($source, 0, 12);
         </div>
     </div>
     <script>
-        const sourceSpan = document.getElementById('source-span');
-        const fullSource = '<?php echo $source; ?>'; // Store the full source in a variable
 
-        sourceSpan.addEventListener('click', function() {
-            if (sourceSpan.textContent.length <= 13) {
-                sourceSpan.textContent = fullSource;
-            } else {
-                sourceSpan.textContent = sourceSpan.textContent.substring(0, 10) + '...';
-            }
-        });
+
+
         const overlay = document.querySelectorAll('.overlay')[0];
         const closeButton = document.getElementById('close-overlay');
 
