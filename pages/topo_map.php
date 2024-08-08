@@ -46,6 +46,7 @@ while ($row = mysqli_fetch_assoc($result_points)) {
 
 $geojsonDataPoints = ['type' => 'FeatureCollection', 'features' => $geojsonFeatures_points];
 
+
 $featureName = isset($_GET['name']) ? $_GET['name'] : '';
 $source = isset($_GET['source']) ? $_GET['source'] : '';
 $shortSource = substr($source, 0, 12);

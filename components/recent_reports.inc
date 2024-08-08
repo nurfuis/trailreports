@@ -32,6 +32,7 @@ if (!$result) {
     echo "Error: " . mysqli_error($mysqli);
     exit;
 }
+
 $report = $result->fetch_assoc();
 if (isset($report)) {
     include_once realpath("./components/single_report.inc");

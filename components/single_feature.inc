@@ -30,18 +30,154 @@ if (isset($_GET['feature_id'])) {
         echo "Feature not found.";
         exit;
     }
+
+    $sql = "SELECT ST_AsGeoJSON(geometry) AS geojson, p.feature_id, f.name AS feature_name
+    FROM polylines p
+    INNER JOIN features f ON p.feature_id = f.id WHERE p.feature_id = " . $selected_feature_id . ";";
+
+    $result_polylines = mysqli_query($mysqli, $sql);
+
+    $geojsonFeatures = [];
+
+    while ($row = mysqli_fetch_assoc($result_polylines)) {
+        $geojsonFeatures[] = [
+            'type' => 'Feature',
+            'geometry' => json_decode($row['geojson'], true),
+            'properties' => [
+                'feature_id' => $row['feature_id'],
+                'feature_name' => $row['feature_name']
+            ]
+        ];
+    }
+    $geojsonData = ['type' => 'FeatureCollection', 'features' => $geojsonFeatures];
+
+    $sql_points = "SELECT ST_AsGeoJSON(geometry) AS geojson, p.feature_id, f.name AS feature_name
+    FROM points p
+    INNER JOIN features f ON p.feature_id = f.id WHERE p.feature_id = " . $selected_feature_id . ";";
+
+    $result_points = mysqli_query($mysqli, $sql_points);
+
+
+    $geojsonFeatures_points = [];
+
+    while ($row = mysqli_fetch_assoc($result_points)) {
+        $geojsonFeatures_points[] = [
+            'type' => 'Feature',
+            'geometry' => json_decode($row['geojson'], true),
+            'properties' => [
+                'feature_id' => $row['feature_id'],
+                'feature_name' => $row['feature_name']
+            ]
+        ];
+    }
+
+    $geojsonDataPoints = ['type' => 'FeatureCollection', 'features' => $geojsonFeatures_points];
+
 ?>
     <div>
         <div class="regular-padding">
-            <h2><?php echo $feature['name'] ?></h2>
+            <h1><?php echo $feature['name'] ?></h1>
 
-            <div class="nav">
-                <a href="./pages/add_report.php?id=<?php echo $selected_feature_id ?>">
-                    Submit a Report
-                </a>
-            </div>
+            <div id="map-inset"></div>
+
+            <!-- Map -->
+            <script>
+                const geojsonData = JSON.parse('<?php echo json_encode($geojsonData); ?>');
+                const geojsonDataPoints = JSON.parse('<?php echo json_encode($geojsonDataPoints); ?>');
+
+                var map = L.map("map-inset", {
+                    renderer: L.canvas({
+                        tolerance: 8
+                    }),
+                    zoomControl: false,
+                });
+
+                function getParentWidth(elementId) {
+                    const element = document.getElementById(elementId);
+                    const parent = element.parentElement;
+                    return parent.offsetWidth;
+                }
+
+                const width = getParentWidth("map-inset");
+                const height = 200;
+
+                document.getElementById("map-inset").style.width = width * 0.8 + "px";
+                document.getElementById("map-inset").style.height = height + "px";
+
+
+                var tileLayer = L.tileLayer("https://tile.opentopomap.org/{z}/{x}/{y}.png", {
+                    maxZoom: 15,
+                });
+
+
+                tileLayer.addTo(map);
+
+
+                let allBounds = new L.LatLngBounds([]); // Initialize an empty bounds object
+
+                // Process features from geojsonData
+                geojsonData.features.forEach(feature => {
+                    const popup = feature.properties.feature_name;
+
+                    // Create a GeoJSON layer
+                    const geoJsonLayer = L.geoJSON(feature, {
+                        style: {
+                            color: 'red'
+                        }
+                    }).bindPopup(function(layer) {
+                        return popup;
+                    }).addTo(map);
+
+                    // Extend the existing bounds
+                    allBounds.extend(geoJsonLayer.getBounds());
+                });
+
+                var geojsonMarkerOptions = {
+                    radius: 6,
+                    fillColor: "#ff7800",
+                    color: "#000",
+                    weight: 1,
+                    opacity: 1,
+                    fillOpacity: 0.8
+                };
+                // Process features from geojsonDataPoints
+                geojsonDataPoints.features.forEach(feature => {
+                    const popup = feature.properties.feature_name;
+
+                    // Create a GeoJSON layer
+                    const markerLayer = L.geoJSON(feature, {
+                        pointToLayer: function(feature, latlng) {
+                            return L.circleMarker(latlng, geojsonMarkerOptions);
+                        }
+                    }).bindPopup(function(layer) {
+                        return popup;
+                    }).addTo(map);
+
+                    // Extend the existing bounds
+                    allBounds.extend(markerLayer.getBounds());
+                });
+
+                // After iterating through all features
+                map.fitBounds(allBounds);
+                const mapIcon = document.querySelector('.map-icon');
+                const mapInset = document.getElementById('map-inset');
+
+                mapIcon.addEventListener('click', () => {});
+
+                map.setMaxBounds(allBounds);
+
+                window.addEventListener('resize', () => {
+                    const mapContainer = document.getElementById('map-inset');
+                    mapContainer.style.width = '80%';
+                    mapContainer.style.height = '200px';
+
+                    map.invalidateSize();
+                });
+            </script>
+
 
             <?php
+            // map points
             if ($feature['geometry_type'] == 'LineString') {
                 $polyline_sql = "SELECT ST_AsText(geometry) AS text_geometry, source FROM polylines WHERE feature_id = $selected_feature_id;";
 
@@ -95,10 +231,10 @@ if (isset($_GET['feature_id'])) {
 
                 if ($first_point) {
                     $point_coords = explode(" ", substr($first_point['text_geometry'], strpos($first_point['text_geometry'], "(") + 1, -1));
-                    
+
                     $longitude = trim($point_coords[0]);
                     $latitude = trim($point_coords[1]);
-                    
+
 
                     $geometry_string = "$longitude, $latitude";
 
@@ -113,123 +249,24 @@ if (isset($_GET['feature_id'])) {
                 mysqli_free_result($point_result);
             }
 
-            if (isset($_GET['sort-by'])) {
-                $sort_by = $_GET['sort-by'];
-                switch ($sort_by) {
-                    case "recent":
-                        $order_by = "tr.created_at DESC";
-                        break;
-                    case "oldest":
-                        $order_by = "tr.created_at ASC";
-                        break;
-                    case "rating_high":
-                        $order_by = "tr.rating ASC, tr.created_at DESC";
-                        break;
-                    case "rating_low":
-                        $order_by = "tr.rating DESC, tr.created_at DESC";
-                        break;
-                    default:
-                        $order_by = "tr.created_at DESC";
-                }
-            } else {
-                $order_by = "tr.created_at DESC";
-            }
+
+
             $selected_trail = isset($_GET['feature_id']) ? $_GET['feature_id'] : "recent";
-
-            $date_range_sql = "";
-
-            if (isset($_GET['date-range']) && $_GET['date-range'] != "all") {
-                switch ($_GET['date-range']) {
-                    case "day":
-                        $date_range_sql = " AND tr.created_at >= CURDATE() - INTERVAL 1 DAY";
-                        break;
-                    case "week":
-                        $date_range_sql = " AND tr.created_at >= CURDATE() - INTERVAL 1 WEEK";
-                        break;
-                    case "month":
-                        $date_range_sql = " AND tr.created_at >= CURDATE() - INTERVAL 1 MONTH";
-                        break;
-                    case "year":
-                        $date_range_sql = " AND tr.created_at >= CURDATE() - INTERVAL 1 YEAR";
-                        break;
-                    default:
-                        // Handle invalid selection or no selection
-                        break;
-                }
-            }
 
             $sql = "SELECT tr.*, f.name AS trail_name, u.username
             FROM trail_reports tr
             INNER JOIN features f ON tr.feature_id = f.id
             INNER JOIN users u ON tr.user_id = u.user_id
             WHERE f.id = $selected_feature_id AND tr.active = 1";
-
-            if (isset($_GET['filter-by-trail']) && $_GET['filter-by-trail'] != "all") {
-                $selected_trail = $_GET['filter-by-trail'];
-                $sql .= " WHERE tr.feature_id = $selected_trail"; // Filter by trail ID
-            }
-            $sql .= $date_range_sql;
-            $sql .= " ORDER BY $order_by";
-            $sql .= " LIMIT $ITEMS_PER_PAGE;";
             ?>
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    const sortBySelect = document.getElementById("sort-by");
-                    const dateRangeSelect = document.getElementById("date-range");
 
-                    sortBySelect.addEventListener("change", function() {
-                        this.form.submit();
-                    });
-
-                    dateRangeSelect.addEventListener("change", function() {
-                        this.form.submit();
-                    });
-
-                });
-            </script>
-            <p class="hidden"><span>Distance:</span> </p>
-            <p class="hidden"><span>Management Area:</span> <?php echo $feature["management_area_id"]; ?></p>
             <hr>
-            <h3>Reports:</h3>
-            <div>
-                <form action="" method="get">
-                    <input type='hidden' name='feature_id' value='<?php echo $selected_feature_id ?>'>
-                    <div class="hidden">
-                        <label for="sort-by">Sort By:</label>
-                        <select name="sort-by" id="sort-by">
-                            <option value="recent" <?php if ($order_by == "tr.created_at DESC")
-                                                        echo "selected"; ?>>Most Recent
-                            </option>
-                            <option value="oldest" <?php if ($order_by == "tr.created_at ASC")
-                                                        echo "selected"; ?>>Oldest First
-                            </option>
-                            <option value="rating_high" <?php if ($order_by == "tr.rating ASC, tr.created_at DESC")
-                                                            echo "selected"; ?>>
-                                Rating
-                                (High to Low)
-                            </option>
-                            <option value="rating_low" <?php if ($order_by == "tr.rating DESC, tr.created_at DESC")
-                                                            echo "selected"; ?>>Rating
-                                (Low to High)
-                            </option>
-                        </select>
-                    </div>
-                    <div class="hidden">
-                        <label for="date-range">Date Range:</label>
 
-                        <select name="date-range" id="date-range">
-                            <option value="all" <?php echo (isset($_GET['date-range']) && $_GET['date-range'] == "all") ? "selected" : ""; ?>>
-                                All Time</option>
-                            <option value="day" <?php echo (isset($_GET['date-range']) && $_GET['date-range'] == "day") ? "selected" : ""; ?>>
-                                Past Day</option>
-                            <option value="week" <?php echo (isset($_GET['date-range']) && $_GET['date-range'] == "week") ? "selected" : ""; ?>>
-                                Past Week</option>
-                            <option value="month" <?php echo (isset($_GET['date-range']) && $_GET['date-range'] == "month") ? "selected" : ""; ?>>Past Month</option>
-                            <option value="year" <?php echo (isset($_GET['date-range']) && $_GET['date-range'] == "year") ? "selected" : ""; ?>>
-                                Past Year</option>
-                        </select>
-                    </div>
-                </form>
+            <h3>Reports:</h3>
+            <div class="nav">
+                <a href="./pages/add_report.php?id=<?php echo $selected_feature_id ?>">
+                    Submit a Report
+                </a>
             </div>
             <div class="trail-reports regular-padding">
 
