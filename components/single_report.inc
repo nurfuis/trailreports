@@ -264,7 +264,7 @@ $MAP_ZOOM = 13;
                 $link_url .= "&source=" . $source;
             }
 
-            echo '<p><span>Map:</span> <a href="' . $link_url . '">' . $geometry_string . '</a></p>';
+            echo '<p><a href="' . $link_url . '"><span>Open Trail Map</span></a></p>';
         } else {
             echo "No polylines found for this feature.";
         }
@@ -299,7 +299,7 @@ $MAP_ZOOM = 13;
             // Create a link to another page with lat, long, and zoom
             $link_url = "./pages/topo_map.php?name=" . $report['feature_name'] . "&lat=" . $latitude . "&long=" . $longitude . "&zoom=" . $MAP_ZOOM;
 
-            echo '<p><span>Map:</span> <a href="' . $link_url . '">' . $geometry_string . '</a></p>';
+            echo '<p><a href="' . $link_url . '"><span>Open Trail Map</span> </a></p>';
         } else {
             echo "No point found for this feature.";
         }
@@ -315,7 +315,7 @@ $MAP_ZOOM = 13;
 
     <h3><?php echo nl2br($title); ?> </h3>
 
-    <p><strong>Rating:</strong> <?php echo $ratings[$report['rating']]; ?></p>
+    <p><strong>Trail Condition:</strong> <?php echo $ratings[$report['rating']]; ?></p>
     <p class="indented larger">
         <?php echo nl2br($summary); ?>
     </p>

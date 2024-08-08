@@ -206,7 +206,7 @@ if (isset($_GET['feature_id'])) {
                         $link_url .= "&source=" . $source;
                     }
 
-                    echo '<p><span>Map:</span> <a href="' . $link_url . '">' . $geometry_string . '</a></p>';
+                    echo '<p><a href="' . $link_url . '"><span>Open Trail Map</span> </a></p>';
                 } else {
                     echo "No polylines found for this feature.";
                 }
@@ -241,7 +241,7 @@ if (isset($_GET['feature_id'])) {
                     // Create a link to another page with lat, long, and zoom
                     $link_url = "./pages/topo_map.php?name=" . $feature['name'] . "&lat=" . $latitude . "&long=" . $longitude . "&zoom=" . $MAP_ZOOM;
 
-                    echo '<p><span>Map:</span> <a href="' . $link_url . '">' . $geometry_string . '</a></p>';
+                    echo '<p><a href="' . $link_url . '"><span>Open Trail Map</span> </a></p>';
                 } else {
                     echo "No point found for this feature.";
                 }
