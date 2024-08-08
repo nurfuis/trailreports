@@ -118,11 +118,11 @@ $geojsonDataPoints = ['type' => 'FeatureCollection', 'features' => $geojsonFeatu
             return parent.offsetWidth;
         }
 
-        const width = getParentWidth("map-inset");
-        const height = 200;
+        // const width = getParentWidth("map-inset");
+        // const height = 200;
 
-        document.getElementById("map-inset").style.width = width * 0.8 + "px";
-        document.getElementById("map-inset").style.height = height + "px";
+        // document.getElementById("map-inset").style.width = width * 0.8 + "px";
+        // document.getElementById("map-inset").style.height = height + "px";
 
 
         var tileLayer = L.tileLayer("https://tile.opentopomap.org/{z}/{x}/{y}.png", {
