@@ -251,13 +251,7 @@ $geojsonDataPoints = ['type' => 'FeatureCollection', 'features' => $geojsonFeatu
         const mapInset = document.getElementById('map-inset');
 
         mapIcon.addEventListener('click', () => {
-            if (mapInset.style.display == "none") {
-                mapInset.style.display = 'block';
-            } else {
-                mapInset.style.display = 'none';
-            }
         });
-
 
         map.setMaxBounds(allBounds);
         // map.setView([lat, long], zoom);
