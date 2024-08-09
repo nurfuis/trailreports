@@ -10,6 +10,6 @@
     </div>
     <div class="indent-wide">
         <h3>Share and Read the Latest Trail Conditions:</h3>
-        <p>Submit a trail report to help others access and enjoy the underused portions of Big Sur.  In contrast to a few locations that nearly every visitor must see, much of the area sees few to no visitors.</p><p><span class="em">Many of these locations are lost, overgrown, or inaccessible.</span></p><p><span class="em">Many more are facing an immediate risk of being lost due to lack of use, absence of oversight, the changing climate, and political opposition to their existence.</span></p>
+        <p>Submit a trail report to help others access and enjoy the outdoors. Discover underused, less travvelled, off the beaten path, and forgotten destinations in Big Sur.  In contrast to a few locations that nearly every visitor must see, much of the area sees few to no visitors.</p><p><span class="em">Many of these locations are lost, overgrown, or inaccessible.</span></p><p><span class="em">Many more are facing an immediate risk of being lost due to lack of use, absence of oversight, the changing climate, and political opposition to their existence.</span></p>
     </div>
 </div>
