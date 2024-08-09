@@ -117,8 +117,7 @@ $shortSource = substr($source, 0, 12);
         const geojsonData = JSON.parse('<?php echo json_encode($geojsonData); ?>');
         const geojsonDataPoints = JSON.parse('<?php echo json_encode($geojsonDataPoints); ?>');
 
-
-
+        let selectedFeature = false;
 
         function getMapParamsFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -135,7 +134,7 @@ $shortSource = substr($source, 0, 12);
                     zoom: 11
                 };
             }
-
+            selectedFeature = true;
             return {
                 lat,
                 long,
@@ -167,13 +166,19 @@ $shortSource = substr($source, 0, 12);
             })
         });
 
-        const point = L.marker([lat, long], {
-            icon: redIcon
-        }).addTo(map);
+        console.log(selectedFeature)
 
-        point.on("click", function() {
-            showOverlay();
-        });
+        if (selectedFeature) {
+
+            const point = L.marker([lat, long], {
+                icon: redIcon
+            }).addTo(map);
+
+            point.on("click", function() {
+                showOverlay();
+            });
+
+        }
 
         L.control.scale().addTo(map);
 
@@ -242,6 +247,8 @@ $shortSource = substr($source, 0, 12);
         });
     </script>
 
+
+
     <div class="overlay">
         <div>
             <h2><?php echo $featureName; ?></h2>
@@ -254,6 +261,9 @@ $shortSource = substr($source, 0, 12);
             <button id="close-overlay">Hide</button>
         </div>
     </div>
+
+
+
     <script>
         const sourceSpan = document.getElementById('source-span');
         const fullSource = '<?php echo $source; ?>'; // Store the full source in a variable
@@ -265,6 +275,8 @@ $shortSource = substr($source, 0, 12);
                 sourceSpan.textContent = sourceSpan.textContent.substring(0, 10) + '...';
             }
         });
+
+
         const overlay = document.querySelectorAll('.overlay')[0];
         const closeButton = document.getElementById('close-overlay');
 
@@ -275,7 +287,6 @@ $shortSource = substr($source, 0, 12);
         function hideOverlay() {
             overlay.style.display = 'none';
         }
-        showOverlay();
         closeButton.addEventListener('click', hideOverlay);
     </script>
 </body>

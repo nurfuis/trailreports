@@ -2,7 +2,7 @@
 session_start();
 
 
-$page_title = "Add report";
+$page_title = "Submit a Trail Report";
 $stylesheet = "../assets/css/style.css";
 $currentPagePath = $_SERVER['REQUEST_URI'];
 

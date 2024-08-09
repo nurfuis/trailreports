@@ -30,12 +30,12 @@
   </div>
 
   <div class="dropdown" data-dropdown>
-    <button class="dropdown__link" data-dropdown-button>Reports</button>
+    <button class="dropdown__link" data-dropdown-button>Menu</button>
     <div class="dropdown__menu dropdown__link-grid">
       <a href="./pages/display_reports.php" class="dropdown__link">All Reports</a>
       <a href="./pages/add_report.php" class="dropdown__link">Submit a Report</a>
       <a href="./pages/features.php" class="dropdown__link hidden">Index</a>
-      <a href="./pages/topo_map.php" class="dropdown__link hidden">Topo Map</a>
+      <a href="./pages/topo_map.php" class="dropdown__link">Trail Map</a>
     </div>
   </div>
 

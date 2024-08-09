@@ -2,7 +2,7 @@
 session_start();
 require_once realpath("../../db_connect.php");
 
-$page_title = "Trail Reports";
+$page_title = "Trail Conditions";
 $stylesheet = "../assets/css/style.css";
 $BLURB_LIMIT = 500;
 
