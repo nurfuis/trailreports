@@ -591,10 +591,11 @@ h2 {
   border-radius: 2rem;
 }
 .narrow div {
-  margin: 4rem;
+  margin: 3rem 1rem;
+  
 }
 .narrow {
-  width: 80%;
+  width: 90%;
 }
 #map-inset {
   width: 100%;
