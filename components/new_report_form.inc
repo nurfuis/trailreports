@@ -2,7 +2,7 @@
 require_once realpath("../../db_connect.php");
 
 $selectedFeature = "";
-$sqlFeatures = "SELECT id, name FROM features WHERE collections_id IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16) ORDER BY name ASC;";
+$sqlFeatures = "SELECT id, name FROM features ORDER BY name ASC;";
 $resultFeatures = $mysqli->query($sqlFeatures);
 if (!$resultFeatures) {
     die("Error retrieving features: " . $mysqli->error);
@@ -10,6 +10,8 @@ if (!$resultFeatures) {
 ?>
 <div class="trail-report__form">
     <h1>New Report</h1>
+
+
     <h2>Submit to Collection</h2>
 
     <form action="process_new_report.php" method="post">
@@ -23,11 +25,11 @@ if (!$resultFeatures) {
             <option value="">-- Select Trail --</option>
             <?php
             // Check if a trail ID is present in the URL parameter
-            $selectedTrailId = isset($_GET['id']) ? $_GET['id'] : '';
+            $selected_feature_id = isset($_GET['id']) ? $_GET['id'] : '';
 
             while ($row = $resultFeatures->fetch_assoc()):
                 ?>
-                <option value="<?php echo $row["id"]; ?>" <?php echo ($selectedTrailId == $row["id"]) ? 'selected' : ''; ?>>
+                <option value="<?php echo $row["id"]; ?>" <?php echo ($selected_feature_id == $row["id"]) ? 'selected' : ''; ?>>
                     <?php
 
                     $shortenedName = substr($row['name'], 0, 34);

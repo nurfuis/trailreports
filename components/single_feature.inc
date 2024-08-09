@@ -1,6 +1,4 @@
 <?php
-$current_page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-
 $ITEMS_PER_PAGE = 5;
 $BLURB_LIMIT = 200;
 $MAP_ZOOM = 13;
@@ -283,7 +281,7 @@ if (isset($_GET['feature_id'])) {
                     $is_descending = ($order_by === "tr.created_at DESC" || $order_by === "tr.rating ASC, tr.created_at DESC");
                     $count = 1;
                     while ($report = mysqli_fetch_assoc($result)) {
-                        $reportNumber = ($is_descending) ? ($current_page - 1) * $ITEMS_PER_PAGE + $count : ($total_reports - ($current_page - 1) * $ITEMS_PER_PAGE - $count + 1);
+                        $reportNumber = $count;
                         $count++;
 
                         $isUpdated = $report['time_updated'] !== $report['created_at']; // Check if updated time is different
