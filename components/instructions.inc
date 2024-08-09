@@ -18,6 +18,6 @@
             <p>Share your trail experiences and help others discover underutilized, off-the-beaten-path locations in Big Sur. Many of these special places are at risk due to lack of use, neglect, extreme weather, and opposition to their preservation.</p>
         </div>
     </div>
-    <hr>
+    <!-- <hr> -->
     <p><span class="em">Read the latest trail conditions from our community</span></p>
 </div>

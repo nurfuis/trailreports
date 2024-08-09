@@ -566,11 +566,15 @@ h2 {
   border-radius: 2rem;
 }
 .margin-tall{
-  margin: 6rem 1rem;
+  margin: 16rem 1rem;
+  line-height: 2;
   
 }
 .narrow {
-  width: 90%;
+  width: 85%;
+  border-left: 1px dashed var(--accent);
+
+  border-right: 1px dashed var(--accent);
 }
 #map-inset {
   width: 100%;
