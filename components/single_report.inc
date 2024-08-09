@@ -114,10 +114,7 @@ $MAP_ZOOM = 13;
 
 <div class="single-report">
 
-    <div class="map-icon__wrapper">
-        <div class="map-icon__dashes"></div>
-        <img class="map-icon" src="../assets/images/compass-icon.webp">
-    </div>
+
 
 
     <h1>Trail Report</h1>
@@ -204,48 +201,7 @@ $MAP_ZOOM = 13;
         map.fitBounds(allBounds);
 
         const mapInset = document.getElementById('map-inset');
-        
-        
-        const compassIcon = document.querySelector('.map-icon');
-        let rocking = false; // Flag to track rocking state
-        let rotationAngle = 0;
-        compassIcon.addEventListener('click', () => {
-            // Randomly choose rotation direction
-            const direction = Math.random() < 0.5 ? -1 : 1; // -1 for clockwise, 1 for counter-clockwise
-
-            // Randomize rotation amount (less than 360 for rocking)
-            const randomRotation = Math.random() * 45; // Adjust for desired oscillation range (e.g., 10-30 degrees)
-
-            // Update rotation angle with direction and randomness
-            rotationAngle += direction * randomRotation;
-
-            // Start or stop rocking animation
-            rocking = !rocking;
-
-            // Apply rotation and rocking animation
-            compassIcon.style.transform = `rotate(${rotationAngle}deg)`;
-            if (rocking) {
-                rockAnimation(); // Start rocking animation
-            } else {
-                // Optionally add a reset animation after rocking stops
-                resetAnimation(); // (Optional) Add a reset animation if desired
-            }
-        });
-
-        function rockAnimation() {
-            // Define rocking animation logic
-            // Here's a basic example for illustration:
-            let rockingAngle = 0;
-            const rockingInterval = setInterval(() => {
-                rockingAngle = Math.sin(Date.now() / 100) * 5; // Adjust for rocking intensity (e.g., 2-5 degrees)
-                compassIcon.style.transform = `rotate(${rotationAngle + rockingAngle}deg)`;
-                if (Math.abs(rockingAngle) < 0.1) { // Adjust threshold for stopping rocking
-                    clearInterval(rockingInterval);
-                    rocking = false; // Reset rocking state
-                }
-            }, 20); // Adjust interval for rocking speed (e.g., 10-30 milliseconds)
-        }
-
+                
         map.setMaxBounds(allBounds);
 
         window.addEventListener('resize', () => {
