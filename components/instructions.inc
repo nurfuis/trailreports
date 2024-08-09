@@ -7,7 +7,7 @@
 
     <div class="indent-wide border-box-round regular-padding">
         <h3>Explore the Trail Map</h3>
-        <p>Open the trail map to quickly locate trails and explore the surrounding area.</p>
+        <p>Use the trail map to quickly locate trails and explore the surrounding area.</p>
     </div>
     <div class="indent-wide border-box-round regular-padding">
         <h3>Discover Hidden Gems</h3>
