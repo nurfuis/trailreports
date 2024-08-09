@@ -2,7 +2,7 @@
 <div class="regular-padding narrow">
     <div class="indent-wide border-box-round regular-padding">
         <h3>Find Your Place</h3>
-        <p>Use the dropdown menu to find a feature in Big Sur, including California State Parks, Los Padres National Forest, Monterey District, the Ventana Wilderness, and other noteworthy locations.</p>
+        <p>Use the dropdown menu to find a feature in Big Sur, including California State Parks, Los Padres National Forest Monterey District, the Ventana Wilderness, and other noteworthy locations.</p>
     </div>
 
     <div class="indent-wide border-box-round regular-padding">
