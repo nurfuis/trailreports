@@ -582,7 +582,7 @@ h2 {
   height: 400px;
   background-image: url('../images/photo-header.webp');
   background-attachment: fixed;
-  background-size: auto;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -592,7 +592,7 @@ h2 {
   height: 400px;
   background-image: url('../images/winter.webp');
   background-attachment: fixed;
-  background-size: auto
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -602,7 +602,7 @@ h2 {
   height: 400px;
   background-image: url('../images/solstice.webp');
   background-attachment: fixed;
-  background-size: auto;
+  background-size: cover;;
   background-repeat: no-repeat;
   background-position: center;
 }
