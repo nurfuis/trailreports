@@ -40,18 +40,18 @@ function formatSummaryWithBreaks($summary) {
     $formattedSummary = '';
     $sentenceCount = 0;
     foreach ($sentences as $sentence) {
-      $formattedSummary .= $sentence;
+      $formattedSummary .= $sentence . '. ';
       $sentenceCount++;
   
       if ($sentenceCount % 3 === 0) {
         $formattedSummary .= "<br><br>";
-      } else if ($sentenceCount !== count($sentences)) {
-        $formattedSummary .= ". ";
       }
     }
   
-    return $formattedSummary;
+    // Ensure the last period and space are removed
+    return substr($formattedSummary, 0, -2);
   }
+  
   
   
 $formattedSummary = formatSummaryWithBreaks($summary);
