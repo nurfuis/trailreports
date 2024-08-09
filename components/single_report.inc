@@ -114,11 +114,6 @@ $MAP_ZOOM = 13;
 
 <div class="single-report">
 
-    <?php if ($userId == $submitterId || is_admin()) : ?>
-        <a class="small-button" href="/pages/edit_report.php?id=<?php echo $reportId; ?>"><span>Edit</span></a>
-    <?php endif; ?>
-
-
     <div class="map-icon__wrapper">
         <div class="map-icon__dashes"></div>
         <img class="map-icon" src="../assets/images/compass-icon.webp">
@@ -345,5 +340,7 @@ $MAP_ZOOM = 13;
     <p class="indented larger">
         <?php echo nl2br($formattedSummary); ?>
     </p>
-
+    <?php if ($userId == $submitterId || is_admin()) : ?>
+        <a class="small-button" href="/pages/edit_report.php?id=<?php echo $reportId; ?>"><span>Edit</span></a>
+    <?php endif; ?>
 </div>
