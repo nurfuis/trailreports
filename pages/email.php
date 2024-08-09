@@ -12,13 +12,12 @@ include_once realpath("../layouts/wide.inc");
 <div class="regular-padding">
   <h2>Join Our Trail Reporting Community</h2>
   <p>
-    To ensure the quality and credibility of trail reports on our platform, we
-    highly recommend verifying your email address. We take your privacy seriously and will never
+    We take your privacy seriously and will never
     sell or share your information with third parties. Your email will not be used
-    to identify you on the website. </p>
-  <p>You will only recieve emails in response to a request
-    for verification, login, or a password change. This is to
-    securely manage access to your account.
+    to identify you on the website.</p>
+  <p>You will only recieve emails to
+    securely manage access to your account including a request
+    for verification, login, or a password change. This step may be completed later.
   </p>
 
   <?php
@@ -44,10 +43,10 @@ include_once realpath("../layouts/wide.inc");
     document.getElementById("skip-verification-alert").style.display = "block";
     document.getElementById("skip-button").style.display = "none";
   }
+
   function continueWithoutEmail() {
     // Redirect to next page
-    console.log(<?php echo 1; ?>
-    );
+    console.log(<?php echo 1; ?>);
     window.location.href = "<?php echo $currentPagePath; ?>";
   }
 </script>
