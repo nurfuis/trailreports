@@ -312,7 +312,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
 
       echo "  <p><span>" . $postedOnText . "</span> " . $formattedTime . "</p>";
 
-      echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
+      echo "  <p><span>Trail Condition:</span> " . $ratings[$report['rating']] . "</p>";
 
 
       echo "  <p class='indented'>" . nl2br($summary);

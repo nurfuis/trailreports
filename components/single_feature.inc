@@ -302,7 +302,7 @@ if (isset($_GET['feature_id'])) {
                         echo "  <h5><a href='./pages/trail_report.php?id=" . $report['id'] . "'>" . htmlspecialchars($report['title'], ENT_QUOTES, 'UTF-8') . "</a></h5>";
                         echo "  <p><span>Submitted by:</span> " . $report['username'] . "</p>";
                         echo "  <p><span>" . $postedOnText . "</span> " . $formattedTime . "</p>";
-                        echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
+                        echo "  <p><span>Trail Condition:</span> " . $ratings[$report['rating']] . "</p>";
                         echo "  <p class='indented'>" . nl2br($summary);
                         if ($showReadMore) : ?>
                             <a href="./pages/trail_report.php?id=<?php echo $report['id']; ?>" class="read-more-btn">read more</a>

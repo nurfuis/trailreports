@@ -282,7 +282,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') {
             $formattedTime = date("F j, Y", strtotime($time));
             echo "  <p><span>" . $postedOnText . "</span> " . $formattedTime . "</p>";
 
-            echo "  <p><span>Rating:</span> " . $ratings[$report['rating']] . "</p>";
+            echo "  <p><span>Trail Condition:</span> " . $ratings[$report['rating']] . "</p>";
 
             $summary = htmlspecialchars($report['summary'], ENT_QUOTES, 'UTF-8');
 
