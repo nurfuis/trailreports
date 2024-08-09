@@ -582,7 +582,12 @@ h2 {
   box-sizing: border-box;
   background-image: url("../images/photo-header.webp");
 }
-
+.indent-wide {
+  margin-left: 3rem;
+}
+.narrow {
+  width: 70%;
+}
 #map-inset {
   width: 100%;
   height: 200px;

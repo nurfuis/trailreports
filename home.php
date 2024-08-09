@@ -41,12 +41,15 @@ include_once realpath("./components/single_select_form.inc");
 if (isset($_GET['feature_id'])) {
     $selected_feature_id = $_GET['feature_id'];
     if ($selected_feature_id == 'recent') {
+
         include_once realpath("./components/recent_reports.inc");
 
     } else {
         include_once realpath("./components/single_feature.inc");
     }
 } else {
+    include_once realpath("./components/instructions.inc");
+
     include_once realpath("./components/recent_reports.inc");
 }
 
