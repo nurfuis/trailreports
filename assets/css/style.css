@@ -584,9 +584,17 @@ h2 {
 }
 .indent-wide {
   margin-left: 3rem;
+
+}
+.border-box-round {
+  border: 1px solid var(--accent);
+  border-radius: 2rem;
+}
+.narrow div {
+  margin: 4rem;
 }
 .narrow {
-  width: 70%;
+  width: 80%;
 }
 #map-inset {
   width: 100%;
