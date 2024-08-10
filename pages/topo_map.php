@@ -62,9 +62,6 @@ $shortSource = substr($source, 0, 12);
     <title>Trail Map<?php echo " " . $featureName; ?> </title>
     <link rel="icon" href="/favicon.png" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/style.css" />
 
     <!-- Leaflet Code -->
