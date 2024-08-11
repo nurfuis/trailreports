@@ -210,12 +210,12 @@ if (isset($_GET['feature_id'])) {
                 }
 
 
-                while ($polyline = mysqli_fetch_assoc($polyline_result)) {
-                    echo '<div class="hidden">';
-                    echo "<h4>Segment</h4>";
-                    echo "<p>Path: " . $polyline['text_geometry'] . "</p>";
-                    echo '</div>';
-                }
+                // while ($polyline = mysqli_fetch_assoc($polyline_result)) {
+                //     echo '<div class="hidden">';
+                //     echo "<h4>Segment</h4>";
+                //     echo "<p>Path: " . $polyline['text_geometry'] . "</p>";
+                //     echo '</div>';
+                // }
             } elseif ($feature['geometry_type'] == 'Point') {
                 $point_sql = "SELECT ST_AsText(geometry) AS text_geometry FROM points WHERE feature_id = $selected_feature_id;";
                 $point_result = mysqli_query($mysqli, $point_sql);
@@ -252,7 +252,7 @@ if (isset($_GET['feature_id'])) {
             FROM trail_reports tr
             INNER JOIN features f ON tr.feature_id = f.id
             INNER JOIN users u ON tr.user_id = u.user_id
-            WHERE f.id = $selected_feature_id AND tr.active = 1";
+            WHERE f.id = $selected_feature_id AND tr.active = 1 ORDER BY tr.created_at DESC";
             ?>
 
             <hr>
