@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     echo '<p>' . $user_id . ' was set to inactive.</p>';
   }
+  
   if ($_POST['pw_reset'] == "1") {
     $new_password = mysqli_real_escape_string($mysqli, trim($_POST['new_password']));
 
