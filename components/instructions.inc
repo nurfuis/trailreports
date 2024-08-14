@@ -1,10 +1,13 @@
 <div class="regular-padding">
 
     <div class="regular-padding narrow">
+
+        <div class="scroll-text">scroll</div>
+
         <div class="p1"></div>
 
 
-        <div class="indent-wide margin-tall border-box-round regular-padding">
+        <div class="indent-wide margin-tall-first border-box-round regular-padding">
 
             <h3>Find Your Place</h3>
 
