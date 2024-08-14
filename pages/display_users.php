@@ -13,15 +13,40 @@ include_once realpath("../layouts/wide.inc"); // An open div with layout class
 $show_inactive = isset($_GET['show_inactive']) && $_GET['show_inactive'] == 'on';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $user_id = $_POST['user_id'];
+  $user_id = mysqli_real_escape_string($mysqli, trim($_POST['user_id']));
 
-  $sql = "UPDATE users SET account_status = 'inactive' WHERE user_id = ?";
-  $stmt = mysqli_prepare($mysqli, $sql);
-  mysqli_stmt_bind_param($stmt, "i", $user_id);
-  mysqli_stmt_execute($stmt);
-  mysqli_stmt_close($stmt);
+  if ($_POST['status'] == "inactive") {
+    $sql = "UPDATE users SET account_status = 'inactive' WHERE user_id = ?";
+    $stmt = mysqli_prepare($mysqli, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $user_id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
 
-  echo '<p>' . $user_id . ' was set to inactive.</p>';
+    echo '<p>' . $user_id . ' was set to inactive.</p>';
+  }
+  if ($_POST['pw_reset'] == "1") {
+    $new_password = mysqli_real_escape_string($mysqli, trim($_POST['new_password']));
+
+    $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+
+    $sql = "UPDATE users SET password_hash = ?, reset_token = NULL, reset_token_expiry = NULL, login_attempts = 0 WHERE user_id = ?";
+
+    $stmt = mysqli_prepare($mysqli, $sql);
+
+    mysqli_stmt_bind_param($stmt, "si", $hashed_password, $user_id);
+
+    if (mysqli_stmt_execute($stmt)) {
+?>
+
+<?php
+      echo "Password updated successfully.";
+    } else {
+      echo "Failed to update password: " . mysqli_stmt_error($stmt);
+    }
+    mysqli_stmt_close($stmt);
+
+    echo '<p>' . $user_id . ' pw was set to:</p>' . $_POST['new_password'];
+  }
 }
 
 
@@ -48,8 +73,19 @@ if (!$result) {
 </form><br><br>
 <form method="post" action="">
   <input type="text" name="user_id" placeholder="Enter User ID">
+  <input name="status" value="inactive" type="hidden">
+
   <button type="submit">Set to Inactive</button>
 </form>
+
+
+<form method="post" action="">
+  <input name="user_id" placeholder="Enter User ID">
+  <input type="text" autocomplete="new-password" name="new_password" id="password" maxlength="256" required /><br><br>
+
+  <button type="submit">Reset Password</button>
+</form>
+
 
 <div class="user-list">
   <div class="user-list-body">
@@ -59,7 +95,7 @@ if (!$result) {
       $formatted_last_email_login_attempt = $row["last_email_login_attempt"] ? date('M j, Y g:i A', strtotime($row["last_email_login_attempt"])) : 'NA';
 
 
-      ?>
+    ?>
       <div class="user-item">
         <div class="user-id"><span>user-id:</span> <?php echo $row["user_id"]; ?></div>
         <div>
@@ -84,4 +120,4 @@ if (!$result) {
 <?php
 mysqli_close($mysqli);
 
-include_once ("../components/tail.inc"); // closing tags for layout div, body, and html
+include_once("../components/tail.inc"); // closing tags for layout div, body, and html
