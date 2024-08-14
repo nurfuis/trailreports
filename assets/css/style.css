@@ -403,6 +403,7 @@ button {
   display: grid;
   grid-template-columns: 1, max-content;
   gap: 2rem;
+  min-width: 50%;
   white-space: nowrap;
 }
 
