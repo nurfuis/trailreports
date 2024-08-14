@@ -403,7 +403,6 @@ button {
   display: grid;
   grid-template-columns: 1, max-content;
   gap: 2rem;
-  min-width: 50%;
   white-space: nowrap;
 }
 
@@ -482,6 +481,7 @@ button {
   display: inline-flex;
   border-bottom: 1px dashed var(--accent);
   border-radius: 3px;
+  min-width: 300px;
   margin: .25rem .25rem 0 .25rem;
 }
 
