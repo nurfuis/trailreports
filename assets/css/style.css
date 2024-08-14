@@ -481,7 +481,7 @@ button {
   display: inline-flex;
   border-bottom: 1px dashed var(--accent);
   border-radius: 3px;
-  min-width: 300px;
+  min-width: 240px;
   margin: .25rem .25rem 0 .25rem;
 }
 
