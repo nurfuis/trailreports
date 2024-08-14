@@ -73,7 +73,7 @@ hr {
   color: var(--accent);
   border: 0;
   border-top: 1px dashed var(--accent);
-  margin: 15px 0;
+  margin: 6rem 0;
   padding: 0 10px;
 }
 
@@ -571,12 +571,16 @@ h2 {
   line-height: 2;
   
 }
+.margin-regular {
+  margin: 2rem;
+}
 .narrow {
   width: 85%;
   border-left: 1px dashed var(--accent);
 
   border-right: 1px dashed var(--accent);
 }
+
 .p1 {
   margin-top: 18rem;
   width: 100%;
@@ -586,6 +590,32 @@ h2 {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+}
+.full-width {
+  width: 85%;
+  max-width: 480px;
+  box-sizing: border-box;
+}
+input[type="file"]::file-selector-button {
+  border-radius: 4px;
+  padding: 0 1rem;
+  height: 3rem;
+  cursor: pointer;
+  background-color: var(--light-background);
+  border: 1px solid var(--darker-background);
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+  transition: background-color 200ms;
+}
+#image-input {
+  padding: .5rem;
+}
+
+.preview {
+  margin: 2rem;
+  display: block;
+}
+.image-preview {
+  text-align: left;
 }
 .p2 {
   margin-top: 12rem;
@@ -790,7 +820,7 @@ input {
   padding: 0.2rem 0.7rem;
   border: 1px solid #ccc;
   border-radius: 3px;
-  margin-bottom: 10px;
+  margin: 1.37rem;
 }
 
 textarea {

@@ -16,7 +16,7 @@ if (!$resultFeatures) {
 
     <form action="process_new_report.php" method="post">
 
-    
+
         <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 
 
@@ -28,7 +28,7 @@ if (!$resultFeatures) {
             $selected_feature_id = isset($_GET['id']) ? $_GET['id'] : '';
 
             while ($row = $resultFeatures->fetch_assoc()):
-                ?>
+            ?>
                 <option value="<?php echo $row["id"]; ?>" <?php echo ($selected_feature_id == $row["id"]) ? 'selected' : ''; ?>>
                     <?php
 
@@ -100,7 +100,7 @@ if (!$resultFeatures) {
             const toggleLink = document.querySelector(".toggle-guidance");
             const guidanceList = document.querySelector(".guidance-list");
 
-            toggleLink.addEventListener("click", function (event) {
+            toggleLink.addEventListener("click", function(event) {
                 event.preventDefault();
                 guidanceList.style.display = guidanceList.style.display === "none" ? "block" : "none";
                 toggleLink.textContent = guidanceList.style.display === "none" ? "(more)" : "(less)";
@@ -109,9 +109,90 @@ if (!$resultFeatures) {
         <br>
         <textarea name="summary" id="summary" class="summary-input" placeholder="Date hiked. A detailed description. "
             required></textarea>
-        <br><br>
 
-        <button type="submit">Submit Report</button>
+        <hr class="hidden">
+        <label class="hidden" for="image-input">Images:</label>
+
+        <input class="hidden" type="file" id="image-input" name="images[]" multiple>
+
+        <div class="hidden" id="image-preview"></div>
+        <script>
+            const imageInput = document.getElementById('image-input');
+            const imagePreview = document.getElementById('image-preview');
+
+            imageInput.addEventListener('change', (event) => {
+                imagePreview.innerHTML = "";
+                const files = event.target.files;
+
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    const reader = new FileReader();
+
+                    reader.onload = (e) => {
+                        const img = new Image();
+                        img.src = e.target.result;
+
+                        img.onload = () => {
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+
+
+                            var MAX_WIDTH = 300;
+                            var MAX_HEIGHT = 300;
+                            var width = img.width;
+                            var height = img.height;
+
+                            if (width > height) {
+                                if (width > MAX_WIDTH) {
+                                    height *= MAX_WIDTH / width;
+                                    width = MAX_WIDTH;
+                                }
+                            } else {
+                                if (height > MAX_HEIGHT) {
+                                    width *= MAX_HEIGHT / height;
+                                    height = MAX_HEIGHT;
+                                }
+                            }
+                            canvas.width = width;
+                            canvas.height = height;
+                            ctx.drawImage(img, 0, 0, width, height);
+
+                            const preview__wrapper = document.createElement('div');
+                            imagePreview.appendChild(preview__wrapper);
+
+                            // Create an image element to display the resized image
+                            const imgElement = document.createElement('img');
+                            imgElement.src = canvas.toDataURL();
+                            imgElement.classList.add('preview');
+                            imgElement.id = `image-${i}`;
+                            imgElement.name = `image-${i}`;
+                            preview__wrapper.appendChild(imgElement);
+
+                            const captionInput = document.createElement('input');
+                            captionInput.type = 'text';
+                            captionInput.placeholder = 'Caption';
+                            captionInput.maxLength = 256;
+                            captionInput.id = `caption-${i}`;
+                            captionInput.name = `caption-${i}`;
+                            captionInput.classList.add('full-width')
+
+                            preview__wrapper.appendChild(captionInput);
+
+                        };
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+                const numImages = document.createElement('input');
+                numImages.type = "hidden";
+                numImages.name = "num_images";
+                numImages.value = `${files.length}`;
+                imagePreview.appendChild(numImages);
+                console.log(imagePreview);
+            });
+        </script>
+        <hr>
+        <button class="margin-regular" type="submit">Submit Report</button>
         <input type="hidden" name="time_submitted" value="<?php echo time(); ?>">
     </form>
 </div>
