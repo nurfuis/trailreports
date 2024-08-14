@@ -33,10 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $threshold = 100;
     $lockoutTime = 10;
 
-    if ($attempts >= $threshold && ($currentTime - $lastAttempt) < $lockoutTime) {
+    // if ($attempts >= $threshold && ($currentTime - $lastAttempt) < $lockoutTime) {
+
+    if ($attempts >= $threshold) {
       // account is locked
       $errorMessage = "Your account has been temporarily locked due to multiple failed login attempts. Please try again later.";
-
     } else {
       // account is not locked
       // check login
@@ -56,6 +57,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
           $_SESSION['user_level'] = 'user';
         }
+
+        $sql_update_attempts = "UPDATE users SET login_attempts = 0, last_login_attempt = NOW() WHERE username = ?";
+        $stmt_update_attempts = mysqli_prepare($mysqli, $sql_update_attempts);
+        mysqli_stmt_bind_param($stmt_update_attempts, "s", $username);
+        mysqli_stmt_execute($stmt_update_attempts);
+        mysqli_stmt_close($stmt_update_attempts);
 
         if ($row['account_status'] === 'inactive') {
           // Update account status to active
@@ -92,27 +99,25 @@ mysqli_close($mysqli);
 if (!empty($errorMessage)) {
   echo "<p class='alert'>$errorMessage</p>";
   include realpath("../components/sign_in_form.inc");
-
 } else if (!empty($successMessage)) {
   if (!!$redirect_path) {
-    ?>
-      <script type="text/javascript">
-        window.location.href = "<?php echo $redirect_path ?>" 
-      </script>
+?>
+    <script type="text/javascript">
+      window.location.href = "<?php echo $redirect_path ?>"
+    </script>
 
-      <?php
-      echo "<p>$successMessage</p>";
-      // header("Location: $redirect_path");
-      exit;
+  <?php
+    echo "<p>$successMessage</p>";
+    // header("Location: $redirect_path");
+    exit;
   } else {
-    ?>
-      <script type="text/javascript">
-        window.location.href = "/home.php" 
-      </script>
+  ?>
+    <script type="text/javascript">
+      window.location.href = "/home.php"
+    </script>
 
-    <?php
+<?php
   }
-
 }
 
 include realpath("../components/tail.inc");
