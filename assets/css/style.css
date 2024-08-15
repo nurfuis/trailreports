@@ -936,6 +936,9 @@ p {
   .picture {
     background-attachment: fixed;
   }
+  .scroll-text {
+    display: none;
+  }
   .wide__wrapper {
     font-weight: 300;
     font-style: normal;
