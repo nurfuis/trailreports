@@ -127,7 +127,8 @@ button {
   width: 85%;
   height: 4rem;
   padding: 2rem;
-  font-size: larger;
+  margin-bottom: 16rem;
+  color: var(--text-light);
 }
 
 
@@ -570,12 +571,12 @@ h2 {
   border-radius: 2rem;
 }
 .margin-tall-first{
-  margin: 12rem 1rem 16rem 1rem;
+  margin: 6rem 1rem 6rem 1rem;
   line-height: 2;
   
 }
 .margin-tall{
-  margin: 16rem 1rem;
+  margin: 6rem 1rem;
   line-height: 2;
   
 }
