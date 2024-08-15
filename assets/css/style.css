@@ -402,7 +402,6 @@ button {
 
 .dropdown__link-grid {
   display: grid;
-  grid-template-columns: max-content auto;
   gap: 2rem;
   white-space: nowrap;
 }
