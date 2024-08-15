@@ -62,11 +62,8 @@
 
     function handleScroll() {
         arrowContainers.forEach(arrowContainer => {
-        if (isElementInViewport(arrowContainer)) {
-            // arrowContainer.classList.toggle('scroll-arrow');
-            setTimeout(() => {
-                arrowContainer.classList.toggle('scroll-arrow');
-            }, 4000)
+        if (isElementInViewport(arrowContainer) && !arrowContainer.classList.contains('scroll-arrow__animation')) {
+            arrowContainer.classList.add('scroll-arrow__animation');
         }
         });
 

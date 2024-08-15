@@ -708,8 +708,8 @@ input[type="file"]::file-selector-button {
   max-width: 900px;
   padding-bottom: 2rem;
 }
-.scroll-arrow {
-  animation: bounce 2s infinite;
+.scroll-arrow__animation {
+  animation: bounce 2s ease-in-out 3;
 }
 
 @keyframes bounce {
