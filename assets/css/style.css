@@ -253,7 +253,7 @@ button {
   background-color: var(--light-background);
   margin: 0;
   min-width: 320px;
-  max-width: 900x;
+  max-width: 900px;
   width: 100%;
   box-sizing: border-box;
   padding: 2rem;
@@ -401,7 +401,7 @@ button {
 
 .dropdown__link-grid {
   display: grid;
-  grid-template-columns: 1, max-content;
+  grid-template-columns: max-content auto;
   gap: 2rem;
   white-space: nowrap;
 }
