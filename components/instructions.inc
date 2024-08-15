@@ -5,7 +5,7 @@
         <div class="scroll-text">Scroll<br><img class="scroll-arrow" src="../assets/images/chevron-shadow.png" width="90px">
         </div>
 
-        <div class="p1"></div>
+        <div class="picture" id="p1"></div>
 
 
         <div class="indent-wide margin-tall-first border-box-round regular-padding">
@@ -19,7 +19,7 @@
         <div class="scroll-text">Scroll<br><img class="scroll-arrow" src="../assets/images/chevron-shadow.png" width="90px"></div>
 
 
-        <div class="p2"></div>
+        <div class="picture" id="p2"></div>
 
         <div class="indent-wide margin-tall border-box-round regular-padding">
             <h3>Explore the Trail Map</h3>
@@ -30,7 +30,7 @@
         <div class="scroll-text">Scroll<br><img class="scroll-arrow" src="../assets/images/chevron-shadow.png" width="90px"></div>
 
 
-        <div class="p3"></div>
+        <div class="picture" id="p3"></div>
 
         <div class="indent-wide margin-tall border-box-round regular-padding">
             <h3>Discover Public Trails</h3>
