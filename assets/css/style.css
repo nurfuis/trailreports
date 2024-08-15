@@ -586,7 +586,6 @@ h2 {
 .narrow {
   width: 85%;
   border-left: 1px dashed var(--accent);
-
   border-right: 1px dashed var(--accent);
 }
 
@@ -708,6 +707,18 @@ input[type="file"]::file-selector-button {
 .trail-report__form {
   max-width: 900px;
   padding-bottom: 2rem;
+}
+.scroll-arrow {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
 }
 
 .feature-list {
