@@ -35,7 +35,7 @@ if (isset($_GET['collection'])) {
 include_once realpath("./components/head.inc");
 include_once realpath("./layouts/main.inc");
 include_once realpath("./components/header.inc");
-// include_once realpath("./components/intro.inc");
+include_once realpath("./components/intro.inc");
 include_once realpath("./components/single_select_form.inc");
 
 if (isset($_GET['feature_id'])) {
@@ -48,7 +48,7 @@ if (isset($_GET['feature_id'])) {
         include_once realpath("./components/single_feature.inc");
     }
 } else {
-    include_once realpath("./components/instructions.inc");
+    // include_once realpath("./components/instructions.inc");
 
     include_once realpath("./components/recent_reports.inc");
 }
