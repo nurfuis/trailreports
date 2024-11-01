@@ -11,7 +11,6 @@ $stylesheet = "./assets/css/style.css";
 $currentTime = time();
 $dateTime = new DateTime();
 $dateTime->setTimestamp($currentTime);
-$dateTime->setTimezone(new DateTimeZone('America/Los_Angeles'));
 
 $hour = (int)$dateTime->format('G');
 
