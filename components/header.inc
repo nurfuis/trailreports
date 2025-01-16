@@ -5,10 +5,10 @@
       <?php
       if (isset($_SESSION['username'])) {
         $username = $_SESSION['username'];
-        $short_username = substr($username, 0, 6);
+        $short_username = substr($username, 0, 12);
         echo $short_username;
 
-        if (strlen($username) > 6) {
+        if (strlen($username) > 12) {
           echo "...";
         }
       } else {
